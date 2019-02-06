@@ -7,12 +7,16 @@
   <%= f.submit "記事を公開する" %>
 <% end %>
 
+<div class="posts-wrapper">
 <% @posts.each do |post| %>
   <% if post.content %>
-    <div class="md-wrapper">
-      <p>Title：<%= post.title %></p>
+    <div class="post">
+      <% if post.title != "" %>
+        <h1 class="title"><%= post.title %></h1>
+      <% end %>
       <%== markdown(post.content) %>
-      <%= link_to "削除する", "/posts/#{post.id}", method: :delete %>
+      <%= link_to "Delete", "/posts/#{post.id}", method: :delete, data: { confirm: "本当に削除しますか？"} %>
     </div>
   <% end %>
 <% end %>
+</div>

@@ -15,7 +15,7 @@ input, textarea {
 
 form {
   padding-bottom: 30px;
-  border-bottom: solid 1px rgb(218, 218, 218);
+  margin-bottom: 50px;
   input[type="text"] {
     display: block;
     width: 100%;
@@ -28,6 +28,7 @@ form {
   div.tab-bar {
     height: 40px;
     width: 100%;
+    padding: 0 8px;
     border-bottom: solid 1px rgb(218, 218, 218);
     div#bold {
       height: 40px;
@@ -36,6 +37,7 @@ form {
       text-align: center;
       font-weight: bold;
       border: none;
+      cursor: pointer;
     }
   }
 
@@ -54,13 +56,31 @@ form {
     width: 120px;
     height: 45px;
     margin: 8px;
-    color: white;
+    line-height: 45px;
+    border-top: solid 2px #00906d;
+    border-radius: 3px;
     font-size: 13px;
-    background-color: rgb(104, 210, 213);
+    letter-spacing: 1px;
+    background-color: #66dcc5;
   }
 }
 
-div.md-wrapper {
+div.post {
   padding: 8px;
   border-bottom: solid 1px rgb(218, 218, 218);
+  a {
+    text-decoration: none;
+  }
+}
+
+div.posts-wrapper {
+  width: 80%;
+  margin: 0 auto;
+  h1 {
+    border-bottom: solid 1px rgb(232, 232, 232);
+    padding: 8px;
+    &.title {
+      border-left: solid 10px #66dcc5;
+    }
+  }
 }

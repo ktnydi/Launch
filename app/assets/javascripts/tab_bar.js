@@ -1,37 +1,25 @@
 document.addEventListener('DOMContentLoaded', function() {
 
-  // function getSelectedString(elem, event) {
-  //   var selected_string = "";
-  //   elem.addEventListener(event, function() {
-  //     var start = elem.selectionStart;
-  //     var end = elem.selectionEnd;
-  //     var value = elem.value;
-  //     if (start !== end) {
-  //       selected_string = value.slice(start, end);
-  //     }
-  //   });
-  // }
-
-  function selectedStringIn(text_area) {
+  function selectedStr(text_area) {
     var start = text_area.selectionStart;
-    var end = text_area.selectionEnd;
-    var value = text_area.value;
-    return selected_string = value.slice(start, end);
+    var end   = text_area.selectionEnd;
+    var val = text_area.value;
+    var selected_str = val.slice(start, end);
+    return {val: val, start: start, end: end, str: selected_str};
+  }
+
+  function insertStr(insert, textarea) {
+    var str = selectedStr(text_area);
+    var val  = str['val'];
+    var before = val.substr(0, str['start']);
+    var after  = val.slice(str['end'], val.length);
+    val = before + insert + str['str'] + insert + after;
+    return val
   }
 
   var text_area = document.getElementById('post_content');
-
-  var str = "";
-  text_area.addEventListener('keyup', function() {
-    str = selectedStringIn(text_area);
-  });
-
-  text_area.addEventListener('mouseup', function() {
-    str = selectedStringIn(text_area);
-  });
-
   var bold = document.getElementById('bold');
   bold.addEventListener('click', function() {
-    console.log(str);
+    text_area.value = insertStr('**', text_area);
   });
 });

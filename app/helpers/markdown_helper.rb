@@ -10,7 +10,7 @@ module MarkdownHelper
       autolink:           true,
       fenced_code_blocks: true,
       lax_spacing:        true,
-      no_intra_emphasis:  true,
+      # no_intra_emphasis:  true,
       strikethrough:      true,
       superscript:        true,
       tables:             true
