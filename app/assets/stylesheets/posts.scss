@@ -3,6 +3,7 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 * {
   margin: 0;
+  font-family: 'hiragino sans';
 }
 
 input, textarea {
@@ -14,6 +15,7 @@ input, textarea {
 }
 
 form {
+  width: 100%;
   padding-bottom: 30px;
   margin-bottom: 50px;
   input[type="text"] {
@@ -22,14 +24,16 @@ form {
     height: 40px;
     margin-top: 20px;
     padding: 0 8px;
-    font-size: 20px;
+    font-size: 18px;
+    border: none;
+    border-bottom: 1px solid #ddd;
   }
 
   div.tab-bar {
     height: 40px;
     width: 100%;
     padding: 0 8px;
-    border-bottom: solid 1px rgb(218, 218, 218);
+    border-bottom: solid 1px #ddd;
     div#bold {
       height: 40px;
       width: 40px;
@@ -47,7 +51,7 @@ form {
     height: 200px;
     padding: 8px;
     border: none;
-    border-bottom: solid 1px rgb(218, 218, 218);
+    border-bottom: solid 1px #ddd;
     font-size: 16px;
   }
 
@@ -57,17 +61,23 @@ form {
     height: 45px;
     margin: 8px;
     line-height: 45px;
-    border-top: solid 2px #00906d;
+    border-top: solid 2px #3f7066;
     border-radius: 3px;
     font-size: 13px;
     letter-spacing: 1px;
-    background-color: #66dcc5;
+    background-color: #69aea5;
+    color: white;
+    &:active {
+      border-top: none;
+      position: relative;
+      top: -2px;
+    }
   }
 }
 
 div.post {
   padding: 8px;
-  border-bottom: solid 1px rgb(218, 218, 218);
+  border-bottom: solid 1px #ddd;
   a {
     text-decoration: none;
   }
@@ -77,10 +87,35 @@ div.posts-wrapper {
   width: 80%;
   margin: 0 auto;
   h1 {
-    border-bottom: solid 1px rgb(232, 232, 232);
+    border-bottom: solid 1px #ddd;
     padding: 8px;
     &.title {
-      border-left: solid 10px #66dcc5;
+      border-left: solid 10px #69aea5;
     }
   }
+}
+
+.CodeMirror {
+  display: inline-block;
+  font-size: 14px;
+  border-right: solid 1px #ddd;
+  .CodeMirror-placeholder {
+    padding: 0 14px;
+    color: #999;
+  }
+  .CodeMirror-line {
+    padding: 0 14px;
+  }
+  .CodeMirror-linenumber {
+    width: 30px;
+    padding: 0 4px;
+  }
+}
+
+.md-preview {
+  display: inline-block;
+  float: right;
+  width: 49%;
+  height: 600px;
+  position: relative;
 }

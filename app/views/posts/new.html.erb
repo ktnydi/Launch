@@ -3,7 +3,10 @@
   <div class="tab-bar">
     <div id="bold">bold</div>
   </div>
-  <%= f.text_area :content, placeholder: "Markdownで内容を書く" %>
+  <div class="editor-md">
+    <%= f.text_area :content, placeholder: "Markdownで内容を書く", col: 40, rows: 30 %>
+    <div class="md-preview"></div>
+  </div>
   <%= f.submit "記事を公開する" %>
 <% end %>
 
