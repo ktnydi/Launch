@@ -1,104 +1,74 @@
-// Place all the styles related to the Posts controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+$main-color: #26a69a;
+
 * {
   margin: 0;
+  box-sizing: border-box;
+}
+
+body {
   font-family: 'hiragino sans';
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
+::selection {
+  background-color: #80cbc4;
 }
 
 input, textarea {
   outline: none;
+  padding: 0;
 }
 
 ::-webkit-input-placeholder {
-  color: rgb(195, 195, 195);
+  color: #999;
 }
 
 form {
   width: 100%;
-  padding-bottom: 30px;
-  margin-bottom: 50px;
-  input[type="text"] {
-    display: block;
+  height: calc(100% - 25px);
+
+  .md-editor-top {
+    display: flex;
+    align-items: center;
     width: 100%;
-    height: 40px;
-    margin-top: 20px;
-    padding: 0 8px;
-    font-size: 18px;
-    border: none;
+    height: 60px;
+    padding: 0 16px;
     border-bottom: 1px solid #ddd;
-  }
 
-  div.tab-bar {
-    height: 40px;
-    width: 100%;
-    padding: 0 8px;
-    border-bottom: solid 1px #ddd;
-    div#bold {
+    input[type="text"] {
+      display: inline-block;
+      width: calc(100% - 120px);
       height: 40px;
-      width: 40px;
-      line-height: 40px;
-      text-align: center;
-      font-weight: bold;
+      font-size: 18px;
       border: none;
-      cursor: pointer;
     }
-  }
-
-  textarea {
-    display: block;
-    width: 100%;
-    height: 200px;
-    padding: 8px;
-    border: none;
-    border-bottom: solid 1px #ddd;
-    font-size: 16px;
-  }
-
-  input[type="submit"] {
-    display: inline-block;
-    width: 120px;
-    height: 45px;
-    margin: 8px;
-    line-height: 45px;
-    border-top: solid 2px #3f7066;
-    border-radius: 3px;
-    font-size: 13px;
-    letter-spacing: 1px;
-    background-color: #69aea5;
-    color: white;
-    &:active {
-      border-top: none;
-      position: relative;
-      top: -2px;
+    input[type="submit"] {
+      display: inline-block;
+      width: 120px;
+      height: 40px;
+      line-height: 40px;
+      border-radius: 3px;
+      font-size: 13px;
+      letter-spacing: 1px;
+      background-color: $main-color;
+      color: white;
     }
   }
 }
 
-div.post {
-  padding: 8px;
-  border-bottom: solid 1px #ddd;
-  a {
-    text-decoration: none;
-  }
-}
-
-div.posts-wrapper {
-  width: 80%;
-  margin: 0 auto;
-  h1 {
-    border-bottom: solid 1px #ddd;
-    padding: 8px;
-    &.title {
-      border-left: solid 10px #69aea5;
-    }
-  }
+.editor-md {
+  position: relative;
+  height: calc(100% - 60px);
 }
 
 .CodeMirror {
-  display: inline-block;
   font-size: 14px;
   border-right: solid 1px #ddd;
+  font-family: 'hiragino sans';
   .CodeMirror-placeholder {
     padding: 0 14px;
     color: #999;
@@ -110,12 +80,60 @@ div.posts-wrapper {
     width: 30px;
     padding: 0 4px;
   }
+  .CodeMirror-selected {
+    background-color: #80cbc4;
+  }
 }
 
-.md-preview {
+#md-preview {
+  position: absolute;
+  top: 0;
+  right: 0;
   display: inline-block;
   float: right;
-  width: 49%;
+  width: 50%;
   height: 600px;
-  position: relative;
+  padding: 20px;
+  overflow: scroll;
+}
+
+.posts-wrapper {
+  width: 60%;
+  margin: 0 auto;
+}
+
+.post, #md-preview {
+  padding: 16px;
+  * {
+    margin-bottom: 16px;
+  }
+  h1 {
+    border-bottom: solid 1px #eceff1;
+  }
+  a {
+    text-decoration: none;
+    color: $main-color;
+  }
+  ol, ul {
+    li {
+      margin: 0;
+    }
+  }
+  table {
+    border-collapse: collapse;
+    tr {
+      border: solid 1px #ddd;
+    }
+    th {
+      font-weight: normal;
+    }
+    th, td {
+      padding: 8px 14px;
+    }
+  }
+  code {
+    font-family: consolas, monaco;
+    padding: 12px;
+    border: 1px solid #ddd;
+  }
 }

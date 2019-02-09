@@ -8,10 +8,6 @@ class PostsController < ApplicationController
 
   def new
     @post = Post.new
-    # @md = "# Hello, World!"
-    # @markdown = "<script>alert('hoge');</script>"
-    # @md = Post.find_by(id: 3)
-    @posts = Post.all
   end
 
   def create
