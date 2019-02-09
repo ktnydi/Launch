@@ -1,36 +1,48 @@
-// Place all the styles related to the Posts controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+$main-color: #26a69a;
+
 * {
   margin: 0;
-  font-family: 'hiragino sans';
   box-sizing: border-box;
+}
+
+body {
+  font-family: 'hiragino sans';
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
+::selection {
+  background-color: #80cbc4;
 }
 
 input, textarea {
   outline: none;
+  padding: 0;
 }
 
 ::-webkit-input-placeholder {
-  color: rgb(195, 195, 195);
+  color: #999;
 }
 
 form {
   width: 100%;
-  padding-bottom: 30px;
-  margin-bottom: 50px;
+  height: calc(100% - 25px);
 
   .md-editor-top {
     display: flex;
     align-items: center;
     width: 100%;
+    height: 60px;
+    padding: 0 16px;
     border-bottom: 1px solid #ddd;
 
     input[type="text"] {
       display: inline-block;
       width: calc(100% - 120px);
       height: 40px;
-      padding: 0 15px;
       font-size: 18px;
       border: none;
     }
@@ -38,12 +50,11 @@ form {
       display: inline-block;
       width: 120px;
       height: 40px;
-      margin: 8px;
       line-height: 40px;
       border-radius: 3px;
       font-size: 13px;
       letter-spacing: 1px;
-      background-color: #009688;
+      background-color: $main-color;
       color: white;
     }
   }
@@ -51,12 +62,13 @@ form {
 
 .editor-md {
   position: relative;
+  height: calc(100% - 60px);
 }
 
 .CodeMirror {
-  display: inline-block;
   font-size: 14px;
   border-right: solid 1px #ddd;
+  font-family: 'hiragino sans';
   .CodeMirror-placeholder {
     padding: 0 14px;
     color: #999;
@@ -67,6 +79,9 @@ form {
   .CodeMirror-linenumber {
     width: 30px;
     padding: 0 4px;
+  }
+  .CodeMirror-selected {
+    background-color: #80cbc4;
   }
 }
 
@@ -88,6 +103,7 @@ form {
 }
 
 .post, #md-preview {
+  padding: 16px;
   * {
     margin-bottom: 16px;
   }
@@ -96,17 +112,28 @@ form {
   }
   a {
     text-decoration: none;
-    color: #009688;
+    color: $main-color;
   }
   ol, ul {
     li {
       margin: 0;
     }
   }
-  pre {
-    font-family: monospace;
-    padding: 10px 15px;
-    background-color: #f5f5f5;
-    border: 1px solid #e0e0e0;
+  table {
+    border-collapse: collapse;
+    tr {
+      border: solid 1px #ddd;
+    }
+    th {
+      font-weight: normal;
+    }
+    th, td {
+      padding: 8px 14px;
+    }
+  }
+  code {
+    font-family: consolas, monaco;
+    padding: 12px;
+    border: 1px solid #ddd;
   }
 }

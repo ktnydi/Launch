@@ -6,7 +6,9 @@
         <% if post.title != "" %>
           <h1 class="title"><%= post.title %></h1>
         <% end %>
-        <%== markdown(post.content) %>
+        <div class="content">
+          <%== markdown(post.content) %>
+        </div>
         <%= link_to "Delete", "/posts/#{post.id}", method: :delete, data: { confirm: "本当に削除しますか？"} %>
       </div>
     <% end %>

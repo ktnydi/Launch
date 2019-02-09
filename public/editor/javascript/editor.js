@@ -8,15 +8,13 @@ document.addEventListener('DOMContentLoaded', function() {
     lineWrapping: true,
     indentUnit: 2,
     theme: 'neat',
-    styleActiveLine: true
+    styleActiveLine: true,
+    styleSelectedText: true
   });
-  editor.setSize("50%", "600px");
+  editor.setSize("50%", "100%");
 
   const preview = document.getElementById('md-preview');
   editor.on('change', function(e) {
     preview.innerHTML = marked(e.getValue());
   });
-
-  marked.setOptions({breaks: true});
-  
 });
