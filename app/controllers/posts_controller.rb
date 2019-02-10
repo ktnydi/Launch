@@ -13,7 +13,9 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     if @post.save
+      flash.notice = "記事を公開しました。"
       redirect_to :root
+    else
     end
   end
 

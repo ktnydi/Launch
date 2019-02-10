@@ -16,6 +16,20 @@
 //= require_tree .
 
 document.addEventListener('DOMContentLoaded', function() {
+
+  const NOTIFICATION = document.getElementById('notification');
+
+  if (NOTIFICATION !== null) {
+    setTimeout(
+      function() {
+        var classes = NOTIFICATION.className.split(' ');
+        classes.push('close');
+        NOTIFICATION.className = classes.join(' ');
+      },
+      3000
+    );
+  }
+
   hljs.initHighlightingOnLoad();
   marked_js_render();
 });

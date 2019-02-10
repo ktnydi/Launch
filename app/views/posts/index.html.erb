@@ -1,4 +1,11 @@
 <%= link_to "記事を書く", posts_new_path, data: {"turbolinks" => false} %>
+
+<% if flash.notice %>
+  <div class="notice" id="notification">
+    <%= flash.notice %>
+  </div>
+<% end %>
+
 <div class="posts-wrapper">
   <% @posts.each do |post| %>
     <% if post.content %>
