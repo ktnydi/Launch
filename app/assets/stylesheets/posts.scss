@@ -1,0 +1,116 @@
+@import "variables";
+
+::-webkit-input-placeholder {
+  color: #999;
+}
+
+form {
+  width: 100%;
+  height: calc(100% - 25px);
+
+  .md-editor-top {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 60px;
+    padding: 0 16px;
+    border-bottom: 1px solid $border-color;
+
+    input[type="text"] {
+      display: inline-block;
+      width: calc(100% - 120px);
+      height: 40px;
+      font-size: 18px;
+      border: none;
+    }
+    input[type="submit"] {
+      display: inline-block;
+      width: 120px;
+      height: 40px;
+      line-height: 40px;
+      border-radius: 3px;
+      font-size: 13px;
+      letter-spacing: 1px;
+      background-color: $main-color;
+      color: white;
+    }
+  }
+}
+
+.editor-md {
+  position: relative;
+  height: calc(100% - 60px);
+}
+
+.CodeMirror {
+  font-size: 14px;
+  border-right: solid 1px $border-color;
+  font-family: 'hiragino sans';
+  .CodeMirror-placeholder {
+    padding: 0 14px;
+    color: #999;
+  }
+  .CodeMirror-line {
+    padding: 0 14px;
+  }
+  .CodeMirror-linenumber {
+    width: 30px;
+    padding: 0 4px;
+  }
+  .CodeMirror-selected {
+    background-color: #B2DFDB;
+  }
+}
+
+#md-preview {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: inline-block;
+  float: right;
+  width: 50%;
+  height: 600px;
+  padding: 20px;
+  overflow: scroll;
+}
+
+.posts-wrapper {
+  width: 60%;
+  margin: 0 auto;
+}
+
+.post, #md-preview {
+  padding: 16px;
+  * {
+    margin-bottom: 16px;
+  }
+  h1 {
+    border-bottom: solid 1px $border-color;
+  }
+  a {
+    text-decoration: none;
+    color: $sub-color;
+  }
+  ol, ul {
+    li {
+      margin: 0;
+    }
+  }
+  table {
+    border-collapse: collapse;
+    tr {
+      border: solid 1px $border-color;
+    }
+    th {
+      font-weight: normal;
+    }
+    th, td {
+      padding: 8px 14px;
+    }
+  }
+  code {
+    font-family: consolas, monaco;
+    padding: 12px;
+    border: 1px solid $border-color;
+  }
+}

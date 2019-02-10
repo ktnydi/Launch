@@ -1,0 +1,23 @@
+<%= link_to "記事を書く", posts_new_path, data: {"turbolinks" => false} %>
+
+<% if flash.notice %>
+  <div class="notice" id="notification">
+    <%= flash.notice %>
+  </div>
+<% end %>
+
+<div class="posts-wrapper">
+  <% @posts.each do |post| %>
+    <% if post.content %>
+      <div class="post">
+        <% if post.title != "" %>
+          <h1 class="title"><%= post.title %></h1>
+        <% end %>
+        <div class="content">
+          <%== markdown(post.content) %>
+        </div>
+        <%= link_to "Delete", "/posts/#{post.id}", method: :delete, data: { confirm: "本当に削除しますか？"} %>
+      </div>
+    <% end %>
+  <% end %>
+</div>

@@ -1,0 +1,12 @@
+pkg
+rdoc
+doc
+coverage
+.yardoc
+.ruby-version
+.ruby-gemset
+.DS_Store
+.idea/*
+*.sh
+*.gem
+Gemfile.lock
