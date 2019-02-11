@@ -20,7 +20,7 @@ header.editor {
       line-height: 50px;
       text-decoration: none;
       color: $font-color;
-      transition: all 0.15s;
+      transition: all .15s;
       &:hover {
         border-bottom: 4px solid $main-color;
         i {
@@ -37,7 +37,7 @@ header.editor {
 
 form {
   width: 100%;
-  height: calc(100% - 50px);
+  height: calc(100vh - 50px);
   .md-editor-top {
     display: flex;
     align-items: center;
@@ -59,11 +59,17 @@ form {
       width: 120px;
       height: 40px;
       line-height: 40px;
+      border: none;
       border-radius: 3px;
       font-size: 13px;
       letter-spacing: 1px;
       background-color: $main-color;
       color: white;
+      cursor: pointer;
+      transition: all .15s;
+      &:hover {
+        background-color: $sub-color;
+      }
     }
   }
 }
@@ -109,12 +115,7 @@ form {
   overflow: scroll;
 }
 
-.posts-wrapper {
-  width: 60%;
-  margin: 50px auto;
-}
-
-.post, #md-preview {
+#md-preview {
   padding: 16px;
   background-color: $white;
   * {
