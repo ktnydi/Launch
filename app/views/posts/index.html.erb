@@ -9,7 +9,7 @@
   <div class="posts">
     <% @posts.each do |post| %>
       <div class="post">
-        <%= link_to "#", data: { "turbolinks" => false } do %>
+        <%= link_to post_path(post), data: { "turbolinks" => false } do %>
           <div class="post-inner">
             <%= image_tag "sample.png", class: "post-img" %>
             <div class="post-title">

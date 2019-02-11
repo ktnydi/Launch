@@ -9,13 +9,13 @@
           <%= link_to "ホーム", root_path, data: { "turbolinks" => false } %>
         </li>
         <li>
-          <%= link_to "新着", "https://google.co.jp" %>
+          <%= link_to "新着", "#" %>
         </li>
       </ul>
     </div>
     <div class="header-right">
         <button class="new-post">
-          <%= link_to "記事を書く", posts_new_path, data: { "turbolinks" => false } %>
+          <%= link_to "記事を書く", new_post_path, data: { "turbolinks" => false } %>
         </button>
     </div>
   </div>
