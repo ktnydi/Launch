@@ -1,0 +1,22 @@
+<header class="share">
+  <div class="container">
+    <div class="header-left">
+      <div class="logo">
+        <%= link_to "Launch", root_path, data: { "turbolinks" => false } %>
+      </div>
+      <ul>
+        <li>
+          <%= link_to "ホーム", root_path, data: { "turbolinks" => false } %>
+        </li>
+        <li>
+          <%= link_to "新着", "https://google.co.jp" %>
+        </li>
+      </ul>
+    </div>
+    <div class="header-right">
+        <button class="new-post">
+          <%= link_to "記事を書く", posts_new_path, data: { "turbolinks" => false } %>
+        </button>
+    </div>
+  </div>
+</header>
