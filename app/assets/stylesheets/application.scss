@@ -41,8 +41,11 @@ input, textarea {
 
 .container {
   width: 60%;
-  height: 50px;
   margin: 0 auto;
+}
+
+header .container {
+  height: 100%;
 }
 
 header.share {

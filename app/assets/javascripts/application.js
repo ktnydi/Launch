@@ -47,7 +47,7 @@ function marked_js_render() {
   var renderer = new marked.Renderer();
 
   renderer.code = function (code, language) {
-    return '<pre' + '><code class="hljs">' + hljs.highlightAuto(code).value + '</code></pre>';
+    return '<pre' + '><code class="hljs">' + hljs.highlightAuto(code, [language]).value + '</code></pre>';
   };
   marked.setOptions({
     breaks: true,
