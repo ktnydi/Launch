@@ -7,29 +7,24 @@
 <main class="posts-wrapper">
   <div class="container">
     <h1>記事一覧</h1>
+
     <div class="posts-list">
     <% @posts.each do |post| %>
       <div class="post">
-        <%= link_to post_path(post), data: { "turbolinks" => false } do %>
-          <div class="post-inner">
-            <%= image_tag "sample.png", class: "post-img" %>
-            <div class="post-title">
-              <h2>
-                <%= post.title %>
-              </h2>
-              <div class="post-bottom">
-                <span>
-                  <i class="far fa-heart"></i>
-                  123
-                </span>
-                <p>
-                  <%= post.created_at.strftime("%Y.%m.%d") %>
-                </p>
-              </div>
-            </div>
-          </div>
-        <% end %>
+        <h2>
+          <%= link_to post.title, post_path(post), data: { "turbolinks": false } %>
+        </h2>
+        <div class="post-bottom">
+          <span>
+            <i class="far fa-heart"></i>
+            123
+          </span>
+          <p>
+            <%= post.created_at.strftime("%Y.%m.%d") %>
+          </p>
+        </div>
       </div>
     <% end %>
+
   </div>
 </main>

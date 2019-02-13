@@ -1,3 +1,5 @@
+require 'securerandom'
+
 class PostsController < ApplicationController
   def index
     @posts = Post.all.order(created_at: :desc)
@@ -17,7 +19,6 @@ class PostsController < ApplicationController
     if @post.save
       flash.notice = "記事を公開しました。"
       redirect_to :root
-    else
     end
   end
 
@@ -27,6 +28,12 @@ class PostsController < ApplicationController
   end
 
   def update
+    @post = Post.find_by(id: params[:id])
+    @post.assign_attributes(post_params)
+    if @post.save
+      flash.notice = "記事を編集しました。"
+      redirect_to :root
+    end
   end
 
   def destroy
@@ -37,6 +44,6 @@ class PostsController < ApplicationController
 
   private
   def post_params
-    params.require(:post).permit(:title, :content)
+    params.require(:post).permit(:title, :content, :app_url)
   end
 end

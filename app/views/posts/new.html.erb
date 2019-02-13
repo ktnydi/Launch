@@ -1,4 +1,4 @@
-<%= form_for @post do |f| %>
+<%= form_for @post, multipart: true do |f| %>
   <%= render "share/editor_form", f: f %>
   <div class="md-editor-bottom">
     <%= f.submit "記事を公開する" %>

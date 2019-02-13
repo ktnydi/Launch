@@ -43,27 +43,10 @@ form {
     width: 100%;
     height: 40px;
     padding: 0 16px;
-    font-size: 20px;
+    font-size: 1rem;
     border: none;
-    background-color: $white;
-  }
-  .md-image {
-    width: 100%;
-    height: 40px;
-    line-height: 40px;
-    padding: 0 16px;
-    border-top: 1px solid $border-color;
     border-bottom: 1px solid $border-color;
     background-color: $white;
-    label {
-      cursor: pointer;
-      span {
-        color: #999;
-      }
-    }
-    input[type="file"] {
-      display: none;
-    }
   }
   .md-editor-bottom {
     height: 60px;
@@ -146,7 +129,7 @@ form {
 #md-preview, .content {
   padding: 24px;
   background-color: $white;
-  color: $md-font-color;
+  color: $fb-color;
   * {
     margin-bottom: 16px;
   }
