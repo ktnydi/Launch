@@ -12,9 +12,7 @@
   }
 }
 
-.posts {
-  width: 60%;
-  margin: 0 auto;
+.posts-list {
   display: flex;
   flex-wrap: wrap;
   align-content: flex-start;
@@ -27,6 +25,7 @@
       display: block;
       height: 100%;
       width: 90%;
+      min-width: 307px;
       margin: 0 auto;
       text-decoration: none;
       color: $font-color;
@@ -78,14 +77,10 @@
       display: inline-block;
       height: 20px;
       padding: 0;
-      font-size: 1rem;
+      font-size: .8rem;
       cursor: pointer;
       i {
-        color: $font-color;
-        transition: all .25s;
-        &:hover {
-          color: #AD1457;
-        }
+        color: #AD1457;
       }
     }
     p {

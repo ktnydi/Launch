@@ -1,0 +1,13 @@
+<%= f.text_field :title, placeholder: "記事のタイトルを入力" %>
+<div class="md-image">
+  <label for="select-image">
+    サムネイル：<span id="image-url">画像を選択する</span>
+    <input type="file" id="select-image">
+  </label>
+</div>
+
+<div class="editor-md">
+  <%= f.text_area :content, placeholder: "Markdownで内容を書く", col: 40, rows: 30 %>
+  <div id="md-preview">
+  </div>
+</div>

@@ -5,8 +5,9 @@
 <% end %>
 
 <main class="posts-wrapper">
-  <h1>投稿した記事</h1>
-  <div class="posts">
+  <div class="container">
+    <h1>記事一覧</h1>
+    <div class="posts-list">
     <% @posts.each do |post| %>
       <div class="post">
         <%= link_to post_path(post), data: { "turbolinks" => false } do %>

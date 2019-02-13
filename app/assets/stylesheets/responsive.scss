@@ -1,12 +1,9 @@
 // タブレット
-@media all and (max-width: 1300px) {
+@media all and (max-width: 1024px) {
   .container {
     width: 95%;
   }
   .posts-wrapper {
-    width: 95%;
-  }
-  .posts {
     width: 100%;
     .post {
       width: 50%;
@@ -20,9 +17,6 @@
     width: 95%;
   }
   .posts-wrapper {
-    width: 95%;
-  }
-  .posts {
     width: 100%;
     .post {
       width: 100%;

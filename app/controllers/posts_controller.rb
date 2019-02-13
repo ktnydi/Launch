@@ -22,6 +22,8 @@ class PostsController < ApplicationController
   end
 
   def edit
+    @post = Post.find_by(id: params[:id])
+    render :layout => "editor"
   end
 
   def update

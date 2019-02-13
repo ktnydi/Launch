@@ -5,11 +5,13 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= render "share/head.html.erb" %>
+    <%= render "share/head" %>
   </head>
 
   <body>
-    <%= render 'share/header/editor' %>
+    <%= render "share/header/editor" %>
     <%= yield %>
+
+    <%= render "share/editor_js" %>
   </body>
 </html>
