@@ -26,6 +26,20 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
+  var toggle = document.getElementById('toggle');
+  var lists = document.getElementById('lists');
+  toggle.addEventListener('click', function() {
+    var classes = lists.className.split(' ');
+    var active_idx = classes.indexOf('active');
+    if (active_idx >= 0) {
+      classes.splice(active_idx, 1);
+      lists.className = classes.join(' ');
+    } else {
+      classes.push('active');
+      lists.className = classes.join(' ');
+    }
+  });
+
   const NOTIFICATION = document.getElementById('notification');
 
   if (NOTIFICATION !== null) {

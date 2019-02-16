@@ -14,9 +14,27 @@
       </ul>
     </div>
     <div class="header-right">
+      <% if user_signed_in? %>
         <button class="new-post">
           <%= link_to "記事を書く", new_post_path, data: { "turbolinks" => false } %>
         </button>
+        <div class="user-name-toggle">
+          <div class="user-name" id="toggle">
+            <%= current_user.name %>
+          </div>
+          <div class="toggle-list" id="lists">
+            <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+            <%= link_to "アカウント設定", edit_user_registration_path, data: { "turbolinks" => false } %>
+          </div>
+        </div>
+      <% else %>
+        <button>
+          <%= link_to "ログイン", new_user_session_path %>
+        </button>
+        <button>
+          <%= link_to "アカウント作成", new_user_registration_path %>
+        </button>
+      <% end %>
     </div>
   </div>
 </header>

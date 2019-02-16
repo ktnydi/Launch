@@ -73,6 +73,7 @@ header.share {
       float: left;
       height: 50px;
       margin: 0 12px;
+      font-size: 13px;
       line-height: 50px;
       transition: all .15s;
       &:hover {
@@ -99,10 +100,9 @@ header.share {
     height: 50px;
     button {
       padding: 0;
+      margin: 0 12px;
       border: none;
       font-size: 13px;
-    }
-    .new-post {
       background-color: $main-color;
       height: 35px;
       width: 100px;
@@ -116,6 +116,44 @@ header.share {
         line-height: 35px;
         color: white;
         text-decoration: none;
+      }
+    }
+    .user-name-toggle {
+      position: relative;
+      .user-name {
+        height: 50px;
+        padding: 0 8px;
+        line-height: 50px;
+        cursor: pointer;
+        &:hover {
+          background-color: #F5F5F5;
+        }
+      }
+      .toggle-list {
+        min-width: 135px;
+        background-color: $white;
+        border-radius: 1px;
+        box-shadow: 0 2px 17px 1px rgba(0, 0, 0, 0.1);
+        position: absolute;
+        top: 50px;
+        right: 0;
+        display: none;
+        a {
+          display: block;
+          line-height: 34px;
+          width: 100%;
+          padding: 8px;
+          font-size: 13px;
+          text-decoration: none;
+          color: $font-color;
+          transition: all .1s;
+          &:hover {
+            background-color: #F5F5F5;
+          }
+        }
+      }
+      .toggle-list.active {
+        display: block;
       }
     }
   }
