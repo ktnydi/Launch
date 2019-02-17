@@ -38,3 +38,9 @@
     </div>
   </div>
 </header>
+<% if flash[:notice] || flash[:alert]  %>
+  <p class="devise-notification">
+    <%= notice %>
+    <%= alert %>
+  </p>
+<% end %>

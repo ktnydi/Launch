@@ -159,7 +159,7 @@ header.share {
   }
 }
 
-.notice {
+.post_notice {
   width: 200px;
   height: 70px;
   text-align: center;
@@ -177,4 +177,19 @@ header.share {
 
 .close {
   right: -1000px;
+}
+
+.devise-notification {
+  height: 50px;
+  margin: auto;
+  line-height: 50px;
+  text-align: center;
+  background-color: #EF9A9A;
+  color: white;
+  letter-spacing: 1px;
+  position: fixed;
+  top: 50px;
+  right: 0;
+  left: 0;
+  z-index: 10;
 }

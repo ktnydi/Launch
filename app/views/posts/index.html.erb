@@ -1,8 +1,6 @@
-<% if flash.notice %>
-  <div class="notice" id="notification">
-    <%= flash.notice %>
-    <%= notice %>
-    <%= alert %>
+<% if flash[:post_notice] %>
+  <div class="post_notice" id="notification">
+    <%= flash[:post_notice] %>
   </div>
 <% end %>
 
