@@ -11,17 +11,20 @@
     <div class="posts-list">
     <% @posts.each do |post| %>
       <div class="post">
-        <h2>
-          <%= link_to post.title, post_path(post), data: { "turbolinks": false } %>
-        </h2>
-        <div class="post-bottom">
-          <span>
-            <i class="far fa-heart"></i>
-            123
-          </span>
-          <p>
-            <%= post.created_at.strftime("%Y.%m.%d") %>
-          </p>
+        <%= image_tag "/images/users/default_user_image.png", size: 50 %>
+        <div class="post-title">
+          <h2>
+            <%= link_to post.title, post_path(post), data: { "turbolinks": false } %>
+          </h2>
+          <div class="post-bottom">
+            <span>
+              <i class="far fa-heart"></i>
+              123
+            </span>
+            <p>
+              <%= post.created_at.strftime("%Y.%m.%d") %>
+            </p>
+          </div>
         </div>
       </div>
     <% end %>
