@@ -20,11 +20,13 @@
         </button>
         <div class="user-name-toggle">
           <div class="user-name" id="toggle">
-            <%= current_user.name %>
+            <%= image_tag "/images/users/default_user_image.png", size: 35 %>
+            <span><%= current_user.name %></span>
           </div>
           <div class="toggle-list" id="lists">
             <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
             <%= link_to "アカウント設定", edit_user_registration_path, data: { "turbolinks" => false } %>
+            <%= link_to "ダッシュボード", user_path(current_user.id), data: { "turbolinks" => false } %>
           </div>
         </div>
       <% else %>

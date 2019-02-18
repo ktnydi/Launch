@@ -3,6 +3,7 @@ user_names.each_with_index do |val, idx|
   User.create(
     name: val,
     email: val + "@example.com",
-    password: "password"
+    password: "password",
+    image_name: "default_user_image.png"
   )
 end

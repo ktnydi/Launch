@@ -125,8 +125,17 @@ header.share {
         padding: 0 8px;
         line-height: 50px;
         cursor: pointer;
+        display: flex;
+        align-items: center;
         &:hover {
           background-color: #F5F5F5;
+        }
+        img {
+          display: inline-block;
+          margin-right:8px;
+          size: 30px;
+          border-radius: 9999px;
+          border: 1px solid $border-color;
         }
       }
       .toggle-list {
