@@ -10,8 +10,8 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
- *= require_tree .
  *= require_self
+ *= require_tree .
  */
 
 @import "variables";
@@ -26,8 +26,8 @@ body {
 }
 
 html, body {
- width: 100%;
- height: 100%;
+ background-color: #ECEFF1;
+ color: $font-color;
 }
 
 ::selection {
@@ -39,7 +39,136 @@ input, textarea {
  padding: 0;
 }
 
-.notice {
+.container {
+  width: 1024px;
+  margin: 0 auto;
+}
+
+header.share {
+  height: 50px;
+  width: 100%;
+  background-color: $white;
+  box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 0;
+  z-index: 9999;
+  .logo {
+    float: left;
+    display: inline-block;
+    height: 50px;
+    padding-right: 8px;
+    font-weight: bold;
+    line-height: 50px;
+    font-size: 25px;
+    a {
+      text-decoration: none;
+      color: $font-color;
+    }
+  }
+  ul {
+    float: left;
+    list-style: none;
+    padding: 0;
+    li {
+      float: left;
+      height: 50px;
+      margin: 0 12px;
+      font-size: 13px;
+      line-height: 50px;
+      transition: all .15s;
+      &:hover {
+        border-bottom: 4px solid $main-color;
+      }
+      &.active {
+        border-bottom: 4px solid $main-color;
+      }
+      a {
+        display: block;
+        line-height: 50px;
+        text-decoration: none;
+        color: $font-color;
+      }
+    }
+  }
+  .header-left {
+    float: left;
+  }
+  .header-right {
+    display: flex;
+    align-items: center;
+    float: right;
+    height: 50px;
+    button {
+      padding: 0;
+      margin: 0 12px;
+      border: none;
+      font-size: 13px;
+      background-color: $main-color;
+      height: 35px;
+      width: 100px;
+      border-radius: 3px;
+      transition: all .15s;
+      &:hover {
+        background-color: $sub-color;
+      }
+      a {
+        display: block;
+        line-height: 35px;
+        color: white;
+        text-decoration: none;
+      }
+    }
+    .user-name-toggle {
+      position: relative;
+      .user-name {
+        height: 50px;
+        padding: 0 8px;
+        line-height: 50px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        &:hover {
+          background-color: #F5F5F5;
+        }
+        img {
+          display: inline-block;
+          margin-right:8px;
+          size: 30px;
+          border-radius: 9999px;
+          border: 1px solid $border-color;
+        }
+      }
+      .toggle-list {
+        min-width: 135px;
+        background-color: $white;
+        border-radius: 1px;
+        box-shadow: 0 2px 17px 1px rgba(0, 0, 0, 0.1);
+        position: absolute;
+        top: 50px;
+        right: 0;
+        display: none;
+        a {
+          display: block;
+          line-height: 34px;
+          width: 100%;
+          padding: 8px;
+          font-size: 13px;
+          text-decoration: none;
+          color: $font-color;
+          transition: all .1s;
+          &:hover {
+            background-color: #F5F5F5;
+          }
+        }
+      }
+      .toggle-list.active {
+        display: block;
+      }
+    }
+  }
+}
+
+.post_notice {
   width: 200px;
   height: 70px;
   text-align: center;
@@ -47,14 +176,29 @@ input, textarea {
   opacity: 1;
   visibility: visible;
   background-color: $sub-color;
-  color: white;
+  color: $white;
   position: fixed;
   top: 60px;
   right: 40px;
-  z-index: 9999px;
-  transition: right 0.8s;
+  z-index: 9999;
+  transition: right .8s;
 }
 
 .close {
   right: -1000px;
+}
+
+.devise-notification {
+  height: 50px;
+  margin: auto;
+  line-height: 50px;
+  text-align: center;
+  background-color: #EF9A9A;
+  color: white;
+  letter-spacing: 1px;
+  position: fixed;
+  top: 50px;
+  right: 0;
+  left: 0;
+  z-index: 10;
 }

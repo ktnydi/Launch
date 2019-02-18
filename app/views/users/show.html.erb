@@ -1,0 +1,66 @@
+<div class="user-info-wrapper">
+  <div class="container">
+    <h2>ユーザー情報</h2>
+    <div class="user-profile-wrapper">
+      <div class="user-info">
+        <div class="user-profile-img">
+          <%= image_tag "/images/users/default_user_image.png", size: 70 %>
+          <p><%= @user.name %></p>
+        </div>
+      </div>
+      <div class="user-info">
+        <div class="user-profile-posts">
+          <div class="posted-count">
+            <%= @user.posts.count %>
+          </div>
+          <div class="posted-text">投稿した記事数</div>
+        </div>
+      </div>
+      <div class="user-info">
+        <div class="user-profile-likes">
+          <div class="posted-count">
+            123
+          </div>
+          <div class="posted-text">総いいね数</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="posts-info-wrapper">
+  <div class="container">
+    <h2>記事の管理</h2>
+    <table>
+      <tr>
+        <th class="title">記事のタイトル・概要</th>
+        <th class="status">状態</th>
+        <th class="created_at">作成日</th>
+        <th class="updated_at">更新日</th>
+        <th class="edit">操作</th>
+      </tr>
+      <% @user.posts.each do |post| %>
+      <tr>
+        <td class="title">
+          <h3><%= link_to post.title, post_path(post), data: { "turbolinks" => false } %></h3>
+          <p><%= truncate(post.content, length: 80) %></p>
+        </td>
+        <td class="status">
+          公開中
+        </td>
+        <td class="created_at">
+          <%= post.created_at.strftime("%Y.%m.%d") %>
+        </td>
+        <td class="updated_at">
+          <%= post.updated_at.strftime("%Y.%m.%d") %>
+        </td>
+        <td class="edit">
+          <%= link_to "編集", edit_post_path(post), data: { "turbolinks" => false } %>
+          |
+          <%= link_to "削除", post_path(post), method: :delete, data: { confirm: "本当に削除しますか？一度、記事を削除すると元に戻せなくなります。"} %>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>

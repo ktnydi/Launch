@@ -1,0 +1,8 @@
+<%= f.text_field :title, placeholder: "記事のタイトルを入力" %>
+<%= f.text_field :app_url, placeholder: "開発アプリURL" %>
+
+<div class="editor-md">
+  <%= f.text_area :content, placeholder: "Markdownで内容を書く", col: 40, rows: 30 %>
+  <div id="md-preview">
+  </div>
+</div>

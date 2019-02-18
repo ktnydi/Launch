@@ -1,0 +1,6 @@
+<%= form_for @post, html: { class: "f-editor" } do |f| %>
+  <%= render "share/editor_form", f: f %>
+  <div class="md-editor-bottom">
+    <%= f.submit "記事を編集する" %>
+  </div>
+<% end %>

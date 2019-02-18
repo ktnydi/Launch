@@ -1,0 +1,48 @@
+<header class="share">
+  <div class="container">
+    <div class="header-left">
+      <div class="logo">
+        <%= link_to "Launch", root_path, data: { "turbolinks" => false } %>
+      </div>
+      <ul>
+        <li>
+          <%= link_to "ホーム", root_path, data: { "turbolinks" => false } %>
+        </li>
+        <li>
+          <%= link_to "新着", "#" %>
+        </li>
+      </ul>
+    </div>
+    <div class="header-right">
+      <% if user_signed_in? %>
+        <button class="new-post">
+          <%= link_to "記事を書く", new_post_path, data: { "turbolinks" => false } %>
+        </button>
+        <div class="user-name-toggle">
+          <div class="user-name" id="toggle">
+            <%= image_tag "/images/users/default_user_image.png", size: 35 %>
+            <span><%= current_user.name %></span>
+          </div>
+          <div class="toggle-list" id="lists">
+            <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+            <%= link_to "アカウント設定", edit_user_registration_path, data: { "turbolinks" => false } %>
+            <%= link_to "ダッシュボード", user_path(current_user.id), data: { "turbolinks" => false } %>
+          </div>
+        </div>
+      <% else %>
+        <button>
+          <%= link_to "ログイン", new_user_session_path %>
+        </button>
+        <button>
+          <%= link_to "アカウント作成", new_user_registration_path %>
+        </button>
+      <% end %>
+    </div>
+  </div>
+</header>
+<% if flash[:notice] || flash[:alert]  %>
+  <p class="devise-notification">
+    <%= notice %>
+    <%= alert %>
+  </p>
+<% end %>

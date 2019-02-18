@@ -16,6 +16,29 @@
 //= require_tree .
 
 document.addEventListener('DOMContentLoaded', function() {
+  var now_url = location.href;
+  var lists = document.querySelectorAll('.header-left ul li');
+  for (var i = 0; i < lists.length; i++) {
+    var a = lists.item(i).firstElementChild;
+    if (a.href === now_url) {
+      lists.item(i).className = 'active';
+      break;
+    }
+  }
+
+  var toggle = document.getElementById('toggle');
+  var lists = document.getElementById('lists');
+  toggle.addEventListener('click', function() {
+    var classes = lists.className.split(' ');
+    var active_idx = classes.indexOf('active');
+    if (active_idx >= 0) {
+      classes.splice(active_idx, 1);
+      lists.className = classes.join(' ');
+    } else {
+      classes.push('active');
+      lists.className = classes.join(' ');
+    }
+  });
 
   const NOTIFICATION = document.getElementById('notification');
 
@@ -38,7 +61,7 @@ function marked_js_render() {
   var renderer = new marked.Renderer();
 
   renderer.code = function (code, language) {
-    return '<pre' + '><code class="hljs">' + hljs.highlightAuto(code).value + '</code></pre>';
+    return '<pre' + '><code class="hljs">' + hljs.highlightAuto(code, [language]).value + '</code></pre>';
   };
   marked.setOptions({
     breaks: true,

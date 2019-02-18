@@ -1,0 +1,176 @@
+@import "variables";
+
+::-webkit-input-placeholder {
+  color: #999;
+}
+
+header.editor {
+  width: 100%;
+  height: 50px;
+  border-bottom: 1px solid $border-color;
+  background-color: $white;
+  .back {
+    display: inline-block;
+    height: 50px;
+    margin: 0 16px;
+    a {
+      height: 50px;
+      width: auto;
+      display: inline-block;
+      line-height: 50px;
+      text-decoration: none;
+      color: $font-color;
+      transition: all .15s;
+      &:hover {
+        border-bottom: 4px solid $main-color;
+        i {
+          color: $main-color;
+        }
+      }
+      i {
+        font-size: 16px;
+        transition: all 0.15s;
+      }
+    }
+  }
+}
+
+form.f-editor {
+  width: 100%;
+  height: calc(100vh - 50px);
+  input[type="text"] {
+    display: block;
+    width: 100%;
+    height: 40px;
+    padding: 0 16px;
+    font-size: 1rem;
+    border: none;
+    border-bottom: 1px solid $border-color;
+    background-color: $white;
+  }
+  .md-editor-bottom {
+    height: 60px;
+    width: 100%;
+    line-height: 60px;
+    border-top: solid 1px $border-color;
+    background-color: $white;
+    text-align: right;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 9999;
+    .image {
+      margin: 0 16px;
+      input[type="file"] {
+        font-size: 16px;
+      }
+    }
+    input[type="submit"] {
+      display: inline-block;
+      height: 40px;
+      padding: 0 8px;
+      margin: 0 16px;
+      border: none;
+      border-radius: 3px;
+      font-size: 16px;
+      letter-spacing: 1px;
+      background-color: $main-color;
+      color: white;
+      cursor: pointer;
+      transition: all .15s;
+      &:hover {
+        background-color: $sub-color;
+      }
+    }
+  }
+}
+
+.editor-md {
+  position: relative;
+  height: calc(100% - 140px);
+}
+
+.CodeMirror {
+  font-size: 14px;
+  border-right: solid 1px $border-color;
+  font-family: 'hiragino sans';
+  background-color: $white;
+  .CodeMirror-placeholder {
+    padding: 0 14px;
+    color: #999;
+  }
+  .CodeMirror-line {
+    padding: 0 14px;
+  }
+  .CodeMirror-linenumber {
+    width: 30px;
+    padding: 0 4px;
+  }
+  .CodeMirror-selected {
+    background-color: #B2DFDB;
+  }
+  .CodeMirror-scroll {
+    padding-bottom: 0;
+  }
+}
+
+#md-preview {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: inline-block;
+  float: right;
+  width: 50%;
+  height: 100%;
+  padding: 20px;
+  overflow: scroll;
+}
+
+#md-preview, .content {
+  padding: 24px;
+  background-color: $white;
+  color: $fb-color;
+  * {
+    margin-bottom: 16px;
+  }
+  h1 {
+    margin: 32px 0 8px;
+    font-size: 1.6rem;
+    border-bottom: solid 1px $border-color;
+  }
+  a {
+    text-decoration: none;
+    color: $sub-color;
+  }
+  ol, ul {
+    li {
+      margin: 0;
+    }
+  }
+  table {
+    border-collapse: collapse;
+    tr {
+      border: solid 1px $border-color;
+    }
+    th {
+      font-weight: normal;
+    }
+    th, td {
+      padding: 8px 14px;
+    }
+  }
+  code {
+    font-family: consolas, monaco;
+    border: 1px solid $border-color;
+    border-radius: 3px;
+    font-size: .8rem;
+    padding: 2px 5px;
+    background-color: #282c34;
+    color: #abb2bf;
+  }
+  pre {
+      code {
+      padding: 12px;
+    }
+  }
+}

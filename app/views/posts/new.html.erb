@@ -1,23 +1,6 @@
-<%= link_to "戻る", root_path, data: {"turbolinks": false} %>
-<%= form_for @post do |f| %>
-  <div class="md-editor-top">
-    <%= f.text_field :title, placeholder: "記事のタイトルを入力" %>
+<%= form_for @post, html: { class: "f-editor" } do |f| %>
+  <%= render "share/editor_form", f: f %>
+  <div class="md-editor-bottom">
     <%= f.submit "記事を公開する" %>
   </div>
-  <div class="editor-md">
-    <%= f.text_area :content, placeholder: "Markdownで内容を書く", col: 40, rows: 30 %>
-    <div id="md-preview">
-    </div>
-  </div>
 <% end %>
-
-
-<!--
-javascript only for editor
- -->
-<%= javascript_include_tag '/editor/lib/codemirror.js' %>
-<%= javascript_include_tag '/editor/mode/markdown/markdown.js' %>
-<%= javascript_include_tag '/editor/addon/display/placeholder.js' %>
-<%= javascript_include_tag '/editor/addon/selection/active-line.js' %>
-<%= javascript_include_tag '/editor/addon/selection/mark-selection.js' %>
-<%= javascript_include_tag '/editor/javascript/editor.js' %>
