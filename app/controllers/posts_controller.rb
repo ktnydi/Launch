@@ -5,7 +5,7 @@ before_action :authenticate_user!, except: [:index, :show]
 before_action :forbiden_access, only: [:edit]
 
   def index
-    @posts = Post.all.order(created_at: :desc)
+    @posts = Post.all.order(created_at: :desc).page(params[:page]).per(25)
   end
 
   def show

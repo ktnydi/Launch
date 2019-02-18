@@ -9,12 +9,17 @@
     text-align: center;
     font-weight: normal;
     font-size: 1.6rem;
+    letter-spacing: 1px;
+    i {
+      margin-right: 8px;
+    }
   }
 }
 
 .posts-list {
-  width: 60%;
-  margin: 24px auto;
+  width: 70%;
+  margin: 24px auto 0;
+  box-shadow: 0 2px 17px 1px rgba(0, 0, 0, 0.12);
   background-color: $white;
   .post {
     display: flex;
@@ -57,5 +62,31 @@
     &:last-child {
       border-bottom: none;
     }
+  }
+}
+
+.paginate {
+  width: 70%;
+  margin: 0 auto;
+  padding: 24px;
+  overflow: hidden;
+  a {
+    padding: 12px;
+    color: $white;
+    background-color: $main-color;
+    text-decoration: none;
+    border-radius: 3px;
+    box-shadow: 0 2px 17px 1px rgba(0, 0, 0, 0.12);
+    font-size: 0.8rem;
+    transition: all 0.1s;
+    &:hover {
+      background-color: $sub-color;
+    }
+  }
+  .next-page {
+    float: right;
+  }
+  .prev-page {
+    float: left;
   }
 }
