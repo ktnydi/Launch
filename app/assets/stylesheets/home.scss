@@ -6,6 +6,7 @@
   width: 100%;
   color: $font-color;
   h1 {
+    margin-bottom: 12px;
     text-align: center;
     font-weight: normal;
     font-size: 1.6rem;
@@ -17,8 +18,8 @@
 }
 
 .posts-list {
-  width: 70%;
-  margin: 24px auto 0;
+  width: 90%;
+  margin: 0 auto;
   box-shadow: 0 2px 17px 1px rgba(0, 0, 0, 0.12);
   background-color: $white;
   .post {
@@ -88,5 +89,60 @@
   }
   .prev-page {
     float: left;
+  }
+}
+
+.posts-home-wrapper {
+  padding: 120px 0;
+  overflow: hidden;
+  .container {
+    width: 1024px;
+  }
+  h1, h3 {
+    font-weight: normal;
+    font-size: 1.2rem;
+    text-align: center;
+  }
+  .period {
+    width: 90%;
+    margin: 12px auto;
+    padding: 0 24px;
+    overflow: hidden;
+    .select-period {
+      float: right;
+      a {
+        padding: 5px;
+        font-size: 0.8rem;
+        text-decoration: none;
+        color: grey;
+        &.select {
+          color: $main-color;
+        }
+      }
+    }
+    h1 {
+      float: left;
+    }
+  }
+  .posts-rank-wrapper {
+    float: left;
+    width: calc(100% / 3 * 2);
+    margin: 0 auto;
+  }
+  .page-right {
+    float: right;
+    width: calc(100% / 3);
+    .posted-count {
+      h3 {
+        margin: 12px 0;
+      }
+      .calender {
+        width: 330px;
+        height: 330px;
+        margin: 0 auto;
+        box-shadow: 0 2px 17px 1px rgba(0, 0, 0, 0.12);
+        background-color: $white;
+      }
+    }
   }
 }

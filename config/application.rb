@@ -10,6 +10,7 @@ module TestMd
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.2
+    config.time_zone = "Tokyo"
     config.action_view.field_error_proc = Proc.new do |html_tag, instance|
       %Q(<span class="field_with_errors">#{html_tag}</span>).html_safe
     end

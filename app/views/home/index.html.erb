@@ -1,0 +1,44 @@
+<div class="posts-home-wrapper">
+  <div class="container">
+    <div class="posts-rank-wrapper">
+      <div class="period">
+        <h1>アクセスランキング</h1>
+        <div class="select-period">
+          <%= link_to "Day", "?period=today", data: { "turbolinks" => false } %>
+          <%= link_to "Week", "?period=week", data: { "turbolinks" => false } %>
+          <%= link_to "Month", "?period=month", data: { "turbolinks" => false } %>
+        </div>
+      </div>
+      <div class="posts-list">
+        <% @posts.each do |post| %>
+        <div class="post">
+          <%= image_tag "/images/users/default_user_image.png", size: 50 %>
+          <div class="post-title">
+            <h2>
+              <%= link_to post.title, post_path(post), data: { "turbolinks": false } %>
+            </h2>
+            <div class="post-bottom">
+              <span>
+                <i class="far fa-heart"></i>
+                123
+              </span>
+              <p>
+                <%= post.created_at.strftime("%Y.%m.%d") %>
+              </p>
+            </div>
+          </div>
+        </div>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="page-right">
+      <div class="posted-count">
+        <h3>投稿カレンダー</h3>
+        <div class="calender">
+          hoge
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
