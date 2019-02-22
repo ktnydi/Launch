@@ -13,9 +13,12 @@
       <div class="post">
         <%= image_tag "/images/users/default_user_image.png", size: 50 %>
         <div class="post-title">
-          <h2>
-            <%= link_to post.title, post_path(post), data: { "turbolinks": false } %>
-          </h2>
+          <div class="post-top">
+            <h2>
+              <%= link_to post.title, post_path(post), data: { "turbolinks": false } %>
+            </h2>
+            <p><%= truncate post.content, length: 120 %></p>
+          </div>
           <div class="post-bottom">
             <span>
               <i class="far fa-heart"></i>
