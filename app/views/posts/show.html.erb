@@ -1,8 +1,75 @@
-<div class="post-wrapper">
+<div class="post-wrapper clear">
   <div class="container">
+  <main>
     <h1 class="main-title"><%= @post.title %></h1>
+    <span class="created_at">
+      Created by <%= @post.user.name %>
+      at <%= @post.created_at.strftime("%Y.%m.%d %H:%M") %>
+    </span>
     <div class="content">
       <%== markdown @post.content %>
     </div>
+    <div class="comment-wrapper">
+      <h3>コメントする</h3>
+      <div class="comment-field">
+        <ul>
+          <li id="edit" style="border-bottom: 3px solid #009688; color: #009688;">編集</li>
+          <li id="preview">プレビュー</li>
+        </ul>
+        <div class="comment-edit">
+          <form>
+            <textarea placeholder="コメントを入力してください" id="md-comment" style="display: block;"></textarea>
+            <div class="comment-md-preview" id="comment-preview" style="display: none;">
+            </div>
+            <input type="submit" value="投稿">
+          </form>
+        </div>
+      </div>
+    </div>
+  </main>
+  <aside>
+    <div class="author">
+      <h3>この記事のクリエイター</h3>
+      <%= image_tag "/images/users/#{@post.user.image_name}", size: 120 %>
+      <div class="author-name">
+        <%= @post.user.name %>
+      </div>
+      <table>
+        <tr>
+          <th>フォロワー</th>
+          <th>投稿した数</th>
+        </tr>
+        <tr>
+          <td>123</td>
+          <td>456</td>
+        </tr>
+      </table>
+      <%= link_to "いいね！", "#" %>
+    </div>
+  </aside>
   </div>
 </div>
+<script>
+  var edit = document.getElementById('edit');
+  var preview = document.getElementById('preview')
+  var md_comment = document.getElementById('md-comment');
+  var comment_preview = document.getElementById('comment-preview');
+
+  SwitchField(edit, preview, md_comment, comment_preview);
+  SwitchField(preview, edit, comment_preview, md_comment);
+
+  function SwitchField(btn1, btn2, elem1, elem2) {
+    btn1.addEventListener('click', function() {
+      btn1.style.borderBottom = "3px solid #009688";
+      btn2.style.border = 'none';
+      btn1.style.color = "#009688";
+      btn2.style.color = "inherit";
+      elem1.style.display = 'block';
+      elem2.style.display = 'none';
+    });
+  }
+
+  md_comment.addEventListener('keyup', function() {
+    comment_preview.innerHTML = marked(md_comment.value);
+  })
+</script>
