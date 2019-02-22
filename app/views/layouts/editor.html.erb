@@ -12,6 +12,11 @@
     <%= render "share/header/editor" %>
     <%= yield %>
 
-    <%= render "share/editor_js" %>
+    <%= javascript_include_tag '/editor/lib/codemirror.js' %>
+    <%= javascript_include_tag '/editor/mode/markdown/markdown.js' %>
+    <%= javascript_include_tag '/editor/addon/display/placeholder.js' %>
+    <%= javascript_include_tag '/editor/addon/selection/active-line.js' %>
+    <%= javascript_include_tag '/editor/addon/selection/mark-selection.js' %>
+    <%= javascript_include_tag '/editor/javascript/editor.js' %>
   </body>
 </html>
