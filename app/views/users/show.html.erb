@@ -19,9 +19,9 @@
       <div class="user-info">
         <div class="user-profile-likes">
           <div class="posted-count">
-            123
+            <%= @count %>
           </div>
-          <div class="posted-text">総いいね数</div>
+          <div class="posted-text">総アクセス数</div>
         </div>
       </div>
     </div>
@@ -30,7 +30,13 @@
 
 <div class="posts-info-wrapper">
   <div class="container">
-    <h2>記事の管理</h2>
+    <div class="posts-controll-header">
+      <h2>記事の管理</h2>
+      <%= form_tag user_path(current_user), method: :get do %>
+        <%= search_field_tag "q", params[:q], placeholder: "記事を検索" %>
+        <%= submit_tag "検索" %>
+      <% end %>
+    </div>
     <table>
       <tr>
         <th class="title">記事のタイトル・概要</th>
@@ -39,28 +45,50 @@
         <th class="updated_at">更新日</th>
         <th class="edit">操作</th>
       </tr>
-      <% @user.posts.each do |post| %>
-      <tr>
-        <td class="title">
-          <h3><%= link_to post.title, post_path(post), data: { "turbolinks" => false } %></h3>
-          <p><%= truncate(post.content, length: 80) %></p>
-        </td>
-        <td class="status">
-          公開中
-        </td>
-        <td class="created_at">
-          <%= post.created_at.strftime("%Y.%m.%d") %>
-        </td>
-        <td class="updated_at">
-          <%= post.updated_at.strftime("%Y.%m.%d") %>
-        </td>
-        <td class="edit">
-          <%= link_to "編集", edit_post_path(post), data: { "turbolinks" => false } %>
-          |
-          <%= link_to "削除", post_path(post), method: :delete, data: { confirm: "本当に削除しますか？一度、記事を削除すると元に戻せなくなります。"} %>
-        </td>
-      </tr>
+      <% if @posts.present? %>
+        <% @posts.each do |post| %>
+        <tr>
+          <td class="title">
+            <h3><%= link_to post.title, post_path(post), data: { "turbolinks" => false } %></h3>
+            <p><%= truncate(post.content, length: 80) %></p>
+          </td>
+          <td class="status">
+            公開中
+          </td>
+          <td class="created_at">
+            <%= post.created_at.strftime("%Y.%m.%d") %>
+          </td>
+          <td class="updated_at">
+            <%= post.updated_at.strftime("%Y.%m.%d") %>
+          </td>
+          <td class="edit">
+            <%= link_to "編集", edit_post_path(post), data: { "turbolinks" => false } %>
+            |
+            <%= link_to "削除", post_path(post), method: :delete, data: { confirm: "本当に削除しますか？一度、記事を削除すると元に戻せなくなります。"} %>
+          </td>
+        </tr>
+        <% end %>
+      <% else %>
+        <tr>
+          <td colspan="5" class="nopost">記事はありません</td>
+        </tr>
       <% end %>
     </table>
+    <div class="paginate">
+      <%= link_to_prev_page @posts, "前のページへ", class: "prev-page", data: { "turbolinks" => false } %>
+      <%= link_to_next_page @posts, "次のページへ", class: "next-page", data: { "turbolinks" => false } %>
+    </div>
+  </div>
+</div>
+
+<div class="posts-like-wrapper">
+  <div class="container">
+    <div class="posts-controll-header">
+      <h2>いいねした記事</h2>
+      <form>
+        <%= search_field_tag "q", params[:q], placeholder: "記事を検索" %>
+        <%= submit_tag "検索" %>
+      </form>
+    </div>
   </div>
 </div>

@@ -1,12 +1,11 @@
 @import 'variables';
 
 .user-info-wrapper {
-  margin: 120px 0 80px;
+  padding: 120px 0 80px;
   h2 {
     margin: 16px 0;
     font-size: 1.2rem;
     font-weight: normal;
-    text-align: center;
   }
   .user-profile-wrapper {
     height: 150px;
@@ -45,65 +44,86 @@
   }
 }
 
-.posts-info-wrapper {
-  h2 {
-    margin: 16px 0;
-    font-size: 1.2rem;
-    font-weight: normal;
-    text-align: center;
+.posts-info-wrapper, .posts-like-wrapper {
+  .posts-controll-header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    h2 {
+      margin: 16px 0;
+      font-size: 1.2rem;
+      font-weight: normal;
+    }
+    form {
+      margin-left: 12px;
+      input[type="search"] {
+        width: 200px;
+        padding: 0 12px;
+        line-height: 25px;
+        border: 1px solid $border-color;
+        border-radius: 3px;
+        font-size: .8rem;
+        background-color: $white;
+      }
+      input[type="submit"] {
+        display: none;
+      }
+    }
   }
-  table {
-    width: 100%;
-    margin: 24px 0 60px;
-    border-collapse: collapse;
-    box-shadow: 0 2px 17px 1px rgba(0, 0, 0, 0.12);
-    background-color: $white;
-    tr {
-      border-bottom: 1px solid $border-color;
-      &:last-child {
-        border-bottom: none;
-      }
-      th, td {
-        padding: 24px;
-      }
-      td {
-      }
+}
+.posts-info-wrapper table {
+  width: 100%;
+  border-collapse: collapse;
+  box-shadow: 0 2px 17px 1px rgba(0, 0, 0, 0.12);
+  background-color: $white;
+  tr {
+    border-bottom: 1px solid $border-color;
+    &:last-child {
+      border-bottom: none;
     }
-    .title {
-      width: 40%;
-      text-align: left;
+    th, td {
+      padding: 24px;
+    }
+    td {
+    }
+  }
+  .title {
+    width: 40%;
+    text-align: left;
+    font-size: 1rem;
+    h3 {
       font-size: 1rem;
-      h3 {
-        font-size: 1rem;
-        a {
-          color: $main-color;
-          text-decoration: none;
-          &:hover {
-            text-decoration: underline;
-          }
-        }
-      }
-      p {
-        height: 40px;
-        font-size: 0.8rem;
-        word-break: break-all;
-      }
-    }
-    .status {
-      text-align: center;
-    }
-    .created_at, .updated_at {
-      text-align: center;
-    }
-    .edit {
-      text-align: center;
       a {
-        text-decoration: none;
         color: $main-color;
+        text-decoration: none;
         &:hover {
           text-decoration: underline;
         }
       }
     }
+    p {
+      height: 40px;
+      font-size: 0.8rem;
+      word-break: break-all;
+    }
+  }
+  .status {
+    text-align: center;
+  }
+  .created_at, .updated_at {
+    text-align: center;
+  }
+  .edit {
+    text-align: center;
+    a {
+      text-decoration: none;
+      color: $main-color;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+  .nopost {
+    text-align: center;
   }
 }
