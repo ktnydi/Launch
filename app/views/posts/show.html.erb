@@ -10,6 +10,33 @@
       <%== markdown @post.content %>
     </div>
     <div class="comment-wrapper">
+      <div class="post-comments">
+        <% if @post.comments.present? %>
+          <h3>この記事のコメント</h3>
+          <% @post.comments.each do |comment| %>
+          <div class="user-comment-wrapper">
+            <%= image_tag "/images/users/#{@post.user.image_name}", size: 60 %>
+            <div class="comment">
+              <div class="md-comment">
+                <%== markdown comment.content %>
+              </div>
+              <div class="comment-bottom">
+                <div class="left">
+                by <%= comment.user.name %>
+                ・
+                <%= comment.created_at.strftime("%Y.%H.%d %H:%M") %>
+                </div>
+                <% if comment.user_id == current_user.id %>
+                  <div class="right">
+                    <%= link_to "削除", "/comment/#{comment.id}/", method: :delete, data: { confirm: "コメントを削除します。"} %>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+          <% end %>
+        <% end %>
+      </div>
       <h3>コメントする</h3>
       <div class="comment-field">
         <ul>
@@ -17,12 +44,12 @@
           <li id="preview">プレビュー</li>
         </ul>
         <div class="comment-edit">
-          <form>
-            <textarea placeholder="コメントを入力してください" id="md-comment" style="display: block;"></textarea>
+          <%= form_for @comment, url: "/comment/#{@post.id}" do |f| %>
+            <%= f.text_area :content, id: "md-comment", placeholder: "コメントを入力してください", style: "display: block;" %>
             <div class="comment-md-preview" id="comment-preview" style="display: none;">
             </div>
             <input type="submit" value="投稿">
-          </form>
+          <% end %>
         </div>
       </div>
     </div>
