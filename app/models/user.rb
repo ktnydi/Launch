@@ -2,7 +2,7 @@ class User < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
-  has_many :posts, through: :likes
+  has_many :liked_posts, through: :likes, source: :post
 
   validates :name, presence: true, length: { maximum: 30 }
   attr_accessor :current_password
