@@ -57,6 +57,10 @@
         overflow: hidden;
         span {
           float: left;
+          a {
+            text-decoration: none;
+            color: $fb-color;
+          }
         }
         p {
           display: inline-block;
