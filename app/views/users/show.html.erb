@@ -1,6 +1,8 @@
 <div class="user-info-wrapper">
   <div class="container">
-    <h2>ユーザー情報</h2>
+    <h2>
+      ユーザー情報
+    </h2>
     <div class="user-profile-wrapper">
       <div class="user-info">
         <div class="user-profile-img">
@@ -31,10 +33,15 @@
 <div class="posts-info-wrapper">
   <div class="container">
     <div class="posts-controll-header">
-      <h2>記事の管理</h2>
+      <h2>
+        記事の管理
+      </h2>
       <%= form_tag user_path(current_user), method: :get do %>
-        <%= search_field_tag "q", params[:q], placeholder: "記事を検索" %>
-        <%= submit_tag "検索" %>
+        <%= label_tag do %>
+          <i class="fas fa-search"></i>
+          <%= search_field_tag "q", params[:q], placeholder: "記事を検索" %>
+          <%= submit_tag "検索" %>
+        <% end %>
       <% end %>
     </div>
     <table>
@@ -63,7 +70,7 @@
           </td>
           <td class="edit">
             <%= link_to "編集", edit_post_path(post), data: { "turbolinks" => false } %>
-            |
+            ・
             <%= link_to "削除", post_path(post), method: :delete, data: { confirm: "本当に削除しますか？一度、記事を削除すると元に戻せなくなります。"} %>
           </td>
         </tr>
@@ -84,11 +91,50 @@
 <div class="posts-like-wrapper">
   <div class="container">
     <div class="posts-controll-header">
-      <h2>いいねした記事</h2>
-      <form>
-        <%= search_field_tag "q", params[:q], placeholder: "記事を検索" %>
-        <%= submit_tag "検索" %>
-      </form>
+      <h2>
+        いいねした記事
+      </h2>
+      <div class="more-posts">
+        <%= link_to "#" do %>
+          いいねした記事一覧へ
+          <i class="fas fa-angle-right"></i>
+        <% end %>
+      </div>
+    </div>
+    <div class="post-like">
+      <% @liked_posts.each do |post| %>
+      <div class="post">
+        <%= image_tag "/images/users/default_user_image.png", size: 50 %>
+        <div class="post-title">
+          <div class="post-top">
+            <h2>
+              <%= link_to post.title, post_path(post), data: { "turbolinks": false } %>
+            </h2>
+            <p><%= truncate post.content, length: 120 %></p>
+          </div>
+          <div class="post-bottom">
+            <div class="left">
+              <span class="heart">
+                <% if current_user && post.likes.find_by(user_id: current_user.id) %>
+                  <i class="fas fa-heart"></i>
+                <% else %>
+                  <i class="far fa-heart"></i>
+                <% end %>
+                <%= post.likes.count %>
+              </span>
+              ･
+              <span>
+                Created by
+                <%= post.user.name %>
+              </span>
+            </div>
+            <p>
+              <%= post.created_at.strftime("%Y.%m.%d") %>
+            </p>
+          </div>
+        </div>
+      </div>
+      <% end %>
     </div>
   </div>
 </div>

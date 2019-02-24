@@ -4,14 +4,15 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find_by(id: params[:id])
-    @posts = Post.where(user_id: @user.id).order(created_at: :desc).page(params[:page]).per(5)
+    @posts = @user.posts.order(created_at: :desc).page(params[:page]).per(5)
     if params[:q]
-      @posts = Post.where(user_id: @user.id).search(params[:q]).page(params[:page]).per(5)
+      @posts = @user.posts.search(params[:q]).page(params[:page]).per(5)
     end
     @count = 0
     @user.posts.each do |post|
       @count += post.impressions_count
     end
+    @liked_posts = @user.liked_posts.order(created_at: :desc).limit(10)
   end
 
   private

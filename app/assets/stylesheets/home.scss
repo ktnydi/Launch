@@ -17,9 +17,7 @@
   }
 }
 
-.posts-list {
-  width: 90%;
-  margin: 0 auto;
+.posts-list, .post-like {
   box-shadow: 0 2px 17px 1px rgba(0, 0, 0, 0.12);
   background-color: $white;
   .post {
@@ -55,11 +53,13 @@
         margin-top: 12px;
         font-size: 0.8rem;
         overflow: hidden;
-        span {
+        color: silver;
+        .left {
           float: left;
-          a {
-            text-decoration: none;
-            color: $fb-color;
+          span {
+            a {
+              text-decoration: none;
+            }
           }
         }
         p {
