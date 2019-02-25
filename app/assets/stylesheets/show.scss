@@ -5,11 +5,10 @@
   background-color: $white;
   color: $fb-color;
   .container {
-    width: 90%;
+    display: flex;
     main {
-      float: left;
       width: 70%;
-      padding: 0 20px;
+      padding-right: 24px;
       border-right: 1px solid $border-color;
       a {
         display: inline-block;
@@ -27,7 +26,6 @@
       }
     }
     aside {
-      float: right;
       width: 30%;
       padding: 0 20px;
       .author {

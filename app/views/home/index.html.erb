@@ -1,5 +1,28 @@
 <div class="posts-home-wrapper">
   <div class="container">
+    <aside class="page-right">
+      <div class="account-wrapper">
+        <h3>ユーザー</h3>
+        <div class="account">
+          <%= image_tag "/images/users/#{current_user.image_name}", size: 120 %>
+          <div class="current-user-name">
+            <%= current_user.name %>
+          </div>
+          <table>
+            <tr>
+              <th>フォロワー</th>
+              <th>投稿した数</th>
+            </tr>
+            <tr>
+              <td>123</td>
+              <td>
+                <%= current_user.posts.count %>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </aside>
     <div class="posts-rank-wrapper">
       <div class="period">
         <h1>アクセスランキング</h1>
@@ -33,15 +56,6 @@
           </div>
         </div>
         <% end %>
-      </div>
-    </div>
-
-    <div class="page-right">
-      <div class="posted-count">
-        <h3>投稿カレンダー</h3>
-        <div class="calender">
-          hoge
-        </div>
       </div>
     </div>
   </div>
