@@ -167,6 +167,25 @@
             font-size: 1.2rem;
           }
         }
+        .login, .signup {
+          display: block;
+          width: 200px;
+          padding: 8px 0;
+          margin: 12px auto;
+          border-radius: 3px;
+          text-decoration: none;
+        }
+        .login {
+          color: $main-color;
+        }
+        .signup {
+          background-color: $main-color;
+          color: $white;
+          transition: background-color .1s;
+          &:hover {
+            background-color: $sub-color;
+          }
+        }
       }
     }
   }
