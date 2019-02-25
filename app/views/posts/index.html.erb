@@ -7,7 +7,7 @@
 <main class="posts-wrapper">
   <div class="container">
     <h1><i class="fas fa-paste"></i>記事一覧</h1>
-
+    <% if @posts.present? %>
     <div class="posts-list">
     <% @posts.each do |post| %>
       <div class="post">
@@ -20,13 +20,18 @@
             <p><%= truncate post.content, length: 120 %></p>
           </div>
           <div class="post-bottom">
-            <span>
+            <span class="heart">
               <% if current_user && post.likes.find_by(user_id: current_user.id) %>
                 <i class="fas fa-heart"></i>
               <% else %>
                 <i class="far fa-heart"></i>
               <% end %>
               <%= post.likes.count %>
+            </span>
+            ･
+            <span>
+              Created by
+              <%= post.user.name %>
             </span>
             <p>
               <%= post.created_at.strftime("%Y.%m.%d") %>
@@ -40,5 +45,10 @@
       <%= link_to_prev_page @posts, "前のページへ", class: "prev-page", data: { "turbolinks" => false } %>
       <%= link_to_next_page @posts, "次のページへ", class: "next-page", data: { "turbolinks" => false } %>
     </div>
+    <% else %>
+      <p class="noposts">
+        <strong><%= params[:q] %></strong>に一致する記事が見つかりませんでした。
+      </p>
+    <% end %>
   </div>
 </main>

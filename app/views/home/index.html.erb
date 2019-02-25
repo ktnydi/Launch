@@ -4,22 +4,27 @@
       <div class="account-wrapper">
         <h3>ユーザー</h3>
         <div class="account">
-          <%= image_tag "/images/users/#{current_user.image_name}", size: 120 %>
-          <div class="current-user-name">
-            <%= current_user.name %>
-          </div>
-          <table>
-            <tr>
-              <th>フォロワー</th>
-              <th>投稿した数</th>
-            </tr>
-            <tr>
-              <td>123</td>
-              <td>
-                <%= current_user.posts.count %>
-              </td>
-            </tr>
-          </table>
+          <% if current_user %>
+            <%= image_tag "/images/users/#{current_user.image_name}", size: 120 %>
+            <div class="current-user-name">
+              <%= current_user.name %>
+            </div>
+            <table>
+              <tr>
+                <th>フォロワー</th>
+                <th>投稿した数</th>
+              </tr>
+              <tr>
+                <td>123</td>
+                <td>
+                  <%= current_user.posts.count %>
+                </td>
+              </tr>
+            </table>
+          <% else %>
+            <%= link_to "ログイン", new_user_session_path, class: "login" %>
+            <%= link_to "アカウント作成", new_user_registration_path, class: "signup" %>
+          <% end %>
         </div>
       </div>
     </aside>
@@ -41,13 +46,18 @@
               <%= link_to post.title, post_path(post), data: { "turbolinks": false } %>
             </h2>
             <div class="post-bottom">
-              <span>
+              <span class="heart">
                 <% if current_user && post.likes.find_by(user_id: current_user.id) %>
                   <i class="fas fa-heart"></i>
                 <% else %>
                   <i class="far fa-heart"></i>
                 <% end %>
                 <%= post.likes.count %>
+              </span>
+              ･
+              <span>
+                Created by
+                <%= post.user.name %>
               </span>
               <p>
                 <%= post.created_at.strftime("%Y.%m.%d") %>
