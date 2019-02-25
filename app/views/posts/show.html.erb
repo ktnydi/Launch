@@ -79,7 +79,7 @@
         </tr>
         <tr>
           <td>123</td>
-          <td>456</td>
+          <td><%= @post.user.posts.count %></td>
         </tr>
       </table>
         <%= link_to "#", class: "follow" do %>

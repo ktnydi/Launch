@@ -16,6 +16,13 @@
           <%= link_to "記事一覧", posts_path, data: { "turbolinks" => false } %>
         </li>
       </ul>
+      <%= form_tag posts_path, method: :get do %>
+        <%= label_tag do %>
+          <i class="fas fa-search"></i>
+          <%= search_field_tag "q", params[:q], placeholder: "記事のタイトルを検索", autocomplete: "off" %>
+          <%= submit_tag "検索" %>
+        <% end %>
+      <% end %>
     </div>
     <div class="header-right">
       <% if user_signed_in? %>

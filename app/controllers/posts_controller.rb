@@ -6,7 +6,10 @@ before_action :forbiden_access, only: [:edit]
 impressionist :actions => [:show]
 
   def index
-    @posts = Post.all.order(created_at: :desc).page(params[:page]).per(25)
+    @posts = Post.all.order(created_at: :desc).page(params[:page]).per(10)
+    if params[:q]
+      @posts = Post.search(params[:q]).page(params[:page]).per(10)
+    end
   end
 
   def show
