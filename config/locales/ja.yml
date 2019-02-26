@@ -1,0 +1,13 @@
+ja:
+  activerecord:
+    models:
+      user: アカウント情報
+    attributes:
+      user:
+        email: メールアドレス
+        current_password: 現在のパスワード
+        password: パスワード
+        password_confirmation: 確認用パスワード
+        name: 名前
+        image_name: ユーザー画像
+        remember_me: ログイン情報を記録する
