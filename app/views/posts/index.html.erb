@@ -11,7 +11,7 @@
     <div class="posts-list">
     <% @posts.each do |post| %>
       <div class="post">
-        <%= image_tag "/images/users/default_user_image.png", size: 50 %>
+        <%= image_tag "/images/users/#{post.user.image_name}", size: 50 %>
         <div class="post-title">
           <div class="post-top">
             <h2>

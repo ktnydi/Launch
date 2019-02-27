@@ -31,7 +31,7 @@
         </button>
         <div class="user-name-toggle">
           <div class="user-name" id="toggle">
-            <%= image_tag "/images/users/default_user_image.png", size: 35 %>
+            <%= image_tag "/images/users/#{current_user.image_name}", size: 35 %>
             <span><%= current_user.name %></span>
           </div>
           <div class="toggle-list" id="lists">
