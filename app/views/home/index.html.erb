@@ -15,7 +15,9 @@
                 <th>投稿した数</th>
               </tr>
               <tr>
-                <td>123</td>
+                <td>
+                  <%= current_user.followers.count %>
+                </td>
                 <td>
                   <%= current_user.posts.count %>
                 </td>
