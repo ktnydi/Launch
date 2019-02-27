@@ -2,12 +2,22 @@ ja:
   activerecord:
     models:
       user: アカウント情報
+      post: 投稿
+      comment: コメント
+      like: いいね
     attributes:
       user:
         email: メールアドレス
         current_password: 現在のパスワード
         password: パスワード
         password_confirmation: 確認用パスワード
-        name: 名前
+        name: ユーザー名
         image_name: ユーザー画像
         remember_me: ログイン情報を記録する
+      post:
+        title: タイトル
+        content: 投稿内容
+        app_url: アプリURL
+        impressions_count: アクセス数
+      comment:
+        content: コメント内容

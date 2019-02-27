@@ -1,3 +1,10 @@
+<% if errors = @comment.errors.full_messages %>
+  <% errors.each do |error| %>
+    <div class="nocomment">
+      <%= error %>
+    </div>
+  <% end %>
+<% end %>
 <div class="post-wrapper clear">
   <div class="container">
   <main>
