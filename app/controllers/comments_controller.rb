@@ -4,7 +4,9 @@ class CommentsController < ApplicationController
     if @comment.save
       redirect_to post_path(params[:post_id])
     else
-      render post_path(params[:post_id])
+      @post = Post.find_by(id: params[:post_id])
+      @likes_count = @post.likes.count
+      render "posts/show"
     end
   end
 

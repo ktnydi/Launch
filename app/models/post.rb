@@ -6,7 +6,7 @@ class Post < ApplicationRecord
 
   validates :title, presence: true,
                     length: { maximum: 50 }
-  validates :content, presence: true
+  validates :content, presence: true, length: { maximum: 5000 }
   is_impressionable counter_cache: true, unique: true
 
   def self.search(query)

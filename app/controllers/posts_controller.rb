@@ -28,6 +28,9 @@ impressionist :actions => [:show]
     if @post.save
       flash[:p_notice] = "記事を公開しました。"
       redirect_to :root
+    else
+      @errors = @post.errors.full_messages
+      render new_post_path, :layout => "editor"
     end
   end
 
