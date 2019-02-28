@@ -6,7 +6,7 @@
     <div class="user-profile-wrapper">
       <div class="user-info">
         <div class="user-profile-img">
-          <%= image_tag "/images/users/default_user_image.png", size: 70 %>
+          <%= image_tag "/images/users/#{current_user.image_name}", size: 70 %>
           <p><%= @user.name %></p>
         </div>
       </div>
@@ -91,11 +91,12 @@
 <div class="posts-like-wrapper">
   <div class="container">
     <div class="posts-controll-header">
+      <% if @liked_posts.present? %>
       <h2>
         いいねした記事
       </h2>
       <div class="more-posts">
-        <%= link_to "#" do %>
+        <%= link_to likes_path, data: { "turbolinks" => false } do %>
           いいねした記事一覧へ
           <i class="fas fa-angle-right"></i>
         <% end %>
@@ -104,7 +105,7 @@
     <div class="post-like">
       <% @liked_posts.each do |post| %>
       <div class="post">
-        <%= image_tag "/images/users/default_user_image.png", size: 50 %>
+        <%= image_tag "/images/users/#{post.user.image_name}", size: 50 %>
         <div class="post-title">
           <div class="post-top">
             <h2>
@@ -136,5 +137,6 @@
       </div>
       <% end %>
     </div>
+    <% end %>
   </div>
 </div>

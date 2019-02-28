@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :posts do
     resources :likes, only: [:create, :destroy]
   end
+  resources :likes, only: [:index]
   resources :users, only: [:show] do
     resources :follows, only: [:create, :destroy]
     get '/follows' => 'follows#follow', as: "myfollows"

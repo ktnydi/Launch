@@ -67,6 +67,7 @@
             <%= link_to "Month", "?period=month", data: { "turbolinks" => false } %>
           </div>
         </div>
+        <% if @posts.present? %>
         <div class="posts-list">
           <% @posts.each do |post| %>
           <div class="post">
@@ -97,8 +98,13 @@
           </div>
           <% end %>
         </div>
+        <% else %>
+          <p class="noposts">
+            期間内に投稿された記事はありません。
+          </p>
+        <% end %>
       </div>
-      <% if user_signed_in? %>
+      <% if user_signed_in? && followings.present? %>
         <div class="followings-posts-wrapper">
           <% if followings = current_user.followings.shuffle %>
             <div class="followings">
