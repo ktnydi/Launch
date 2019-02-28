@@ -1,7 +1,7 @@
 require 'securerandom'
 
 class PostsController < ApplicationController
-before_action :authenticate_user!, except: [:index, :show]
+before_action :authenticate_user!, except: [:index, :show, :mypost]
 before_action :forbiden_access, only: [:edit]
 impressionist :actions => [:show]
 
@@ -52,6 +52,11 @@ impressionist :actions => [:show]
     @post = Post.find_by(id: params[:id])
     @post.destroy
     redirect_to user_path(current_user)
+  end
+
+  def mypost
+    @posts = Post.where(user_id: params[:user_id]).order(created_at: :desc).page(params[:page]).per(10)
+    @user = User.find_by(id: params[:user_id])
   end
 
   private

@@ -42,6 +42,10 @@
         }
         .author-name {
           font-size: 1.3rem;
+          a {
+            color: $fb-color;
+            text-decoration: none;
+          }
         }
         table {
           width: 90%;

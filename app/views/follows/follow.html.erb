@@ -1,0 +1,28 @@
+<div class="follows-wrapper">
+  <div class="container">
+    <h3>フォロー中</h3>
+    <% if @followings.present? %>
+      <div class="follows-lists-wrapper">
+        <div class="follows-lists">
+        <% @followings.each do |following| %>
+          <div class="list">
+            <%= link_to user_posts_path(following), data: {  "turbolinks" => false } do %>
+              <div class="list-card">
+                <%= image_tag "/images/users/#{following.image_name}", size: 50 %><br>
+                <span><%= following.name %></span>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+        </div>
+      </div>
+      <div class="paginate">
+        <%= link_to_prev_page @followings, "前のページへ", class: "prev-page", data: { "turbolinks" => false } %>
+        <%= link_to_next_page @followings, "次のページへ", class: "next-page", data: { "turbolinks" => false } %>
+      </div>
+    <% else %>
+      <p>フォロー中のユーザーが見つかりませんでした。</p>
+      <%= link_to "戻る", :back, class: "back", data: { "tubolinks" => false } %>
+    <% end %>
+  </div>
+</div>
