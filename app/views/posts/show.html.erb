@@ -79,18 +79,35 @@
       <div class="author-name">
         <%= @post.user.name %>
       </div>
-      <table>
+      <table class="follow">
         <tr>
-          <th>フォロワー</th>
-          <th>投稿した数</th>
+          <th>
+            <%= link_to "投稿した数", "#" %>
+          </th>
+          <th>
+            <%= link_to "フォロー", "#" %>
+          </th>
+          <th>
+            <%= link_to "フォロワー", "#" %>
+          </th>
         </tr>
         <tr>
-          <td>123</td>
           <td><%= @post.user.posts.count %></td>
+          <td><%= @post.user.followings.count %></td>
+          <td><%= @post.user.followers.count %></td>
         </tr>
       </table>
-        <%= link_to "#", class: "follow" do %>
-          フォローする
+        <% unless current_user.id == @post.user.id %>
+          <% if current_user.is_following?(@post.user) %>
+            <%= link_to user_follow_path(@post.user, current_user), class: "follow-btn", method: :delete do %>
+              フォロー中
+            <% end %>
+          <% else %>
+            <%= link_to user_follows_path(@post.user.id), class: "follow-btn", method: :post do %>
+              フォローする
+            <% end %>
+          <% end %>
+          <% p current_user.is_following?(@post.user) %>
         <% end %>
     </div>
   </aside>

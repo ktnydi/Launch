@@ -237,3 +237,30 @@ header.share {
 .fas.fa-heart {
   color: #D84315;
 }
+
+table.follow {
+  width: 100%;
+  margin: 12px auto 0;
+  border-collapse: collapse;
+  th, td {
+    padding: 0;
+    padding-right: 8px;
+  }
+  th {
+    font-size: .8rem;
+    font-weight: normal;
+    a {
+      text-decoration: none;
+      color: $font-color;
+      &:hover {
+        text-decoration: underline;
+        color: $main-color;
+      }
+    }
+  }
+  td {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: $main-color
+  }
+}
