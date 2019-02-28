@@ -12,13 +12,13 @@
             <table class="follow">
               <tr>
                 <th>
-                  <%= link_to "投稿した数", "#" %>
+                  <%= link_to "投稿した数", user_myposts_path(current_user), data: { "turbolinks" => false } %>
                 </th>
                 <th>
-                  <%= link_to "フォロー", "#" %>
+                  <%= link_to "フォロー", user_myfollows_path(current_user), data: { "turbolinks" => false } %>
                 </th>
                 <th>
-                  <%= link_to "フォロワー", "#" %>
+                  <%= link_to "フォロワー", user_myfollowers_path(current_user), data: { "turbolinks" => false } %>
                 </th>
               </tr>
               <tr>
@@ -34,12 +34,12 @@
               </tr>
             </table>
             <% if followings = current_user.followings %>
-              <div class="followings-lists-wrapper">
+              <div class="follows-lists-wrapper">
                 <h3>
                   フォロー中のユーザー
                   (<%= followings.count %>人)
                 </h3>
-                <div class="followings-lists">
+                <div class="follows-lists">
                 <% followings.limit(12).each do |following| %>
                   <div class="list">
                     <%= image_tag "/images/users/#{following.image_name}", size: 50 %><br>
@@ -47,7 +47,7 @@
                   </div>
                 <% end %>
                 </div>
-                <%= link_to "すべて表示", "#" %>
+                <%= link_to "すべて表示", user_myfollows_path(current_user), data: { "turbolinks" => false } %>
               </div>
             <% end %>
           <% else %>
@@ -112,13 +112,13 @@
                   <table class="follow">
                     <tr>
                       <th>
-                        <%= link_to "投稿した数", "#" %>
+                        <%= link_to "投稿した数", user_myposts_path(following), data: { "turbolinks" => false } %>
                       </th>
                       <th>
-                        <%= link_to "フォロー", "#" %>
+                        <%= link_to "フォロー", user_myfollows_path(following), data: { "turbolinks" => false } %>
                       </th>
                       <th>
-                        <%= link_to "フォロワー", "#" %>
+                        <%= link_to "フォロワー", user_myfollowers_path(following), data: { "turbolinks" => false } %>
                       </th>
                     </tr>
                     <tr>

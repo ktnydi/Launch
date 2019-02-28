@@ -54,6 +54,11 @@ impressionist :actions => [:show]
     redirect_to user_path(current_user)
   end
 
+  def mypost
+    @posts = Post.where(user_id: params[:user_id]).order(created_at: :desc).page(params[:page]).per(10)
+    @user = User.find_by(id: params[:user_id])
+  end
+
   private
   def post_params
     params[:post][:user_id] = current_user.id
