@@ -15,7 +15,7 @@
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, id: "left-form" }) do |f| %>
         <div class="f-profile f active" id="profile">
           <div class="field">
-            <%= image_tag "/images/users/1.png", size: 120, class: "user-image", id: "user-image" %>
+            <%= image_tag "/images/users/#{current_user.image_name}", size: 120, class: "user-image", id: "user-image" %>
             <%= f.label :image_name, class: "user-image-label" do %>
               画像を変更
               <%= f.file_field :image_name, autofocus: true, class: "user-image-field" %>
