@@ -6,10 +6,12 @@
         <div class="follows-lists">
         <% @followers.each do |follower| %>
           <div class="list">
-            <div class="list-card">
-            <%= image_tag "/images/users/#{follower.image_name}", size: 50 %><br>
-            <span><%= follower.name %></span>
-            </div>
+            <%= link_to user_posts_path(follower), data: {  "turbolinks" => false } do %>
+              <div class="list-card">
+                <%= image_tag "/images/users/#{follower.image_name}", size: 50 %><br>
+                <span><%= follower.name %></span>
+              </div>
+            <% end %>
           </div>
         <% end %>
         </div>

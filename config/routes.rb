@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :likes, only: [:index]
   resources :users, only: [:show] do
     resources :follows, only: [:create, :destroy]
+    get '/posts' => 'home#index'
     get '/follows' => 'follows#follow', as: "myfollows"
     get '/followers' => 'follows#follower', as: "myfollowers"
     get '/myposts' => 'posts#mypost'

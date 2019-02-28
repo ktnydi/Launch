@@ -6,10 +6,12 @@
         <div class="follows-lists">
         <% @followings.each do |following| %>
           <div class="list">
-            <div class="list-card">
-            <%= image_tag "/images/users/#{following.image_name}", size: 50 %><br>
-            <span><%= following.name %></span>
-            </div>
+            <%= link_to user_posts_path(following), data: {  "turbolinks" => false } do %>
+              <div class="list-card">
+                <%= image_tag "/images/users/#{following.image_name}", size: 50 %><br>
+                <span><%= following.name %></span>
+              </div>
+            <% end %>
           </div>
         <% end %>
         </div>
@@ -20,7 +22,7 @@
       </div>
     <% else %>
       <p>フォロー中のユーザーが見つかりませんでした。</p>
-      <%= link_to "戻る", :back %>
+      <%= link_to "戻る", :back, class: "back", data: { "tubolinks" => false } %>
     <% end %>
   </div>
 </div>

@@ -193,6 +193,10 @@
         }
         .current-user-name {
           font-size: 1.3rem;
+          a {
+            color: $font-color;
+            text-decoration: none;
+          }
         }
         table {
           margin-bottom: 12px;
@@ -282,9 +286,14 @@
     .list {
       width: calc(100% / 4);
       margin: 24px 0;
+      a {
+        text-align: center;
+        text-decoration: none;
+        color: $font-color;
+      }
       .list-card {
+        display: inline-block;
         width: 85%;
-        margin: 0 auto;
         padding: 24px;
         border-radius: 3px;
         box-shadow: 0 2px 17px 1px rgba(0, 0, 0, 0.12);
@@ -300,7 +309,7 @@
       }
     }
   }
-  a {
+  a.back {
     display: inline-block;
     padding: 8px 24px;
     margin: 12px 0;

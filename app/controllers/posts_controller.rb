@@ -1,7 +1,7 @@
 require 'securerandom'
 
 class PostsController < ApplicationController
-before_action :authenticate_user!, except: [:index, :show]
+before_action :authenticate_user!, except: [:index, :show, :mypost]
 before_action :forbiden_access, only: [:edit]
 impressionist :actions => [:show]
 

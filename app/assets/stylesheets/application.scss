@@ -129,19 +129,24 @@ header.share {
       margin: 0 12px;
       border: none;
       font-size: 13px;
-      background-color: $main-color;
       height: 35px;
       width: 100px;
       border-radius: 3px;
       transition: all .15s;
+      a {
+        display: block;
+        line-height: 35px;
+        color: $font-color;
+        text-decoration: none;
+      }
+    }
+    button.signin, button.new-post {
+      background-color: $main-color;
       &:hover {
         background-color: $sub-color;
       }
       a {
-        display: block;
-        line-height: 35px;
-        color: white;
-        text-decoration: none;
+        color: $white;
       }
     }
     .user-name-toggle {

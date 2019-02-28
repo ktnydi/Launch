@@ -1,5 +1,10 @@
 class HomeController < ApplicationController
   def index
+    if params[:user_id]
+      @user = User.find_by(id: params[:user_id])
+    else
+      @user = current_user
+    end
     today = 1.day.ago
     week  = 1.week.ago
     month = 1.month.ago
