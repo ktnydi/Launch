@@ -20,7 +20,7 @@ class User < ApplicationRecord
             through: :passive_follows,
             source: :followed
 
-  validates :name, presence: true, length: { maximum: 30 }
+  validates :name, presence: true, length: { maximum: 10 }
   attr_accessor :current_password
 
   # Include default devise modules. Others available are:
