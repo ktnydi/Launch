@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
   editor.setSize("50%", "100%");
 
   const preview = document.getElementById('md-preview');
+  preview.innerHTML = marked(text_area.value);
   editor.on('change', function(e) {
     preview.innerHTML = marked(e.getValue());
   });
