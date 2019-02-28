@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_27_021051) do
+ActiveRecord::Schema.define(version: 2019_02_28_114457) do
 
   create_table "comments", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -68,6 +68,7 @@ ActiveRecord::Schema.define(version: 2019_02_27_021051) do
     t.string "app_url"
     t.integer "user_id"
     t.integer "impressions_count", default: 0
+    t.string "status", default: "", null: false
   end
 
   create_table "users", force: :cascade do |t|

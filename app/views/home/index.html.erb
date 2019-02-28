@@ -1,3 +1,9 @@
+<% if flash[:post_notice] %>
+  <div class="post_notice" id="notification">
+    <%= flash[:post_notice] %>
+  </div>
+<% end %>
+
 <div class="posts-home-wrapper">
   <div class="container">
     <aside class="page-left">
@@ -23,7 +29,7 @@
               </tr>
               <tr>
                 <td>
-                  <%= @user.posts.count %>
+                  <%= @user.posts.status_public.count %>
                 </td>
                 <td>
                   <%= @user.followings.count %>
@@ -129,7 +135,7 @@
                     </tr>
                     <tr>
                       <td>
-                        <%= following.posts.count %>
+                        <%= following.posts.status_public.count %>
                       </td>
                       <td>
                         <%= following.followings.count %>
@@ -142,7 +148,7 @@
                 </div>
               </div>
               <div class="posts-list">
-              <% posts = following.posts.order(created_at: :desc).limit(5) %>
+              <% posts = following.posts.status_public.order(created_at: :desc).limit(5) %>
               <% posts.each do |post| %>
                 <div class="post">
                   <div class="post-title">

@@ -13,7 +13,7 @@
       <div class="user-info">
         <div class="user-profile-posts">
           <div class="posted-count">
-            <%= @user.posts.count %>
+            <%= @user.posts.status_public.count %>
           </div>
           <div class="posted-text">投稿した記事数</div>
         </div>
@@ -60,7 +60,7 @@
             <p><%= truncate(post.content, length: 80) %></p>
           </td>
           <td class="status">
-            公開中
+            <%= post.status %>
           </td>
           <td class="created_at">
             <%= post.created_at.strftime("%Y.%m.%d") %>

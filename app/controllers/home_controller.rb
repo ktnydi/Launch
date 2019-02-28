@@ -24,6 +24,6 @@ class HomeController < ApplicationController
 
   private
   def posts_ranking(period)
-    @posts = Post.where("created_at > ?", period).order(impressions_count: :desc).limit(10)
+    @posts = Post.status_public.where("created_at > ?", period).order(impressions_count: :desc).limit(10)
   end
 end
