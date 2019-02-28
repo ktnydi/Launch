@@ -42,14 +42,12 @@
             <% if followings = @user.followings %>
               <div class="follows-lists-wrapper">
                 <h3>
-                  フォロー中のユーザー
-                  (<%= followings.count %>人)
+                  フォローしているユーザー
                 </h3>
                 <div class="follows-lists">
                 <% followings.limit(12).each do |following| %>
                   <div class="list">
-                    <%= image_tag "/images/users/#{following.image_name}", size: 50 %><br>
-                    <span><%= following.name %></span>
+                    <%= image_tag "/images/users/#{following.image_name}", size: 50 %>
                   </div>
                 <% end %>
                 </div>
@@ -114,7 +112,7 @@
         <div class="followings-posts-wrapper">
           <% if followings = @user.followings.shuffle %>
             <div class="followings">
-              <h3>フォロー中のユーザーの記事</h3>
+              <h3>フォローしているユーザーの記事</h3>
             </div>
             <% followings[0..2].each do |following| %>
               <div class="following-user-image">
