@@ -1,7 +1,7 @@
 class LikesController < ApplicationController
   before_action :authenticate_user!
   def index
-    @posts = current_user.liked_posts.order(created_at: :desc).page(params[:page]).per(30)
+    @posts = current_user.liked_posts.status_public.order(created_at: :desc).page(params[:page]).per(30)
   end
 
   def create

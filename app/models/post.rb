@@ -16,4 +16,8 @@ class Post < ApplicationRecord
     end
     rel
   end
+
+  def self.status_public
+    where(status: "公開中")
+  end
 end

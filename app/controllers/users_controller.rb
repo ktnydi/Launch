@@ -12,7 +12,7 @@ class UsersController < ApplicationController
     @user.posts.each do |post|
       @count += post.impressions_count
     end
-    @liked_posts = @user.liked_posts.order(created_at: :desc).limit(10)
+    @liked_posts = @user.liked_posts.status_public.order(created_at: :desc).limit(10)
   end
 
   private
