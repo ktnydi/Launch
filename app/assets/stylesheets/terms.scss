@@ -1,0 +1,23 @@
+@import 'variables';
+
+.terms-wrapper {
+  padding: 120px 0 60px;
+  line-height: 2;
+  h1, h2 {
+    border-bottom: 1px solid $border-color;
+  }
+  h1 {
+    font-size: 1.5rem;
+    margin-bottom: 24px;
+    text-align: center;
+  }
+  h2 {
+    font-size: 1.2rem;
+    margin: 24px 0;
+  }
+  ol, ul {
+    padding-left: 24px;
+  }
+  li {
+  }
+}

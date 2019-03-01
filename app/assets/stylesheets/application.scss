@@ -269,3 +269,32 @@ table.follow {
     color: $main-color
   }
 }
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+footer {
+  margin-top: auto;
+  width: 100%;
+  padding: 12px 0;
+  text-align: right;
+  border-top: 1px solid $border-color;
+  background-color: $white;
+  ul {
+    list-style: none;
+    li {
+      display: inline-block;
+      margin: 0 12px;
+      font-size: .8rem;
+      a {
+        text-decoration: none;
+        color: $font-color;
+        &:hover {
+          color: $main-color;
+        }
+      }
+    }
+  }
+}

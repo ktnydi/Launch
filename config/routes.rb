@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   delete '/comment/:id/' => 'comments#destroy'
   devise_for :users, controllers: { registrations: 'registrations' }
   root 'home#index'
+  get '/terms' => 'terms#index'
   resources :posts do
     resources :likes, only: [:create, :destroy]
   end

@@ -1,0 +1,14 @@
+<footer>
+  <div class="container">
+    <ul>
+      <li>
+        <%= link_to "利用規約", terms_path, target: :_blank %>
+      </li>
+      <% if user_signed_in? %>
+      <li>
+        <%= link_to "退会する方はこちら", edit_user_registration_path(current_user), data: { "tubolinks" => false } %>
+      </li>
+      <% end %>
+    </ul>
+  </div>
+</footer>
