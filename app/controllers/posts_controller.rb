@@ -75,7 +75,7 @@ impressionist :actions => [:show]
   end
 
   def status(param)
-    if param == "下書き保存する"
+    if param == "下書き保存"
       params[:post][:status] = "下書き"
       flash[:post_notice] = "記事を下書きしました。"
     else

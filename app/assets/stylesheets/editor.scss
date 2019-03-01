@@ -9,6 +9,9 @@ header.editor {
   height: 50px;
   border-bottom: 1px solid $border-color;
   background-color: $white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   .back {
     display: inline-block;
     height: 50px;
@@ -33,6 +36,22 @@ header.editor {
       }
     }
   }
+  .submit {
+    input[type="submit"] {
+      display: inline-block;
+      padding: 8px 24px;
+      margin-right: 12px;
+      border: none;
+      border-radius: 3px;
+      font-size: .8rem;
+      background-color: $main-color;
+      color: $white;
+      transition: all .15s;
+      &:hover {
+        background-color: $sub-color;
+      }
+    }
+  }
 }
 
 form.f-editor {
@@ -48,46 +67,11 @@ form.f-editor {
     border-bottom: 1px solid $border-color;
     background-color: $white;
   }
-  .md-editor-bottom {
-    height: 60px;
-    width: 100%;
-    line-height: 60px;
-    border-top: solid 1px $border-color;
-    background-color: $white;
-    text-align: right;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    z-index: 9999;
-    .image {
-      margin: 0 16px;
-      input[type="file"] {
-        font-size: 16px;
-      }
-    }
-    input[type="submit"] {
-      display: inline-block;
-      height: 40px;
-      padding: 0 8px;
-      margin-right: 16px;
-      border: none;
-      border-radius: 3px;
-      font-size: 16px;
-      letter-spacing: 1px;
-      background-color: $main-color;
-      color: white;
-      cursor: pointer;
-      transition: all .15s;
-      &:hover {
-        background-color: $sub-color;
-      }
-    }
-  }
 }
 
 .editor-md {
   position: relative;
-  height: calc(100% - 140px);
+  height: calc(100% - 80px);
 }
 
 .CodeMirror {
