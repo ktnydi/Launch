@@ -19,6 +19,7 @@
 * {
  margin: 0;
  box-sizing: border-box;
+ -webkit-appearance: none;
 }
 
 body {
@@ -104,7 +105,7 @@ header.share {
       }
       input[type="search"] {
         width: 200px;
-        line-height: 35px;
+        height: 35px;
         border: none;
         font-size: 13px;
         background-color: inherit;
@@ -132,6 +133,7 @@ header.share {
       height: 35px;
       width: 100px;
       border-radius: 3px;
+      background-color: inherit;
       transition: all .15s;
       a {
         display: block;
