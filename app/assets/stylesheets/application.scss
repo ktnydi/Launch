@@ -19,7 +19,6 @@
 * {
  margin: 0;
  box-sizing: border-box;
- -webkit-appearance: none;
 }
 
 body {
@@ -38,6 +37,18 @@ html, body {
 input, textarea {
  outline: none;
  padding: 0;
+}
+
+input {
+  -webkit-appearance: none;
+}
+
+input[type="checkbox"] {
+  -webkit-appearance: checkbox;
+}
+
+.checkbox {
+  cursor: pointer;
 }
 
 .container {
