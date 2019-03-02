@@ -3,7 +3,7 @@ require 'securerandom'
 class PostsController < ApplicationController
 before_action :authenticate_user!, except: [:index, :show, :mypost]
 before_action :forbiden_access, only: [:edit]
-before_action :no_public, only: [:show]
+before_action :access_draft, only: [:show]
 impressionist :actions => [:show]
 
   def index
@@ -84,16 +84,22 @@ impressionist :actions => [:show]
     end
   end
 
-  def no_public
-    @post = current_user.posts.find_by(id: params[:id])
-    if !@post.present?
-      @posts = Post.where(status: "下書き")
-      @posts.each do |post|
-        if params[:id].to_i == post.id
-          flash[:alert] = "このアクセスは禁止されています。"
-          redirect_to root_path
-        end
+  def access_draft
+    if user_signed_in?
+      post = current_user.posts.find_by(id: params[:id])
+      if post.blank?
+        forbiden_access_draft
       end
+    else
+      forbiden_access_draft
+    end
+  end
+
+  def forbiden_access_draft
+    post = Post.find_by(id: params[:id])
+    if post.status == "下書き"
+      flash[:alert] = "このアクセスは禁止されています。"
+      redirect_to root_path
     end
   end
 end

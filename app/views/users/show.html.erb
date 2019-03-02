@@ -90,8 +90,8 @@
 
 <div class="posts-like-wrapper">
   <div class="container">
+    <% if @liked_posts.present? %>
     <div class="posts-controll-header">
-      <% if @liked_posts.present? %>
       <h2>
         いいねした記事
       </h2>
