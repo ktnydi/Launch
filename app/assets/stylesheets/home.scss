@@ -24,7 +24,7 @@
     display: flex;
     padding: 12px 24px;
     border-bottom: 1px solid $border-color;
-    color: $fb-color;
+    color: $font-color;
     img {
       display: inline-block;
       width: 50px;
@@ -119,8 +119,11 @@
     margin: 12px auto;
     padding: 0 24px;
     overflow: hidden;
+  }
+  .period {
+    display: flex;
+    justify-content: space-between;
     .select-period {
-      float: right;
       a {
         padding: 5px;
         font-size: 0.8rem;
@@ -130,9 +133,6 @@
           color: $main-color;
         }
       }
-    }
-    h3 {
-      float: left;
     }
   }
   .page-right {

@@ -16,8 +16,28 @@
   .hamburger-menu-list {
     display: block;
   }
-  .container {
-    width: 95%;
+  .posts-home-wrapper {
+    .container {
+      width: 95%;
+      flex-direction: column;
+    }
+    .page-left {
+      width: 100%;
+      .account-wrapper {
+        width: 100%;
+        margin-bottom: 60px;
+        h1 {
+          text-align: center;
+        }
+      }
+    }
+    .page-right {
+      width: 100%;
+    }
+    .period {
+      text-align: center;
+      flex-direction: column;
+    }
   }
   header.share {
     .logo {
