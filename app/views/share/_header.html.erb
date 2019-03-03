@@ -1,13 +1,13 @@
-<header class="share">
+<header class="share" id="header">
   <div class="container">
+    <div class="logo">
+      <% if user_signed_in? %>
+        <%= link_to "Launch", user_path(current_user), data: { "turbolinks" => false } %>
+      <% else %>
+        <%= link_to "Launch", root_path, data: { "turbolinks" => false } %>
+      <% end %>
+    </div>
     <div class="header-left">
-      <div class="logo">
-        <% if user_signed_in? %>
-          <%= link_to "Launch", user_path(current_user), data: { "turbolinks" => false } %>
-        <% else %>
-          <%= link_to "Launch", root_path, data: { "turbolinks" => false } %>
-        <% end %>
-      </div>
       <ul>
         <li>
           <%= link_to "ホーム", root_path, data: { "turbolinks" => false } %>
@@ -48,6 +48,9 @@
           <%= link_to "アカウント作成", new_user_registration_path %>
         </button>
       <% end %>
+      <div class="hamburger-menu" id="hamburger">
+        <i class="fas fa-bars"></i>
+      </div>
     </div>
   </div>
 </header>

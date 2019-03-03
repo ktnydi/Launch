@@ -63,9 +63,14 @@ header.share {
   box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.1);
   position: fixed;
   top: 0;
+  right: 0;
   z-index: 9999;
+  transition: right .2s;
+  .container {
+    display: flex;
+    justify-content: space-between;
+  }
   .logo {
-    float: left;
     display: inline-block;
     height: 50px;
     padding-right: 8px;
@@ -78,7 +83,6 @@ header.share {
     }
   }
   ul {
-    float: left;
     list-style: none;
     padding: 0;
     li {
@@ -161,6 +165,12 @@ header.share {
       a {
         color: $white;
       }
+    }
+    .hamburger-menu {
+      display: none;
+      font-size: 1.5rem;
+      margin: 8px;
+      cursor: pointer;
     }
     .user-name-toggle {
       position: relative;
@@ -309,5 +319,58 @@ footer {
         }
       }
     }
+  }
+}
+
+body {
+  position: relative;
+  right: 0vw;
+  transition: right .2s;
+}
+body.active {
+  right: 70vw;
+}
+
+.hamburger-menu-list {
+  height: 100vh;
+  width: 70vw;
+  background-color: #212121;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  z-index: -10;
+  .user-name {
+    padding: 24px;
+    border-bottom: 1px solid black;
+    display: flex;
+    align-items: center;
+    img {
+      border-radius: 9999px;
+      width: 40px;
+      height: 40px;
+      margin-right: 8px;
+    }
+    span {
+      color: $white;
+    }
+  }
+  .posts-link, .user-link {
+    border-bottom: 1px solid black;
+  }
+  a {
+    display: block;
+    padding: 0 24px;
+    width: 100%;
+    line-height: 50px;
+    color: $white;
+    text-decoration: none;
+  }
+  .write {
+    width: 80%;
+    margin: 24px auto;
+    text-align: center;
+    border-radius: 3px;
+    background-color: $main-color;
   }
 }
