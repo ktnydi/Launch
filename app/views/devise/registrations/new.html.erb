@@ -1,19 +1,19 @@
 <% @page_title = "アカウントを作成" %>
-<div class="user-f-wrapper">
+<div class="user-f-wrapper signup-wrapper">
   <div class="container">
+    <%= render "devise/shared/error_messages", resource: resource %>
     <div class="signup">
       <h2>アカウントを作成</h2>
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-        <%= render "devise/shared/error_messages", resource: resource %>
 
         <div class="field">
-          <%= f.label :name %><br />
-          <%= f.text_field :name, autofocus: true %>
+          <%= f.label :name %>
+          <%= f.text_field :name, autofocus: true, required: true, maxlength:"15" %>
         </div>
 
         <div class="field">
           <%= f.label :email %><br />
-          <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", required: true %>
         </div>
 
         <div class="field">
@@ -21,16 +21,20 @@
           <% if @minimum_password_length %>
           <span>：<%= @minimum_password_length %>文字以上
           <% end %></span>
-          <%= f.password_field :password, autocomplete: "new-password" %>
+          <div class="signup-password">
+            <%= f.password_field :password, autocomplete: "new-password", required: true %>
+            <div class="password-mask" id="mask">
+              <i class="far fa-eye"></i>
+            </div>
+          </div>
         </div>
 
-        <div class="field">
-          <%= f.label :password_confirmation %><br />
-          <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-        </div>
+        <p class="term">
+          ご登録前に必ず<%= link_to "利用規約", terms_path, target: :_blank %>をご確認ください。登録が完了すると利用規約に同意したものとみなします。
+        </p>
 
         <div class="actions">
-          <%= f.submit "登録" %>
+          <%= f.submit "登録", id: "submit", disabled: true, style: "background-color: #E0E0E0" %>
         </div>
       <% end %>
 
@@ -38,3 +42,28 @@
     </div>
   </div>
 </div>
+<script>
+  var mask = document.getElementById('mask');
+  var password = document.getElementById('user_password');
+  var submit = document.getElementById('submit');
+
+  password.addEventListener('focus', function() {
+    this.setAttribute('type', 'text');
+    mask.innerHTML = '<i class="far fa-eye-slash"></i>';
+  });
+  password.addEventListener('blur', function() {
+    this.setAttribute('type', 'password');
+    mask.innerHTML = '<i class="far fa-eye"></i>';
+  });
+
+  password.addEventListener('keyup', function() {
+    var password_length = this.value.length;
+    if (password_length >= 6) {
+      submit.removeAttribute('disabled');
+      submit.style.backgroundColor = '#009688';
+    } else {
+      submit.setAttribute('disabled', 'disabled');
+      submit.style.backgroundColor = '#E0E0E0';
+    }
+  });
+</script>

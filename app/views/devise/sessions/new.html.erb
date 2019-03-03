@@ -6,12 +6,12 @@
       <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
         <div class="field">
           <%= f.label :email %><br />
-          <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", required: true %>
         </div>
 
         <div class="field">
           <%= f.label :password %><br />
-          <%= f.password_field :password, autocomplete: "current-password" %>
+          <%= f.password_field :password, autocomplete: "current-password", required: true %>
         </div>
 
         <% if devise_mapping.rememberable? %>
@@ -22,7 +22,7 @@
         <% end %>
 
         <div class="actions">
-          <%= f.submit "ログイン" %>
+          <%= f.submit "ログイン", id: "submit", disabled: true, style:  "background-color: #E0E0E0" %>
         </div>
       <% end %>
 
@@ -30,3 +30,18 @@
     </div>
   </div>
 </div>
+<script>
+  var password = document.getElementById('user_password');
+  var submit = document.getElementById('submit');
+
+  password.addEventListener('keyup', function() {
+    var password_length = this.value.length;
+    if (password_length >= 6) {
+      submit.removeAttribute('disabled');
+      submit.style.backgroundColor = '#009688';
+    } else {
+      submit.setAttribute('disabled', 'disabled');
+      submit.style.backgroundColor = '#E0E0E0';
+    }
+  })
+</script>

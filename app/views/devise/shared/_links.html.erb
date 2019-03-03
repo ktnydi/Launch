@@ -1,12 +1,12 @@
 <%- if controller_name != 'sessions' %>
-  <p>
+  <p class="link">
     すでにアカウントをお持ちですか？
     <%= link_to "ログイン", new_session_path(resource_name) %><br />
   </p>
 <% end %>
 
 <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
-  <p>
+  <p class="link">
     アカウント作成は<%= link_to "こちら", new_registration_path(resource_name) %><br />
   </p>
 <% end %>
