@@ -131,6 +131,7 @@ header.share {
     }
   }
   .header-left {
+    margin-right: auto;
     float: left;
     display: flex;
     align-items: center;
@@ -242,20 +243,39 @@ header.share {
 .close {
   right: -1000px;
 }
-
+.devise-notification {
+  position: relative;
+  .fa-times {
+    padding: 3px;
+    margin: auto;
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 17px;
+  }
+}
 .devise-notification, .nocomment {
-  height: 50px;
-  margin: auto;
-  line-height: 50px;
+  padding: 8px 24px;
+  width: 95%;
+  margin: 0 auto;
   text-align: center;
-  background-color: #EF9A9A;
   color: white;
   letter-spacing: 1px;
-  position: fixed;
-  top: 50px;
-  right: 0;
-  left: 0;
-  z-index: 10;
+  top: 60px;
+}
+.devise-notification.notice, .nocomment {
+  border-radius: 3px;
+  border: 1px solid rgba(24, 153, 114, 0.3);
+  border-left: 3px solid $main-color;
+  background-color: rgba(24, 153, 114, 0.1);
+  color: $main-color;
+}
+.devise-notification.alert {
+  border-radius: 3px;
+  border: 1px solid rgba(153, 24, 24, 0.3);
+  border-left: 3px solid #833131;
+  background-color: rgba(153, 24, 24, 0.1);
+  color: #833131;
 }
 
 .far.fa-heart {
@@ -332,6 +352,7 @@ body.active {
 }
 
 .hamburger-menu-list {
+  display: none;
   height: 100vh;
   width: 70vw;
   background-color: #212121;

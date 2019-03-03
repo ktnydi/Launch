@@ -13,7 +13,9 @@
 
 // スマホ
 @media all and (max-width: 767px) {
-
+  .hamburger-menu-list {
+    display: block;
+  }
   .container {
     width: 95%;
   }
@@ -37,13 +39,7 @@
       }
     }
     .header-right {
-      button {
-        margin: 0 3px;
-      }
-      .new-post {
-        display: none;
-      }
-      .user-name-toggle {
+      .new-post, .user-name-toggle, .authenticate {
         display: none;
       }
       .hamburger-menu {

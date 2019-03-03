@@ -41,12 +41,14 @@
           </div>
         </div>
       <% else %>
-        <button>
-          <%= link_to "ログイン", new_user_session_path %>
-        </button>
-        <button class="signin">
-          <%= link_to "アカウント作成", new_user_registration_path %>
-        </button>
+        <div class="authenticate">
+          <button>
+            <%= link_to "ログイン", new_user_session_path %>
+          </button>
+          <button class="signin">
+            <%= link_to "アカウント作成", new_user_registration_path %>
+          </button>
+        </div>
       <% end %>
       <div class="hamburger-menu" id="hamburger">
         <i class="fas fa-bars"></i>
@@ -54,9 +56,14 @@
     </div>
   </div>
 </header>
-<% if flash[:notice] || flash[:alert]  %>
-  <p class="devise-notification">
+<% if flash[:notice] %>
+  <p class="devise-notification notice" id="notice">
+    <i class="fas fa-times" id="cls-btn"></i>
     <%= notice %>
+  </p>
+<% elsif flash[:alert] %>
+  <p class="devise-notification alert" id="alert">
+    <i class="fas fa-times" id="cls-btn"></i>
     <%= alert %>
   </p>
 <% end %>

@@ -42,15 +42,25 @@
             <%= link_to "アカウント設定", edit_user_registration_path, data: { "turbolinks" => false } %>
             <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
           </div>
+          <%= link_to "記事を書く", new_post_path, class: "write", data: { "turbolinks" => false } %>
+        <% else %>
+          <div class="posts-link">
+            <%= link_to "ホーム", root_path, data: { "turbolinks" => false } %>
+            <%= link_to "記事一覧", posts_path, data: { "turbolinks" => false } %>
+          </div>
+          <%= link_to "ログイン", new_user_session_path %>
+          <%= link_to "アカウント作成", new_user_registration_path %>
         <% end %>
       </nav>
-      <%= link_to "記事を書く", new_post_path, class: "write", data: { "turbolinks" => false } %>
     </div>
     <script>
       var hamburger = document.getElementById('hamburger');
       var menu = document.getElementById('menu');
       var body = document.getElementsByTagName('body')[0];
       var header = document.getElementById('header');
+      var cls_btn = document.getElementById('cls-btn');
+      var notice = document.getElementById('notice');
+      var alert = document.getElementById('alert');
 
       hamburger.addEventListener('click', function() {
         var clazz = body.className;
@@ -66,6 +76,15 @@
           menu.style.visibility = 'visible';
         }
       })
+
+      close(cls_btn, notice);
+      close(cls_btn, alert);
+
+      function close(cls_btn, cls_obj) {
+        cls_btn.addEventListener('click', function() {
+          cls_obj.style.display = 'none';
+        });
+      }
     </script>
   </body>
 </html>
