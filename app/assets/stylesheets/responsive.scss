@@ -101,8 +101,13 @@
       }
     }
   }
-  .comment-wrapper .comment-field .comment-edit input {
-    margin: 0 auto;
+  .comment-wrapper {
+    .post-comments .user-comment-wrapper .comment .comment-bottom {
+      font-size: .6rem;
+    }
+    .comment-field .comment-edit input {
+      margin: 0 auto;
+    }
   }
   .user-info-wrapper .user-profile-wrapper {
     padding: 0;
@@ -148,5 +153,11 @@
         font-size: .6rem;
       }
     }
+  }
+  table.follow th {
+    font-size: .6rem;
+  }
+  .tab-select {
+    font-size: .8rem;
   }
 }
