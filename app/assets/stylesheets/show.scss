@@ -3,7 +3,7 @@
 .post-wrapper {
   padding: 120px 0 80px;
   background-color: $white;
-  color: $fb-color;
+  color: $font-color;
   .container {
     display: flex;
     main {
@@ -13,7 +13,7 @@
       a {
         display: inline-block;
         text-decoration: none;
-        color: $fb-color;
+        color: $font-color;
       }
       h1.main-title {
         font-size: 2.6rem;
@@ -43,7 +43,7 @@
         .author-name {
           font-size: 1.3rem;
           a {
-            color: $fb-color;
+            color: $font-color;
             text-decoration: none;
           }
         }
@@ -73,14 +73,6 @@
   }
 }
 
-.clear:after {
-  content: '.';
-  display: block;
-  clear: both;
-  height: 0;
-  visibility: hidden;
-}
-
 .comment-wrapper {
   .comment-field {
     margin: 8px 0;
@@ -88,10 +80,11 @@
       padding: 0;
       list-style: none;
       li {
-        float: left;
+        display: inline-block;
         width: 100px;
         padding: 8px 0;
         text-align: center;
+        font-size: .8rem;
         cursor: pointer;
       }
     }
@@ -112,10 +105,13 @@
       }
       textarea {
         line-height: 1.5em;
+        border: 1px solid $border-color;
+        border-radius: 3px;
       }
       input {
-        display: inline-block;
+        display: block;
         padding: 8px 24px;
+        border: none;
         border-radius: 3px;
         font-size: 1rem;
         background-color: $main-color;
@@ -146,6 +142,7 @@
       .comment {
         width: calc(100% - 60px);
         word-break: break-all;
+        position: relative;
         .md-comment {
           padding: 0;
           h1, h2 {
@@ -154,15 +151,13 @@
           }
         }
         .comment-bottom {
-          margin-top: 24px;
           font-size: .8rem;
-          overflow: hidden;
           color: silver;
-          .left {
-            float: left;
+          display: flex;
+          justify-content: space-between;
+          .comment-user {
           }
-          .right {
-            float: right;
+          .comment-delete {
             a {
               color: $main-color;
               text-decoration: none;

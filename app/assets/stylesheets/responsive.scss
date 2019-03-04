@@ -16,29 +16,6 @@
   .hamburger-menu-list {
     display: block;
   }
-  .posts-home-wrapper {
-    .container {
-      width: 95%;
-      flex-direction: column;
-    }
-    .page-left {
-      width: 100%;
-      .account-wrapper {
-        width: 100%;
-        margin-bottom: 60px;
-        h1 {
-          text-align: center;
-        }
-      }
-    }
-    .page-right {
-      width: 100%;
-    }
-    .period {
-      text-align: center;
-      flex-direction: column;
-    }
-  }
   header.share {
     .logo {
       a {
@@ -67,10 +44,62 @@
       }
     }
   }
+  .posts-home-wrapper {
+    .container {
+      width: 95%;
+      flex-direction: column;
+    }
+    .page-left {
+      width: 100%;
+      .account-wrapper {
+        width: 100%;
+        margin-bottom: 60px;
+        h1 {
+          text-align: center;
+        }
+      }
+    }
+    .page-right {
+      width: 100%;
+    }
+    .period {
+      text-align: center;
+      flex-direction: column;
+    }
+  }
   .posts-wrapper {
     width: 100%;
     .post {
       width: 100%;
     }
+  }
+  .post-wrapper {
+    .container {
+      flex-direction: column;
+      main {
+        width: 100%;
+        padding-right: 0;
+        border-right: none;
+        h1.main-title {
+          font-size: 2rem;
+        }
+        .comment-wrapper {
+          margin-bottom: 60px;
+        }
+      }
+      aside {
+        width: 100%;
+        .author {
+          // text-align: left;
+          img {
+            width: 80px;
+            height: 80px;
+          }
+        }
+      }
+    }
+  }
+  .comment-wrapper .comment-field .comment-edit input {
+    margin: 0 auto;
   }
 }
