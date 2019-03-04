@@ -15,6 +15,7 @@
             <p><%= truncate post.content, length: 120 %></p>
           </div>
           <div class="post-bottom">
+            <div class="left">
             <span class="heart">
               <% if current_user && post.likes.find_by(user_id: current_user.id) %>
                 <i class="fas fa-heart"></i>
@@ -28,6 +29,7 @@
               Created by
               <%= post.user.name %>
             </span>
+            </div>
             <p>
               <%= post.created_at.strftime("%Y.%m.%d") %>
             </p>

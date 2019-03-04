@@ -25,12 +25,12 @@
 
           <div class="field">
             <%= f.label :name %>
-            <%= f.text_field :name, autofocus: true %>
+            <%= f.text_field :name, autofocus: true, required: true %>
           </div>
 
           <div class="field">
             <%= f.label :email %>
-            <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+            <%= f.email_field :email, autofocus: true, required: true, autocomplete: "email" %>
           </div>
 
           <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
@@ -47,24 +47,29 @@
         <div class="f-password f" id="password">
           <div class="field">
             <%= f.label :current_password %>
-            <%= f.password_field :current_password, autocomplete: "current-password" %>
+            <%= f.password_field :current_password, autocomplete: "current-password", required: true %>
           </div>
 
           <div class="field">
-            <%= f.label :password %>
-            <% if @minimum_password_length %>
-              <span>：<%= @minimum_password_length %>文字以上</span>
+            <%= f.label :password do %>
+              新しいパスワード
+              <% if @minimum_password_length %>
+                <span>：<%= @minimum_password_length %>文字以上</span>
+              <% end %>
+              <%= f.password_field :password, autocomplete: "new-password", required: true %>
             <% end %>
-            <%= f.password_field :password, autocomplete: "new-password" %>
           </div>
 
           <div class="field">
-            <%= f.label :password_confirmation %>
-            <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+            <%= f.label :password_confirmation do %>
+              新しいパスワードの確認
+              <%= f.password_field :password_confirmation, autocomplete: "new-password", required: true %>
+            <% end %>
+            <p class="correspond-password" id="judge"></p>
           </div>
 
           <div class="actions">
-            <%= f.submit "パスワードを変更" %>
+            <%= f.submit "パスワードを変更", id: "submit", disabled: true, style: "background-color: #E0E0E0" %>
           </div>
         </div>
       <% end %>
@@ -80,7 +85,6 @@
   </div>
 </div>
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
     var select_image = document.getElementById('user_image_name');
     select_image.addEventListener('change', function() {
       var user_image = document.getElementById('user-image');
@@ -91,8 +95,21 @@
       reader.readAsDataURL(select_image.files[0]);
     });
 
+    var new_password = document.getElementById('user_password');
+    var new_confirmation_password = document.getElementById('user_password_confirmation');
+    var judge = document.getElementById('judge');
+    var submit = document.getElementById('submit');
 
+    new_confirmation_password.addEventListener('keyup', function() {
+      if (this.value && this.value === new_password.value) {
+        judge.textContent = '';
+        submit.removeAttribute('disabled');
+        submit.style.backgroundColor = '#009688';
+      } else {
+        judge.textContent = '新しいパスワードと一致させてください。';
+        submit.setAttribute('disabled', 'disabled');
+        submit.style.backgroundColor = '#E0E0E0';
+      }
+    });
 
-
-  });
 </script>

@@ -8,15 +8,15 @@
     font-weight: normal;
   }
   .user-profile-wrapper {
-    height: 150px;
-    padding: 24px 10%;
+    padding: 24px 0;
     background-color: $white;
     box-shadow: 0 2px 17px 1px rgba(0, 0, 0, 0.12);
+    display: flex;
+    align-items: center;
     .user-info {
       display: flex;
       align-items: center;
       justify-content: center;
-      float: left;
       width: calc(100% / 3);
       height: 100%;
       text-align: center;
@@ -105,6 +105,7 @@
     font-size: 1rem;
     h3 {
       font-size: 1rem;
+      word-break: break-all;
       a {
         color: $main-color;
         text-decoration: none;

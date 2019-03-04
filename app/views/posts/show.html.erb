@@ -2,11 +2,12 @@
 <% if errors = @comment.errors.full_messages %>
   <% errors.each do |error| %>
     <div class="nocomment">
+    <i class="fas fa-times" id="cls-btn"></i>
       <%= error %>
     </div>
   <% end %>
 <% end %>
-<div class="post-wrapper clear">
+<div class="post-wrapper">
   <div class="container">
   <main>
     <% if current_user && @post.likes.find_by(user_id: current_user.id) %>
@@ -34,19 +35,19 @@
           <h3>この記事のコメント</h3>
           <% @post.comments.each do |comment| %>
           <div class="user-comment-wrapper">
-            <%= image_tag "/images/users/#{@post.user.image_name}", size: 60 %>
+            <%= image_tag "/images/users/#{comment.user.image_name}", size: 60 %>
             <div class="comment">
               <div class="md-comment">
                 <%== markdown comment.content %>
               </div>
               <div class="comment-bottom">
-                <div class="left">
+                <div class="comment-user">
                 by <%= comment.user.name %>
                 ・
                 <%= comment.created_at.strftime("%Y.%H.%d %H:%M") %>
                 </div>
-                <% if comment.user_id == current_user.id %>
-                  <div class="right">
+                <% if user_signed_in? && comment.user_id === current_user.id %>
+                  <div class="comment-delete">
                     <%= link_to "削除", "/comment/#{comment.id}/", method: :delete, data: { confirm: "コメントを削除します。"} %>
                   </div>
                 <% end %>
@@ -58,7 +59,7 @@
       </div>
       <h3>コメントする</h3>
       <div class="comment-field">
-        <ul>
+        <ul class="toggle-field">
           <li id="edit" style="border-bottom: 3px solid #009688; color: #009688;">編集</li>
           <li id="preview">プレビュー</li>
         </ul>

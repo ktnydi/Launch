@@ -24,7 +24,7 @@
     display: flex;
     padding: 12px 24px;
     border-bottom: 1px solid $border-color;
-    color: $fb-color;
+    color: $font-color;
     img {
       display: inline-block;
       width: 50px;
@@ -38,6 +38,7 @@
       h2 {
         display: inline-block;
         font-size: 1rem;
+        word-break: break-all;
         a {
           color: inherit;
           text-decoration: none;
@@ -55,8 +56,9 @@
         font-size: 0.8rem;
         overflow: hidden;
         color: silver;
+        display: flex;
+        justify-content: space-between;
         .left {
-          float: left;
           span {
             a {
               text-decoration: none;
@@ -65,7 +67,6 @@
         }
         p {
           display: inline-block;
-          float: right;
         }
       }
     }
@@ -109,7 +110,6 @@
   .container {
     display: flex;
     justify-content: flex-start;
-    width: 1024px;
   }
   h1, h3 {
     font-weight: normal;
@@ -119,8 +119,11 @@
     margin: 12px auto;
     padding: 0 24px;
     overflow: hidden;
+  }
+  .period {
+    display: flex;
+    justify-content: space-between;
     .select-period {
-      float: right;
       a {
         padding: 5px;
         font-size: 0.8rem;
@@ -130,9 +133,6 @@
           color: $main-color;
         }
       }
-    }
-    h3 {
-      float: left;
     }
   }
   .page-right {
@@ -208,6 +208,8 @@
           padding-top: 12px;
           border-top: 1px solid $border-color;
           .follows-lists {
+            display: flex;
+            flex-wrap: wrap;
             .list {
               display: inline-block;
               width: calc(100% / 4);
@@ -259,52 +261,27 @@
     }
   }
 }
-.follows-lists-wrapper {
-  h3 {
-    font-size: 1rem;
-    margin: 12px 0;
-  }
-  .follows-lists {
-    display: flex;
-    flex-wrap: wrap;
-    .list {
-      display: inline-block;
-      text-align: center;
-      img {
-        display: inline-block;
-        border-radius: 9999px;
-        border: 1px solid $border-color;
-        background-color: $white;
-        vertical-align: bottom;
-      }
-    }
-  }
-}
 .follows-wrapper {
-  text-align: center;
-  .follows-lists-wrapper {
-    .list {
-      width: calc(100% / 4);
-      margin: 24px 0;
-      a {
-        text-align: center;
-        text-decoration: none;
-        color: $font-color;
+  .posts-list {
+    .post {
+      align-items: center;
+      justify-content: space-between;
+      .post-title {
+        width: auto;
+        margin-right: auto;
       }
-      .list-card {
+      .follow-btn {
         display: inline-block;
-        width: 85%;
-        padding: 24px;
+        padding: 8px 24px;
+        margin: 12px 0;
         border-radius: 3px;
-        box-shadow: 0 2px 17px 1px rgba(0, 0, 0, 0.12);
-        background-color: $white;
-        img {
-          width: 120px;
-          height: 120px;
-          margin-bottom: 8px;
-        }
-        span {
-          font-size: 1rem;
+        text-decoration: none;
+        font-size: .8rem;
+        background-color: $main-color;
+        color: $white;
+        transition: background-color .1s;
+        &:hover {
+          background-color: $sub-color;
         }
       }
     }

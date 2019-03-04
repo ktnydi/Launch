@@ -1,13 +1,13 @@
-<header class="share">
+<header class="share" id="header">
   <div class="container">
+    <div class="logo">
+      <% if user_signed_in? %>
+        <%= link_to "Launch", user_path(current_user), data: { "turbolinks" => false } %>
+      <% else %>
+        <%= link_to "Launch", root_path, data: { "turbolinks" => false } %>
+      <% end %>
+    </div>
     <div class="header-left">
-      <div class="logo">
-        <% if user_signed_in? %>
-          <%= link_to "Launch", user_path(current_user), data: { "turbolinks" => false } %>
-        <% else %>
-          <%= link_to "Launch", root_path, data: { "turbolinks" => false } %>
-        <% end %>
-      </div>
       <ul>
         <li>
           <%= link_to "ホーム", root_path, data: { "turbolinks" => false } %>
@@ -41,19 +41,29 @@
           </div>
         </div>
       <% else %>
-        <button>
-          <%= link_to "ログイン", new_user_session_path %>
-        </button>
-        <button class="signin">
-          <%= link_to "アカウント作成", new_user_registration_path %>
-        </button>
+        <div class="authenticate">
+          <button>
+            <%= link_to "ログイン", new_user_session_path %>
+          </button>
+          <button class="signin">
+            <%= link_to "アカウント作成", new_user_registration_path %>
+          </button>
+        </div>
       <% end %>
+      <div class="hamburger-menu" id="hamburger">
+        <i class="fas fa-bars"></i>
+      </div>
     </div>
   </div>
 </header>
-<% if flash[:notice] || flash[:alert]  %>
-  <p class="devise-notification">
+<% if flash[:notice] %>
+  <p class="devise-notification notice" id="notice">
+    <i class="fas fa-times" id="cls-btn"></i>
     <%= notice %>
+  </p>
+<% elsif flash[:alert] %>
+  <p class="devise-notification alert" id="alert">
+    <i class="fas fa-times" id="cls-btn"></i>
     <%= alert %>
   </p>
 <% end %>

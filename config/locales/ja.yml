@@ -13,7 +13,7 @@ ja:
         password_confirmation: 確認用パスワード
         name: ユーザー名
         image_name: ユーザー画像
-        remember_me: ログイン情報を記録する
+        remember_me: ログインを保存する
       post:
         title: タイトル
         content: 投稿内容
