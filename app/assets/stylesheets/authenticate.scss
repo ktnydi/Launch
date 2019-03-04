@@ -21,7 +21,8 @@
     }
   }
   .signup, .login, .edit {
-    width: 330px;
+    width: 100%;
+    max-width: 330px;
     margin: 50px auto;
     h2 {
       font-weight: normal;
