@@ -286,17 +286,20 @@
       }
     }
   }
-  a.back {
-    display: inline-block;
-    padding: 8px 24px;
-    margin: 12px 0;
-    border-radius: 3px;
-    text-decoration: none;
-    background-color: $main-color;
-    color: $white;
-    transition: background-color .1s;
-    &:hover {
-      background-color: $sub-color;
+  .notfind {
+    text-align: center;
+    a.back {
+      display: inline-block;
+      padding: 8px 24px;
+      margin: 12px 0;
+      border-radius: 3px;
+      text-decoration: none;
+      background-color: $main-color;
+      color: $white;
+      transition: background-color .1s;
+      &:hover {
+        background-color: $sub-color;
+      }
     }
   }
 }

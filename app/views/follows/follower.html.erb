@@ -35,8 +35,10 @@
         <%= link_to_next_page @followers, "次のページへ", class: "next-page", data: { "turbolinks" => false } %>
       </div>
     <% else %>
-      <p>フォロワーが見つかりませんでした。</p>
-      <%= link_to "戻る", :back %>
+      <div class="notfind">
+        <p>フォロワーが見つかりませんでした。</p>
+        <%= link_to "戻る", :back, class: "back", data: { "tubolinks" => false } %>
+      </div>
     <% end %>
   </div>
 </div>
