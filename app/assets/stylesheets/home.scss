@@ -38,6 +38,7 @@
       h2 {
         display: inline-block;
         font-size: 1rem;
+        word-break: break-all;
         a {
           color: inherit;
           text-decoration: none;
@@ -55,8 +56,9 @@
         font-size: 0.8rem;
         overflow: hidden;
         color: silver;
+        display: flex;
+        justify-content: space-between;
         .left {
-          float: left;
           span {
             a {
               text-decoration: none;
@@ -65,7 +67,6 @@
         }
         p {
           display: inline-block;
-          float: right;
         }
       }
     }

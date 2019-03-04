@@ -1,3 +1,5 @@
+@import 'variables';
+
 // タブレット
 @media all and (max-width: 1024px) {
   .container {
@@ -101,5 +103,50 @@
   }
   .comment-wrapper .comment-field .comment-edit input {
     margin: 0 auto;
+  }
+  .user-info-wrapper .user-profile-wrapper {
+    padding: 0;
+    flex-direction: column;
+    .user-info {
+      width: 100%;
+      height: 130px;
+      border-right: none;
+      border-bottom: 1px solid $border-color;
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+  }
+  .posts-info-wrapper {
+    .posts-controll-header {
+      margin: 24px 0;
+      flex-direction: column;
+      h2 {
+        margin: 8px 0;
+      }
+    }
+    table {
+      tr th, tr td {
+        padding: 12px;
+        font-size: .8rem;
+      }
+      .title {
+        width: 45%;
+        p {
+         display: none;
+       }
+      }
+      .created_at, .updated_at {
+        display: none;
+      }
+    }
+  }
+  .post-like, .posts-list {
+    .post .post-title .post-bottom {
+      font-size: .6rem;
+      p {
+        font-size: .6rem;
+      }
+    }
   }
 }
