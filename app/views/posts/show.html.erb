@@ -35,7 +35,7 @@
           <h3>この記事のコメント</h3>
           <% @post.comments.each do |comment| %>
           <div class="user-comment-wrapper">
-            <%= image_tag "/images/users/#{@post.user.image_name}", size: 60 %>
+            <%= image_tag "/images/users/#{comment.user.image_name}", size: 60 %>
             <div class="comment">
               <div class="md-comment">
                 <%== markdown comment.content %>
@@ -59,7 +59,7 @@
       </div>
       <h3>コメントする</h3>
       <div class="comment-field">
-        <ul>
+        <ul class="toggle-field">
           <li id="edit" style="border-bottom: 3px solid #009688; color: #009688;">編集</li>
           <li id="preview">プレビュー</li>
         </ul>

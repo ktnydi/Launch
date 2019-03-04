@@ -355,6 +355,7 @@ body.active {
 }
 
 .hamburger-menu-list {
+  overflow-y: scroll;
   display: none;
   height: 100vh;
   width: 70vw;

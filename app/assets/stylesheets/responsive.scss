@@ -1,20 +1,9 @@
 @import 'variables';
 
-// タブレット
 @media all and (max-width: 1024px) {
   .container {
     width: 95%;
   }
-  .posts-wrapper {
-    width: 100%;
-    .post {
-      width: 50%;
-    }
-  }
-}
-
-// スマホ
-@media all and (max-width: 767px) {
   .hamburger-menu-list {
     display: block;
   }
@@ -50,6 +39,9 @@
     .container {
       width: 95%;
       flex-direction: column;
+    }
+    h1, h3 {
+      text-align: center;
     }
     .page-left {
       width: 100%;
@@ -109,16 +101,21 @@
       margin: 0 auto;
     }
   }
-  .user-info-wrapper .user-profile-wrapper {
-    padding: 0;
-    flex-direction: column;
-    .user-info {
-      width: 100%;
-      height: 130px;
-      border-right: none;
-      border-bottom: 1px solid $border-color;
-      &:last-child {
-        border-bottom: none;
+  .user-info-wrapper {
+    h2 {
+      text-align: center;
+    }
+    .user-profile-wrapper {
+      padding: 0;
+      flex-direction: column;
+      .user-info {
+        width: 100%;
+        height: 130px;
+        border-right: none;
+        border-bottom: 1px solid $border-color;
+        &:last-child {
+          border-bottom: none;
+        }
       }
     }
   }
