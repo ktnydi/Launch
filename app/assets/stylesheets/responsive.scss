@@ -146,11 +146,17 @@
       }
     }
   }
+  .follows-wrapper .posts-list .post .follow-btn {
+    padding: 8px;
+  }
   .post-like, .posts-list {
-    .post .post-title .post-bottom {
-      font-size: .6rem;
-      p {
+    .post {
+      padding: 12px;
+      .post-title .post-bottom {
         font-size: .6rem;
+        p {
+          font-size: .6rem;
+        }
       }
     }
   }

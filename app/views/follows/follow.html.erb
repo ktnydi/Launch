@@ -3,20 +3,33 @@
   <div class="container">
     <h3>フォロー中</h3>
     <% if @followings.present? %>
-      <div class="follows-lists-wrapper">
-        <div class="follows-lists">
-        <% @followings.each do |following| %>
-          <div class="list">
-            <%= link_to user_posts_path(following), data: {  "turbolinks" => false } do %>
-              <div class="list-card">
-                <%= image_tag "/images/users/#{following.image_name}", size: 50 %><br>
-                <span><%= following.name %></span>
-              </div>
-            <% end %>
+    <div class="posts-list">
+    <% @followings.each do |following| %>
+      <div class="post">
+        <%= image_tag "/images/users/#{following.image_name}", size: 50 %>
+        <div class="post-title">
+          <div class="post-top">
+            <h2>
+              <%= link_to following.name, user_posts_path(following), data: { "turbolinks": false } %>
+            </h2>
           </div>
-        <% end %>
         </div>
+        <% if user_signed_in? %>
+        <% unless current_user.id === following.id %>
+          <% if current_user.is_following?(following) %>
+            <%= link_to user_follow_path(following, current_user), class: "follow-btn", method: :delete do %>
+              フォロー中
+            <% end %>
+          <% else %>
+            <%= link_to user_follows_path(following), class: "follow-btn", method: :post do %>
+              フォローする
+            <% end %>
+          <% end %>
+        <% end %>
+        <% end %>
       </div>
+    <% end %>
+    </div>
       <div class="paginate">
         <%= link_to_prev_page @followings, "前のページへ", class: "prev-page", data: { "turbolinks" => false } %>
         <%= link_to_next_page @followings, "次のページへ", class: "next-page", data: { "turbolinks" => false } %>
