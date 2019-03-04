@@ -22,6 +22,15 @@
       .created_at {
         color: silver;
       }
+      .app-url {
+        color: silver;
+        p {
+          word-break: break-all;
+        }
+        a {
+          color: $main-color;
+        }
+      }
       .content {
         padding: 60px 0;
       }

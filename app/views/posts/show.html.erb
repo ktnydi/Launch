@@ -26,6 +26,14 @@
       Created by <%= @post.user.name %>
       at <%= @post.created_at.strftime("%Y.%m.%d %H:%M") %>
     </span>
+    <% if @post.app_url.present? %>
+      <div class="app-url">
+        <p>開発アプリURL：</p>
+        <%= link_to @post.app_url do %>
+          <%= @post.app_url %>
+        <% end %>
+      </div>
+    <% end %>
     <div class="content">
       <%== markdown @post.content %>
     </div>
