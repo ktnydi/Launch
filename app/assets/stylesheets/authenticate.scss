@@ -30,7 +30,6 @@
       text-align: center;
     }
     form {
-      margin: 24px 0;
       .field {
         margin: 12px 0;
         .user-image {
@@ -104,7 +103,8 @@
       }
       .actions {
         text-align: center;
-        input[type="submit"] {
+        input[type="submit"], .twitter {
+          display: inline-block;
           width: 100%;
           height: 40px;
           font-size: 1rem;
@@ -116,6 +116,14 @@
           transition: all 0.1s;
           &:hover {
             background-color: $sub-color;
+          }
+        }
+        .twitter {
+          line-height: 40px;
+          background-color: #55acee;
+          text-decoration: none;
+          &:hover {
+            background-color: #6eb5ec;
           }
         }
       }
@@ -155,34 +163,35 @@
     }
   }
   .login, .signup {
-    margin: auto;
-    padding: 24px;
+    display: block;
+    width: 330px;
+    margin: 0 auto;
+    border-radius: 3px;
     border: 1px solid $border-color;
     background-color: $white;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
+    h2 {
+      padding: 24px 24px 0;
+    }
+    .form-wrapper {
+      padding: 0 24px 24px;
+    }
+    form {
+    }
     .term {
       margin: 8px 0;
     }
     p {
       font-size: .8rem;
+      margin: 3px 0;
       a {
         color: $main-color;
         text-decoration: none;
       }
     }
     .link {
+      padding: 8px 0;
       text-align: center;
     }
-  }
-  .login {
-    height: 390px;
-  }
-  .signup {
-    height: 500px;
   }
 }
 

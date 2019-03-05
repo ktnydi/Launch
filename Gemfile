@@ -38,6 +38,9 @@ gem 'redcarpet'
 
 gem 'devise'
 
+gem 'omniauth'
+gem 'omniauth-twitter'
+
 gem 'kaminari'
 
 gem 'impressionist'
