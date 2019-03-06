@@ -16,7 +16,6 @@ impressionist :actions => [:show]
   def show
     @post = Post.find_by(id: params[:id])
     @comment = Comment.new
-    @likes_count = @post.likes.count
   end
 
   def new
