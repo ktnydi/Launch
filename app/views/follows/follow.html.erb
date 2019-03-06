@@ -14,19 +14,9 @@
             </h2>
           </div>
         </div>
-        <% if user_signed_in? %>
-        <% unless current_user.id === following.id %>
-          <% if current_user.is_following?(following) %>
-            <%= link_to user_follow_path(following, current_user), class: "follow-btn", method: :delete do %>
-              フォロー中
-            <% end %>
-          <% else %>
-            <%= link_to user_follows_path(following), class: "follow-btn", method: :post do %>
-              フォローする
-            <% end %>
-          <% end %>
-        <% end %>
-        <% end %>
+        <div class="follow" id="<%= following.id %>">
+          <%= render "follows/follow", other: following %>
+        </div>
       </div>
     <% end %>
     </div>

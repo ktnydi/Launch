@@ -15,6 +15,7 @@ impressionist :actions => [:show]
 
   def show
     @post = Post.find_by(id: params[:id])
+    @author = @post.user
     @comment = Comment.new
   end
 
