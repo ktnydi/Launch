@@ -2,20 +2,27 @@ class CommentsController < ApplicationController
   before_action :authenticate_user!
   def create
     @comment = Comment.new(comment_params)
+    @post = Post.find_by(id: params[:post_id])
     if @comment.save
-      redirect_to post_path(params[:post_id])
+      @comment = Comment.new
+      respond_to do |format|
+        format.js
+        format.html
+      end
     else
-      @post = Post.find_by(id: params[:post_id])
-      @likes_count = @post.likes.count
       render "posts/show"
     end
   end
 
   def destroy
     @comment = Comment.find_by(id: params[:id])
-    post_id = @comment.post_id
-    @comment.destroy
-    redirect_to post_path(post_id)
+    @post = @comment.post
+    respond_to do |format|
+      if @comment.destroy
+        format.js
+        format.html
+      end
+    end
   end
 
   private

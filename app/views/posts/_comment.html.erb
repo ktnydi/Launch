@@ -1,0 +1,27 @@
+<div class="post-comments">
+  <% if post.comments.present? %>
+    <h3>この記事のコメント</h3>
+    <% post.comments.each do |comment| %>
+    <div class="user-comment-wrapper">
+      <%= image_tag "/images/users/#{comment.user.image_name}", size: 60 %>
+      <div class="comment">
+        <div class="md-comment">
+          <%== markdown comment.content %>
+        </div>
+        <div class="comment-bottom">
+          <div class="comment-user">
+          by <%= comment.user.name %>
+          ・
+          <%= comment.created_at.strftime("%Y.%H.%d %H:%M") %>
+          </div>
+          <% if user_signed_in? && comment.user_id === current_user.id %>
+            <div class="comment-delete">
+              <%= link_to "削除", "/comment/#{comment.id}/", method: :delete, remote: true, data: { confirm: "コメントを削除します。"} %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <% end %>
+  <% end %>
+</div>
