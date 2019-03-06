@@ -31,33 +31,10 @@
       <%== markdown @post.content %>
     </div>
     <div class="comment-wrapper">
-      <div class="post-comments">
-        <% if @post.comments.present? %>
-          <h3>この記事のコメント</h3>
-          <% @post.comments.each do |comment| %>
-          <div class="user-comment-wrapper">
-            <%= image_tag "/images/users/#{comment.user.image_name}", size: 60 %>
-            <div class="comment">
-              <div class="md-comment">
-                <%== markdown comment.content %>
-              </div>
-              <div class="comment-bottom">
-                <div class="comment-user">
-                by <%= comment.user.name %>
-                ・
-                <%= comment.created_at.strftime("%Y.%H.%d %H:%M") %>
-                </div>
-                <% if user_signed_in? && comment.user_id === current_user.id %>
-                  <div class="comment-delete">
-                    <%= link_to "削除", "/comment/#{comment.id}/", method: :delete, data: { confirm: "コメントを削除します。"} %>
-                  </div>
-                <% end %>
-              </div>
-            </div>
-          </div>
-          <% end %>
-        <% end %>
+      <div id="comment">
+        <%= render "comment", post: @post %>
       </div>
+      <% if user_signed_in? %>
       <h3>コメントする</h3>
       <div class="comment-field">
         <ul class="toggle-field">
@@ -65,55 +42,45 @@
           <li id="preview">プレビュー</li>
         </ul>
         <div class="comment-edit">
-          <%= form_for @comment, url: "/comment/#{@post.id}" do |f| %>
+          <%= form_for @comment, url: "/comment/#{@post.id}", remote: true do |f| %>
             <%= f.text_area :content, id: "md-comment", placeholder: "コメントを入力してください", style: "display: block;" %>
             <div class="comment-md-preview" id="comment-preview" style="display: none;">
             </div>
-            <input type="submit" value="投稿">
+            <input type="submit" value="投稿" id="comment-submit">
           <% end %>
         </div>
       </div>
+      <% end %>
     </div>
   </main>
   <aside>
     <div class="author">
       <h3>この記事のクリエイター</h3>
-      <%= image_tag "/images/users/#{@post.user.image_name}", size: 120 %>
+      <%= image_tag "/images/users/#{@author.image_name}", size: 120 %>
       <div class="author-name">
-        <%= link_to @post.user.name, user_posts_path(@post.user), data: {  "turbolinks" => false } %>
+        <%= link_to @author.name, user_posts_path(@author), data: {  "turbolinks" => false } %>
       </div>
       <table class="follow">
         <tr>
           <th>
-            <%= link_to "投稿した数", user_myposts_path(@post.user), data: { "turbolinks" => false } %>
+            <%= link_to "投稿した数", user_myposts_path(@author), data: { "turbolinks" => false } %>
           </th>
           <th>
-            <%= link_to "フォロー", user_myfollows_path(@post.user), data: { "turbolinks" => false } %>
+            <%= link_to "フォロー", user_myfollows_path(@author), data: { "turbolinks" => false } %>
           </th>
           <th>
-            <%= link_to "フォロワー", user_myfollowers_path(@post.user), data: { "turbolinks" => false } %>
+            <%= link_to "フォロワー", user_myfollowers_path(@author), data: { "turbolinks" => false } %>
           </th>
         </tr>
         <tr>
-          <td><%= @post.user.posts.status_public.count %></td>
-          <td><%= @post.user.followings.count %></td>
-          <td><%= @post.user.followers.count %></td>
+          <td><%= @author.posts.status_public.count %></td>
+          <td><%= @author.followings.count %></td>
+          <td><%= @author.followers.count %></td>
         </tr>
       </table>
-        <% if signed_in? %>
-        <% unless current_user.id == @post.user.id %>
-          <% if current_user.is_following?(@post.user) %>
-            <%= link_to user_follow_path(@post.user, current_user), class: "follow-btn", method: :delete do %>
-              フォロー中
-            <% end %>
-          <% else %>
-            <%= link_to user_follows_path(@post.user.id), class: "follow-btn", method: :post do %>
-              フォローする
-            <% end %>
-          <% end %>
-          <% p current_user.is_following?(@post.user) %>
-        <% end %>
-        <% end %>
+      <div id="follow">
+        <%= render "follows/follow", other: @author %>
+      </div>
     </div>
   </aside>
   </div>

@@ -272,10 +272,12 @@
       }
       .follow-btn {
         display: inline-block;
-        padding: 8px 24px;
+        width: 100px;
+        padding: 8px 0;
         margin: 12px 0;
         border-radius: 3px;
         text-decoration: none;
+        text-align: center;
         font-size: .8rem;
         background-color: $main-color;
         color: $white;

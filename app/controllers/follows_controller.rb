@@ -1,15 +1,29 @@
 class FollowsController < ApplicationController
+  before_action :other
+
   def create
     @follow = current_user.active_follows.create(
               followed_user_id: params[:user_id]
               )
-    redirect_back(fallback_location: root_path)
+    respond_to do |format|
+      if @follow
+        format.js
+        format.html
+      end
+    end
   end
 
   def destroy
-    @follow = current_user.active_follows.find_by(followed_user_id: params[:user_id])
-    @follow.destroy
-    redirect_back(fallback_location: root_path)
+    @follow = current_user.active_follows.find_by(
+              followed_user_id: params[:user_id]
+              )
+    respond_to do |format|
+      if @follow.destroy
+        format.js
+        format.html
+      end
+    end
+
   end
 
   def follow
@@ -21,4 +35,10 @@ class FollowsController < ApplicationController
     @user = User.find_by(id: params[:user_id])
     @followers = @user.followers.page(params[:page]).per(80)
   end
+
+  private
+    def other
+      @author = User.find_by(id: params[:user_id])
+      @other = @author
+    end
 end

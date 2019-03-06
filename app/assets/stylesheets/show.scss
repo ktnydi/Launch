@@ -67,7 +67,7 @@
         a.follow-btn {
           display: inline-block;
           width: 90%;
-          line-height: 35px;
+          padding: 8px 0;
           border-radius: 3px;
           box-shadow: 0 2px 17px 1px rgba(0, 0, 0, 0.1);
           text-decoration: none;
@@ -120,7 +120,8 @@
       }
       input {
         display: block;
-        padding: 8px 24px;
+        width: 150px;
+        padding: 8px 0;
         border: none;
         border-radius: 3px;
         font-size: 1rem;
