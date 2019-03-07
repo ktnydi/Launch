@@ -8,6 +8,10 @@ module ApplicationHelper
     title
   end
 
+  def gravatar_image(user)
+    user.gravatar_url(default: "retro")
+  end
+
   # ログイン中のユーザーと記事の作者と違うかどうか判断するには
   # 以下のように、ログイン中のユーザーが投稿した記事を持って
   # いるかどうかで判断するのではなく、

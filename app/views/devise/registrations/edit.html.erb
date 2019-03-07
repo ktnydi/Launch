@@ -16,11 +16,8 @@
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, id: "left-form" }) do |f| %>
         <div class="f-profile f active" id="profile">
           <div class="field">
-            <%= image_tag "/images/users/#{current_user.image_name}", size: 120, class: "user-image", id: "user-image" %>
-            <%= f.label :image_name, class: "user-image-label" do %>
-              画像を変更
-              <%= f.file_field :image_name, autofocus: true, class: "user-image-field" %>
-            <% end %>
+            <%= image_tag gravatar_image(current_user), class: "user-image", id: "user-image" %>
+            <%= link_to "画像を変更", "https://ja.gravatar.com/", data: {confirm: "画像を変更するには、現在登録中のメールアドレスでGravatarを作成する必要があります。\n変更後、画像が更新されるまでに数分かかります。"}, class: "change_image", target: :_blank %>
           </div>
 
           <div class="field">
@@ -85,16 +82,6 @@
   </div>
 </div>
 <script>
-    var select_image = document.getElementById('user_image_name');
-    select_image.addEventListener('change', function() {
-      var user_image = document.getElementById('user-image');
-      var reader = new FileReader();
-      reader.addEventListener("load", function() {
-        user_image.src = reader.result;
-      });
-      reader.readAsDataURL(select_image.files[0]);
-    });
-
     var new_password = document.getElementById('user_password');
     var new_confirmation_password = document.getElementById('user_password_confirmation');
     var judge = document.getElementById('judge');

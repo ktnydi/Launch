@@ -6,7 +6,7 @@
     <div class="posts-list">
     <% @followings.each do |following| %>
       <div class="post">
-        <%= image_tag "/images/users/#{following.image_name}", size: 50 %>
+        <%= image_tag gravatar_image(following), size: 50 %>
         <div class="post-title">
           <div class="post-top">
             <h2>

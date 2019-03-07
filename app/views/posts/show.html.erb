@@ -56,7 +56,7 @@
   <aside>
     <div class="author">
       <h3>この記事のクリエイター</h3>
-      <%= image_tag "/images/users/#{@author.image_name}", size: 120 %>
+      <%= image_tag gravatar_image(@author), size: 120 %>
       <div class="author-name">
         <%= link_to @author.name, user_posts_path(@author), data: {  "turbolinks" => false } %>
       </div>

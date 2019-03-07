@@ -6,7 +6,7 @@
     <div class="posts-list">
     <% @posts.each do |post| %>
       <div class="post">
-        <%= image_tag "/images/users/#{post.user.image_name}", size: 50 %>
+        <%= image_tag gravatar_image(post.user), size: 50 %>
         <div class="post-title">
           <div class="post-top">
             <h2>
