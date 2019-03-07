@@ -4,6 +4,5 @@ user_names.each_with_index do |val, idx|
     name: val,
     email: val + "@example.com",
     password: "password",
-    image_name: "default.png"
   )
 end
