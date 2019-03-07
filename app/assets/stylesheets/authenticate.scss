@@ -34,8 +34,8 @@
         margin: 12px 0;
         .user-image {
           display: block;
-          width: 120px;
-          height: 120px;
+          width: 90px;
+          height: 90px;
           margin: 8px auto;
           border-radius: 9999px;
           background-color: $white;
@@ -44,7 +44,7 @@
         label, span {
           font-size: .8rem;
         }
-        .user-image-label {
+        .change_image {
           display: block;
           height: 40px;
           width: 120px;
@@ -53,15 +53,14 @@
           text-align: center;
           border-radius: 3px;
           box-shadow: 0 2px 17px 1px rgba(0, 0, 0, 0.1);
+          text-decoration: none;
+          color: $font-color;
           font-size: .8rem;
           cursor: pointer;
           background-color: $white;
           transition: background-color .1s;
           &:hover {
             background-color: #eee;
-          }
-          .user-image-field {
-            display: none;
           }
         }
         input {

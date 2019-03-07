@@ -3,7 +3,7 @@
     <h3>この記事のコメント</h3>
     <% post.comments.each do |comment| %>
     <div class="user-comment-wrapper">
-      <%= image_tag "/images/users/#{comment.user.image_name}", size: 60 %>
+      <%= image_tag gravatar_image(comment.user), size: 60 %>
       <div class="comment">
         <div class="md-comment">
           <%== markdown comment.content %>

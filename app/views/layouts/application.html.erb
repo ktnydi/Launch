@@ -30,7 +30,7 @@
       <nav>
         <% if user_signed_in? %>
           <div class="user-name">
-            <%= image_tag "/images/users/#{current_user.image_name}", size: 35 %>
+            <%= image_tag gravatar_image(current_user), size: 35 %>
             <span><%= current_user.name %></span>
           </div>
           <div class="posts-link">

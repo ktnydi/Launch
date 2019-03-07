@@ -11,7 +11,7 @@
         <h1>ユーザー</h1>
         <div class="account">
           <% if user_signed_in? %>
-            <%= image_tag "/images/users/#{@user.image_name}", size: 120 %>
+            <%= image_tag gravatar_image(@user), size: 80 %>
             <div class="current-user-name">
               <%= link_to @user.name, user_posts_path(@user), data: { "turbolinks" => false } %>
             </div>
@@ -47,7 +47,7 @@
                 <div class="follows-lists">
                 <% followings.limit(12).each do |following| %>
                   <div class="list">
-                    <%= image_tag "/images/users/#{following.image_name}", size: 50 %>
+                    <%= image_tag gravatar_image(following), size: 50 %>
                   </div>
                 <% end %>
                 </div>
@@ -75,7 +75,7 @@
         <div class="posts-list">
           <% @posts.each do |post| %>
           <div class="post">
-            <%= image_tag "/images/users/#{post.user.image_name}", size: 50 %>
+            <%= image_tag gravatar_image(post.user), size: 50 %>
             <div class="post-title">
               <h2>
                 <%= link_to post.title, post_path(post), data: { "turbolinks": false } %>
@@ -118,7 +118,7 @@
             </div>
             <% followings[0..2].each do |following| %>
               <div class="following-user-image">
-                <%= image_tag "/images/users/#{following.image_name}", size: 50 %>
+                <%= image_tag gravatar_image(following), size: 50 %>
                 <div class="following-info">
                   <b><%= following.name %></b>
                   <table class="follow">

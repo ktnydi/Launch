@@ -7,7 +7,7 @@
     <div class="user-profile-wrapper">
       <div class="user-info">
         <div class="user-profile-img">
-          <%= image_tag "/images/users/#{current_user.image_name}", size: 70 %>
+          <%= image_tag gravatar_image(@user), size: 70 %>
           <p><%= @user.name %></p>
         </div>
       </div>
@@ -106,7 +106,7 @@
     <div class="post-like">
       <% @liked_posts.each do |post| %>
       <div class="post">
-        <%= image_tag "/images/users/#{post.user.image_name}", size: 50 %>
+        <%= image_tag gravatar_image(post.user), size: 50 %>
         <div class="post-title">
           <div class="post-top">
             <h2>
