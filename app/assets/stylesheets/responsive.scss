@@ -15,11 +15,6 @@
     }
     form {
       margin-left: 0;
-      label {
-        input[type="search"] {
-          width: 135px;
-        }
-      }
     }
     .header-left {
       ul {
@@ -121,12 +116,11 @@
       }
     }
   }
-  .posts-info-wrapper {
+  .posts-info-wrapper, .posts-like-wrapper {
     .posts-controll-header {
-      margin: 24px 0;
       flex-direction: column;
       h2 {
-        margin: 8px 0;
+        text-align: center;
       }
     }
     table {
