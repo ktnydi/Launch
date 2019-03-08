@@ -165,4 +165,14 @@
   header.editor .submit input[type="submit"] {
     padding: 8px 12px;
   }
+
+  footer {
+    text-align: center;
+    ul {
+      li {
+        display: block;
+        margin: 8px 12px;
+      }
+    }
+  }
 }

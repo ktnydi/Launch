@@ -328,6 +328,7 @@ footer {
   border-top: 1px solid $border-color;
   background-color: $white;
   ul {
+    padding: 0;
     list-style: none;
     li {
       display: inline-block;

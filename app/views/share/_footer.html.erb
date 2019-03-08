@@ -4,9 +4,12 @@
       <li>
         <%= link_to "利用規約", terms_path, target: :_blank %>
       </li>
+      <li>
+        <%= link_to "お問い合わせ", "https://goo.gl/forms/HDn8yGkq2UYPVFDj2", target: :_blank %>
+      </li>
       <% if user_signed_in? %>
       <li>
-        <%= link_to "退会する方はこちら", edit_user_registration_path(current_user), data: { "tubolinks" => false } %>
+        <%= link_to "退会", edit_user_registration_path(current_user), data: { "tubolinks" => false } %>
       </li>
       <% end %>
     </ul>
