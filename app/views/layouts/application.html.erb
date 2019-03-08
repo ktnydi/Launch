@@ -1,12 +1,28 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Launchはプログラマーのためのブログサービスです。あなたが開発したアプリケーションに関する記事を書くことで、ユーザーからフィードバックをもらうことができます。">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><%= page_title %></title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <%= favicon_link_tag('favicon.ico') %>
+    <%= favicon_link_tag('apple-touch-icon.png',
+                     {:rel => 'apple-touch-icon-precomposed'}) %>
+    <%= favicon_link_tag('apple-touch-icon.png',
+                     {:rel => 'apple-touch-icon-precomposed',
+                      :sizes => '76x76',
+                      :type => 'image/png'}) %>
+    <%= favicon_link_tag('apple-touch-icon.png',
+                     {:rel => 'apple-touch-icon-precomposed',
+                      :sizes => '120x120',
+                      :type => 'image/png'}) %>
+    <%= favicon_link_tag('apple-touch-icon.png',
+                     {:rel => 'apple-touch-icon-precomposed',
+                      :sizes => '152x152',
+                      :type => 'image/png'}) %>
     <%= stylesheet_link_tag '/editor/lib/codemirror.css', media: 'all' %>
     <%= stylesheet_link_tag '/editor/theme/neat.css', media: 'all' %>
     <%= stylesheet_link_tag '/editor/highlight/atom-one-dark.css', media: 'all' %>
