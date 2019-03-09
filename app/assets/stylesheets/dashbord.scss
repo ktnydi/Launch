@@ -1,5 +1,11 @@
 @import 'variables';
 
+.user-info-wrapper, .posts-info-wrapper, .posts-like-wrapper {
+  .container {
+    max-width: 1024px;
+  }
+}
+
 .user-info-wrapper {
   padding: 120px 0 30px;
   h2 {

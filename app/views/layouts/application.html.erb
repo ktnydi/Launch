@@ -42,7 +42,7 @@
     <%= render 'share/footer' %>
     </div>
 
-    <div class="hamburger-menu-list" id="menu" style="visibility: hidden; transition: visibility .2s">
+    <div class="hamburger-menu-list" id="menu" style="visibility: hidden; transition: visibility .4s">
       <nav>
         <% if user_signed_in? %>
           <div class="user-name">
@@ -87,8 +87,7 @@
           menu.style.visibility = 'hidden';
         } else {
           body.className = 'active';
-          header.style.right = '70vw';
-          hamburger.innerHTML = '<i class="fas fa-times"></i>';
+          header.style.right = '250px';
           menu.style.visibility = 'visible';
         }
       })

@@ -1,12 +1,14 @@
 <header class="editor">
-  <div class="back">
-    <%= link_to root_path, data: {"turbolinks": false} do %>
-      <i class="fas fa-angle-left"></i>
-      戻る
-    <% end %>
-  </div>
-  <div class="submit">
-    <input type="submit" form="posts" value="下書き保存" name="commit"><!--
-    --><input type="submit" form="posts" value="記事を公開" name="commit">
+  <div class="container">
+    <div class="back">
+      <%= link_to root_path, data: {"turbolinks": false} do %>
+        <i class="fas fa-angle-left"></i>
+        戻る
+      <% end %>
+    </div>
+    <div class="submit">
+      <input type="submit" form="posts" value="下書き保存" name="commit"><!--
+      --><input type="submit" form="posts" value="記事を公開" name="commit">
+    </div>
   </div>
 </header>

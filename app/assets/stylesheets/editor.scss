@@ -5,17 +5,10 @@
 }
 
 header.editor {
-  width: 100%;
-  height: 50px;
   border-bottom: 1px solid $border-color;
-  background-color: $white;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   .back {
     display: inline-block;
     height: 50px;
-    margin: 0 16px;
     a {
       height: 50px;
       width: auto;
@@ -37,10 +30,12 @@ header.editor {
     }
   }
   .submit {
+    display: flex;
+    align-items: center;
     input[type="submit"] {
       display: inline-block;
       padding: 8px 24px;
-      margin-right: 12px;
+      margin-left: 12px;
       border: none;
       border-radius: 3px;
       font-size: .8rem;
@@ -61,7 +56,7 @@ form.f-editor {
     display: block;
     width: 100%;
     height: 40px;
-    padding: 0 16px;
+    padding: 0 2.5%;
     font-size: 1rem;
     border: none;
     border-bottom: 1px solid $border-color;
