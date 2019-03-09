@@ -5,11 +5,34 @@ class HomeController < ApplicationController
     else
       @user = current_user
     end
+
+    if @user
+      @followings = @user.followings
+      @following_ids = [current_user.id]
+      @followings.each do |following|
+        @following_ids << following.id
+      end
+      @following_posts = Post.status_public
+                             .where(user_id: @following_ids)
+                             .order(created_at: :desc)
+                             .page(params[:page])
+                             .per(20)
+    end
+
+    posts_for(params[:period])
+  end
+
+  private
+  def posts_ranking(period)
+    @posts = Post.status_public.where("created_at > ?", period).order(impressions_count: :desc).limit(5)
+  end
+
+  def posts_for(param)
     today = 1.day.ago
     week  = 1.week.ago
     month = 1.month.ago
-    if params[:period]
-      case params[:period]
+    if param
+      case param
       when "today"
         posts_ranking today
       when "week"
@@ -20,10 +43,5 @@ class HomeController < ApplicationController
     else
       posts_ranking today
     end
-  end
-
-  private
-  def posts_ranking(period)
-    @posts = Post.status_public.where("created_at > ?", period).order(impressions_count: :desc).limit(10)
   end
 end
