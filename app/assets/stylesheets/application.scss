@@ -25,6 +25,7 @@
 }
 
 body {
+  -webkit-text-size-adjust: 100%;
  font-family: 'hiragino sans';
 }
 
@@ -257,28 +258,30 @@ header.share {
 
 .devise-notification, .nocomment {
   padding: 8px 24px;
-  width: 95%;
+  max-width: 95%;
   margin: 0 auto;
   text-align: center;
   color: white;
   letter-spacing: 1px;
-  position: relative;
+  position: absolute;
   top: 60px;
+  right: 0;
+  left: 0;
   .fa-times {
+    width: 22px;
+    height: 22px;
     padding: 3px;
     margin: auto;
     cursor: pointer;
     position: absolute;
-    top: 10px;
-    right: 17px;
+    top: 0;
+    bottom: 0;
+    right: 1px;
   }
 }
 .devise-notification.notice, .nocomment {
   border-radius: 3px;
-  border: 1px solid rgba(24, 153, 114, 0.3);
-  border-left: 3px solid $main-color;
-  background-color: rgba(24, 153, 114, 0.1);
-  color: $main-color;
+  background-color: $sub-color;
 }
 .devise-notification.alert {
   border-radius: 3px;
@@ -331,6 +334,7 @@ table.follow {
 footer {
   margin-top: auto;
   width: 100%;
+  min-height: 50px;
   padding: 12px 0;
   text-align: right;
   border-top: 1px solid $border-color;
@@ -341,9 +345,9 @@ footer {
     li {
       display: inline-block;
       margin: 0 12px;
-      font-size: .8rem;
       a {
         text-decoration: none;
+        font-size: .8rem;
         color: $font-color;
         &:hover {
           color: $main-color;

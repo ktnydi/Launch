@@ -1,0 +1,103 @@
+@import 'variables';
+
+.top-page-wrapper {
+  padding-top: 50px;
+  display: flex;
+  @media all and (max-width: 1024px) {
+    flex-direction: column;
+  }
+  .introduce, .top-page-content {
+    width: 50vw;
+    text-align: center;
+    @media all and (max-width: 1024px) {
+      width: 100%;
+    }
+  }
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 100px);
+    min-height: 400px;
+    @media all and (max-width: 1024px) {
+      height: 50vh;
+    }
+    @media all and (max-width: 480px) {
+      height: calc(100vh - 100px);
+    }
+  }
+  .introduce {
+    background-color: $main-color;
+    color: $white;
+    .message {
+      .title {
+        margin-bottom: 60px;
+        h1 {
+          font-weight: normal;
+          font-size: 3rem;
+        }
+        p {
+          font-size: .8rem;
+        }
+      }
+      ul {
+        padding: 0;
+        text-align: left;
+        list-style: none;
+        li {
+          padding: 8px 0;
+          display: flex;
+          align-items: center;
+          i {
+            margin-right: 12px;
+            font-size: 1.6rem;
+          }
+          span {
+            font-size: 1rem;
+            @media all and (max-width :1024px) {
+              font-size: .8rem;
+            }
+          }
+        }
+      }
+    }
+  }
+  .top-page-content {
+    background-color: $white;
+    .authenticate {
+      h2 {
+        margin-bottom: 24px;
+        font-size: 1.3rem;
+        font-weight: normal;
+      }
+      .login-or-signup {
+        .signup, .login {
+          display: block;
+          width: 200px;
+          margin: 0 auto;
+          padding: 8px 0;
+          border-radius: 3px;
+          text-decoration: none;
+          transition: all .1s;
+        }
+        .signup {
+          background-color: $main-color;
+          color: $white;
+          &:hover {
+            background-color: $sub-color;
+          }
+        }
+        .login {
+          border: 1px solid $main-color;
+          color: $main-color;
+          &:hover {
+            background-color: #f5f5f5;
+          }
+        }
+        p {
+          margin: 3px 0;
+        }
+      }
+    }
+  }
+}
