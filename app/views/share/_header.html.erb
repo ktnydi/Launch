@@ -10,7 +10,11 @@
     <div class="header-left">
       <ul>
         <li>
-          <%= link_to "ホーム", root_path, data: { "turbolinks" => false } %>
+          <% if user_signed_in? %>
+            <%= link_to "ホーム", users_path, data: { "turbolinks" => false } %>
+          <% else %>
+            <%= link_to "ホーム", root_path, data: { "turbolinks" => false } %>
+          <% end %>
         </li>
         <li>
           <%= link_to "記事一覧", posts_path, data: { "turbolinks" => false } %>

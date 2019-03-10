@@ -25,7 +25,7 @@ impressionist :actions => [:show]
   def create
     @post = Post.new(post_params)
     if @post.save
-      redirect_to :root
+      redirect_to users_path
     else
       @errors = @post.errors.full_messages
       render new_post_path, :layout => "editor"
@@ -42,7 +42,7 @@ impressionist :actions => [:show]
     @post.assign_attributes(post_params)
     if @post.save
       flash[:post_notice] = "記事を編集しました。"
-      redirect_to :root
+      redirect_to users_path
     end
   end
 
@@ -68,7 +68,7 @@ impressionist :actions => [:show]
     post = Post.find_by(id: params[:id])
     if current_user.id != post.user_id
       flash[:alert] = "このアクセスは禁止されています。"
-      redirect_to root_path
+      redirect_to users_path
     end
   end
 
@@ -97,7 +97,7 @@ impressionist :actions => [:show]
     post = Post.find_by(id: params[:id])
     if post.status == "下書き"
       flash[:alert] = "このアクセスは禁止されています。"
-      redirect_to root_path
+      redirect_to users_path
     end
   end
 end
