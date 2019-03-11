@@ -34,10 +34,10 @@
         margin-bottom: 60px;
         h1 {
           font-weight: normal;
-          font-size: 3rem;
+          font-size: 4rem;
         }
         p {
-          font-size: .8rem;
+          font-size: 1.3rem;
         }
       }
       ul {
@@ -50,12 +50,12 @@
           align-items: center;
           i {
             margin-right: 12px;
-            font-size: 1.6rem;
+            font-size: 2.8rem;
           }
           span {
-            font-size: 1rem;
+            font-size: 1.3rem;
             @media all and (max-width :1024px) {
-              font-size: .8rem;
+              font-size: 1.3rem;
             }
           }
         }
@@ -67,10 +67,11 @@
     .authenticate {
       h2 {
         margin-bottom: 24px;
-        font-size: 1.3rem;
+        font-size: 2rem;
         font-weight: normal;
       }
       .login-or-signup {
+        font-size: 1.6rem;
         .signup, .login {
           display: block;
           width: 200px;

@@ -10,8 +10,9 @@
   padding: 120px 0 30px;
   h2 {
     margin: 16px 0;
-    font-size: 1.2rem;
+    font-size: 2rem;
     font-weight: normal;
+    text-align: center;
   }
   .user-profile-wrapper {
     padding: 24px 0;
@@ -19,6 +20,10 @@
     box-shadow: 0 2px 17px 1px rgba(0, 0, 0, 0.12);
     display: flex;
     align-items: center;
+    @media all and (max-width: 1024px) {
+      padding: 0;
+      flex-direction: column;
+    }
     .user-info {
       display: flex;
       align-items: center;
@@ -27,8 +32,17 @@
       height: 100%;
       text-align: center;
       border-right: 1px solid $border-color;
+      @media all and (max-width: 1024px) {
+        width: 100%;
+        padding: 12px;
+        border-right: none;
+        border-bottom: 1px solid $border-color;
+      }
       &:last-child {
         border-right: none;
+        @media all and (max-width: 1024px) {
+          border-bottom: none;
+        }
       }
     }
     .user-profile-img {
@@ -38,15 +52,15 @@
         background-color: $white;
       }
       p {
-        font-size: 0.8rem;
+        font-size: 1.3rem;
       }
     }
     .posted-count {
       margin-bottom: 3px;
-      font-size: 2.4rem;
+      font-size: 4rem;
     }
     .posted-text {
-      font-size: 0.8rem;
+      font-size: 1.3rem;
     }
   }
 }
@@ -54,13 +68,11 @@
 .posts-info-wrapper, .posts-like-wrapper {
   padding: 30px 0;
   .posts-controll-header {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
     h2 {
       margin: 16px 0;
-      font-size: 1.2rem;
+      font-size: 2rem;
       font-weight: normal;
+      text-align: center;
     }
   }
 }
@@ -71,16 +83,19 @@
     .posts-search {
       padding: 8px 24px;
       border-bottom: 1px solid $border-color;
+      @media all and (max-width: 1024px) {
+        padding: 8px 12px;
+      }
       form {
         width: 100%;
-        max-width: 350px;
+        max-width: 600px;
         margin: 0 auto;
         border-radius: 3px;
         background-color: #eee;
         label {
           display: block;
           padding: 0 8px;
-          font-size: .8rem;
+          font-size: 1.3rem;
           i {
             width: 14px;
             color: silver;
@@ -90,7 +105,7 @@
             padding-left: 8px;
             height: 35px;
             border: none;
-            font-size: 13px;
+            font-size: 1.3rem;
             background-color: inherit;
           }
         }
@@ -109,17 +124,26 @@
         }
         th, td {
           padding: 24px;
+          @media all and (max-width: 1024px) {
+            padding: 24px 12px;
+          }
+        }
+        th {
+          font-size: 1.6rem;
         }
         td {
+          font-size: 1.3rem;
         }
       }
       .title {
         width: 40%;
         text-align: left;
-        font-size: 1rem;
         h3 {
-          font-size: 1rem;
+          font-size: 1.6rem;
           word-break: break-all;
+          @media all and (max-width: 1024px) {
+            font-size: 1.3rem;
+          }
           a {
             color: $main-color;
             text-decoration: none;
@@ -129,7 +153,6 @@
           }
         }
         p {
-          height: 40px;
           font-size: 0.8rem;
           word-break: break-all;
         }
@@ -139,6 +162,9 @@
       }
       .created_at, .updated_at {
         text-align: center;
+        @media all and (max-width: 1024px) {
+          display: none;
+        }
       }
       .edit {
         text-align: center;
@@ -166,7 +192,7 @@
   a {
     display: inline-block;
     padding: 12px;
-    font-size: .8rem;
+    font-size: 1.3rem;
     text-decoration: none;
     color: $font-color;
   }

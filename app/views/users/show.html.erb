@@ -100,14 +100,8 @@
       <h2>
         いいねした記事
       </h2>
-      <div class="more-posts">
-        <%= link_to likes_path, data: { "turbolinks" => false } do %>
-          いいねした記事一覧へ
-          <i class="fas fa-angle-right"></i>
-        <% end %>
-      </div>
     </div>
-    <div class="post-like">
+    <div class="posts-list">
       <% @liked_posts.each do |post| %>
       <div class="post">
         <%= image_tag gravatar_image(post.user), size: 50 %>
@@ -140,6 +134,12 @@
           </div>
         </div>
       </div>
+      <% end %>
+    </div>
+    <div class="more-posts">
+      <%= link_to likes_path, data: { "turbolinks" => false } do %>
+        いいねした記事一覧へ
+        <i class="fas fa-angle-right"></i>
       <% end %>
     </div>
     <% end %>
