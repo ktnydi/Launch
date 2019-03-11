@@ -73,21 +73,15 @@
         }
         .author-name {
           font-size: 1.6rem;
+          margin-bottom: 12px;
           a {
             color: $font-color;
             text-decoration: none;
           }
         }
-        table {
-          width: 90%;
-          margin-bottom: 8px;
-          th,td {
-            padding-right: 0;
-          }
-        }
         a.follow-btn {
           display: inline-block;
-          width: 90%;
+          width: 70%;
           padding: 8px 0;
           border-radius: 3px;
           box-shadow: 0 2px 17px 1px rgba(0, 0, 0, 0.1);
@@ -161,7 +155,7 @@
         padding: 8px 0;
         border: none;
         border-radius: 3px;
-        font-size: 1.6rem;
+        font-size: 1.3rem;
         background-color: $main-color;
         color: $white;
         cursor: pointer;

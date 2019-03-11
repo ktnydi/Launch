@@ -22,7 +22,7 @@
     <% if @post.app_url.present? %>
       <div class="app-url">
         <p>開発アプリURL：</p>
-        <%= link_to @post.app_url do %>
+        <%= link_to @post.app_url, target: :_blank do %>
           <%= @post.app_url %>
         <% end %>
       </div>
@@ -60,24 +60,6 @@
       <div class="author-name">
         <%= link_to @author.name, user_posts_path(@author), data: {  "turbolinks" => false } %>
       </div>
-      <table class="follow">
-        <tr>
-          <th>
-            <%= link_to "投稿した数", user_myposts_path(@author), data: { "turbolinks" => false } %>
-          </th>
-          <th>
-            <%= link_to "フォロー", user_myfollows_path(@author), data: { "turbolinks" => false } %>
-          </th>
-          <th>
-            <%= link_to "フォロワー", user_myfollowers_path(@author), data: { "turbolinks" => false } %>
-          </th>
-        </tr>
-        <tr>
-          <td><%= @author.posts.status_public.count %></td>
-          <td><%= @author.followings.count %></td>
-          <td><%= @author.followers.count %></td>
-        </tr>
-      </table>
       <div id="follow">
         <%= render "follows/follow", other: @author %>
       </div>
