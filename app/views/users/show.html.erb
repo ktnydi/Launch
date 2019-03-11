@@ -61,7 +61,7 @@
           <tr>
             <td class="title">
               <h3><%= link_to post.title, post_path(post), data: { "turbolinks" => false } %></h3>
-              <p><%= truncate(post.content, length: 80) %></p>
+              <p><%= markdown(post.content).gsub!(/(<.*?>|&quot;)/, "").truncate(100) %></p>
             </td>
             <td class="status">
               <%= post.status %>
@@ -110,7 +110,7 @@
             <h2>
               <%= link_to post.title, post_path(post), data: { "turbolinks": false } %>
             </h2>
-            <p><%= truncate post.content, length: 120 %></p>
+            <p><%= markdown(post.content).gsub!(/(<.*?>|&quot;)/, "").truncate(200) %></p>
           </div>
           <div class="post-bottom">
             <div class="left">

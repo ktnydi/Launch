@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, only: [:show]
   before_action :forbiden_access, only: [:show]
 
   def index
@@ -11,7 +11,7 @@ class UsersController < ApplicationController
 
     if @user
       @followings = @user.followings
-      @following_ids = [current_user.id]
+      @following_ids = [@user.id]
       @followings.each do |following|
         @following_ids << following.id
       end

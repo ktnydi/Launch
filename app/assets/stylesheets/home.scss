@@ -17,10 +17,10 @@
   }
 }
 
-.posts-list {
+.posts-list, .follows-list {
   box-shadow: 0 2px 17px 1px rgba(0, 0, 0, 0.12);
   background-color: $white;
-  .post {
+  .post, .list {
     display: flex;
     padding: 12px 24px;
     border-bottom: 1px solid $border-color;
@@ -36,7 +36,7 @@
       border: 1px solid $border-color;
       background-color: $white;
     }
-    .post-title {
+    .post-title, .follow-name {
       width: calc(100% - 50px);
       h2 {
         display: inline-block;
@@ -199,43 +199,8 @@
           }
         }
         table {
-          margin-bottom: 12px;
           th, td {
             padding-right: 0;
-          }
-        }
-        .follows-lists-wrapper {
-          padding-top: 12px;
-          border-top: 1px solid $border-color;
-          h3 {
-            font-size: 1.3rem;
-          }
-          .follows-lists {
-            display: flex;
-            flex-wrap: wrap;
-            .list {
-              display: inline-block;
-              width: calc(100% / 4);
-              padding: 8px;
-              text-align: center;
-              img {
-                display: inline-block;
-                width: 50px;
-                height: 50px;
-                border-radius: 9999px;
-                border: 1px solid $border-color;
-                background-color: $white;
-                vertical-align: bottom;
-              }
-            }
-          }
-          a {
-            font-size: 1.3rem;
-            text-decoration: none;
-            color: $main-color;
-            &:hover {
-              text-decoration: underline;
-            }
           }
         }
         .login, .signup {
@@ -282,11 +247,11 @@
   }
 }
 .follows-wrapper {
-  .posts-list {
-    .post {
+  .follows-list {
+    .list {
       align-items: center;
       justify-content: space-between;
-      .post-title {
+      .follow-name {
         width: auto;
         margin-right: auto;
       }
@@ -310,18 +275,6 @@
   }
   .notfind {
     text-align: center;
-    a.back {
-      display: inline-block;
-      padding: 8px 24px;
-      margin: 12px 0;
-      border-radius: 3px;
-      text-decoration: none;
-      background-color: $main-color;
-      color: $white;
-      transition: background-color .1s;
-      &:hover {
-        background-color: $sub-color;
-      }
-    }
+    font-size: 1.3rem;
   }
 }
