@@ -2,50 +2,6 @@
 <main class="posts-wrapper">
   <div class="container">
     <h1>いいねした記事</h1>
-    <% if @posts.present? %>
-    <div class="posts-list">
-    <% @posts.each do |post| %>
-      <div class="post">
-        <%= image_tag gravatar_image(post.user), size: 50 %>
-        <div class="post-title">
-          <div class="post-top">
-            <h2>
-              <%= link_to post.title, post_path(post), data: { "turbolinks": false } %>
-            </h2>
-            <p><%= truncate post.content, length: 120 %></p>
-          </div>
-          <div class="post-bottom">
-            <div class="left">
-            <span class="heart">
-              <% if current_user && post.likes.find_by(user_id: current_user.id) %>
-                <i class="fas fa-heart"></i>
-              <% else %>
-                <i class="far fa-heart"></i>
-              <% end %>
-              <%= post.likes.count %>
-            </span>
-            ･
-            <span>
-              Created by
-              <%= post.user.name %>
-            </span>
-            </div>
-            <p>
-              <%= post.created_at.strftime("%Y.%m.%d") %>
-            </p>
-          </div>
-        </div>
-      </div>
-    <% end %>
-    </div>
-    <div class="paginate">
-      <%= link_to_prev_page @posts, "前のページへ", class: "prev-page", data: { "turbolinks" => false } %>
-      <%= link_to_next_page @posts, "次のページへ", class: "next-page", data: { "turbolinks" => false } %>
-    </div>
-    <% else %>
-      <p class="noposts">
-        いいねした記事が見つかりませんでした。
-      </p>
-    <% end %>
+    <%= render "share/list", objs: @posts %>
   </div>
 </main>

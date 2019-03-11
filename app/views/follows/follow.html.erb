@@ -3,30 +3,10 @@
   <div class="container">
     <h3>フォロー中</h3>
     <% if @followings.present? %>
-    <div class="posts-list">
-    <% @followings.each do |following| %>
-      <div class="post">
-        <%= image_tag gravatar_image(following), size: 50 %>
-        <div class="post-title">
-          <div class="post-top">
-            <h2>
-              <%= link_to following.name, user_posts_path(following), data: { "turbolinks": false } %>
-            </h2>
-          </div>
-        </div>
-        <div class="follow" id="<%= following.id %>">
-          <%= render "follows/follow", other: following %>
-        </div>
-      </div>
-    <% end %>
-    </div>
-      <div class="paginate">
-        <%= link_to_prev_page @followings, "前のページへ", class: "prev-page", data: { "turbolinks" => false } %>
-        <%= link_to_next_page @followings, "次のページへ", class: "next-page", data: { "turbolinks" => false } %>
-      </div>
+      <%= render "share/follow_list", users: @followings %>
     <% else %>
       <div class="notfind">
-        <p>フォロー中のユーザーが見つかりませんでした。</p>
+        <p>フォロー中のユーザーがいません。</p>
       </div>
     <% end %>
   </div>

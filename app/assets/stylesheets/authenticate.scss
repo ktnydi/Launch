@@ -163,6 +163,7 @@
   .login, .signup {
     display: block;
     width: 330px;
+    max-width: 100%;
     margin: 0 auto;
     border-radius: 3px;
     border: 1px solid $border-color;
