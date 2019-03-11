@@ -20,31 +20,32 @@
 @import "variables";
 
 * {
- margin: 0;
- box-sizing: border-box;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 10px;
 }
 
 body {
   -webkit-text-size-adjust: 100%;
- font-family: 'hiragino sans';
+  font-family: 'hiragino sans';
 }
 
 html, body {
- background-color: #eee;
- color: $font-color;
+  background-color: #eee;
+  color: $font-color;
 }
 
 ::selection {
- background-color: #B2DFDB;
-}
-
-input, textarea {
- outline: none;
- padding: 0;
+  background-color: #B2DFDB;
 }
 
 input, textarea {
   -webkit-appearance: none;
+  outline: none;
+  padding: 0;
 }
 
 input[type="checkbox"] {
@@ -85,12 +86,15 @@ header.share {
     display: inline-block;
     height: 50px;
     padding-right: 8px;
-    font-weight: bold;
     line-height: 50px;
-    font-size: 25px;
+    font-size: 2.4rem;
+    letter-spacing: 1px;
     a {
       text-decoration: none;
       color: $font-color;
+      @media all and (max-width: 1024px) {
+        font-size: 2rem;
+      }
     }
   }
   ul {
@@ -100,7 +104,7 @@ header.share {
       float: left;
       height: 50px;
       margin: 0 12px;
-      font-size: 13px;
+      font-size: 1.3rem;
       transition: all .15s;
       &:hover {
         border-bottom: 4px solid $main-color;
@@ -112,6 +116,7 @@ header.share {
         display: block;
         line-height: 50px;
         text-decoration: none;
+        letter-spacing: 1px;
         color: $font-color;
       }
     }
@@ -122,10 +127,13 @@ header.share {
     margin-left: 12px;
     border-radius: 3px;
     background-color: #eee;
+    @media all and (max-width: 1024px) {
+      margin-left: 0;
+    }
     label {
       display: block;
       padding: 0 8px;
-      font-size: .8rem;
+      font-size: 1.3rem;
       i {
         width: 14px;
         color: silver;
@@ -135,7 +143,7 @@ header.share {
         padding-left: 8px;
         height: 35px;
         border: none;
-        font-size: 13px;
+        font-size: 1.3rem;
         background-color: inherit;
       }
     }
@@ -147,6 +155,11 @@ header.share {
     flex-grow: 1;
     display: flex;
     align-items: center;
+    ul {
+      @media all and (max-width: 1024px) {
+        display: none;
+      }
+    }
   }
   .header-right {
     display: flex;
@@ -157,12 +170,15 @@ header.share {
       padding: 0;
       margin: 0 12px;
       border: none;
-      font-size: 13px;
+      font-size: 1.3rem;
       height: 35px;
       width: 100px;
       border-radius: 3px;
       background-color: inherit;
       transition: all .15s;
+      @media all and (max-width: 1024px) {
+        display: none;
+      }
       a {
         display: block;
         line-height: 35px;
@@ -181,17 +197,24 @@ header.share {
     }
     .hamburger-menu {
       display: none;
-      font-size: 1.5rem;
+      font-size: 2.4rem;
       margin: 8px;
       cursor: pointer;
+      @media all and (max-width: 1024px) {
+        display: block;
+      }
     }
     .user-name-toggle {
       position: relative;
+      @media all and (max-width: 1024px) {
+        display: none;
+      }
       .user-name {
         height: 50px;
         padding: 0 8px;
         line-height: 50px;
         cursor: pointer;
+        font-size: 1.3rem;
         display: flex;
         align-items: center;
         &:hover {
@@ -220,7 +243,7 @@ header.share {
           line-height: 34px;
           width: 100%;
           padding: 8px;
-          font-size: 13px;
+          font-size: 1.3rem;
           text-decoration: none;
           color: $font-color;
           transition: all .1s;
@@ -237,12 +260,13 @@ header.share {
 }
 
 .post_notice {
-  width: 200px;
-  height: 70px;
+  padding: 8px 24px;
   text-align: center;
-  line-height: 70px;
   opacity: 1;
   visibility: visible;
+  border-radius: 3px;
+  box-shadow: 0 2px 17px 1px rgba(0, 0, 0, 0.1);
+  font-size: 1.3rem;
   background-color: $sub-color;
   color: $white;
   position: fixed;
@@ -250,6 +274,9 @@ header.share {
   right: 40px;
   z-index: 9999;
   transition: right .8s;
+  @media all and (max-width: 1024px) {
+    right: 8px;
+  }
 }
 
 .close {
@@ -262,6 +289,7 @@ header.share {
   margin: 0 auto;
   text-align: center;
   color: white;
+  font-size: 1.6rem;
   letter-spacing: 1px;
   position: absolute;
   top: 60px;
@@ -308,7 +336,7 @@ table.follow {
     padding-right: 8px;
   }
   th {
-    font-size: .8rem;
+    font-size: 1.3rem;
     font-weight: normal;
     a {
       text-decoration: none;
@@ -320,7 +348,7 @@ table.follow {
     }
   }
   td {
-    font-size: 1.2rem;
+    font-size: 1.6rem;
     font-weight: bold;
     color: $main-color
   }
@@ -339,15 +367,21 @@ footer {
   text-align: right;
   border-top: 1px solid $border-color;
   background-color: $white;
+  @media all and (max-width: 1024px) {
+    text-align: center;
+  }
   ul {
     padding: 0;
     list-style: none;
     li {
       display: inline-block;
-      margin: 0 12px;
+      margin: 8px 12px;
+      @media all and (max-width: 1024px) {
+        display: block;
+      }
       a {
         text-decoration: none;
-        font-size: .8rem;
+        font-size: 1.3rem;
         color: $font-color;
         &:hover {
           color: $main-color;
@@ -371,12 +405,16 @@ body.active {
   display: none;
   height: 100vh;
   width: 250px;
+  font-size: 1.3rem;
   background-color: #212121;
   position: fixed;
   top: 0;
   bottom: 0;
   right: 0;
   z-index: -10;
+  @media all and (max-width: 1024px) {
+    display: block;
+  }
   .user-name {
     padding: 24px;
     border-bottom: 1px solid black;
