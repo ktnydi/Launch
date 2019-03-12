@@ -23,11 +23,12 @@
                      {:rel => 'apple-touch-icon-precomposed',
                       :sizes => '152x152',
                       :type => 'image/png'}) %>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <%= stylesheet_link_tag '/editor/lib/codemirror.css', media: 'all' %>
     <%= stylesheet_link_tag '/editor/theme/neat.css', media: 'all' %>
     <%= stylesheet_link_tag '/editor/highlight/atom-one-dark.css', media: 'all' %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag '/editor/marked/marked.min.js' %>
@@ -39,7 +40,7 @@
     <%= render "share/editor_header" %>
     <% if @errors.present? %>
       <div class="editor-errors" id="errors">
-        <i class="fas fa-times" id="cls-btn"></i>
+        <i class="material-icons clear" id="cls-btn">clear</i>
         <h3>
           保存に失敗しました
         </h3>

@@ -23,12 +23,12 @@
                      {:rel => 'apple-touch-icon-precomposed',
                       :sizes => '152x152',
                       :type => 'image/png'}) %>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <%= stylesheet_link_tag '/editor/lib/codemirror.css', media: 'all' %>
     <%= stylesheet_link_tag '/editor/theme/neat.css', media: 'all' %>
     <%= stylesheet_link_tag '/editor/highlight/atom-one-dark.css', media: 'all' %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag '/editor/marked/marked.min.js' %>
@@ -36,40 +36,14 @@
 
   </head>
 
-  <body>
+  <body ontouchstart="">
     <div class="wrapper">
     <%= render 'share/header' %>
     <%= yield %>
     <%= render 'share/footer' %>
     </div>
 
-    <div class="hamburger-menu-list" id="menu" style="visibility: hidden; transition: visibility .4s">
-      <nav>
-        <% if user_signed_in? %>
-          <div class="user-name">
-            <%= image_tag gravatar_image(current_user), size: 35 %>
-            <span><%= current_user.name %></span>
-          </div>
-          <div class="posts-link">
-            <%= link_to "ホーム", users_path, data: { "turbolinks" => false } %>
-            <%= link_to "記事一覧", posts_path, data: { "turbolinks" => false } %>
-          </div>
-          <div class="user-link">
-            <%= link_to "ダッシュボード", user_path(current_user.id), data: { "turbolinks" => false } %>
-            <%= link_to "アカウント設定", edit_user_registration_path, data: { "turbolinks" => false } %>
-            <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
-          </div>
-          <%= link_to "記事を書く", new_post_path, class: "write", data: { "turbolinks" => false } %>
-        <% else %>
-          <div class="posts-link">
-            <%= link_to "ホーム", root_path, data: { "turbolinks" => false } %>
-            <%= link_to "記事一覧", posts_path, data: { "turbolinks" => false } %>
-          </div>
-          <%= link_to "ログイン", new_user_session_path %>
-          <%= link_to "アカウント作成", new_user_registration_path %>
-        <% end %>
-      </nav>
-    </div>
+    <%= render "share/menu" %>
     <script>
       var hamburger = document.getElementById('hamburger');
       var menu = document.getElementById('menu');

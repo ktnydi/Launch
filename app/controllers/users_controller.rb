@@ -20,6 +20,8 @@ class UsersController < ApplicationController
                              .order(created_at: :desc)
                              .page(params[:page])
                              .per(20)
+    else
+      redirect_to root_path
     end
     posts_for(params[:period])
   end

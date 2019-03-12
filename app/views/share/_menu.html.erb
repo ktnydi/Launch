@@ -1,0 +1,27 @@
+<div class="hamburger-menu-list" id="menu" style="visibility: hidden; transition: visibility .4s">
+  <nav>
+    <% if user_signed_in? %>
+      <div class="user-name">
+        <%= image_tag gravatar_image(current_user), size: 35 %>
+        <span><%= current_user.name %></span>
+      </div>
+      <div class="posts-link">
+        <%= link_to "ホーム", users_path, data: { "turbolinks" => false } %>
+        <%= link_to "記事一覧", posts_path, data: { "turbolinks" => false } %>
+      </div>
+      <div class="user-link">
+        <%= link_to "ダッシュボード", user_path(current_user.id), data: { "turbolinks" => false } %>
+        <%= link_to "アカウント設定", edit_user_registration_path, data: { "turbolinks" => false } %>
+        <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+      </div>
+      <%= link_to "記事を書く", new_post_path, class: "write", data: { "turbolinks" => false } %>
+    <% else %>
+      <div class="posts-link">
+        <%= link_to "ホーム", root_path, data: { "turbolinks" => false } %>
+        <%= link_to "記事一覧", posts_path, data: { "turbolinks" => false } %>
+      </div>
+      <%= link_to "ログイン", new_user_session_path %>
+      <%= link_to "アカウント作成", new_user_registration_path %>
+    <% end %>
+  </nav>
+</div>

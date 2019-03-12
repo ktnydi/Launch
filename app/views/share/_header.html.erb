@@ -2,7 +2,7 @@
   <div class="container">
     <div class="logo">
       <% if user_signed_in? %>
-        <%= link_to "Launch", user_path(current_user), data: { "turbolinks" => false } %>
+        <%= link_to "Launch", users_path, data: { "turbolinks" => false } %>
       <% else %>
         <%= link_to "Launch", root_path, data: { "turbolinks" => false } %>
       <% end %>
@@ -39,9 +39,9 @@
             <span><%= current_user.name %></span>
           </div>
           <div class="toggle-list" id="lists">
-            <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
-            <%= link_to "アカウント設定", edit_user_registration_path, data: { "turbolinks" => false } %>
             <%= link_to "ダッシュボード", user_path(current_user.id), data: { "turbolinks" => false } %>
+            <%= link_to "アカウント設定", edit_user_registration_path, data: { "turbolinks" => false } %>
+            <%= link_to "ログアウト", destroy_user_session_path, method: :delete, data: { "turbolinks" => false } %>
           </div>
         </div>
       <% else %>
@@ -61,13 +61,12 @@
   </div>
 </header>
 <% if flash[:notice] %>
-  <p class="devise-notification notice" id="notice">
-    <i class="material-icons close" id="cls-btn">clear</i>
+  <p class="devise-notification notice" id="notification">
     <%= notice %>
   </p>
 <% elsif flash[:alert] %>
-  <i class="material-icons close" id="cls-btn">clear</i>
-    <i class="fas fa-times" id="cls-btn"></i>
+  <p class="devise-notification alert" id="alert">
+  <i class="material-icons clear" id="cls-btn">clear</i>
     <%= alert %>
   </p>
 <% end %>

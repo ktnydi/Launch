@@ -25,6 +25,7 @@ impressionist :actions => [:show]
   def create
     @post = Post.new(post_params)
     if @post.save
+      flash_notice(params[:commit])
       redirect_to users_path
     else
       @errors = @post.errors.full_messages
@@ -75,9 +76,15 @@ impressionist :actions => [:show]
   def status(param)
     if param == "下書き保存"
       params[:post][:status] = "下書き"
-      flash[:post_notice] = "記事を下書きしました。"
     else
       params[:post][:status] = "公開中"
+    end
+  end
+
+  def flash_notice(param)
+    if param == "下書き保存"
+      flash[:post_notice] = "記事を下書きしました。"
+    else
       flash[:post_notice] = "記事を公開しました。"
     end
   end

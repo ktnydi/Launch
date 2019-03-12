@@ -25,7 +25,6 @@ header.editor {
         }
       }
       i {
-        margin-right: 8px;
         font-size: 2.4rem;
         transition: all 0.15s;
       }
@@ -41,6 +40,7 @@ header.editor {
       border: none;
       border-radius: 3px;
       font-size: 1.3rem;
+      cursor: pointer;
       background-color: $main-color;
       color: $white;
       transition: all .15s;
@@ -57,7 +57,7 @@ header.editor {
 form.f-editor {
   width: 100%;
   height: calc(100vh - 50px);
-  input[type="text"] {
+  input[type="text"], input[type="url"] {
     display: block;
     width: 100%;
     height: 40px;
@@ -204,7 +204,8 @@ form.f-editor {
     right: 0;
     left: 0;
   }
-  .fa-times {
+  .clear {
+    font-size: 1.6rem;
     padding: 3px;
     cursor: pointer;
     position: absolute;

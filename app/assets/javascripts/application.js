@@ -40,14 +40,13 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
-  const NOTIFICATION = document.getElementById('notification');
-
-  if (NOTIFICATION !== null) {
+  const notification = document.getElementById('notification');
+  if (notification !== null) {
     setTimeout(
       function() {
-        var classes = NOTIFICATION.className.split(' ');
+        var classes = notification.className.split(' ');
         classes.push('close');
-        NOTIFICATION.className = classes.join(' ');
+        notification.className = classes.join(' ');
       },
       3000
     );

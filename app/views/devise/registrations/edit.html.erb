@@ -17,7 +17,7 @@
         <div class="f-profile f active" id="profile">
           <div class="field">
             <%= image_tag gravatar_image(current_user), class: "user-image", id: "user-image" %>
-            <%= link_to "画像を変更", "https://ja.gravatar.com/", data: {confirm: "画像を変更するには、現在登録中のメールアドレスでGravatarを作成する必要があります。\n変更後、画像が更新されるまでに数分かかります。"}, class: "change_image", target: :_blank %>
+            <%= link_to "画像を変更", "https://ja.gravatar.com/", data: {confirm: "画像を変更するには、現在登録中のメールアドレスでGravatarを作成する必要があります。"}, class: "change_image", target: :_blank %>
           </div>
 
           <div class="field">
