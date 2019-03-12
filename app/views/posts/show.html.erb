@@ -10,23 +10,33 @@
 <div class="post-wrapper">
   <div class="container">
   <main>
-    <span id="heart">
-      <%= render @post %>
-    </span>
-
-    <h1 class="main-title"><%= @post.title %></h1>
-    <span class="created_at">
-      Created by <%= @post.user.name %>
-      at <%= @post.created_at.strftime("%Y.%m.%d %H:%M") %>
-    </span>
-    <% if @post.app_url.present? %>
-      <div class="app-url">
-        <p>開発アプリURL：</p>
-        <%= link_to @post.app_url, target: :_blank do %>
-          <%= @post.app_url %>
+    <div class="icon">
+      <div class="like">
+        <span id="heart">
+          <%= render "post", post: @post %>
+        </span>
+      </div>
+      <div class="comment">
+        <p><%= @post.comments.count %></p>
+        <%= link_to "#comment" do %>
+          <i class="material-icons">comment</i>
         <% end %>
       </div>
-    <% end %>
+      <% if @post.app_url.present? %>
+        <div class="app-url">
+          <p>LINK</p>
+          <%= link_to @post.app_url, target: :_blank do %>
+            <i class="material-icons">link</i>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+
+    <h1 class="main-title"><%= @post.title %></h1>
+    <div class="created_at">
+      Created by <%= @post.user.name %>
+      at <%= @post.created_at.strftime("%Y.%m.%d %H:%M") %>
+    </div>
     <div class="content">
       <%== markdown @post.content %>
     </div>

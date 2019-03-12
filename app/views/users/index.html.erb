@@ -67,15 +67,14 @@
                 <div class="left">
                   <span class="heart">
                     <% if current_user && post.likes.find_by(user_id: current_user.id) %>
-                      <i class="fas fa-heart"></i>
+                      <i class="material-icons favorite">favorite</i>
                     <% else %>
-                      <i class="far fa-heart"></i>
+                      <i class="material-icons unfavorite">favorite_border</i>
                     <% end %>
-                    <%= post.likes.count %>
+                    <span><%= post.likes.count %></span>
                   </span>
-                  ･
+                  ・
                   <span>
-                    Created by
                     <%= post.user.name %>
                   </span>
                 </div>

@@ -10,9 +10,9 @@
         </div>
         <div class="comment-bottom">
           <div class="comment-user">
-          by <%= comment.user.name %>
+          <%= comment.user.name %>
           ・
-          <%= comment.created_at.strftime("%Y.%m.%d %H:%M") %>
+          <%= comment.created_at.strftime("%Y.%m.%d") %>
           </div>
           <% if user_signed_in? && comment.user_id === current_user.id %>
             <div class="comment-delete">
