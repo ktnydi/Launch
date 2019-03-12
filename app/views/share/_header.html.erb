@@ -22,7 +22,7 @@
       </ul>
       <%= form_tag posts_path, method: :get do %>
         <%= label_tag do %>
-          <i class="fas fa-search">
+          <i class="material-icons">search
           </i><%= search_field_tag "q", params[:q], placeholder: "記事のタイトルを検索", autocomplete: "off" %>
           <%= submit_tag "検索" %>
         <% end %>
@@ -55,18 +55,18 @@
         </div>
       <% end %>
       <div class="hamburger-menu" id="hamburger">
-        <i class="fas fa-bars"></i>
+        <i class="material-icons">menu</i>
       </div>
     </div>
   </div>
 </header>
 <% if flash[:notice] %>
   <p class="devise-notification notice" id="notice">
-    <i class="fas fa-times" id="cls-btn"></i>
+    <i class="material-icons close" id="cls-btn">clear</i>
     <%= notice %>
   </p>
 <% elsif flash[:alert] %>
-  <p class="devise-notification alert" id="alert">
+  <i class="material-icons close" id="cls-btn">clear</i>
     <i class="fas fa-times" id="cls-btn"></i>
     <%= alert %>
   </p>

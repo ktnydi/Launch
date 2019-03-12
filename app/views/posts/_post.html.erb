@@ -2,16 +2,13 @@
 ログイン中のユーザーが存在し、
 閲覧している記事にいいね済みか？
 -->
-<% if current_user && @post.like_user(current_user.id) %>
-
-  <%= link_to post_like_path(@post, current_user.id), remote: true, method: :delete do %>
-    <i class="fas fa-heart"></i>
-    <%= @post.likes.count %>
+<p><%= post.likes.count %></p>
+<% if current_user && post.like_user(current_user.id) %>
+  <%= link_to post_like_path(post, current_user.id), remote: true, method: :delete do %>
+    <i class="material-icons favorite">favorite</i>
   <% end %>
 <% else %>
-
-  <%= link_to post_likes_path(@post), remote: true, method: :post do %>
-    <i class="far fa-heart"></i>
-    <%= @post.likes.count %>
+  <%= link_to post_likes_path(post), remote: true, method: :post do %>
+    <i class="material-icons unfavorite">favorite_border</i>
   <% end %>
 <% end %>

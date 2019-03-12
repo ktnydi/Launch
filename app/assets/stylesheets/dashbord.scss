@@ -20,7 +20,7 @@
     box-shadow: 0 2px 17px 1px rgba(0, 0, 0, 0.12);
     display: flex;
     align-items: center;
-    @media all and (max-width: 1024px) {
+    @media all and (max-width: 896px) {
       padding: 0;
       flex-direction: column;
     }
@@ -32,7 +32,7 @@
       height: 100%;
       text-align: center;
       border-right: 1px solid $border-color;
-      @media all and (max-width: 1024px) {
+      @media all and (max-width: 896px) {
         width: 100%;
         padding: 12px;
         border-right: none;
@@ -40,7 +40,7 @@
       }
       &:last-child {
         border-right: none;
-        @media all and (max-width: 1024px) {
+        @media all and (max-width: 896px) {
           border-bottom: none;
         }
       }
@@ -83,7 +83,7 @@
     .posts-search {
       padding: 8px 24px;
       border-bottom: 1px solid $border-color;
-      @media all and (max-width: 1024px) {
+      @media all and (max-width: 896px) {
         padding: 8px 12px;
       }
       form {
@@ -97,6 +97,9 @@
           padding: 0 8px;
           font-size: 1.3rem;
           i {
+            display: inline-flex;
+            vertical-align: middle;
+            font-size: 1.8rem;
             width: 14px;
             color: silver;
           }
@@ -124,7 +127,7 @@
         }
         th, td {
           padding: 24px;
-          @media all and (max-width: 1024px) {
+          @media all and (max-width: 896px) {
             padding: 24px 12px;
           }
         }
@@ -141,7 +144,7 @@
         h3 {
           font-size: 1.6rem;
           word-break: break-all;
-          @media all and (max-width: 1024px) {
+          @media all and (max-width: 896px) {
             font-size: 1.3rem;
           }
           a {
@@ -162,7 +165,7 @@
       }
       .created_at, .updated_at {
         text-align: center;
-        @media all and (max-width: 1024px) {
+        @media all and (max-width: 896px) {
           display: none;
         }
       }
@@ -195,5 +198,11 @@
     font-size: 1.3rem;
     text-decoration: none;
     color: $font-color;
+    span:after {
+      font-family: "Material Icons";
+      content: "navigate_next";
+      font-size: 1.6rem;
+      vertical-align: middle;
+    }
   }
 }
