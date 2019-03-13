@@ -322,11 +322,7 @@ header.share {
   }
 }
 
-.unfavorite {
-  color: silver;
-}
-
-.favorite {
+.heart, .favorite, .unfavorite {
   color: #D84315;
 }
 
@@ -388,7 +384,8 @@ footer {
       a {
         text-decoration: none;
         font-size: 1.3rem;
-        color: $font-color;
+        color: $sub-font-color;
+        transition: color .3s;
         &:hover {
           color: $main-color;
         }

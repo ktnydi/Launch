@@ -1,7 +1,7 @@
 @import "variables";
 
 .post-wrapper {
-  padding: 150px 0 80px;
+  padding: 120px 0 80px;
   color: $font-color;
   .container {
     display: flex;
@@ -12,7 +12,7 @@
     @media all and (max-width: 896px) {
       width: 100%;
       flex-direction: column;
-      max-width: 550px;
+      max-width: 700px;
     }
     main {
       width: 70%;
@@ -21,7 +21,6 @@
       border-radius: 3px;
       box-shadow: 0 2px 17px 1px rgba(0, 0, 0, 0.1);
       background-color: $white;
-      position: relative;
       @media all and (max-width: 1024px) {
         margin-bottom: 40px;
         padding: 24px 12px;
@@ -31,54 +30,6 @@
         width: 100%;
         margin-right: 0;
       }
-      .icon {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        position: absolute;
-        top: 0;
-        left: -70px;
-        @media all and (max-width: 1024px) {
-          flex-direction: row;
-          top: -78px;
-          left: auto;
-        }
-        .like, .app-url, .comment {
-          display: inline-block;
-          text-align: center;
-          p {
-            font-size: 1rem;
-            color: $font-color;
-            letter-spacing: 1px;
-          }
-          a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 50px;
-            height: 50px;
-            margin-bottom: 8px;
-            text-decoration: none;
-            box-shadow: 0 2px 17px 1px rgba(0, 0, 0, 0.1);
-            border: 2px solid $border-color;
-            border-radius: 9999px;
-            background-color: $white;
-            color: silver;
-            @media all and (max-width: 1024px) {
-              margin: 0 3px;
-            }
-            i {
-              font-size: 2rem;
-            }
-          }
-        }
-      }
-      span > a {
-        display: inline-block;
-        text-decoration: none;
-        font-size: 1.6rem;
-        color: $font-color;
-      }
       h1.main-title {
         font-size: 4rem;
         word-break: break-all;
@@ -87,18 +38,8 @@
         }
       }
       .created_at {
-        color: silver;
+        color: $sub-font-color;
         font-size: 1.3rem;
-      }
-      .app-url {
-        color: silver;
-        font-size: 1.6rem;
-        p {
-          word-break: break-all;
-        }
-        a {
-          color: $main-color;
-        }
       }
       .content {
         padding: 60px 0;
@@ -115,13 +56,6 @@
         box-shadow: 0 2px 17px 1px rgba(0, 0, 0, 0.1);
         text-align: center;
         background-color: $white;
-        position: sticky;
-        position: -webkit-sticky;
-        top: 80px;
-        @media all and (max-width: 480px) {
-          position: static;
-          top: auto;
-        }
         h3 {
           font-size: 2rem;
           margin-bottom: 24px;
@@ -282,5 +216,66 @@
         }
       }
     }
+  }
+}
+
+.icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: fixed;
+  top: 200px;
+  left: 9.2%;
+  z-index: 5000;
+  @media all and (max-width: 1024px) {
+    justify-content: center;
+    flex-direction: row-reverse;
+    top: auto;
+    left: 0;
+    bottom: 24px;
+    right: 0;
+  }
+  @media all and (max-width: 896px) {
+    left: auto;
+    right: 24px;
+  }
+  .like, .app-url, .comment {
+    display: inline-block;
+    text-align: center;
+    p {
+      font-size: 1rem;
+      font-weight: bold;
+      color: $sub-font-color;
+      letter-spacing: 1px;
+    }
+    a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 50px;
+      height: 50px;
+      margin-bottom: 20px;
+      text-decoration: none;
+      box-shadow: 0 2px 17px 1px rgba(0, 0, 0, 0.1);
+      border: 1px solid $border-color;
+      border-radius: 9999px;
+      background-color: $white;
+      color: silver;
+      @media all and (max-width: 1024px) {
+        margin: 0 8px;
+      }
+      i {
+        font-size: 2rem;
+      }
+    }
+  }
+  .app-url > a {
+    color: $sub-color;
+  }
+}
+
+.post-wrapper + script + footer {
+  @media all and (max-width: 1024px) {
+    padding: 12px 0 110px;
   }
 }
