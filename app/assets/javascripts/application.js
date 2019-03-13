@@ -50,5 +50,11 @@ document.addEventListener('DOMContentLoaded', function() {
       },
       3000
     );
+    setTimeout(
+      function() {
+        notification.style.display = "none";
+      },
+      4000
+    );
   }
 });

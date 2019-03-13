@@ -22,6 +22,9 @@
 * {
   margin: 0;
   box-sizing: border-box;
+  @media all and (max-width: 1024px) {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  }
 }
 
 html {
@@ -268,7 +271,6 @@ header.share {
 .notice {
   padding: 8px 24px;
   text-align: center;
-  opacity: 1;
   visibility: visible;
   border-radius: 3px;
   box-shadow: 0 2px 17px 1px rgba(0, 0, 0, 0.1);
@@ -279,7 +281,7 @@ header.share {
   top: 60px;
   right: 40px;
   z-index: 5000;
-  transition: right 5s, visibility .2s;
+  transition: right 5s;
   @media all and (max-width: 1024px) {
     right: 8px;
   }
