@@ -364,30 +364,45 @@ table.follow {
 footer {
   margin-top: auto;
   width: 100%;
-  min-height: 50px;
   padding: 12px 0;
-  text-align: right;
+  font-size: 1.3rem;
   border-top: 1px solid $border-color;
   background-color: $white;
-  @media all and (max-width: 1024px) {
+  color: $sub-font-color;
+  @media all and (max-width: 896px) {
     text-align: center;
   }
-  ul {
-    padding: 0;
-    list-style: none;
-    li {
-      display: inline-block;
-      margin: 8px 12px;
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    @media all and (max-width: 896px) {
+      display: inline-flex;
+      align-items: flex-start;
+      flex-direction: column-reverse;
+    }
+    p {
       @media all and (max-width: 896px) {
-        display: block;
+        margin-top: 12px;
       }
-      a {
-        text-decoration: none;
-        font-size: 1.3rem;
-        color: $sub-font-color;
-        transition: color .3s;
-        &:hover {
-          color: $main-color;
+    }
+    ul {
+      padding: 0;
+      list-style: none;
+      li {
+        display: inline-block;
+        margin: 0 12px;
+        @media all and (max-width: 896px) {
+          display: block;
+        }
+        a {
+          text-decoration: none;
+          font-size: 1.3rem;
+          color: $sub-font-color;
+          transition: color .3s;
+          &:hover {
+            color: $main-color;
+          }
         }
       }
     }
