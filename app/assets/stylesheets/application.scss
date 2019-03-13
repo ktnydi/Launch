@@ -362,33 +362,40 @@ table.follow {
   min-height: 100vh;
 }
 footer {
+  display: flex;
+  align-items: center;
   margin-top: auto;
   width: 100%;
-  padding: 12px 0;
+  min-height: 50px;
   font-size: 1.3rem;
   border-top: 1px solid $border-color;
   background-color: $white;
   color: $sub-font-color;
   @media all and (max-width: 896px) {
     text-align: center;
+    padding: 12px 0;
   }
   .footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
     @media all and (max-width: 896px) {
-      display: inline-flex;
       align-items: flex-start;
       flex-direction: column-reverse;
     }
     p {
+      font-size: 1rem;
       @media all and (max-width: 896px) {
-        margin-top: 12px;
+        width: 100%;
+        padding-top: 24px;
       }
     }
     ul {
       padding: 0;
       list-style: none;
+      @media all and (max-width: 896px) {
+        width: 100%;
+      }
       li {
         display: inline-block;
         margin: 0 12px;
