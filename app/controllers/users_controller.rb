@@ -4,16 +4,16 @@ class UsersController < ApplicationController
 
   def index
     if params[:user_id]
-      @user = User.find_by(id: params[:user_id])
+      @user = User.find_by(uuid: params[:user_id])
     else
       @user = current_user
     end
 
     if @user
       @followings = @user.followings
-      @following_ids = [@user.id]
+      @following_ids = [@user.uuid]
       @followings.each do |following|
-        @following_ids << following.id
+        @following_ids << following.uuid
       end
       @following_posts = Post.status_public
                              .where(user_id: @following_ids)

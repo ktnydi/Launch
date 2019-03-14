@@ -2,7 +2,7 @@ class CommentsController < ApplicationController
   before_action :authenticate_user!
   def create
     @comment = current_user.comments.new(comment_params)
-    @post = Post.find_by(id: params[:post_id])
+    @post = Post.find_by(uuid: params[:post_id])
     if @comment.save
       @comment = Comment.new
       respond_to do |format|

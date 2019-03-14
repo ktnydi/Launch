@@ -7,7 +7,7 @@ Rails.application.routes.draw do
               }
   root 'top#index'
   get '/terms' => 'terms#index'
-  resources :posts do
+  resources :posts, param: :uuid do
     resources :likes, only: [:create, :destroy]
   end
   resources :likes, only: [:index]
