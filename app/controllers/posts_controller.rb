@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
 before_action :authenticate_user!, except: [:index, :show, :mypost]
-before_action :forbiden_access, only: [:edit]
+before_action :forbiden_access_edit, only: [:edit]
+before_action :forbiden_access_post, only: [:show]
 before_action :access_draft, only: [:show]
 impressionist :actions => [:show]
 
@@ -12,7 +13,7 @@ impressionist :actions => [:show]
   end
 
   def show
-    @post = Post.find_by(id: params[:id])
+    @post = Post.find_by(uuid: params[:uuid])
     @author = @post.user
     @comment = Comment.new
   end
@@ -23,7 +24,8 @@ impressionist :actions => [:show]
   end
 
   def create
-    @post = Post.new(post_params)
+    @post = current_user.posts.new(post_params)
+    @post.uuid = SecureRandom.hex(10)
     if @post.save
       flash_notice(params[:commit])
       redirect_to users_path
@@ -34,12 +36,12 @@ impressionist :actions => [:show]
   end
 
   def edit
-    @post = Post.find_by(id: params[:id])
+    @post = Post.find_by(uuid: params[:uuid])
     render :layout => "editor"
   end
 
   def update
-    @post = Post.find_by(id: params[:id])
+    @post = Post.find_by(uuid: params[:uuid])
     @post.assign_attributes(post_params)
     if @post.save
       flash[:post_notice] = "記事を編集しました。"
@@ -48,27 +50,33 @@ impressionist :actions => [:show]
   end
 
   def destroy
-    @post = Post.find_by(id: params[:id])
+    @post = Post.find_by(uuid: params[:uuid])
     @post.destroy
     redirect_to user_path(current_user)
   end
 
   def mypost
     @posts = Post.status_public.where(user_id: params[:user_id]).order(created_at: :desc).page(params[:page]).per(10)
-    @user = User.find_by(id: params[:user_id])
+    @user = User.find_by(uuid: params[:user_id])
   end
 
   private
   def post_params
-    params[:post][:user_id] = current_user.id
     status(params[:commit])
     params.require(:post).permit(:title, :content, :app_url, :user_id, :status)
   end
 
-  def forbiden_access
-    post = Post.find_by(id: params[:id])
+  def forbiden_access_edit
+    post = Post.find_by(uuid: params[:uuid])
     if current_user.id != post.user_id
       flash[:alert] = "このアクセスは禁止されています。"
+      redirect_to users_path
+    end
+  end
+
+  def forbiden_access_post
+    post = Post.find_by(uuid: params[:uuid])
+    if post.blank?
       redirect_to users_path
     end
   end
@@ -91,7 +99,7 @@ impressionist :actions => [:show]
 
   def access_draft
     if user_signed_in?
-      post = current_user.posts.find_by(id: params[:id])
+      post = current_user.posts.find_by(uuid: params[:uuid])
       if post.blank?
         forbiden_access_draft
       end
@@ -101,7 +109,7 @@ impressionist :actions => [:show]
   end
 
   def forbiden_access_draft
-    post = Post.find_by(id: params[:id])
+    post = Post.find_by(uuid: params[:uuid])
     if post.status == "下書き"
       flash[:alert] = "このアクセスは禁止されています。"
       redirect_to users_path

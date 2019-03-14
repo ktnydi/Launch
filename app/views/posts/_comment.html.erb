@@ -1,7 +1,7 @@
 <div class="post-comments">
-  <% if post.comments.present? %>
+  <% if comments.present? %>
     <h3>この記事のコメント</h3>
-    <% post.comments.each do |comment| %>
+    <% comments.each do |comment| %>
     <div class="user-comment-wrapper">
       <%= image_tag gravatar_image(comment.user), size: 60 %>
       <div class="comment">

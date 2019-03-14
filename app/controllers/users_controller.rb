@@ -4,16 +4,16 @@ class UsersController < ApplicationController
 
   def index
     if params[:user_id]
-      @user = User.find_by(id: params[:user_id])
+      @user = User.find_by(uuid: params[:user_id])
     else
       @user = current_user
     end
 
     if @user
       @followings = @user.followings
-      @following_ids = [@user.id]
+      @following_ids = [@user.uuid]
       @followings.each do |following|
-        @following_ids << following.id
+        @following_ids << following.uuid
       end
       @following_posts = Post.status_public
                              .where(user_id: @following_ids)
@@ -27,7 +27,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find_by(id: params[:id])
+    @user = User.find_by(uuid: params[:id])
     @posts = @user.posts.order(created_at: :desc).page(params[:page]).per(5)
     if params[:q]
       @posts = @user.posts.search(params[:q]).page(params[:page]).per(5)
@@ -42,7 +42,7 @@ class UsersController < ApplicationController
   private
 
   def forbiden_access
-    if current_user.id != params[:id].to_i
+    if current_user.uuid != params[:id]
       flash[:alert] = "このアクセスは禁止されています。"
       redirect_to users_path
     end

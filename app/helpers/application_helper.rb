@@ -21,7 +21,7 @@ module ApplicationHelper
   # ログイン中のユーザーのidと記事の作者のidとで判断する。
   # そうしないと、Ajaxで使う部分テンプレートで引数が渡せない。
 
-  def other_user?(user_id)
-    current_user.id != user_id
+  def other_user?(user_uuid)
+    current_user.uuid != user_uuid
   end
 end

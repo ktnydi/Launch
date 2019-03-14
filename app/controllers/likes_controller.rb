@@ -7,7 +7,7 @@ class LikesController < ApplicationController
   end
 
   def create
-    @like = current_user.likes.create(post_id: params[:post_id])
+    @like = current_user.likes.create(post_id: params[:post_uuid])
     respond_to do |format|
       if @like
         format.js
@@ -17,7 +17,7 @@ class LikesController < ApplicationController
   end
 
   def destroy
-    @like = current_user.likes.find_by(post_id: params[:post_id])
+    @like = current_user.likes.find_by(post_id: params[:post_uuid])
     respond_to do |format|
       if @like.destroy
         format.js
@@ -28,6 +28,6 @@ class LikesController < ApplicationController
 
   private
     def post
-      @post = Post.find_by(id: params[:post_id])
+      @post = Post.find_by(uuid: params[:post_uuid])
     end
 end

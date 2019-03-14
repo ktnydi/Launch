@@ -1,10 +1,10 @@
-<% if user_signed_in? && other_user?(other.id) %>
+<% if user_signed_in? && other_user?(other.uuid) %>
   <% if current_user.is_following?(other) %>
     <%= link_to user_follow_path(other, current_user), remote: true, class: "follow-btn", method: :delete do %>
       フォロー中
     <% end %>
   <% else %>
-    <%= link_to user_follows_path(other.id), remote: true, class: "follow-btn", method: :post do %>
+    <%= link_to user_follows_path(other.uuid), remote: true, class: "follow-btn", method: :post do %>
       フォローする
     <% end %>
   <% end %>
