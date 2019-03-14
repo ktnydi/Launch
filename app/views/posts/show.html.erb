@@ -20,7 +20,7 @@
     </div>
     <div class="comment-wrapper">
       <div id="comment">
-        <%= render "comment", post: @post %>
+        <%= render "comment", comments: @post.comments %>
       </div>
       <% if user_signed_in? %>
       <div class="comment-field">

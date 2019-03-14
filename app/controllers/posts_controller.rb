@@ -23,7 +23,7 @@ impressionist :actions => [:show]
   end
 
   def create
-    @post = Post.new(post_params)
+    @post = current_user.posts.new(post_params)
     if @post.save
       flash_notice(params[:commit])
       redirect_to users_path
@@ -55,12 +55,11 @@ impressionist :actions => [:show]
 
   def mypost
     @posts = Post.status_public.where(user_id: params[:user_id]).order(created_at: :desc).page(params[:page]).per(10)
-    @user = User.find_by(id: params[:user_id])
+    @user = User.find_by(uuid: params[:user_id])
   end
 
   private
   def post_params
-    params[:post][:user_id] = current_user.id
     status(params[:commit])
     params.require(:post).permit(:title, :content, :app_url, :user_id, :status)
   end

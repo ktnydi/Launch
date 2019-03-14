@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  self.primary_key = "uuid"
+
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
@@ -22,6 +24,7 @@ class User < ApplicationRecord
 
   validates :name, presence: true, length: { maximum: 10 }
   attr_accessor :current_password
+  before_validation :create_uuid
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -52,6 +55,10 @@ class User < ApplicationRecord
   end
 
   def is_following?(user)
-    followings.find_by(id: user.id).present?
+    followings.find_by(uuid: user.uuid).present?
+  end
+
+  def create_uuid
+    self.uuid = SecureRandom.hex(10)
   end
 end

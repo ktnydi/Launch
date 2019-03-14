@@ -1,3 +1,3 @@
 var comment = document.getElementById('comment');
-comment.innerHTML = '<%= j(render "posts/comment", post: @post) %>';
+comment.innerHTML = '<%= j(render "posts/comment", comments: @post.comments) %>';
 md_comment.value = '';

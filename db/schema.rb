@@ -10,10 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_07_225112) do
+ActiveRecord::Schema.define(version: 2019_03_14_032552) do
 
   create_table "comments", force: :cascade do |t|
-    t.integer "user_id", null: false
+    t.string "user_id", null: false
     t.integer "post_id", null: false
     t.string "content", null: false
     t.datetime "created_at", null: false
@@ -21,8 +21,8 @@ ActiveRecord::Schema.define(version: 2019_03_07_225112) do
   end
 
   create_table "follows", force: :cascade do |t|
-    t.integer "following_user_id"
-    t.integer "followed_user_id"
+    t.string "following_user_id"
+    t.string "followed_user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -54,7 +54,7 @@ ActiveRecord::Schema.define(version: 2019_03_07_225112) do
   end
 
   create_table "likes", force: :cascade do |t|
-    t.integer "user_id", null: false
+    t.string "user_id", null: false
     t.integer "post_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -66,7 +66,7 @@ ActiveRecord::Schema.define(version: 2019_03_07_225112) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "app_url"
-    t.integer "user_id"
+    t.string "user_id", default: "", null: false
     t.integer "impressions_count", default: 0
     t.string "status", default: "", null: false
   end
@@ -83,6 +83,7 @@ ActiveRecord::Schema.define(version: 2019_03_07_225112) do
     t.string "uid"
     t.string "provider"
     t.string "name", default: "", null: false
+    t.string "uuid", default: "", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

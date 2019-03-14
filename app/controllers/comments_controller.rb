@@ -1,7 +1,7 @@
 class CommentsController < ApplicationController
   before_action :authenticate_user!
   def create
-    @comment = Comment.new(comment_params)
+    @comment = current_user.comments.new(comment_params)
     @post = Post.find_by(id: params[:post_id])
     if @comment.save
       @comment = Comment.new
@@ -10,7 +10,7 @@ class CommentsController < ApplicationController
         format.html
       end
     else
-      render "posts/show"
+      redirect_to users_path
     end
   end
 
@@ -27,8 +27,7 @@ class CommentsController < ApplicationController
 
   private
   def comment_params
-    params[:comment][:user_id] = current_user.id
     params[:comment][:post_id] = params[:post_id]
-    params.require(:comment).permit(:user_id, :post_id, :content)
+    params.require(:comment).permit(:post_id, :content)
   end
 end
