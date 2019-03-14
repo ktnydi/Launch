@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  require "securerandom"
   self.primary_key = "uuid"
 
   has_many :posts, dependent: :destroy
