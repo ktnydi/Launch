@@ -118,13 +118,15 @@ before_action :count_access, only: [:show]
   end
 
   def count_access
-    count = Count.find_by(user_id: current_user.uuid, post_id: params[:uuid])
-    unless count
-      count = Count.create(user_id: current_user.uuid, post_id: params[:uuid])
-      counts = Count.where(post_id: params[:uuid])
-      post = count.post
-      post.pv_count = counts.length
-      post.save
+    if user_signed_in?
+      count = Count.find_by(user_id: current_user.uuid, post_id: params[:uuid])
+      unless count
+        count = Count.create(user_id: current_user.uuid, post_id: params[:uuid])
+        counts = Count.where(post_id: params[:uuid])
+        post = count.post
+        post.pv_count = counts.length
+        post.save
+      end
     end
   end
 end
