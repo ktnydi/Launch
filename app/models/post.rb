@@ -5,12 +5,12 @@ class Post < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
   has_many :liked_users, through: :likes, source: :user
+  has_many :counts, dependent: :destroy
   belongs_to :user
 
   validates :title, presence: true,
                     length: { maximum: 50 }
   validates :content, presence: true, length: { maximum: 5000 }
-  is_impressionable counter_cache: true, unique: true
 
   def self.search(query)
     rel = order(created_at: :desc)

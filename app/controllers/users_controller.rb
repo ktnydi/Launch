@@ -33,8 +33,8 @@ class UsersController < ApplicationController
       @posts = @user.posts.search(params[:q]).page(params[:page]).per(5)
     end
     @count = 0
-    @user.posts.each do |post|
-      @count += post.impressions_count
+    @posts.each do |post|
+      @count += post.counts.length
     end
     @liked_posts = @user.liked_posts.status_public.order(created_at: :desc).limit(10)
   end
@@ -49,7 +49,13 @@ class UsersController < ApplicationController
   end
 
   def posts_ranking(period)
-    @posts = Post.status_public.where("created_at > ?", period).order(impressions_count: :desc).limit(5)
+    count_access = Count.where("created_at > ?", period).limit(5).group("post_id").count("post_id")
+    sort_access = count_access.sort{ |(key1, val1), (key2, val2)| val2 <=> val1 }.to_h  #=> {"post_id" => count}
+    @posts = []
+    sort_access.each_key do |key|
+      @posts << Post.find_by(uuid: key)
+    end
+
   end
 
   def posts_for(param)
