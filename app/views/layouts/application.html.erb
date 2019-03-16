@@ -66,14 +66,29 @@
         }
       })
 
-      close(cls_btn, notice);
-      close(cls_btn, alert);
+      if (notice || alert) {
+        close(cls_btn, notice);
+        close(cls_btn, alert);
+      }
 
       function close(cls_btn, cls_obj) {
         cls_btn.addEventListener('click', function() {
           cls_obj.style.display = 'none';
         });
       }
+
+      var search = document.getElementById('search');
+      var search_label = document.getElementById('label');
+      var search_field = document.getElementById('field');
+      search.addEventListener('click', function() {
+        var clazz = search_label.className;
+        if (clazz === 'active') {
+          search_label.className = '';
+        } else {
+          search_label.className = 'active';
+          search_field.focus();
+        }
+      });
     </script>
   </body>
 </html>
