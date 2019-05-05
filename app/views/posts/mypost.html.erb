@@ -1,9 +1,0 @@
-<% @page_title = @user.name + "が投稿した記事" %>
-<main class="posts-wrapper">
-  <div class="container">
-    <h1>
-      <%= @user.name %>が投稿した記事
-    </h1>
-    <%= render "share/list", objs: @posts %>
-  </div>
-</main>

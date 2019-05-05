@@ -1,0 +1,58 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{:charset => "utf-8"}/
+    %meta{:content => "IE=edge", "http-equiv" => "X-UA-Compatible"}/
+    %meta{:content => "Launchはプログラマーのためのブログサービスです。あなたが開発したアプリケーションに関する記事を書くことで、ユーザーからフィードバックをもらうことができます。", :name => "description"}/
+    %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}/
+    %title= page_title
+    = csrf_meta_tags
+    = csp_meta_tag
+    = favicon_link_tag('favicon.ico')
+    = favicon_link_tag('apple-touch-icon.png',  |
+      {:rel => 'apple-touch-icon-precomposed'}) |
+    = favicon_link_tag('apple-touch-icon.png', |
+      {:rel => 'apple-touch-icon-precomposed', |
+      :sizes => '76x76',                       |
+      :type => 'image/png'})                   |
+    = favicon_link_tag('apple-touch-icon.png', |
+      {:rel => 'apple-touch-icon-precomposed', |
+      :sizes => '120x120',                     |
+      :type => 'image/png'})                   |
+    = favicon_link_tag('apple-touch-icon.png', |
+      {:rel => 'apple-touch-icon-precomposed', |
+      :sizes => '152x152',                     |
+      :type => 'image/png'})                   |
+    %link{:crossorigin => "anonymous", :href => "https://use.fontawesome.com/releases/v5.7.1/css/all.css", :integrity => "sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr", :rel => "stylesheet"}/
+    %link{:href => "https://fonts.googleapis.com/icon?family=Material+Icons", :rel => "stylesheet"}/
+    = stylesheet_link_tag '/editor/lib/codemirror.css', media: 'all'
+    = stylesheet_link_tag '/editor/theme/neat.css', media: 'all'
+    = stylesheet_link_tag '/editor/highlight/atom-one-dark.css', media: 'all'
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag '/editor/marked/marked.min.js'
+    = javascript_include_tag '/editor/highlight/highlight.pack.js'
+  %body{:ontouchstart => ""}
+    = render "share/editor_header"
+    - if @errors.present?
+      #errors.editor-errors
+        %i#cls-btn.material-icons.clear clear
+        %h3
+          保存に失敗しました
+        %ul
+          - @errors.each do |error|
+            %li= error
+    = yield
+    = javascript_include_tag '/editor/lib/codemirror.js'
+    = javascript_include_tag '/editor/mode/markdown/markdown.js'
+    = javascript_include_tag '/editor/addon/display/placeholder.js'
+    = javascript_include_tag '/editor/addon/selection/active-line.js'
+    = javascript_include_tag '/editor/addon/selection/mark-selection.js'
+    = javascript_include_tag '/editor/javascript/editor.js'
+    :javascript
+      var cls_btn = document.getElementById('cls-btn');
+      var cls_obj = document.getElementById('errors');
+      cls_btn.addEventListener('click', function() {
+        cls_obj.style.display = 'none';
+      });

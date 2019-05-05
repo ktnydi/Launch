@@ -1,0 +1,14 @@
+var follow = document.getElementById('follow');
+if (follow != null) {
+follow.innerHTML = '#{j(render "follow", other: @author)}';
+}
+
+var follows = document.getElementsByClassName('follow');
+if (follows.length &gt; 0) {
+for (var i = 0, len = follows.length; i  len; i++) {
+var follow = follows.item(i);
+if (follow.id === '#{@author.id}') {
+follow.innerHTML = '#{j(render follow, other: @author)}';
+}
+}
+}

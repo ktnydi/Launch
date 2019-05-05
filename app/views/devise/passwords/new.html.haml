@@ -1,0 +1,13 @@
+.user-f-wrapper
+  .container
+    .reset-password
+      %h2 パスワードを再設定する
+      = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
+        = render "devise/shared/error_messages", resource: resource
+        .field
+          = f.label :email
+          %br/
+          = f.email_field :email, autofocus: true, autocomplete: "email"
+        .actions
+          = f.submit "パスワード再設定メールを送る"
+      = render "devise/shared/links"

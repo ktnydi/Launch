@@ -1,0 +1,7 @@
+- @page_title = @user.name + "が投稿した記事"
+%main.posts-wrapper
+  .container
+    %h1
+      = @user.name
+      が投稿した記事
+    = render "share/list", objs: @posts

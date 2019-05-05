@@ -32,3 +32,4 @@
 
 # Ignore other unneeded file
 .DS_Store
+vendor/bundle

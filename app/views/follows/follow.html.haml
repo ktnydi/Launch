@@ -1,0 +1,9 @@
+- @page_title = "フォロー一覧"
+.follows-wrapper
+  .container
+    %h3 フォロー中
+    - if @followings.present?
+      = render "share/follow_list", users: @followings
+    - else
+      .notfind
+        %p フォロー中のユーザーがいません。

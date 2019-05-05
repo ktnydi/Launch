@@ -1,0 +1,11 @@
+%body
+  %header.editor
+    .container
+      .back
+        = link_to users_path, data: {"turbolinks": false} do
+          %i.material-icons navigate_before
+          %span 戻る
+      .submit
+        %input{:form => "posts", :name => "commit", :type => "submit", :value => "下書き保存"}/
+        /
+        %input{:form => "posts", :name => "commit", :type => "submit", :value => "記事を公開"}/

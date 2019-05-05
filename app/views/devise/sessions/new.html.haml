@@ -1,0 +1,40 @@
+- @page_title = "ログイン"
+.user-f-wrapper
+  .container
+    .login
+      %h2 ログイン
+      .form-wrapper
+        = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+          .field
+            = f.label :email
+            %br/
+            = f.email_field :email, autofocus: true, autocomplete: "email", required: true
+          .field
+            = f.label :password
+            %br/
+            = f.password_field :password, autocomplete: "current-password", required: true
+          - if devise_mapping.rememberable?
+            .field
+              = f.check_box :remember_me
+              = f.label :remember_me
+          .actions
+            = f.submit "ログイン", id: "submit", disabled: true, style:  "background-color: #E0E0E0"
+            %p or
+            = link_to user_twitter_omniauth_authorize_path, class: "twitter" do
+              %i.fab.fa-twitter
+              Twitterでログイン
+        = render "devise/shared/links"
+:javascript
+  var password = document.getElementById('user_password');
+  var submit = document.getElementById('submit');
+
+  password.addEventListener('keyup', function() {
+    var password_length = this.value.length;
+    if (password_length >= 6) {
+      submit.removeAttribute('disabled');
+      submit.style.backgroundColor = '#009688';
+    } else {
+      submit.setAttribute('disabled', 'disabled');
+      submit.style.backgroundColor = '#E0E0E0';
+    }
+  })

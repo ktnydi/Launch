@@ -1,0 +1,68 @@
+- if flash[:post_notice]
+  #notification.notice
+    = flash[:post_notice]
+.posts-home-wrapper
+  .container
+    %aside.page-left
+      .account-wrapper
+        %h1 ユーザー
+        .account
+          - if @user
+            = image_tag gravatar_image(@user), size: 80
+            .current-user-name
+              = link_to @user.name, user_posts_path(@user), data: { "turbolinks" => false }
+            %table.follow
+              %tr
+                %th
+                  = link_to "投稿した数", user_myposts_path(@user), data: { "turbolinks" => false }
+                %th
+                  = link_to "フォロー", user_myfollows_path(@user), data: { "turbolinks" => false }
+                %th
+                  = link_to "フォロワー", user_myfollowers_path(@user), data: { "turbolinks" => false }
+              %tr
+                %td
+                  = @user.posts.status_public.count
+                %td
+                  = @user.followings.count
+                %td
+                  = @user.followers.count
+      .posts-rank-wrapper
+        .period
+          %h3 アクセスランキング
+          .select-period
+            - if params[:period]
+              = link_to "Day", "?period=today", data: { "turbolinks" => false }
+            - else
+              = link_to "Day", "?period=today", data: { "turbolinks" => false }, class: "select"
+            = link_to "Week", "?period=week", data: { "turbolinks" => false }
+            = link_to "Month", "?period=month", data: { "turbolinks" => false }
+        .posts-list
+          - if @posts.present?
+            - @posts.each do |post|
+              .post
+                .post-title
+                  %h2
+                    = link_to post.title, post_path(post), data: { "turbolinks": false }
+                  .post-bottom
+                    .left
+                      %span.heart
+                        - if current_user && post.likes.find_by(user_id: current_user.id)
+                          %i.material-icons.favorite favorite
+                        - else
+                          %i.material-icons.unfavorite favorite_border
+                        %span= post.likes.count
+                      ・
+                      %span
+                        = post.user.name
+                    %p
+                      = post.created_at.strftime("%Y.%m.%d")
+          - else
+            .post
+              %h2
+                投稿された記事はありません。
+    .page-right
+      - if @user
+        .followings-posts-wrapper
+          .followings
+            %h3 新着記事
+          = render "share/list", objs: @following_posts

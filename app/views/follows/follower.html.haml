@@ -1,0 +1,9 @@
+- @page_title = "フォロワー一覧"
+.follows-wrapper
+  .container
+    %h3 フォロワー
+    - if @followers.present?
+      = render "share/follow_list", users: @followers
+    - else
+      .notfind
+        %p フォロワーがいません。
