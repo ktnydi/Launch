@@ -1,30 +1,11 @@
-.top-page-wrapper
-  .introduce
-    .container
-      .message
-        .title
-          %h1 Launch
-          %p
-            あなたのアプリを紹介してフィードバックをもらおう！
-        %ul
-          %li
-            %i.material-icons desktop_windows
-            %span 自作アプリを作ろう。
-          %li
-            %i.material-icons create
-            %span 作ったアプリをLaunchで紹介しよう。
-          %li
-            %i.material-icons comment
-            %span フィードバックをもらいアプリを改善しよう。
-  .top-page-content
-    .container
+%main
+  .container
+    .position_center
+      .index
+        %h1 Launch
+        %p
+          あなたのアプリを紹介してフィードバックをもらおう！
       .authenticate
-        %h2 さぁ、Launchをはじめてアプリ開発を楽しもう！
-        .login-or-signup
-          = link_to "アカウント作成",                           |
-            new_user_registration_path,                  |
-            data: { turbolinks: false }, class: "signup" |
-          %p or
-          = link_to "ログイン",                             |
-            new_user_session_path,                      |
-            data: { turbolinks: false }, class: "login" |
+        = link_to "アカウント作成", new_user_registration_path, class: "signup"
+        %p または
+        = link_to "ログイン", new_user_session_path, class: "login"

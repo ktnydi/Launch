@@ -33,6 +33,7 @@ html {
 
 body {
   -webkit-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
   font-family: 'Lato', sans-serif;
   font-size: 1.6rem;
 }
@@ -269,7 +270,7 @@ ul {
   font-size: 1.3rem;
   background-color: $sub-color;
   color: $white;
-  position: absolute;
+  position: fixed;
   top: 60px;
   right: 40px;
   z-index: 5000;
@@ -353,6 +354,7 @@ table.follow {
   flex-direction: column;
   min-height: 100vh;
 }
+
 footer {
   display: flex;
   align-items: center;

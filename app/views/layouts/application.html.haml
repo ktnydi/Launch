@@ -31,7 +31,8 @@
     .wrapper
       = render 'share/header'
       = yield
-      = render 'share/footer'
+      - if user_signed_in?
+        = render 'share/footer'
     = render "share/menu"
 
     :javascript
