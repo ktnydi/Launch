@@ -1,25 +1,23 @@
 - @page_title = "ログイン"
-.user-f-wrapper
+%main
   .container
-    .login
+    .authenticate_form
       %h2 ログイン
       .form-wrapper
         = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
           .field
             = f.label :email
-            %br/
             = f.email_field :email, autofocus: true, autocomplete: "email", required: true
           .field
             = f.label :password
-            %br/
             = f.password_field :password, autocomplete: "current-password", required: true
-          - if devise_mapping.rememberable?
-            .field
-              = f.check_box :remember_me
-              = f.label :remember_me
+          -# - if devise_mapping.rememberable?
+          -#   .field
+          -#     = f.check_box :remember_me
+          -#     = f.label :remember_me
           .actions
             = f.submit "ログイン", id: "submit", disabled: true, style:  "background-color: #E0E0E0"
-            %p or
+            %p.or または
             = link_to user_twitter_omniauth_authorize_path, class: "twitter" do
               %i.fab.fa-twitter
               Twitterでログイン
@@ -27,6 +25,7 @@
 :javascript
   var password = document.getElementById('user_password');
   var submit = document.getElementById('submit');
+  var input = document.querySelectorAll('.field input');
 
   password.addEventListener('keyup', function() {
     var password_length = this.value.length;
@@ -38,3 +37,29 @@
       submit.style.backgroundColor = '#E0E0E0';
     }
   })
+
+  const move_form_label = (target) => {
+    if (target.nodeName === 'INPUT') {
+      var field = target.parentNode
+      field.classList.add('focus')
+    }
+  }
+
+  document.addEventListener('input', (e) => {
+    var target = e.target
+    move_form_label(target)
+  })
+
+  for (var i = 0, len = input.length; i < len; i++) {
+    var target = input.item(i)
+    if (target.value.length > 0 && target.type !== 'hidden') {
+      move_form_label(target)
+    }
+    target.addEventListener('blur', (e) => {
+      var target = e.target
+      if (target.value.length === 0) {
+        var field = target.parentNode
+        field.classList.remove('focus')
+      }
+    })
+  }

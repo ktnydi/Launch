@@ -1,8 +1,8 @@
 - @page_title = "アカウントを作成"
-.user-f-wrapper.signup-wrapper
+%main
   .container
     = render "devise/shared/error_messages", resource: resource
-    .signup
+    .authenticate_form
       %h2 アカウントを作成
       .form-wrapper
         = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
@@ -11,39 +11,23 @@
             = f.text_field :name, autofocus: true, required: true, maxlength:"15"
           .field
             = f.label :email
-            %br/
             = f.email_field :email, autofocus: true, autocomplete: "email", required: true
           .field
             = f.label :password
-            - if @minimum_password_length
-              %span
-                ：#{@minimum_password_length}文字以上
-            .signup-password
-              = f.password_field :password, autocomplete: "new-password", required: true
-              #mask.password-mask
-                %i.far.fa-eye
+            = f.password_field :password, autocomplete: "new-password", required: true
           %p.term
             登録が完了すると#{link_to "利用規約", terms_path, target: :_blank}に同意したものとみなします。
           .actions
             = f.submit "登録", id: "submit", disabled: true, style: "background-color: #E0E0E0"
-            %p or
+            %p.or または
             = link_to user_twitter_omniauth_authorize_path, class: "twitter" do
               %i.fab.fa-twitter
               Twitterで登録
         = render "devise/shared/links"
 :javascript
-  var mask = document.getElementById('mask');
   var password = document.getElementById('user_password');
   var submit = document.getElementById('submit');
-
-  password.addEventListener('focus', function() {
-    this.setAttribute('type', 'text');
-    mask.innerHTML = '<i class="far fa-eye-slash"></i>';
-  });
-  password.addEventListener('blur', function() {
-    this.setAttribute('type', 'password');
-    mask.innerHTML = '<i class="far fa-eye"></i>';
-  });
+  var input = document.querySelectorAll('.field input');
 
   password.addEventListener('keyup', function() {
     var password_length = this.value.length;
@@ -55,3 +39,29 @@
       submit.style.backgroundColor = '#E0E0E0';
     }
   });
+
+  const move_form_label = (target) => {
+    if (target.nodeName === 'INPUT') {
+      var field = target.parentNode
+      field.classList.add('focus')
+    }
+  }
+
+  document.addEventListener('input', (e) => {
+    var target = e.target
+    move_form_label(target)
+  })
+
+  for (var i = 0, len = input.length; i < len; i++) {
+    var target = input.item(i)
+    if (target.value.length > 0 && target.type !== 'hidden') {
+      move_form_label(target)
+    }
+    target.addEventListener('blur', (e) => {
+      var target = e.target
+      if (target.value.length === 0) {
+        var field = target.parentNode
+        field.classList.remove('focus')
+      }
+    })
+  }

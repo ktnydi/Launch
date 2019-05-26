@@ -15,16 +15,6 @@
 //= require_tree .
 
 document.addEventListener('DOMContentLoaded', function() {
-  var now_url = location.href;
-  var lists = document.querySelectorAll('.header-left ul li');
-  for (var i = 0; i < lists.length; i++) {
-    var a = lists.item(i).firstElementChild;
-    if (a.href === now_url) {
-      lists.item(i).className = 'active';
-      break;
-    }
-  }
-
   var toggle = document.getElementById('toggle');
   var lists = document.getElementById('lists');
   toggle.addEventListener('click', function() {
