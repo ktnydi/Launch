@@ -33,7 +33,8 @@ html {
 
 body {
   -webkit-text-size-adjust: 100%;
-  font-family: 'hiragino sans';
+  font-family: 'Lato', sans-serif;
+  font-size: 1.6rem;
 }
 
 html, body {
@@ -67,6 +68,7 @@ input[type="checkbox"] {
 header {
   height: 50px;
   width: 100%;
+  border-bottom: 1px solid $border-color;
   background-color: $white;
   .container {
     display: flex;
@@ -74,113 +76,13 @@ header {
     align-content: center;
   }
 }
-header.share {
-  box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.1);
-  position: fixed;
-  top: 0;
-  right: 0;
-  z-index: 9999;
-  transition: right .4s;
-  .container {
-    display: flex;
-    justify-content: space-between;
-  }
-  .logo {
-    display: inline-block;
-    height: 50px;
-    padding-right: 8px;
-    line-height: 50px;
-    font-size: 2.4rem;
-    letter-spacing: 1px;
-    a {
-      text-decoration: none;
-      color: $font-color;
-      @media all and (max-width: 1024px) {
-        font-size: 2rem;
-      }
-    }
-  }
-  ul {
-    list-style: none;
-    padding: 0;
-    li {
-      float: left;
-      height: 50px;
-      margin: 0 12px;
-      font-size: 1.3rem;
-      transition: all .15s;
-      &:hover {
-        border-bottom: 4px solid $main-color;
-      }
-      &.active {
-        border-bottom: 4px solid $main-color;
-      }
-      a {
-        display: block;
-        line-height: 50px;
-        text-decoration: none;
-        letter-spacing: 1px;
-        color: $font-color;
-      }
-    }
-  }
-  form {
-    margin-right: 8px;
-    border-radius: 3px;
-    display: flex;
-    align-items: center;
-    overflow-x: hidden;
-    i {
-      font-size: 2.4rem;
-      color: silver;
-      cursor: pointer;
-    }
-    label {
-      height: 35px;
-      width: 150px;
-      margin-left: 5px;
-      font-size: 1.3rem;
-      visibility: visible;
-      @media all and (max-width: 896px) {
-        width: 0;
-        visibility: hidden;
-        transition: width .3s, visibility .3s;
-        &.active {
-          visibility: visible;
-          width: 150px;
-        }
-      }
-      input[type="search"] {
-        height: 35px;
-        width: 150px;
-        border: none;
-        border-bottom: 1px solid silver;
-        border-radius: 0;
-        font-size: 1.3rem;
-        background-color: inherit;
-      }
-    }
-    input[type="submit"] {
-      display: none;
-    }
-  }
-  .header-left {
-    flex-grow: 1;
-    display: flex;
-    align-items: center;
-    ul {
-      @media all and (max-width: 896px) {
-        display: none;
-      }
-    }
-  }
+header {
   .header-right {
     display: flex;
     align-items: center;
-    float: right;
     margin-left: 8px;
     height: 50px;
-    button {
+    button, input[type="submit"] {
       padding: 0;
       margin: 0 12px;
       border: none;
@@ -200,8 +102,9 @@ header.share {
         text-decoration: none;
       }
     }
-    button.signin, button.new-post {
+    button.signin, button.new-post, input[type="submit"] {
       background-color: $main-color;
+      color: $white;
       &:hover {
         background-color: $sub-color;
       }
@@ -209,67 +112,151 @@ header.share {
         color: $white;
       }
     }
-    .hamburger-menu {
+  }
+}
+
+.user-name-toggle {
+  position: relative;
+  @media all and (max-width: 896px) {
+    display: none;
+  }
+  .user-name {
+    height: 50px;
+    padding: 0 8px;
+    line-height: 50px;
+    cursor: pointer;
+    font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+    &:hover {
+      background-color: #F5F5F5;
+    }
+    img {
+      display: inline-block;
+      margin-right:8px;
+      size: 30px;
+      border-radius: 9999px;
+      border: 1px solid $border-color;
+      background-color: $white;
+    }
+  }
+  .toggle-list {
+    min-width: 135px;
+    background-color: $white;
+    border-radius: 1px;
+    box-shadow: 0 2px 17px 1px rgba(0, 0, 0, 0.1);
+    position: absolute;
+    top: 50px;
+    right: 0;
+    display: none;
+    a {
+      display: block;
+      line-height: 34px;
+      width: 100%;
+      padding: 8px;
+      font-size: 1.3rem;
+      text-decoration: none;
+      color: $font-color;
+      transition: all .1s;
+      &:hover {
+        background-color: #F5F5F5;
+      }
+    }
+  }
+  .toggle-list.active {
+    display: block;
+  }
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+   ul {
+    @media all and (max-width: 896px) {
       display: none;
-      font-size: 2.4rem;
-      line-height: 1rem;
-      cursor: pointer;
-      @media all and (max-width: 896px) {
-        display: block;
+    }
+  }
+}
+.logo {
+  padding-right: 8px;
+  letter-spacing: 1px;
+  a {
+    display: block;
+    line-height: 50px;
+    text-decoration: none;
+    font-size: 2.4rem;
+    color: $font-color;
+    @media all and (max-width: 1024px) {
+      font-size: 2rem;
+    }
+  }
+}
+ul {
+  list-style: none;
+  padding: 0;
+  li {
+    display: inline-block;
+    margin: 0 12px;
+    font-size: 1.3rem;
+    transition: all .15s;
+    a {
+      display: block;
+      line-height: 50px;
+      text-decoration: none;
+      letter-spacing: 1px;
+      color: $font-color;
+    }
+  }
+}
+
+.search_form {
+  margin-right: 8px;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  overflow-x: hidden;
+  i {
+    font-size: 2.4rem;
+    color: silver;
+    cursor: pointer;
+  }
+  label {
+    height: 35px;
+    width: 150px;
+    margin-left: 5px;
+    font-size: 1.3rem;
+    visibility: visible;
+    @media all and (max-width: 896px) {
+      width: 0;
+      visibility: hidden;
+      transition: width .3s, visibility .3s;
+      &.active {
+        visibility: visible;
+        width: 150px;
       }
     }
-    .user-name-toggle {
-      position: relative;
-      @media all and (max-width: 896px) {
-        display: none;
-      }
-      .user-name {
-        height: 50px;
-        padding: 0 8px;
-        line-height: 50px;
-        cursor: pointer;
-        font-size: 1.3rem;
-        display: flex;
-        align-items: center;
-        &:hover {
-          background-color: #F5F5F5;
-        }
-        img {
-          display: inline-block;
-          margin-right:8px;
-          size: 30px;
-          border-radius: 9999px;
-          border: 1px solid $border-color;
-          background-color: $white;
-        }
-      }
-      .toggle-list {
-        min-width: 135px;
-        background-color: $white;
-        border-radius: 1px;
-        box-shadow: 0 2px 17px 1px rgba(0, 0, 0, 0.1);
-        position: absolute;
-        top: 50px;
-        right: 0;
-        display: none;
-        a {
-          display: block;
-          line-height: 34px;
-          width: 100%;
-          padding: 8px;
-          font-size: 1.3rem;
-          text-decoration: none;
-          color: $font-color;
-          transition: all .1s;
-          &:hover {
-            background-color: #F5F5F5;
-          }
-        }
-      }
-      .toggle-list.active {
-        display: block;
-      }
+    input[type="search"] {
+      height: 35px;
+      width: 150px;
+      border: none;
+      border-bottom: 1px solid silver;
+      border-radius: 0;
+      font-size: 1.3rem;
+      background-color: inherit;
     }
+  }
+  input[type="submit"] {
+    display: none;
+  }
+}
+
+.hamburger-menu {
+  display: none;
+  font-size: 2.4rem;
+  line-height: 1rem;
+  cursor: pointer;
+  @media all and (max-width: 896px) {
+    display: block;
   }
 }
 

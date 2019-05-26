@@ -19,11 +19,12 @@
     = favicon_link_tag('apple-touch-icon.png', {:rel => 'apple-touch-icon-precomposed', :sizes => '152x152', :type => 'image/png'})
     %link{:crossorigin => "anonymous", :href => "https://use.fontawesome.com/releases/v5.7.1/css/all.css", :integrity => "sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr", :rel => "stylesheet"}
     %link{:href => "https://fonts.googleapis.com/icon?family=Material+Icons", :rel => "stylesheet"}
+    %link{href: "https://fonts.googleapis.com/css?family=Lato:400,700&display=swap", rel: "stylesheet"}
     = stylesheet_link_tag '/editor/lib/codemirror.css', media: 'all'
     = stylesheet_link_tag '/editor/theme/neat.css', media: 'all'
     = stylesheet_link_tag '/editor/highlight/atom-one-dark.css', media: 'all'
-    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
-    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    = stylesheet_link_tag    'application', media: 'all'
+    = javascript_include_tag 'application'
     = javascript_include_tag '/editor/marked/marked.min.js'
     = javascript_include_tag '/editor/highlight/highlight.pack.js'
   %body{:ontouchstart => ""}
