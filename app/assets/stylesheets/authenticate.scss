@@ -1,5 +1,6 @@
 @import 'variables';
 
+// アカウント認証
 .authenticate_form {
   width: 350px;
   max-width: 90%;
@@ -26,7 +27,7 @@
   }
 }
 
-.authenticate_form form {
+.authenticate_form form, .authenticate_edit_form form {
   margin-bottom: 12px;
   .field {
     margin-bottom: 24px;
@@ -57,6 +58,7 @@
     }
   }
   label {
+    cursor: text;
     position: absolute;
     top: 10px;
     left: 0;
@@ -81,6 +83,7 @@
     padding: 8px 0;
     background-color: $main-color;
     color: $white;
+    cursor: pointer;
   }
 }
 
@@ -102,6 +105,54 @@
     padding: 8px 0;
     text-decoration: none;
     background-color: #2994f7;
+    color: $white;
+  }
+}
+
+// アカウント編集
+.authenticate_edit_form {
+  width: 100%;
+  text-align: center;
+  .container {
+    display: flex;
+    flex-direction: column;
+  }
+  .box {
+    width: 350px;
+    margin: 60px auto;
+  }
+  .user-image {
+    display: inline-block;
+    border-radius: 999px;
+  }
+  .change_image {
+    display: inline-block;
+    width: 200px;
+    margin: 12px 0;
+    padding: 8px;
+    box-shadow: 0 7px 15px rgba(0, 0, 0, .05);
+    text-decoration: none;
+    background-color: $white;
+    color: $sub-font-color;
+  }
+}
+
+.delete_account {
+  padding: 24px;
+  border: 2px dashed silver;
+  h2 {
+    font-size: 2rem;
+  }
+  .caution {
+    margin: 24px 0;
+    color: $sub-font-color;
+  }
+  a {
+    display: inline-block;
+    width: 200px;
+    padding: 8px 0;
+    text-decoration: none;
+    background-color: #d14a4a;
     color: $white;
   }
 }

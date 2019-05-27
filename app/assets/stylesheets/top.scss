@@ -1,12 +1,5 @@
 @import 'variables';
 
-main {
-  height: calc(100vh - 50px);
-  width: 100%;
-  background: $main-color;
-  color: $white;
-}
-
 .position_center {
   position: absolute;
   top: 50%;

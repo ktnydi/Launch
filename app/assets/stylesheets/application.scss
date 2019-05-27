@@ -47,11 +47,12 @@ html, body {
   background-color: #B2DFDB;
 }
 
-input, textarea {
+input, textarea, button {
   -webkit-appearance: none;
   outline: none;
   padding: 0;
   border: none;
+  border-radius: 0;
 }
 
 input[type="checkbox"] {
@@ -67,6 +68,7 @@ input[type="checkbox"] {
   margin: 0 auto;
 }
 
+// ヘッダー
 header {
   height: 50px;
   width: 100%;
@@ -250,6 +252,14 @@ ul {
   input[type="submit"] {
     display: none;
   }
+}
+
+// メインコンテンツ
+main {
+  height: calc(100vh - 50px);
+  width: 100%;
+  background: $main-color;
+  color: $white;
 }
 
 .hamburger-menu {

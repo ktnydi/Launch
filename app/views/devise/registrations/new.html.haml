@@ -8,10 +8,10 @@
         = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
           .field
             = f.label :name
-            = f.text_field :name, autofocus: true, required: true, maxlength:"15"
+            = f.text_field :name, required: true, maxlength:"15"
           .field
             = f.label :email
-            = f.email_field :email, autofocus: true, autocomplete: "email", required: true
+            = f.email_field :email, autocomplete: "email", required: true
           .field
             = f.label :password
             = f.password_field :password, autocomplete: "new-password", required: true
@@ -47,16 +47,17 @@
     }
   }
 
-  document.addEventListener('input', (e) => {
-    var target = e.target
-    move_form_label(target)
-  })
-
   for (var i = 0, len = input.length; i < len; i++) {
     var target = input.item(i)
     if (target.value.length > 0 && target.type !== 'hidden') {
       move_form_label(target)
     }
+
+    target.addEventListener('focus', (e)=>{
+      var target = e.target
+      move_form_label(target)
+    })
+
     target.addEventListener('blur', (e) => {
       var target = e.target
       if (target.value.length === 0) {
