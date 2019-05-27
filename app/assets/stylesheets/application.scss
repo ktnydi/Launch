@@ -74,6 +74,9 @@ header {
   width: 100%;
   border-bottom: 1px solid $border-color;
   background-color: $white;
+  position: fixed;
+  top: 0;
+  z-index: 100;
   .container {
     display: flex;
     justify-content: space-between;
@@ -219,6 +222,9 @@ ul {
   display: flex;
   align-items: center;
   overflow-x: hidden;
+  @media all and (max-width: 896px) {
+    display: none;
+  }
   i {
     font-size: 2.4rem;
     color: silver;
@@ -230,15 +236,6 @@ ul {
     margin-left: 5px;
     font-size: 1.3rem;
     visibility: visible;
-    @media all and (max-width: 896px) {
-      width: 0;
-      visibility: hidden;
-      transition: width .3s, visibility .3s;
-      &.active {
-        visibility: visible;
-        width: 150px;
-      }
-    }
     input[type="search"] {
       height: 35px;
       width: 150px;
@@ -262,16 +259,6 @@ main {
   color: $white;
 }
 
-.hamburger-menu {
-  display: none;
-  font-size: 2.4rem;
-  line-height: 1rem;
-  cursor: pointer;
-  @media all and (max-width: 896px) {
-    display: block;
-  }
-}
-
 .notice {
   padding: 8px 24px;
   text-align: center;
@@ -284,7 +271,7 @@ main {
   position: fixed;
   top: 60px;
   right: 40px;
-  z-index: 5000;
+  z-index: 50;
   transition: right 5s;
   @media all and (max-width: 1024px) {
     right: 8px;
@@ -360,12 +347,6 @@ table.follow {
   }
 }
 
-.wrapper {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-
 footer {
   display: flex;
   align-items: center;
@@ -421,61 +402,150 @@ footer {
   }
 }
 
-body {
-  position: relative;
-  right: 0vw;
-  transition: right .4s;
+.hamburger {
+  height: 25px;
+  width: 25px;
+  display: none;
+  align-items: center;
+  position: fixed;
+  top: 25px;
+  right: 2.5%;
+  z-index: 200 ;
+  transform: translateY(-50%);
+  @media all and (max-width: 896px) {
+    display: flex;
+  }
+  .line {
+    position: relative;
+    &::before, &::after {
+      position: absolute;
+    }
+    &::before {
+      content: '';
+      top: 8px;
+      left: 0;
+    }
+    &::after {
+      content: '';
+      top: -8px;
+      left: 0;
+    }
+  }
+  .line, .line::before, .line::after {
+    display: inline-block;
+    width: 25px;
+    height: 3px;
+    border-radius: 3px;
+    background-color: #1c1c1c;
+    transition: all .3s;
+  }
 }
-body.active {
-  right: 250px;
+
+.hamburger.active {
+  .line {
+    transform: rotate(-45deg);
+    &::before {
+      transform: rotate(90deg);
+      top: 0;
+    }
+    &::after {
+      transform: rotate(-90deg);
+      top: 0;
+    }
+  }
+  .line, .line::before, .line::after {
+    background-color: $white;
+  }
 }
 
 .hamburger-menu-list {
   overflow-y: scroll;
   display: none;
   height: 100vh;
-  width: 250px;
-  font-size: 1.3rem;
-  background-color: #212121;
+  width: 100%;
+  text-align: center;
+  background: linear-gradient(#04c1ae, #009688);
+  opacity: 0;
+  transform-origin: right;
+  transform: scaleX(0);
   position: fixed;
   top: 0;
-  bottom: 0;
-  right: 0;
-  z-index: -10;
+  left: 0;
+  z-index: 150;
+  transition: all .3s;
   @media all and (max-width: 1024px) {
     display: block;
   }
+  &.show {
+    opacity: 1;
+    transform: scaleX(1);
+  }
   .user-name {
-    padding: 24px;
-    border-bottom: 1px solid black;
-    display: flex;
-    align-items: center;
+    text-align: center;
     img {
       border-radius: 9999px;
-      width: 40px;
-      height: 40px;
-      margin-right: 8px;
+      width: 60px;
+      height: 60px;
+      margin-bottom: 12px;
     }
     span {
       color: $white;
+      letter-spacing: .1px;
     }
   }
-  .posts-link, .user-link {
-    border-bottom: 1px solid black;
+  hr {
+    display: inline-block;
+    width: 60px;
+    height: 3px;
+    margin: 12px;
+    border: none;
+    border-radius: 3px;
+    background-color: #00dbc6;
   }
-  a {
+  a, form {
     display: block;
-    padding: 0 24px;
+    margin: 24px 0;
     width: 100%;
-    line-height: 50px;
+    letter-spacing: .1px;
+    font-weight: bold;
     color: $white;
     text-decoration: none;
   }
-  .write {
-    width: 80%;
-    margin: 24px auto;
-    text-align: center;
-    border-radius: 3px;
-    background-color: $main-color;
+  form {
+    height: 34px;
+    width: 200px;
+    margin: 12px auto;
+    display: flex;
+    align-items: center;
+    input[type=text] {
+      height: 34px;
+      width: 100%;
+      padding: 0 12px;
+      font-size: 1.6rem;
+      background-color: rgba(0, 0, 0, 0.1);
+      color: $white;
+      &::placeholder {
+        color: #01756b;
+      }
+    }
+    button[type="submit"] {
+      height: 34px;
+      padding-right: 12px;
+      background-color: rgba(0, 0, 0, 0.1);
+      i {
+        font-size: 1.6rem;
+        color: #01756b;
+      }
+    }
+  }
+}
+
+.hamburger-menu-list {
+  nav {
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 }

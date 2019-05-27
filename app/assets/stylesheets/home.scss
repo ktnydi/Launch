@@ -299,3 +299,47 @@
     font-size: 1.3rem;
   }
 }
+
+.write_post {
+  width: 60px;
+  height: 60px;
+  border-radius: 999px;
+  box-shadow: 0 3px 3px rgba(0, 0, 0, .3);
+  background-color: $main-color;
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 100;
+  display: none;
+  @media all and (max-width: 896px) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  a {
+    display: block;
+    height: 60px;
+    width: 60px;
+    border-radius: 999px;
+    position: fixed;
+    align-items: center;
+    justify-content: center;
+    .line, .line::before {
+      width: 15px;
+      height: 3px;
+      border-radius: 3px;
+      background-color: $white;
+    }
+    .line {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .line::before {
+      content: '';
+      display: block;
+      transform: rotate(90deg);
+    }
+  }
+}

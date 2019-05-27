@@ -28,34 +28,26 @@
     = javascript_include_tag '/editor/marked/marked.min.js'
     = javascript_include_tag '/editor/highlight/highlight.pack.js'
   %body{:ontouchstart => ""}
-    .wrapper
-      = render 'share/header'
-      = yield
-      - if user_signed_in?
-        = render 'share/footer'
+    = render 'share/header'
+    = yield
+    - if user_signed_in?
+      = render 'share/footer'
     = render "share/menu"
 
     :javascript
+      var body = document.getElementsByTagName('body')[0]
       var hamburger = document.getElementById('hamburger');
       var menu = document.getElementById('menu');
-      var body = document.getElementsByTagName('body')[0];
-      var header = document.getElementById('header');
       var cls_btn = document.getElementById('cls-btn');
       var notice = document.getElementById('notice');
       var alert = document.getElementById('alert');
 
-      hamburger.addEventListener('click', function() {
-        var clazz = body.className;
-        if (clazz === 'active') {
-          body.className = '';
-          header.style.right = '0';
-          menu.style.visibility = 'hidden';
-        } else {
-          body.className = 'active';
-          header.style.right = '250px';
-          menu.style.visibility = 'visible';
-        }
-      })
+      (function() {
+        hamburger.addEventListener('click', ()=>{
+          hamburger.classList.toggle('active')
+          menu.classList.toggle('show')
+        })
+      })()
 
       if (notice || alert) {
         close(cls_btn, notice);

@@ -66,3 +66,7 @@
           .followings
             %h3 新着記事
           = render "share/list", objs: @following_posts
+
+%button.write_post
+  = link_to new_post_path do
+    .line

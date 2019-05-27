@@ -1,51 +1,49 @@
-%body
-  %header#header
-    .container
-      .header-left
-        .logo
-          - if user_signed_in?
-            = link_to "Launch", users_path
-          - else
-            = link_to "Launch", root_path
-        %ul
-          %li
-            - if user_signed_in?
-              = link_to "ホーム", users_path
-            - else
-              = link_to "ホーム", root_path
-          %li
-            = link_to "記事一覧", posts_path
-
-      .header-right
-        = form_tag posts_path, method: :get, class: "search_form" do
-          %i#search.material-icons search
-          = label_tag "", id: "label" do
-            = search_field_tag "q", params[:q], placeholder: "記事を検索", autocomplete: "off", id: "field"
-            = submit_tag "検索"
+%header#header
+  .container
+    .header-left
+      .logo
         - if user_signed_in?
-          %button.new-post
-            = link_to "記事を書く", new_post_path
-          .user-name-toggle
-            #toggle.user-name
-              = image_tag gravatar_image(current_user), size: 35
-              %span= current_user.name
-            #lists.toggle-list
-              = link_to "ダッシュボード", user_path(current_user.id)
-              = link_to "アカウント設定", edit_user_registration_path
-              = link_to "ログアウト", destroy_user_session_path, method: :delete
+          = link_to "Launch", users_path
         - else
-          .authenticate
-            %button
-              = link_to "ログイン", new_user_session_path
-            %button.signin
-              = link_to "アカウント作成", new_user_registration_path
-        #hamburger.hamburger-menu
-          %i.material-icons menu
+          = link_to "Launch", root_path
+      %ul
+        %li
+          - if user_signed_in?
+            = link_to "ホーム", users_path
+          - else
+            = link_to "ホーム", root_path
+        %li
+          = link_to "記事一覧", posts_path
 
-  - if flash[:notice]
-    %p#notification.devise-notification.notice
-      = notice
-  - elsif flash[:alert]
-    %p#alert.devise-notification.alert
-      %i#cls-btn.material-icons.clear clear
-      = alert
+    .header-right
+      = form_tag posts_path, method: :get, class: "search_form" do
+        %i#search.material-icons search
+        = label_tag "", id: "label" do
+          = search_field_tag "q", params[:q], placeholder: "記事を検索", autocomplete: "off", id: "field"
+          = submit_tag "検索"
+      - if user_signed_in?
+        %button.new-post
+          = link_to "記事を書く", new_post_path
+        .user-name-toggle
+          #toggle.user-name
+            = image_tag gravatar_image(current_user), size: 35
+            %span= current_user.name
+          #lists.toggle-list
+            = link_to "ダッシュボード", user_path(current_user.id)
+            = link_to "アカウント設定", edit_user_registration_path
+            = link_to "ログアウト", destroy_user_session_path, method: :delete
+      - else
+        .authenticate
+          %button
+            = link_to "ログイン", new_user_session_path
+          %button.signin
+            = link_to "アカウント作成", new_user_registration_path
+.hamburger#hamburger
+  %i.line
+- if flash[:notice]
+  %p#notification.devise-notification.notice
+    = notice
+- elsif flash[:alert]
+  %p#alert.devise-notification.alert
+    %i#cls-btn.material-icons.clear clear
+    = alert
