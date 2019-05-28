@@ -14,13 +14,11 @@
             = link_to "ホーム", root_path
         %li
           = link_to "記事一覧", posts_path
-
-    .header-right
       = form_tag posts_path, method: :get, class: "search_form" do
-        %i#search.material-icons search
-        = label_tag "", id: "label" do
-          = search_field_tag "q", params[:q], placeholder: "記事を検索", autocomplete: "off", id: "field"
-          = submit_tag "検索"
+        = text_field_tag "q", params[:q], placeholder: "記事タイトルで検索", autocomplete: "off", id: "field"
+        = button_tag do
+          %i#search.material-icons search
+    .header-right
       - if user_signed_in?
         %button.new-post
           = link_to "記事を書く", new_post_path
