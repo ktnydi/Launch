@@ -1,13 +1,15 @@
 @import 'variables';
 
 .position_center {
+  width: 100%;
+  padding: 0 24px;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
   .index {
-    margin-bottom: 24px;
+    margin-bottom: 48px;
   }
   h1 {
     font-size: 5rem;
@@ -15,19 +17,21 @@
   }
   .authenticate {
     a {
-      display: inline-block;
+      display: block;
       width: 200px;
-      padding: 5px 0;
-      border: 1px solid $white;
+      padding: 8px 0;
+      margin: 12px auto;
+      border-radius: 999px;
       text-decoration: none;
       color: $white;
       transition: all .3s;
       &:hover {
         background: rgba(255, 255, 255, .1);
       }
-    }
-    p {
-      margin: 12px 0;
+      &.signup {
+        background-color: $sub-color;
+        box-shadow: 0 2px 17px 1px rgba(0, 0, 0, 0.1);
+      }
     }
   }
 }

@@ -14,10 +14,12 @@
             = link_to "ホーム", root_path
         %li
           = link_to "記事一覧", posts_path
-      = form_tag posts_path, method: :get, class: "search_form" do
-        = text_field_tag "q", params[:q], placeholder: "記事タイトルで検索", autocomplete: "off", id: "field"
+      = form_tag posts_path, method: :get, class: 'search header_search' do
+        = label_tag do
+          = text_field_tag "q", params[:q], autocomplete: "off", id: "field"
+          .placeholder 記事タイトルで検索
         = button_tag do
-          %i#search.material-icons search
+          %i.fas.fa-search
     .header-right
       - if user_signed_in?
         %button.new-post
@@ -30,12 +32,6 @@
             = link_to "ダッシュボード", user_path(current_user.id)
             = link_to "アカウント設定", edit_user_registration_path
             = link_to "ログアウト", destroy_user_session_path, method: :delete
-      - else
-        .authenticate
-          %button
-            = link_to "ログイン", new_user_session_path
-          %button.signin
-            = link_to "アカウント作成", new_user_registration_path
 .hamburger#hamburger
   %i.line
 - if flash[:notice]

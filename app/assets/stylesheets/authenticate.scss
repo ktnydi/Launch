@@ -4,8 +4,8 @@
 .authenticate_form {
   width: 350px;
   max-width: 90%;
-  padding: 24px;
   text-align: center;
+  box-shadow: 0 2px 17px 1px rgba(0, 0, 0, 0.1);
   border-radius: 3px;
   background-color: $white;
   color: $font-color;
@@ -13,14 +13,24 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  &::before {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 5px;
+    background-color: $main-color;
+  }
   h2 {
+    padding-top: 24px;
     font-weight: normal;
     font-size: 2.4rem;
+    background-color: $white;
+    color: $font-color;
   }
 }
 
 .authenticate_form .form-wrapper {
-  padding-top: 24px;
+  padding: 24px;
   overflow-y: scroll;
   @media all and (max-width: 480px) {
     max-height: 350px;
@@ -51,8 +61,7 @@
         background-color: $main-color;
       }
       label {
-        transform: translateY(-20px);
-        font-size: 1.2rem;
+        transform: translateY(-20px) scale(.7);
         color: $main-color;
       }
     }
@@ -62,6 +71,7 @@
     position: absolute;
     top: 10px;
     left: 0;
+    transform-origin: left;
     transform: translateY(0);
     transition: all .3s;
     color: $sub-font-color;

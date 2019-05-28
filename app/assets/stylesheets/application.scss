@@ -233,72 +233,38 @@ ul {
   }
 }
 
-.search_form {
-  margin: 0 12px;
-  padding: 0 12px;
-  border-radius: 3px;
-  display: flex;
-  align-items: center;
-  background-color: rgba(0, 126, 114, .8);
-  &:hover {
-    background-color: rgba(0, 126, 114, 1);
-  }
-  @media all and (max-width: 896px) {
-    display: none;
-  }
-  input[type="text"] {
-    height: 35px;
-    width: 170px;
-    border: none;
-    border-radius: 0;
-    font-size: 1.6rem;
-    background-color: transparent;
-    color: $white;
-    &::placeholder {
-      color: #004942;
-    }
-  }
-  button {
-    height: 35px;
-    display: flex;
-    align-items: center;
-    background-color: transparent;
-    i {
-      cursor: pointer;
-      color: #004942;
-    }
-  }
-}
-
 // メインコンテンツ
 main {
-  height: calc(100vh - 50px);
+  height: 100vh;
   width: 100%;
-  background: $main-color;
+  background: #f4f5f7;
   color: $white;
+  &.top_page {
+    background: $main-color;
+  }
 }
 
 .notice {
   padding: 8px 24px;
   text-align: center;
-  visibility: visible;
   border-radius: 3px;
   box-shadow: 0 2px 17px 1px rgba(0, 0, 0, 0.1);
   font-size: 1.3rem;
   background-color: $sub-color;
   color: $white;
   position: fixed;
-  top: 60px;
+  top: 70px;
   right: 40px;
   z-index: 50;
-  transition: right 5s;
+  transform: translateX(0);
+  transition: transform .5s 3s;
   @media all and (max-width: 1024px) {
     right: 8px;
   }
 }
 
 .close {
-  right: -9999px;
+  transform: translateX(150%);
 }
 
 .devise-notification.alert {
@@ -480,7 +446,7 @@ footer {
   height: 100vh;
   width: 100%;
   text-align: center;
-  background: linear-gradient(#04c1ae, #009688);
+  background: linear-gradient($sub-color, $main-color);
   opacity: 0;
   transform-origin: right;
   transform: scaleX(0);
@@ -517,9 +483,9 @@ footer {
     margin: 12px;
     border: none;
     border-radius: 3px;
-    background-color: #00dbc6;
+    background-color: $main-color;
   }
-  a, form {
+  a {
     display: block;
     margin: 24px 0;
     width: 100%;
@@ -528,33 +494,57 @@ footer {
     color: $white;
     text-decoration: none;
   }
-  form {
-    height: 34px;
-    width: 250px;
-    margin: 12px auto;
-    display: flex;
-    align-items: center;
-    background-color: rgba(0, 126, 114, .8);
-    input[type=text] {
-      height: 34px;
-      width: 100%;
-      padding: 0 24px;
-      font-size: 1.6rem;
-      background-color: transparent;
-      color: $white;
-      &::placeholder {
-        color: #004942;
-      }
+}
+
+.search {
+  height: 40px;
+  width: 250px;
+  margin: 12px auto;
+  border-radius: 999px;
+  box-shadow: 0 2px 17px 1px rgba(0, 0, 0, 0.1);
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  background-color: #04756F;
+  position: relative;
+  input[type=text] {
+    height: 40px;
+    width: 100%;
+    padding: 0 24px;
+    font-size: 1.6rem;
+    background-color: transparent;
+    color: $white;
+  }
+  .placeholder {
+    position: absolute;
+    top: 20px;
+    left: 24px;
+    transform: translateY(-50%);
+    color: rgba(255, 255, 255, .4);
+    cursor: text;
+    &.hide {
+      display: none;
     }
-    button[type="submit"] {
-      height: 34px;
-      padding-right: 24px;
-      background-color: transparent;
-      i {
+  }
+  button[type="submit"] {
+    height: 40px;
+    padding-right: 24px;
+    background-color: transparent;
+    i {
+      font-size: 1.3rem;
+      color: rgba(255, 255, 255, .4);
+      @media all and (max-width: 896px) {
         font-size: 1.6rem;
-        color: #004942;
       }
     }
+  }
+}
+
+.header_search {
+  margin: 0 12px;
+  font-size: 1.3rem;
+  @media all and (max-width: 896px) {
+    display: none;
   }
 }
 

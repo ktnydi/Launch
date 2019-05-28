@@ -1,4 +1,4 @@
-%main
+%main.top_page
   .container
     .position_center
       .index
@@ -7,5 +7,4 @@
           あなたのアプリを紹介してフィードバックをもらおう！
       .authenticate
         = link_to "アカウント作成", new_user_registration_path, class: "signup"
-        %p または
         = link_to "ログイン", new_user_session_path, class: "login"

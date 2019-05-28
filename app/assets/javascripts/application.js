@@ -31,19 +31,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
   const notification = document.getElementById('notification');
   if (notification !== null) {
-    setTimeout(
-      function() {
-        var classes = notification.className.split(' ');
-        classes.push('close');
-        notification.className = classes.join(' ');
-      },
-      3000
-    );
-    setTimeout(
-      function() {
-        notification.style.display = "none";
-      },
-      4000
-    );
+    notification.classList.add('close');
   }
 });
