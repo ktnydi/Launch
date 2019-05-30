@@ -6,7 +6,8 @@
 
 form.f-editor {
   width: 100%;
-  height: calc(100vh - 50px);
+  margin-top: 60px;
+  height: calc(100vh - 60px);
   input[type="text"], input[type="url"] {
     display: block;
     width: 100%;
