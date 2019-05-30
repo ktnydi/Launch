@@ -1,5 +1,3 @@
 - @page_title = "記事一覧"
-%main.posts-wrapper
-  .container
-    %h1 記事一覧
-    = render "share/list", objs: @posts
+%main.posts_wrapper
+  = render "share/card", posts: @posts

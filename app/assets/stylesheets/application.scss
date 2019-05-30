@@ -39,7 +39,7 @@ body {
 }
 
 html, body {
-  background-color: #eee;
+  background-color: #f4f5f7;
   color: $font-color;
 }
 
@@ -236,11 +236,13 @@ ul {
 // メインコンテンツ
 main {
   width: 100%;
-  background: #f4f5f7;
   &.top_page {
     height: 100vh;
     background: $main-color;
     color: $white;
+  }
+  &.posts_wrapper {
+    padding-top: 60px;
   }
 }
 
