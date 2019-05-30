@@ -235,12 +235,12 @@ ul {
 
 // メインコンテンツ
 main {
-  height: 100vh;
   width: 100%;
   background: #f4f5f7;
-  color: $white;
   &.top_page {
+    height: 100vh;
     background: $main-color;
+    color: $white;
   }
 }
 
