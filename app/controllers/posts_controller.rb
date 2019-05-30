@@ -3,7 +3,6 @@ before_action :authenticate_user!, except: [:index, :show, :mypost]
 before_action :forbiden_access_edit, only: [:edit]
 before_action :forbiden_access_post, only: [:show]
 before_action :access_draft, only: [:show]
-before_action :count_access, only: [:show]
 
 
   def index
@@ -114,19 +113,6 @@ before_action :count_access, only: [:show]
     if post.status == "下書き"
       flash[:alert] = "このアクセスは禁止されています。"
       redirect_to users_path
-    end
-  end
-
-  def count_access
-    if user_signed_in?
-      count = Count.find_by(user_id: current_user.uuid, post_id: params[:uuid])
-      unless count
-        count = Count.create(user_id: current_user.uuid, post_id: params[:uuid])
-        counts = Count.where(post_id: params[:uuid])
-        post = count.post
-        post.pv_count = counts.length
-        post.save
-      end
     end
   end
 end

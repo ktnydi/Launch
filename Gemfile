@@ -43,8 +43,6 @@ gem 'omniauth-twitter'
 
 gem 'kaminari'
 
-gem 'impressionist'
-
 gem 'rails-i18n', '~> 5.1'
 
 gem 'gravtastic'

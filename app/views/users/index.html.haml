@@ -26,40 +26,6 @@
                   = @user.followings.count
                 %td
                   = @user.followers.count
-      .posts-rank-wrapper
-        .period
-          %h3 アクセスランキング
-          .select-period
-            - if params[:period]
-              = link_to "Day", "?period=today", data: { "turbolinks" => false }
-            - else
-              = link_to "Day", "?period=today", data: { "turbolinks" => false }, class: "select"
-            = link_to "Week", "?period=week", data: { "turbolinks" => false }
-            = link_to "Month", "?period=month", data: { "turbolinks" => false }
-        .posts-list
-          - if @posts.present?
-            - @posts.each do |post|
-              .post
-                .post-title
-                  %h2
-                    = link_to post.title, post_path(post), data: { "turbolinks": false }
-                  .post-bottom
-                    .left
-                      %span.heart
-                        - if current_user && post.likes.find_by(user_id: current_user.id)
-                          %i.material-icons.favorite favorite
-                        - else
-                          %i.material-icons.unfavorite favorite_border
-                        %span= post.likes.count
-                      ・
-                      %span
-                        = post.user.name
-                    %p
-                      = post.created_at.strftime("%Y.%m.%d")
-          - else
-            .post
-              %h2
-                投稿された記事はありません。
     .page-right
       - if @user
         .followings-posts-wrapper
