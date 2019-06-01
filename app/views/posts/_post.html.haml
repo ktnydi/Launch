@@ -1,10 +1,13 @@
 /
   ログイン中のユーザーが存在し、
   閲覧している記事にいいね済みか？
-%p= post.likes.count
 - if current_user && post.like_user(current_user.id)
   = link_to post_like_path(post, current_user.id), remote: true, method: :delete do
-    %i.material-icons.favorite favorite
+    %p
+      = post.likes.count
+    %i.fas.fa-heart
 - else
   = link_to post_likes_path(post), remote: true, method: :post do
-    %i.material-icons.unfavorite favorite_border
+    %p
+      = post.likes.count
+    %i.far.fa-heart

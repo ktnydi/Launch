@@ -8,7 +8,10 @@
           .post_info
             .author= post.user.name
             .created_at= post.created_at.strftime("%Y-%m-%d")
-          %i.far.fa-heart
+          - if current_user && post.like_user(current_user.id)
+            %i.fas.fa-heart
+          - else
+            %i.far.fa-heart
   - else
     .noposts
       %h2 記事がありません

@@ -4,24 +4,17 @@ class CommentsController < ApplicationController
     @comment = current_user.comments.new(comment_params)
     @post = Post.find_by(uuid: params[:post_id])
     if @comment.save
-      @comment = Comment.new
-      respond_to do |format|
-        format.js
-        format.html
-      end
+      redirect_to post_path(@post)
     else
-      redirect_to users_path
+      redirect_to post_path(@post)
     end
   end
 
   def destroy
     @comment = Comment.find_by(id: params[:id])
     @post = @comment.post
-    respond_to do |format|
-      if @comment.destroy
-        format.js
-        format.html
-      end
+    if @comment.destroy
+      redirect_to post_path(@post)
     end
   end
 

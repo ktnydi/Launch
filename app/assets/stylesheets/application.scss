@@ -13,7 +13,7 @@
  *= require_self
  *= require home.scss
  *= require dashbord.scss
- *= require show.scss
+ *= require post.scss
  *= require_tree .
  */
 
@@ -243,6 +243,9 @@ main {
   }
   &.posts_wrapper {
     padding-top: 60px;
+  }
+  &.post_wrapper {
+    background-color: $white;
   }
 }
 
