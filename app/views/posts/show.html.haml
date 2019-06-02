@@ -5,19 +5,26 @@
       %i#cls-btn.fas.fa-times
       = error
 %main
-  .index
+  .post_index
     .post_info_wrapper
       .post_info
         = image_tag gravatar_image(@post.user), size: 50
         %span= @post.user.name
         .created_at= @post.created_at.strftime("%Y-%m-%d")
-      .user_action
-        - if @post.app_url.present?
-          = link_to @post.app_url, target: :_blank, class: "app_url" do
-            %i.fas.fa-link
-        .heart#heart
-          = render "post", post: @post
+      %button.follow_btn{data: {id: @post.user.id}}= render "follows/follow", user: @post.user
     %h2.main_title= @post.title
+    .user_action
+      %button.heart#heart
+        = render "post", post: @post
+      - if @post.app_url.present?
+        %button.github
+          = link_to @post.app_url, target: :_blank do
+            %i.fab.fa-github
+      - else
+        %button.github.no_url
+          %i.fab.fa-github
+      %button.share#share_btn
+        %i.fas.fa-share-alt
   .content
     != markdown @post.content
 
@@ -75,3 +82,16 @@
     comment_form.classList.toggle('hide')
     preview_area.classList.toggle('hide')
   })
+
+  // ssl通信を利用した場合に有効
+  if (navigator.share) {
+    const share_btn = document.getElementById('share_btn')
+    share_btn.classList.add('support')
+    share_btn.addEventListener('click', ()=>{
+      navigator.share({
+        url  : location.href,
+        title: document.title,
+        text : '',
+      })
+    })
+  }

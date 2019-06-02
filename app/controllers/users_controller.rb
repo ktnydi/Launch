@@ -15,13 +15,11 @@ class UsersController < ApplicationController
       @followings.each do |following|
         @following_ids << following.uuid
       end
-      @following_posts = Post.status_public
+      @posts = Post.status_public
                              .where(user_id: @following_ids)
                              .order(created_at: :desc)
                              .page(params[:page])
                              .per(20)
-    else
-      redirect_to root_path
     end
   end
 

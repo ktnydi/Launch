@@ -6,7 +6,7 @@
           = link_to "Launch", users_path
         - else
           = link_to "Launch", root_path
-      %ul
+      %ul.header_nav
         %li
           - if user_signed_in?
             = link_to "ホーム", users_path

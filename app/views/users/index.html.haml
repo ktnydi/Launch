@@ -8,12 +8,14 @@
       %span= current_user.name
     .accompany
       .follow
-        フォロー
-        %span.count= @user.active_follows.count
+        = link_to user_follows_list_path(@user) do
+          フォロー
+          %span.count= @user.active_follows.count
       .follower
-        フォロワー
-        %span.count= @user.passive_follows.count
-  = render "share/card", posts: @following_posts
+        = link_to user_followers_list_path(@user) do
+          フォロワー
+          %span.count= @user.passive_follows.count
+  = render "share/card", posts: @posts
 %button.write_post
   = link_to new_post_path do
     .line

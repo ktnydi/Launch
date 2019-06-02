@@ -1,9 +1,10 @@
 - @page_title = "フォロワー一覧"
-.follows-wrapper
+%main.follower
+  %ul.accompany_btn_list
+    %li= link_to "フォロー中", user_follows_list_path
+    %li= link_to "フォロワー", user_followers_list_path, class: "follower"
   .container
-    %h3 フォロワー
     - if @followers.present?
       = render "share/follow_list", users: @followers
     - else
-      .notfind
-        %p フォロワーがいません。
+      %p.no_user ユーザーはいません。

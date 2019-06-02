@@ -14,7 +14,6 @@ before_action :access_draft, only: [:show]
 
   def show
     @post = Post.find_by(uuid: params[:uuid])
-    @author = @post.user
     @comment = Comment.new
   end
 

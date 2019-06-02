@@ -1,0 +1,10 @@
+var follow_btns = document.getElementsByClassName('follow_btn')
+for (var i = 0, len = follow_btns.length; i < len; i++ ) {
+  var follow_btn = follow_btns.item(i)
+  var follow_btn_id = follow_btn.dataset.id
+  var target_id = '<%= @user.id %>'
+
+  if (follow_btn_id === target_id) {
+    follow_btn.innerHTML = '<%= j(render "follow", user: @user) %>'
+  }
+}

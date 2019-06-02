@@ -29,6 +29,10 @@
       margin-right: 12px;
       font-size: 1.4rem;
       color: $sub-font-color;
+      a {
+        text-decoration: none;
+        color: $sub-font-color;
+      }
       .count {
         margin-left: 3px;
         font-weight: bold;
