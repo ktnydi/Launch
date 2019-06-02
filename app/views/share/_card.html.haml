@@ -17,6 +17,7 @@
       %h2 記事がありません
       %p 開発したアプリを紹介してコメントをもらおう！
       = link_to "アプリを紹介する", new_post_path
-.paginate
-  = link_to_prev_page posts, "前のページへ", class: "prev-page"
-  = link_to_next_page posts, "次のページへ", class: "next-page"
+- if (defined? prev_page)
+  .paginate
+    = link_to_prev_page posts, "前のページへ", class: "prev-page"
+    = link_to_next_page posts, "次のページへ", class: "next-page"

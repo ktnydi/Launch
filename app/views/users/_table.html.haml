@@ -1,0 +1,23 @@
+%table
+  %tr
+    %th.title タイトル
+    %th.status 状態
+    %th.created_at 作成日
+    %th.updated_at 更新日
+    %th.edit 操作
+  - if posts.present?
+    - posts.each do |post|
+      %tr
+        %td.title
+          %h3= link_to post.title, post_path(post), data: { "turbolinks" => false }
+          %p= markdown(post.content).gsub!(/(<.*?>|")/, "").truncate(100)
+        %td.status
+          = post.status
+        %td.created_at
+          = post.created_at.strftime("%Y.%m.%d")
+        %td.updated_at
+          = post.updated_at.strftime("%Y.%m.%d")
+        %td.edit
+          = link_to "編集", edit_post_path(post), data: { "turbolinks" => false }
+          ・
+          \#{link_to "削除", post_path(post), method: :delete, data: { confirm: "本当に削除しますか？一度、記事を削除すると元に戻せなくなります。"}}

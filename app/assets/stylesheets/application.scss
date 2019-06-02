@@ -245,7 +245,9 @@ main {
     background: $main-color;
     color: $white;
   }
-  &.posts_wrapper, &.follow {
+  &.posts_wrapper,
+  &.follow,
+  &.authenticate_edit_form {
     padding-top: 60px;
   }
   &.post_wrapper {
@@ -588,8 +590,12 @@ footer.bottom {
   font-weight: bold;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   background-color: #04756F;
   position: relative;
+  label {
+    flex-grow: 1;
+  }
   input[type=text] {
     height: 40px;
     width: 100%;
@@ -620,6 +626,23 @@ footer.bottom {
         font-size: 1.6rem;
       }
     }
+  }
+}
+
+.mypost_search {
+  width: 90%;
+  max-width: 500px;
+  margin: 24px auto;
+  background-color: $white;
+  input[type="text"] {
+    color: $font-color;
+  }
+  .placeholder {
+    color: $sub-font-color;
+    font-weight: normal;
+  }
+  button[type="submit"] i {
+    color: $sub-font-color;
   }
 }
 

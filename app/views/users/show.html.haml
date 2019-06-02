@@ -24,70 +24,32 @@
       %h2
         記事の管理
     .myposts-list
-      .posts-search
-        = form_tag user_path(current_user), method: :get do
-          = label_tag do
-            %i.material-icons
-              search
-            = search_field_tag "q", params[:q], placeholder: "記事を検索"
-            = submit_tag "検索"
-      %table
-        %tr
-          %th.title タイトル
-          %th.status 状態
-          %th.created_at 作成日
-          %th.updated_at 更新日
-          %th.edit 操作
-        - if @posts.present?
-          - @posts.each do |post|
-            %tr
-              %td.title
-                %h3= link_to post.title, post_path(post), data: { "turbolinks" => false }
-                %p= markdown(post.content).gsub!(/(<.*?>|")/, "").truncate(100)
-              %td.status
-                = post.status
-              %td.created_at
-                = post.created_at.strftime("%Y.%m.%d")
-              %td.updated_at
-                = post.updated_at.strftime("%Y.%m.%d")
-              %td.edit
-                = link_to "編集", edit_post_path(post), data: { "turbolinks" => false }
-                ・
-                \#{link_to "削除", post_path(post), method: :delete, data: { confirm: "本当に削除しますか？一度、記事を削除すると元に戻せなくなります。"}}
-        - else
-          %tr
-            %td.nopost{:colspan => "5"} 記事はありません
+      = form_tag user_path(current_user), method: :get, name: "search_form", remote: true, class: 'search mypost_search' do
+        = label_tag do
+          = text_field_tag "pq", params[:pq], id: "field", class: "search_field"
+          .placeholder 記事タイトルで検索
+        = button_tag id: "go_search" do
+          %i.fas.fa-search
+      #table_wrapper
+        = render "table", posts: @posts
     .paginate
-      = link_to_prev_page @posts, "前のページへ", class: "prev-page", data: { "turbolinks" => false }
-      = link_to_next_page @posts, "次のページへ", class: "next-page", data: { "turbolinks" => false }
+      = link_to_prev_page @posts, "前のページへ", class: "prev-page"
+      = link_to_next_page @posts, "次のページへ", class: "next-page"
 .posts-like-wrapper
   .container
     - if @liked_posts.present?
       .posts-controll-header
         %h2
           いいねした記事
-      .posts-list
-        - @liked_posts.each do |post|
-          .post
-            = image_tag gravatar_image(post.user), size: 50
-            .post-title
-              .post-top
-                %h2
-                  = link_to post.title, post_path(post), data: { "turbolinks": false }
-                %p= markdown(post.content).gsub!(/(<.*?>|")/, "").truncate(200)
-              .post-bottom
-                .left
-                  %span.heart
-                    - if current_user && post.likes.find_by(user_id: current_user.id)
-                      %i.material-icons.favorite favorite
-                    - else
-                      %i.material-icons.unfavorite favorite_border
-                    %span= post.likes.count
-                  ・
-                  %span
-                    = post.user.name
-                %p
-                  = post.created_at.strftime("%Y.%m.%d")
+      = render "share/card", posts: @liked_posts
       .more-posts
-        = link_to likes_path, data: { "turbolinks" => false } do
+        = link_to likes_path do
           %span いいねした記事一覧へ
+
+:javascript
+  var go_search = document.getElementById('go_search')
+  var search_field = document.getElementsByClassName('search_field')[0]
+
+  search_field.addEventListener('input', ()=>{
+    go_search.click()
+  })

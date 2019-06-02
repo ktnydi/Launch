@@ -35,7 +35,7 @@
   (function() {
     document.addEventListener('keyup', (e)=>{
       var target = e.target
-      if (target.nodeName === 'INPUT' && target.name === 'q') {
+      if (target.nodeName === 'INPUT' && target.id === 'field') {
         var has_value = target.value.length > 0
         var placeholder = target.nextElementSibling
         if (has_value) {
@@ -46,3 +46,13 @@
       }
     })
   })()
+
+  var inputs = document.querySelectorAll('.search input')
+  for (var i = 0, len = inputs.length; i < len; i++) {
+    var input = inputs.item(i)
+    var has_value = input.value.length > 0
+    if (has_value) {
+      var placeholder = input.nextElementSibling
+      placeholder.classList.add('hide')
+    }
+  }
