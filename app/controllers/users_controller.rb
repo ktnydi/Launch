@@ -3,11 +3,7 @@ class UsersController < ApplicationController
   before_action :forbiden_access, only: [:show]
 
   def index
-    if params[:user_id]
-      @user = User.find_by(uuid: params[:user_id])
-    else
-      @user = current_user
-    end
+    @user = params[:user_id] ? User.find_by(uuid: params[:user_id]) : current_user
 
     if @user
       @followings = @user.followings
@@ -20,6 +16,8 @@ class UsersController < ApplicationController
                              .order(created_at: :desc)
                              .page(params[:page])
                              .per(20)
+    else
+      redirect_to posts_path
     end
   end
 

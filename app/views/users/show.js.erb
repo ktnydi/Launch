@@ -1,3 +1,7 @@
 var table_wrapper = document.getElementById('table_wrapper')
-console.log('<%= @posts.count %>')
-table_wrapper.innerHTML = '<%= j(render "table", posts: @posts) %>'
+var post_count = <%= @posts.count %>
+if (post_count > 0) {
+  table_wrapper.innerHTML = '<%= j(render "share/card", posts: @posts) %>'
+} else {
+  table_wrapper.innerHTML = '<p class="noposts">記事はありません</p>'
+}

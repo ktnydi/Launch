@@ -38,6 +38,30 @@
   }
 }
 
+// 記事編集
+.edit_wrapper {
+  .edit_list {
+    padding: 0;
+    list-style: none;
+    text-align: center;
+    background-color: $white;
+    display: flex;
+    align-items: center;
+    li {
+      background-color: $main-color;
+      margin-left: 8px;
+      border-radius: 3px;
+      a {
+        display: block;
+        padding: 3px 8px;
+        font-size: 1.2rem;
+        text-decoration: none;
+        color: $white;
+      }
+    }
+  }
+}
+
 // リンク
 .app_url {
   display: flex;

@@ -1,5 +1,5 @@
 .card_wrapper
-  - if posts
+  - if posts.length > 0
     - posts.each do |post|
       .card
         .main_title
@@ -13,10 +13,7 @@
           - else
             %i.far.fa-heart
   - else
-    .noposts
-      %h2 記事がありません
-      %p 開発したアプリを紹介してコメントをもらおう！
-      = link_to "アプリを紹介する", new_post_path
+    %p.noposts 記事はありません
 - if (defined? prev_page)
   .paginate
     = link_to_prev_page posts, "前のページへ", class: "prev-page"

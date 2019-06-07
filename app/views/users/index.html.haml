@@ -5,7 +5,7 @@
   .login_user
     .user
       = image_tag gravatar_image(@user), size: 50
-      %span= current_user.name
+      %span= @user.name
     .accompany
       .follow
         = link_to user_follows_list_path(@user) do
