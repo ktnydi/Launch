@@ -13,7 +13,7 @@ module Launch
     config.time_zone = "Tokyo"
     config.i18n.default_locale = :ja
     config.action_view.field_error_proc = Proc.new do |html_tag, instance|
-      %Q(<span class="field_with_errors">#{html_tag}</span>).html_safe
+      %Q(#{html_tag}).html_safe
     end
 
     # Settings in config/environments/* take precedence over those specified here.

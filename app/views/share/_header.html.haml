@@ -35,9 +35,9 @@
 .hamburger#hamburger
   %i.line
 - if flash[:notice]
-  %p#notification.devise-notification.notice
+  %p.notification.notice
     = notice
 - elsif flash[:alert]
-  %p#alert.devise-notification.alert
+  %p#alert.notification.alert
     %i#cls-btn.material-icons.clear clear
     = alert

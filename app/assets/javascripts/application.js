@@ -17,20 +17,9 @@
 document.addEventListener('DOMContentLoaded', function() {
   var toggle = document.getElementById('toggle');
   var lists = document.getElementById('lists');
-  toggle.addEventListener('click', function() {
-    var classes = lists.className.split(' ');
-    var active_idx = classes.indexOf('active');
-    if (active_idx >= 0) {
-      classes.splice(active_idx, 1);
-      lists.className = classes.join(' ');
-    } else {
-      classes.push('active');
-      lists.className = classes.join(' ');
-    }
-  });
-
-  const notification = document.getElementById('notification');
-  if (notification !== null) {
-    notification.classList.add('close');
+  if (toggle) {
+    toggle.addEventListener('click', function() {
+      lists.classList.toggle('active')
+    });
   }
 });

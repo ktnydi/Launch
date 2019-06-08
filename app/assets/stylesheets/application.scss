@@ -160,7 +160,6 @@ header {
       margin-right:8px;
       size: 30px;
       border-radius: 9999px;
-      border: 1px solid $border-color;
       background-color: $white;
     }
   }
@@ -354,6 +353,21 @@ main.follow, main.follower {
   }
 }
 
+.notification {
+  animation: notification 5s ease 0s forwards;
+}
+
+@keyframes notification {
+  0%, 100% {
+    opacity: 0;
+    transform: translateX(150%);
+  }
+  20%, 80% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
 .notice {
   padding: 8px 24px;
   text-align: center;
@@ -366,18 +380,12 @@ main.follow, main.follower {
   top: 70px;
   right: 40px;
   z-index: 50;
-  transform: translateX(0);
-  transition: transform .5s 3s;
   @media all and (max-width: 1024px) {
     right: 8px;
   }
 }
 
-.close {
-  transform: translateX(150%);
-}
-
-.devise-notification.alert {
+.alert {
   padding: 8px 24px;
   max-width: 95%;
   margin: 0 auto;

@@ -146,6 +146,8 @@ form.f-editor {
   top: 150px;
   right: 50px;
   z-index: 9999;
+  transition: .5s;
+  animation: show_error .5s ease 0s forwards;
   @media all and (max-width: 1024px) {
     width: 95%;
     margin: auto;
@@ -167,5 +169,18 @@ form.f-editor {
   }
   ul {
     margin: 8px 0;
+  }
+}
+
+.editor-errors.hide {
+  transform: translateY(150%);
+}
+
+@keyframes show_error {
+  0% {
+    transform: translateY(150%);
+  }
+  100% {
+    transform: translateY(0);
   }
 }

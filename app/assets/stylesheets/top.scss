@@ -8,30 +8,84 @@
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
-  .index {
-    margin-bottom: 48px;
-  }
-  h1 {
-    font-size: 5rem;
+}
+
+.index {
+  margin-bottom: 48px;
+  .index__h1 {
+    font-size: 10rem;
     font-weight: normal;
+    @media all and (max-width: 896px) {
+      font-size: 5rem;
+    }
   }
-  .authenticate {
-    a {
-      display: block;
-      width: 200px;
-      padding: 8px 0;
-      margin: 12px auto;
-      border-radius: 999px;
-      text-decoration: none;
-      color: $white;
-      transition: all .3s;
-      &:hover {
-        background: rgba(255, 255, 255, .1);
-      }
-      &.signup {
-        background-color: $sub-color;
-        box-shadow: 0 2px 17px 1px rgba(0, 0, 0, 0.1);
-      }
+  .index__text {
+    animation: text 1s linear 0s forwards;
+  }
+}
+
+@keyframes text {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.index__h1 span {
+  opacity: 0;
+  letter-spacing: 2px;
+}
+
+.index__h1 span:nth-child(1) {
+  animation: show_app_name 1s ease 0s forwards;
+}
+
+.index__h1 span:nth-child(2) {
+  animation: show_app_name 1s ease .1s forwards;
+}
+
+.index__h1 span:nth-child(3) {
+  animation: show_app_name 1s ease .2s forwards;
+}
+
+.index__h1 span:nth-child(4) {
+  animation: show_app_name 1s ease .3s forwards;
+}
+
+.index__h1 span:nth-child(5) {
+  animation: show_app_name 1s ease .4s forwards;
+}
+
+.index__h1 span:nth-child(6) {
+  animation: show_app_name 1s ease .5s forwards;
+}
+
+@keyframes show_app_name {
+  to {
+    opacity: 1;
+  }
+}
+
+.authenticate {
+  a {
+    display: block;
+    width: 200px;
+    padding: 8px 0;
+    margin: 12px auto;
+    border-radius: 999px;
+    text-decoration: none;
+    color: $white;
+    transition: all .3s;
+    &:hover {
+      background: rgba(255, 255, 255, .1);
+    }
+    &.signup {
+      background-color: $sub-color;
+      box-shadow: 0 2px 17px 1px rgba(0, 0, 0, 0.1);
     }
   }
 }
