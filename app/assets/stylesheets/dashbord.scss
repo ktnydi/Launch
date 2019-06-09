@@ -1,168 +1,73 @@
 @import 'variables';
 
-.user-info-wrapper, .posts-info-wrapper, .posts-like-wrapper {
-  .container {
-    max-width: 1024px;
-  }
-}
-
 .user-info-wrapper {
-  padding: 120px 0 30px;
-  h2 {
-    margin: 16px 0;
-    font-size: 2rem;
-    font-weight: normal;
+  padding: 84px 0 24px;
+  .user_info {
+    padding: 24px;
     text-align: center;
-  }
-  .user-profile-wrapper {
-    padding: 24px 0;
+    border-radius: 8px;
+    box-shadow: 0 5px 17px 1px rgba(0, 0, 0, 0.05);
     background-color: $white;
-    box-shadow: 0 2px 17px 1px rgba(0, 0, 0, 0.12);
-    display: flex;
-    align-items: center;
-    @media all and (max-width: 896px) {
-      padding: 0;
-      flex-direction: column;
+    position: relative;
+  }
+}
+
+.user_info_top {
+  margin-bottom: 12px;
+  img {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    box-shadow: 0 5px 17px 1px rgba(0, 0, 0, 0.05);
+  }
+  .name, .uuid {
+    margin: 12px;
+  }
+  .name {
+    font-size: 2rem;
+  }
+  .uuid {
+    color: $sub-font-color;
+  }
+  hr {
+    display: block;
+    border: none;
+    border-radius: 3px;
+    height: 3px;
+    width: 100px;
+    margin: 0 auto;
+    background-color: $main-color;
+  }
+}
+
+.user_info_bottom {
+  display: flex;
+  justify-content: space-between;
+  .more_info {
+    flex: 1;
+    a {
+      color: $font-color;
+      text-decoration: none;
     }
-    .user-info {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: calc(100% / 3);
-      height: 100%;
-      text-align: center;
-      border-right: 1px solid $border-color;
-      @media all and (max-width: 896px) {
-        width: 100%;
-        padding: 12px;
-        border-right: none;
-        border-bottom: 1px solid $border-color;
-      }
-      &:last-child {
-        border-right: none;
-        @media all and (max-width: 896px) {
-          border-bottom: none;
-        }
-      }
+    .info_name {
+      font-size: 1.4rem;
     }
-    .user-profile-img {
-      img {
-        border-radius: 9999px;
-        border: 1px solid $border-color;
-        background-color: $white;
-      }
-      p {
-        font-size: 1.3rem;
-      }
-    }
-    .posted-count {
-      margin-bottom: 3px;
-      font-size: 4rem;
-    }
-    .posted-text {
-      font-size: 1.3rem;
+    .count {
+      font-size: 2rem;
+      font-weight: bold;
+      color: $main-color;
     }
   }
 }
 
-.posts-info-wrapper, .posts-like-wrapper {
-  padding: 30px 0;
+.posts-info-wrapper {
   .posts-controll-header {
     h2 {
       margin: 16px 0;
-      font-size: 2rem;
+      font-size: 1.6rem;
       font-weight: normal;
       text-align: center;
-    }
-  }
-}
-.posts-info-wrapper {
-  .myposts-list {
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      box-shadow: 0 2px 17px 1px rgba(0, 0, 0, 0.12);
-      background-color: $white;
-      tr {
-        border-bottom: 1px solid $border-color;
-        &:last-child {
-          border-bottom: none;
-        }
-        th, td {
-          padding: 12px;
-        }
-        th {
-          font-size: 1.6rem;
-        }
-        td {
-          font-size: 1.3rem;
-        }
-      }
-      .title {
-        width: 40%;
-        text-align: left;
-        h3 {
-          font-size: 1.6rem;
-          word-break: break-all;
-          @media all and (max-width: 896px) {
-            font-size: 1.3rem;
-          }
-          a {
-            color: $main-color;
-            text-decoration: none;
-            &:hover {
-              text-decoration: underline;
-            }
-          }
-        }
-        p {
-          font-size: 0.8rem;
-          word-break: break-all;
-        }
-      }
-      .status, .created_at, .updated_at, .edit {
-        width: calc(60% / 4);
-      }
-      .status {
-        text-align: center;
-      }
-      .created_at, .updated_at {
-        text-align: center;
-        @media all and (max-width: 896px) {
-          display: none;
-        }
-      }
-      .edit {
-        text-align: center;
-        a {
-          text-decoration: none;
-          color: $main-color;
-          &:hover {
-            text-decoration: underline;
-          }
-        }
-      }
-    }
-  }
-}
-
-.posts-like-wrapper .posts-controll-header {
-  justify-content: space-between;
-}
-
-.more-posts {
-  text-align: center;
-  a {
-    display: inline-block;
-    padding: 12px;
-    font-size: 1.3rem;
-    text-decoration: none;
-    color: $font-color;
-    span:after {
-      font-family: "Material Icons";
-      content: "navigate_next";
-      font-size: 1.6rem;
-      vertical-align: middle;
+      color: $sub-font-color;
     }
   }
 }

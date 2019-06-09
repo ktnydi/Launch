@@ -1,28 +1,32 @@
 - @page_title = "ダッシュボード"
 .user-info-wrapper
   .container
-    %h2
-      ユーザー情報
-    .user-profile-wrapper
-      .user-info
-        .user-profile-img
-          = image_tag gravatar_image(@user), size: 70
-          %p= @user.name
-      .user-info
-        .user-profile-posts
-          .posted-count
-            = @user.posts.status_public.count
-          .posted-text 投稿した記事数
-      .user-info
-        .user-profile-likes
-          .posted-count
-            = @count
-          .posted-text 総アクセス数
+    .user_info
+      .user_info_top
+        = image_tag gravatar_image(@user), size: 70
+        %h2.name= @user.name
+        %p.uuid<>
+          ID：
+          = @user.uuid
+        %hr
+      .user_info_bottom
+        .more_info
+          .info_name 投稿数
+          %p.count= @user.posts.count
+        .more_info
+          = link_to user_follows_list_path(@user) do
+            .info_name フォロー
+            %p.count= @user.active_follows.count
+        .more_info
+          = link_to user_followers_list_path(@user) do
+            .info_name フォロワー
+            %p.count= @user.passive_follows.count
+
 .posts-info-wrapper
   .container
     .posts-controll-header
       %h2
-        記事の管理
+        あなたの記事一覧
     .myposts-list
       = form_tag user_path(current_user), method: :get, name: "search_form", remote: true, class: 'search mypost_search' do
         = label_tag do
@@ -35,16 +39,6 @@
     .paginate
       = link_to_prev_page @posts, "前のページへ", class: "prev-page"
       = link_to_next_page @posts, "次のページへ", class: "next-page"
-.posts-like-wrapper
-  .container
-    - if @liked_posts.present?
-      .posts-controll-header
-        %h2
-          いいねした記事
-      = render "share/card", posts: @liked_posts
-      .more-posts
-        = link_to likes_path do
-          %span いいねした記事一覧へ
 
 :javascript
   var go_search = document.getElementById('go_search')

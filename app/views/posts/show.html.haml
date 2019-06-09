@@ -5,53 +5,55 @@
       %i#cls-btn.fas.fa-times
       = error
 %main
-  .post_index
-    .post_info_wrapper
-      .post_info
-        = image_tag gravatar_image(@post.user), size: 50
-        %span= @post.user.name
-        .created_at= @post.created_at.strftime("%Y-%m-%d")
-      - if user_signed_in? && other_user?(@post.user.uuid)
-        %button.follow_btn{data: {id: @post.user.id}}= render "follows/follow", user: @post.user
-      - else
-        .edit_wrapper
-          %ul.edit_list
-            %li= link_to "編集", edit_post_path(@post)
-            %li= link_to "削除", post_path(@post), method: :delete, data: { confirm: "本当に削除しますか？一度、記事を削除すると元に戻せなくなります。"}
+  .container.post_container
+    .post_index
+      .post_info_wrapper
+        .post_info
+          = image_tag gravatar_image(@post.user), size: 50
+          %span= @post.user.name
+          .created_at= @post.created_at.strftime("%Y-%m-%d")
+        - if user_signed_in?
+          - if other_user?(@post.user.uuid)
+            %button.follow_btn{data: {id: @post.user.id}}= render "follows/follow", user: @post.user
+          - else
+            .edit_wrapper
+              %ul.edit_list
+                %li= link_to "編集", edit_post_path(@post)
+                %li= link_to "削除", post_path(@post), method: :delete, data: { confirm: "本当に削除しますか？一度、記事を削除すると元に戻せなくなります。"}
 
-    %h2.main_title= @post.title
-    .user_action
-      %button.heart#heart
-        = render "post", post: @post
-      - if @post.app_url.present?
-        %button.github
-          = link_to @post.app_url, target: :_blank do
+      %h2.main_title= @post.title
+      .user_action
+        %button.heart#heart
+          = render "post", post: @post
+        - if @post.app_url.present?
+          %button.github
+            = link_to @post.app_url, target: :_blank do
+              %i.fab.fa-github
+        - else
+          %button.github.no_url
             %i.fab.fa-github
-      - else
-        %button.github.no_url
-          %i.fab.fa-github
-      %button.share#share_btn
-        %i.fas.fa-share-alt
-  .content
-    != markdown @post.content
+        %button.share#share_btn
+          %i.fas.fa-share-alt
+    .content
+      != markdown @post.content
 
-  .comment_wrapper
-    #comment
-      = render "comment", comments: @post.comments
-    - if user_signed_in?
-      .parent_modal
-      .child_modal
-        .comment-edit
-          = form_for @comment, url: "/comment/#{@post.id}", html: { id: "comment_form", class: "comment_form" } do |f|
-            = f.text_area :content, id: "comment_area", placeholder: "コメントを入力"
-          .preview_area.hide
-          .btn_wrapper
-            %button#comment_submit{type: "submit", form: "comment_form"}
-              コメントを送信
-            .preview
-              %i.far.fa-eye-slash
-      %button.show_comment_form_btn
-        %i.far.fa-comment
+    .comment_wrapper
+      #comment
+        = render "comment", comments: @post.comments
+      - if user_signed_in?
+        .parent_modal
+        .child_modal
+          .comment-edit
+            = form_for @comment, url: "/comment/#{@post.id}", html: { id: "comment_form", class: "comment_form" } do |f|
+              = f.text_area :content, id: "comment_area", placeholder: "コメントを入力"
+            .preview_area.hide
+            .btn_wrapper
+              %button#comment_submit{type: "submit", form: "comment_form"}
+                コメントを送信
+              .preview
+                %i.far.fa-eye-slash
+        %button.show_comment_form_btn
+          %i.far.fa-comment
 :javascript
   var comment_form = document.getElementById('comment_form')
   var comment_area = document.getElementById('comment_area')

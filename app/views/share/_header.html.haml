@@ -1,37 +1,36 @@
 %header#header
-  .container
-    .header-left
-      .logo
-        - if user_signed_in?
-          = link_to "Launch", users_path
-        - else
-          = link_to "Launch", root_path
-      %ul.header_nav
-        %li
-          - if user_signed_in?
-            = link_to "ホーム", users_path
-          - else
-            = link_to "ホーム", root_path
-        %li
-          = link_to "記事一覧", posts_path
-      = form_tag posts_path, method: :get, class: 'search header_search' do
-        = label_tag do
-          = text_field_tag "q", params[:q], autocomplete: "off", id: "field"
-          .placeholder 記事タイトルで検索
-        = button_tag do
-          %i.fas.fa-search
-    .header-right
+  .header-left
+    .logo
       - if user_signed_in?
-        %button.new-post
-          = link_to "記事を書く", new_post_path
-        .user-name-toggle
-          #toggle.user-name
-            = image_tag gravatar_image(current_user), size: 35
-            %span= current_user.name
-          #lists.toggle-list
-            = link_to "ダッシュボード", user_path(current_user.id)
-            = link_to "アカウント設定", edit_user_registration_path
-            = link_to "ログアウト", destroy_user_session_path, method: :delete
+        = link_to "Launch", users_path
+      - else
+        = link_to "Launch", root_path
+    %ul.header_nav
+      %li
+        - if user_signed_in?
+          = link_to "ホーム", users_path
+        - else
+          = link_to "ホーム", root_path
+      %li
+        = link_to "記事一覧", posts_path
+    = form_tag posts_path, method: :get, class: 'search header_search' do
+      = label_tag do
+        = text_field_tag "q", params[:q], autocomplete: "off", id: "field"
+        .placeholder 記事タイトルで検索
+      = button_tag do
+        %i.fas.fa-search
+  .header-right
+    - if user_signed_in?
+      %button.new-post
+        = link_to "記事を書く", new_post_path
+      .user-name-toggle
+        #toggle.user-name
+          = image_tag gravatar_image(current_user), size: 35
+          %span= current_user.name
+        #lists.toggle-list
+          = link_to "ダッシュボード", user_path(current_user.id)
+          = link_to "アカウント設定", edit_user_registration_path
+          = link_to "ログアウト", destroy_user_session_path, method: :delete
 .hamburger#hamburger
   %i.line
 - if flash[:notice]

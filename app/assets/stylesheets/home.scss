@@ -1,8 +1,6 @@
 @import "variables";
 
 .login_user {
-  padding: 24px;
-  background-color: $white;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -26,7 +24,7 @@
     display: flex;
     align-items: center;
     .follow, .follower {
-      margin-right: 12px;
+      margin-left: 12px;
       font-size: 1.4rem;
       color: $sub-font-color;
       a {
@@ -39,6 +37,36 @@
         color: $main-color;
       }
     }
+  }
+}
+
+.home_top_wrapper {
+  max-width: 768px;
+  margin: 0 auto;
+  padding: 24px 24px 12px;
+  background-color: $white;
+}
+.toggle_index {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  a {
+    display: inline-block;
+    padding: 4px 16px;
+    margin: 0 4px;
+    font-size: 1.4rem;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 40px;
+    color: $font-color;
+    background-color: $white;
+    transition: .3s;
+  }
+  a:hover, a.active {
+    font-weight: bold;
+    background-color: $main-color;
+    color: $white;
   }
 }
 

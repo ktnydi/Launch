@@ -134,8 +134,9 @@ form.f-editor {
 }
 
 .editor-errors {
-  width: 400px;
+  width: 600px;
   padding: 24px;
+  margin: 0 auto;
   box-shadow: 0 2px 17px 1px rgba(0, 0, 0, 0.12);
   border: 1px solid rgba(153, 24, 24, 0.3);
   border-radius: 3px;
@@ -143,18 +144,13 @@ form.f-editor {
   background-color: rgba(153, 24, 24, 0.1);
   color: #833131;
   position: fixed;
-  top: 150px;
-  right: 50px;
+  bottom: 24px;
+  right: 0;
+  left: 0;
   z-index: 9999;
-  transition: .5s;
-  animation: show_error .5s ease 0s forwards;
+  animation: show_error 5s ease 0s forwards;
   @media all and (max-width: 1024px) {
     width: 95%;
-    margin: auto;
-    top: auto;
-    bottom: 24px;
-    right: 0;
-    left: 0;
   }
   .clear {
     font-size: 1.6rem;
@@ -172,15 +168,15 @@ form.f-editor {
   }
 }
 
-.editor-errors.hide {
+.editor-errors.hidden {
   transform: translateY(150%);
 }
 
 @keyframes show_error {
-  0% {
+  0%, 100% {
     transform: translateY(150%);
   }
-  100% {
+  20%, 80% {
     transform: translateY(0);
   }
 }

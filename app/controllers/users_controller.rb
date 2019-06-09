@@ -11,11 +11,15 @@ class UsersController < ApplicationController
       @followings.each do |following|
         @following_ids << following.uuid
       end
-      @posts = Post.status_public
-                             .where(user_id: @following_ids)
-                             .order(created_at: :desc)
-                             .page(params[:page])
-                             .per(20)
+      if params[:posts]
+        @posts = @user.liked_posts.status_public.order(created_at: :desc).page(params[:page]).per(20)
+      else
+        @posts = Post.status_public
+                               .where(user_id: @following_ids)
+                               .order(created_at: :desc)
+                               .page(params[:page])
+                               .per(20)
+      end
     else
       redirect_to posts_path
     end
@@ -26,7 +30,6 @@ class UsersController < ApplicationController
     @posts = @user.posts.order(created_at: :desc).page(params[:page]).per(5)
     @liked_posts = @user.liked_posts.status_public.order(created_at: :desc).limit(10)
     if @posts = @user.posts.search(params[:pq]).page(params[:page]).per(5)
-      puts @posts
       respond_to do |format|
         format.js
         format.html

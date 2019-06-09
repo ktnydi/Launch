@@ -1,8 +1,10 @@
 - @page_title = "フォロワー一覧"
 %main.follower
-  %ul.accompany_btn_list
-    %li= link_to "フォロー中", user_follows_list_path
-    %li= link_to "フォロワー", user_followers_list_path, class: "follower"
+  .accompany_btn_index
+    .container
+      %ul.accompany_btn_list
+        %li= link_to "フォロー中", user_follows_list_path
+        %li= link_to "フォロワー", user_followers_list_path, class: "follower"
   .container
     - if @followers.present?
       = render "share/follow_list", users: @followers

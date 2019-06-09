@@ -1,13 +1,12 @@
 %footer
-  .container
-    .footer
-      %p
-        © 2019 ktnydi
-      %ul
+  .footer
+    %p
+      &copy; 2019 ktnydi
+    %ul
+      %li
+        = link_to "利用規約", terms_path, target: :_blank
+      %li
+        = link_to "お問い合わせ", "https://goo.gl/forms/HDn8yGkq2UYPVFDj2", target: :_blank
+      - if user_signed_in?
         %li
-          = link_to "利用規約", terms_path, target: :_blank
-        %li
-          = link_to "お問い合わせ", "https://goo.gl/forms/HDn8yGkq2UYPVFDj2", target: :_blank
-        - if user_signed_in?
-          %li
-            = link_to "退会", edit_user_registration_path(current_user), data: { "tubolinks" => false }
+          = link_to "退会", edit_user_registration_path(current_user)

@@ -67,24 +67,29 @@ input[type="checkbox"] {
 }
 
 .container {
-  width: 95%;
+  width: 100%;
+  max-width: 800px;
   margin: 0 auto;
+  padding: 0 16px;
+  &.post_container {
+    @media all and (max-width: 896px) {
+      padding: 0;
+    }
+  }
 }
 
 // ヘッダー
 header {
   height: 60px;
   width: 100%;
+  padding: 0 16px;
   background-color: $main-color;
   position: fixed;
   top: 0;
   z-index: 100;
-  .container {
-    height: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-content: center;
-  }
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
 }
 header {
   .header-right {
@@ -256,7 +261,7 @@ main {
 
 // フォロー・フォロワー一覧ページ
 main.follow, main.follower {
-  padding-top: 100px;
+  padding-top: 110px;
   .container {
     text-align: center;
   }
@@ -271,31 +276,45 @@ main.follow, main.follower {
   .accompany_btn_list {
     .follow, .follower {
       color: $main-color;
+      background-color: $white;
       font-weight: bold;
     }
   }
 }
 
-.accompany_btn_list {
+.accompany_btn_index {
   width: 100%;
-  padding: 0;
-  list-style: none;
-  text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: $white;
+  background-color: $main-color;
   position: fixed;
   top: 60px;
   left: 0;
+  .accompany_btn_list {
+    padding: 0;
+    text-align: center;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
   li {
     width: 50%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     a {
-      display: block;
-      line-height: 40px;
-      padding: 0 12px;
+      display: inline-block;
+      padding: 4px 12px;
+      font-size: 1.4rem;
       text-decoration: none;
-      color: $font-color;
+      border-radius: 99px;
+      color: $white;
+      transition: .4s;
+      &:hover, &.active {
+        font-weight: bold;
+        background-color: $white;
+        color: $main-color;
+      }
     }
   }
 }
@@ -426,15 +445,14 @@ footer {
   margin-top: auto;
   width: 100%;
   min-height: 50px;
-  font-size: 1.3rem;
-  border-top: 1px solid $border-color;
+  padding: 0 16px;
   background-color: $white;
-  color: $sub-font-color;
   @media all and (max-width: 896px) {
     text-align: center;
-    padding: 12px 0;
+    padding: 24px 0;
   }
   .footer {
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -443,7 +461,8 @@ footer {
       flex-direction: column-reverse;
     }
     p {
-      font-size: 1rem;
+      font-size: 1.4rem;
+      color: $sub-font-color;
       @media all and (max-width: 896px) {
         width: 100%;
         padding-top: 24px;
@@ -457,14 +476,15 @@ footer {
       }
       li {
         display: inline-block;
-        margin: 0 12px;
+        margin-left: 24px;
         @media all and (max-width: 896px) {
           display: block;
+          margin: 12px 0;
         }
         a {
           text-decoration: none;
           font-size: 1.3rem;
-          color: $sub-font-color;
+          color: $font-color;
           transition: color .3s;
           &:hover {
             color: $main-color;
@@ -475,11 +495,6 @@ footer {
   }
 }
 
-footer.bottom {
-  position: absolute;
-  bottom: 0;
-}
-
 .hamburger {
   height: 25px;
   width: 25px;
@@ -487,7 +502,7 @@ footer.bottom {
   align-items: center;
   position: fixed;
   top: 30px;
-  right: 2.5%;
+  right: 16px;
   z-index: 200 ;
   transform: translateY(-50%);
   @media all and (max-width: 896px) {
@@ -638,8 +653,7 @@ footer.bottom {
 }
 
 .mypost_search {
-  width: 90%;
-  max-width: 500px;
+  width: 100%;
   margin: 24px auto;
   background-color: $white;
   input[type="text"] {

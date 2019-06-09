@@ -2,20 +2,38 @@
   #notification.notice.notification
     = flash[:post_notice]
 %main.posts_wrapper
-  .login_user
-    .user
-      = image_tag gravatar_image(@user), size: 50
-      %span= @user.name
-    .accompany
-      .follow
-        = link_to user_follows_list_path(@user) do
-          フォロー
-          %span.count= @user.active_follows.count
-      .follower
-        = link_to user_followers_list_path(@user) do
-          フォロワー
-          %span.count= @user.passive_follows.count
-  = render "share/card", posts: @posts
+  .home_top_wrapper
+    .login_user
+      .user
+        = image_tag gravatar_image(@user), size: 50
+        %span= @user.name
+      .accompany
+        .follow
+          = link_to user_follows_list_path(@user) do
+            フォロー
+            %span.count= @user.active_follows.count
+        .follower
+          = link_to user_followers_list_path(@user) do
+            フォロワー
+            %span.count= @user.passive_follows.count
+    .toggle_index
+      = link_to "投稿", user_posts_path(@user), class: "index_tweet"
+      = link_to "いいね", "#{user_posts_path(@user)}/?posts=like", class: "index_like"
+  .container
+    = render "share/card", posts: @posts
 %button.write_post
   = link_to new_post_path do
     .line
+
+:javascript
+  const param = window.location.search
+  const index_tweet = document.getElementsByClassName('index_tweet')[0]
+  const index_like = document.getElementsByClassName('index_like')[0]
+
+  if (param.length > 0) {
+    index_like.classList.add('active')
+    index_tweet.classList.remove('active')
+  } else {
+    index_like.classList.remove('active')
+    index_tweet.classList.add('active')
+  }
