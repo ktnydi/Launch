@@ -27,13 +27,13 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find_by(uuid: params[:id])
-    @posts = @user.posts.order(created_at: :desc).page(params[:page]).per(5)
-    @liked_posts = @user.liked_posts.status_public.order(created_at: :desc).limit(10)
-    if @posts = @user.posts.search(params[:pq]).page(params[:page]).per(5)
+    if @posts = @user.posts.search(params[:pq]).page(params[:page]).per(10)
       respond_to do |format|
         format.js
         format.html
       end
+    else
+      @posts = @user.posts.order(created_at: :desc).page(params[:page]).per(10)
     end
   end
 

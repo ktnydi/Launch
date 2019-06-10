@@ -6,9 +6,9 @@ before_action :access_draft, only: [:show]
 
 
   def index
-    @posts = Post.status_public.order(created_at: :desc).page(params[:page]).per(10)
+    @posts = Post.status_public.order(created_at: :desc).page(params[:page]).per(20)
     if params[:q]
-      @posts = Post.status_public.search(params[:q]).page(params[:page]).per(10)
+      @posts = Post.status_public.search(params[:q]).page(params[:page]).per(20)
     end
   end
 

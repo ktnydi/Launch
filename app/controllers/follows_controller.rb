@@ -28,12 +28,12 @@ class FollowsController < ApplicationController
 
   def follow
     @user = User.find_by(uuid: params[:user_id])
-    @followings = @user.followings.page(params[:page]).per(80)
+    @followings = @user.followings.page(params[:page]).per(20)
   end
 
   def follower
     @user = User.find_by(uuid: params[:user_id])
-    @followers = @user.followers.page(params[:page]).per(80)
+    @followers = @user.followers.page(params[:page]).per(20)
   end
 
   private

@@ -7,6 +7,9 @@
       - if current_user.uuid == params[:user_id]
         .follow_btn{data: {id: user.id}}
           = render "follows/follow", user: user
-.paginate
-  = link_to_prev_page users, "前のページへ", class: "prev-page"
-  = link_to_next_page users, "次のページへ", class: "next-page"
+- unless users.total_pages == 1
+  .paginate
+    = link_to_prev_page users, "", class: "prev-page"
+    - unless users.out_of_range?
+      .now_page= "#{users.current_page}/#{users.total_pages}"
+    = link_to_next_page users, "", class: "next-page"
