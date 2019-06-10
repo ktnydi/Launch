@@ -14,8 +14,8 @@ Rails.application.routes.draw do
   resources :users, only: [:index, :show] do
     resources :follows, only: [:create, :destroy]
     get '/posts' => 'users#index'
-    get '/follows' => 'follows#follow', as: "myfollows"
-    get '/followers' => 'follows#follower', as: "myfollowers"
+    get '/follows' => 'follows#follow', as: "follows_list"
+    get '/followers' => 'follows#follower', as: "followers_list"
     get '/myposts' => 'posts#mypost'
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

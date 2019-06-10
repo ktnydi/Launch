@@ -1,260 +1,188 @@
 @import 'variables';
 
-.user-f-wrapper {
-  width: 100%;
-  padding: 120px 0 80px;
-  .error_explanation {
-    padding: 24px;
-    border-radius: 3px;
-    border: 1px solid rgba(153, 24, 24, 0.3);
-    background-color: rgba(153, 24, 24, 0.1);
-    color: #833131;
-    p {
-      font-weight: bold;
-      font-size: 1.6rem;
-    }
-    ul {
-      padding: 8px 24px 0;
-      font-size: 1.3rem;
-    }
-  }
-  .signup, .login, .edit {
-    width: 100%;
-    max-width: 330px;
-    margin: 50px auto;
-    h2 {
-      font-weight: normal;
-      font-size: 2.4rem;
-      text-align: center;
-    }
-    form {
-      .field {
-        margin: 12px 0;
-        .user-image {
-          display: block;
-          width: 90px;
-          height: 90px;
-          margin: 8px auto;
-          border-radius: 9999px;
-          background-color: $white;
-          border: 1px solid $border-color;
-        }
-        label, span {
-          font-size: 1.3rem;
-        }
-        .change_image {
-          display: block;
-          height: 40px;
-          width: 120px;
-          margin: 24px auto;
-          line-height: 40px;
-          text-align: center;
-          border-radius: 3px;
-          box-shadow: 0 2px 17px 1px rgba(0, 0, 0, 0.1);
-          text-decoration: none;
-          color: $font-color;
-          font-size: 1.3rem;
-          cursor: pointer;
-          background-color: $white;
-          transition: background-color .1s;
-          &:hover {
-            background-color: #eee;
-          }
-        }
-        input {
-          padding: 0 8px;
-          font-size: 1.3rem;
-          letter-spacing: 1.2px;
-        }
-        input[type="text"], input[type="password"], input[type="email"] {
-          width: 100%;
-          height: 40px;
-          border: 1px solid $border-color;
-          @media all and (max-width: 1024px) {
-            font-size: 1.6rem;
-          }
-        }
-        input#user_remember_me {
-          display: inline-block;
-        }
-        .signup-password {
-          position: relative;
-          input {
-            padding-right: 40px;
-          }
-          .password-mask {
-            display: inline-block;
-            width: 40px;
-            text-align: center;
-            line-height: 40px;
-            font-size: 1.6rem;
-            color: #BDBDBD;
-            background-color: inherit;
-            position: absolute;
-            top: 0;
-            right: 0;
-          }
-        }
-        .correspond-password {
-          height: 1rem;
-          font-size: 1.3rem;
-          color: #833131;
-        }
-      }
-      .actions {
-        text-align: center;
-        input[type="submit"], .twitter {
-          display: inline-block;
-          width: 100%;
-          height: 40px;
-          font-size: 1.6rem;
-          border: none;
-          border-radius: 3px;
-          cursor: pointer;
-          background-color: $main-color;
-          color: $white;
-          transition: all 0.1s;
-          &:hover {
-            background-color: $sub-color;
-          }
-        }
-        .twitter {
-          line-height: 40px;
-          background-color: #55acee;
-          text-decoration: none;
-          &:hover {
-            background-color: #6eb5ec;
-          }
-        }
-      }
-    }
-    .f-destroy {
-      .de-account {
-        padding: 24px;
-        border-radius: 3px;
-        border: 1px solid rgba(153, 24, 24, 0.3);
-        background-color: rgba(153, 24, 24, 0.1);
-        color: #833131;
-        .caution {
-          font-weight: bold;
-          font-size: 1.6rem;
-        }
-        p {
-          margin: 8px 0;
-          font-size: 1.3rem;
-        }
-      }
-      form {
-        input[type="submit"] {
-          display: inline-block;
-          width: 120px;
-          height: 40px;
-          margin: 12px 0;
-          font-size: 1.6rem;
-          border: none;
-          border-radius: 3px;
-          background-color: #E57373;
-          color: $white;
-          transition: all 0.1s;
-          &:hover {
-            background-color: #EF5350;
-          }
-        }
-      }
-    }
-  }
-  .login, .signup {
+// アカウント認証
+.authenticate_form {
+  width: 350px;
+  max-width: 90%;
+  text-align: center;
+  box-shadow: 0 2px 17px 1px rgba(0, 0, 0, 0.1);
+  border-radius: 3px;
+  background-color: $white;
+  color: $font-color;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  &::before {
+    content: '';
     display: block;
-    width: 330px;
-    max-width: 100%;
-    margin: 0 auto;
-    border-radius: 3px;
-    border: 1px solid $border-color;
+    width: 100%;
+    height: 5px;
+    background-color: $main-color;
+  }
+  h2 {
+    padding-top: 24px;
+    font-weight: normal;
+    font-size: 2.4rem;
     background-color: $white;
-    h2 {
-      padding: 24px 24px 0;
+    color: $font-color;
+  }
+}
+
+.authenticate_form .form-wrapper {
+  padding: 24px;
+  overflow-y: scroll;
+  @media all and (max-width: 480px) {
+    max-height: 350px;
+  }
+}
+
+.authenticate_form form, .authenticate_edit_form form {
+  margin-bottom: 12px;
+  .field {
+    margin-bottom: 24px;
+    position: relative;
+    &::after {
+      display: block;
+      content: '';
+      height: 1px;
+      width: 100%;
+      transform-origin: left;
+      transform: scale(0);
+      background-color: $border-color;
+      transition: all .3s;
+      position: absolute;
+      bottom: 0;
     }
-    .form-wrapper {
-      padding: 0 24px 24px;
-    }
-    form {
-    }
-    .term {
-      margin: 8px 0;
-    }
-    p {
-      font-size: 1.3rem;
-      margin: 3px 0;
-      a {
+    &.focus {
+      &::after {
+        height: 2px;
+        transform: scale(1);
+        background-color: $main-color;
+      }
+      label {
+        transform: translateY(-20px) scale(.7);
         color: $main-color;
-        text-decoration: none;
       }
     }
-    .link {
-      padding: 8px 0;
-      text-align: center;
-    }
   }
-}
-
-.f-profile, {
-  display: none;
-}
-.f-profile.active {
-  display: block;
-}
-
-.f-password {
-  display: none;
-}
-.f-password.active {
-  display: block;
-}
-
-.f-destroy {
-  display: none;
-}
-.f-destroy.active {
-  display: block;
-}
-
-.tab-select {
-  overflow: hidden;
-  border-bottom: 1px solid $border-color;
-  position: relative;
-  font-size: 1.6rem;
-  @media all and (max-width: 1024px) {
-    font-size: 1.3rem;
+  label {
+    cursor: text;
+    position: absolute;
+    top: 10px;
+    left: 0;
+    transform-origin: left;
+    transform: translateY(0);
+    transition: all .3s;
+    color: $sub-font-color;
   }
-  .tab {
-    display: inline-block;
-    float: left;
-    width: calc(100% / 3);
-    line-height: 60px;
-    text-align: center;
+  input {
+    font-size: 1.6rem;
+  }
+  input[type="text"],
+  input[type="password"],
+  input[type="email"] {
+    display: block;
+    width: 100%;
+    height: 45px;
+    border-bottom: 1px solid $border-color;
+    background-color: inherit;
+  }
+  input[type="submit"] {
+    width: 200px;
+    padding: 8px 0;
+    background-color: $main-color;
+    color: $white;
     cursor: pointer;
   }
-  .tab-bottom {
+}
+
+.authenticate_form {
+  .term, .link {
+    font-size: 1.4rem;
+    margin: 12px 0;
+    a {
+      color: $main-color;
+    }
+  }
+  .or {
+    margin: 5px 0;
+    font-size: 1.4rem;
+  }
+  .twitter {
+    display: inline-block;
+    width: 200px;
+    padding: 8px 0;
+    text-decoration: none;
+    background-color: #2994f7;
+    color: $white;
+  }
+}
+
+// アカウント編集
+.authenticate_edit_form {
+  width: 100%;
+  text-align: center;
+  .container {
+    display: flex;
+    flex-direction: column;
+  }
+  .box {
     width: 100%;
-    height: 2px;
-    position: absolute;
-    bottom: 0;
-    .underline {
-      height: 3px;
-      width: calc(100% / 3);
-      background-color: $main-color;
-      position: absolute;
-      left: 0;
-      transition: left .3s;
-    }
-    .underline.left {
-      left: 0;
-    }
-    .underline.center {
-      left: calc(100% / 3);
-    }
-    .underline.right {
-      left: calc(100% / 3 * 2);
-    }
+    max-width: 400px;
+    margin: 60px auto;
+  }
+  .user-image {
+    display: inline-block;
+    border-radius: 999px;
+    box-shadow: 0 5px 17px 1px rgba(0, 0, 0, 0.05);
+  }
+  .change_image {
+    display: inline-block;
+    width: 200px;
+    margin: 12px 0;
+    padding: 8px;
+    box-shadow: 0 7px 15px rgba(0, 0, 0, .05);
+    text-decoration: none;
+    background-color: $white;
+    color: $sub-font-color;
+  }
+}
+
+.delete_account {
+  padding: 24px;
+  border: 2px dashed silver;
+  h2 {
+    font-size: 2rem;
+  }
+  .caution {
+    margin: 24px 0;
+    color: $sub-font-color;
+  }
+  a {
+    display: inline-block;
+    width: 200px;
+    padding: 8px 0;
+    text-decoration: none;
+    background-color: #d14a4a;
+    color: $white;
+  }
+}
+
+// エラー表示
+.error_explanation {
+  padding: 24px;
+  border-radius: 3px;
+  border: 1px solid rgba(153, 24, 24, 0.3);
+  background-color: rgba(153, 24, 24, 0.1);
+  color: #833131;
+  p {
+    font-weight: bold;
+    font-size: 1.6rem;
+  }
+  ul {
+    padding: 8px 24px 0;
+    font-size: 1.3rem;
+    list-style: none;
   }
 }

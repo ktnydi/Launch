@@ -1,104 +1,122 @@
 @import 'variables';
 
-.top-page-wrapper {
-  padding-top: 50px;
-  display: flex;
-  @media all and (max-width: 1024px) {
-    flex-direction: column;
-  }
-  .introduce, .top-page-content {
-    width: 50vw;
-    text-align: center;
-    @media all and (max-width: 1024px) {
-      width: 100%;
+.circle {
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.05);
+  transform: translate(50%, -50%);
+}
+
+.circle_bigger {
+  width: 800px;
+  height: 800px;
+  position: absolute;
+  right: 1200px;
+  top: 600px;
+}
+
+.circle_middle {
+  width: 500px;
+  height: 500px;
+  position: absolute;
+  right: 500px;
+  top: 400px;
+}
+
+.circle_smaller {
+  width: 160px;
+  height: 160px;
+  position: absolute;
+  right: 160px;
+  top: 200px;
+}
+
+.position_center {
+  width: 100%;
+  padding: 0 24px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.index {
+  margin-bottom: 48px;
+  .index__h1 {
+    font-size: 10rem;
+    font-weight: normal;
+    @media all and (max-width: 896px) {
+      font-size: 5rem;
     }
   }
-  .container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: calc(100vh - 100px);
-    min-height: 400px;
-    @media all and (max-width: 1024px) {
-      height: 50vh;
-    }
-    @media all and (max-width: 480px) {
-      height: calc(100vh - 100px);
-    }
+  .index__text {
+    opacity: 0;
+    animation: text 1s linear 1s forwards;
   }
-  .introduce {
-    background-color: $main-color;
+}
+
+@keyframes text {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.index__h1 span {
+  opacity: 0;
+  letter-spacing: 2px;
+}
+
+.index__h1 span:nth-child(1) {
+  animation: show_app_name 1s ease 0s forwards;
+}
+
+.index__h1 span:nth-child(2) {
+  animation: show_app_name 1s ease .1s forwards;
+}
+
+.index__h1 span:nth-child(3) {
+  animation: show_app_name 1s ease .2s forwards;
+}
+
+.index__h1 span:nth-child(4) {
+  animation: show_app_name 1s ease .3s forwards;
+}
+
+.index__h1 span:nth-child(5) {
+  animation: show_app_name 1s ease .4s forwards;
+}
+
+.index__h1 span:nth-child(6) {
+  animation: show_app_name 1s ease .5s forwards;
+}
+
+@keyframes show_app_name {
+  to {
+    opacity: 1;
+  }
+}
+
+.authenticate {
+  a {
+    display: block;
+    width: 200px;
+    padding: 8px 0;
+    margin: 12px auto;
+    border-radius: 999px;
+    text-decoration: none;
     color: $white;
-    .message {
-      .title {
-        margin-bottom: 60px;
-        h1 {
-          font-weight: normal;
-          font-size: 4rem;
-        }
-        p {
-          font-size: 1.3rem;
-        }
-      }
-      ul {
-        padding: 0;
-        text-align: left;
-        list-style: none;
-        li {
-          padding: 8px 0;
-          display: flex;
-          align-items: center;
-          i {
-            margin-right: 12px;
-            font-size: 2.8rem;
-          }
-          span {
-            font-size: 1.3rem;
-            @media all and (max-width :1024px) {
-              font-size: 1.3rem;
-            }
-          }
-        }
-      }
+    transition: all .3s;
+    &:hover {
+      background: rgba(255, 255, 255, .1);
     }
-  }
-  .top-page-content {
-    background-color: $white;
-    .authenticate {
-      h2 {
-        margin-bottom: 24px;
-        font-size: 2rem;
-        font-weight: normal;
-      }
-      .login-or-signup {
-        font-size: 1.6rem;
-        .signup, .login {
-          display: block;
-          width: 200px;
-          margin: 0 auto;
-          padding: 8px 0;
-          border-radius: 3px;
-          text-decoration: none;
-          transition: all .1s;
-        }
-        .signup {
-          background-color: $main-color;
-          color: $white;
-          &:hover {
-            background-color: $sub-color;
-          }
-        }
-        .login {
-          border: 1px solid $main-color;
-          color: $main-color;
-          &:hover {
-            background-color: #f5f5f5;
-          }
-        }
-        p {
-          margin: 3px 0;
-        }
-      }
+    &.signup {
+      background-color: $sub-color;
+      box-shadow: 0 2px 17px 1px rgba(0, 0, 0, 0.1);
     }
   }
 }

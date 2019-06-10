@@ -1,0 +1,23 @@
+.card_wrapper
+  - if posts.length > 0
+    - posts.each do |post|
+      .card
+        .main_title
+          = link_to post.title, post_path(post.uuid)
+        .post_info_wrapper
+          .post_info
+            .author= post.user.name
+            .created_at= post.created_at.strftime("%Y-%m-%d")
+          - if current_user && post.like_user(current_user.id)
+            %i.fas.fa-heart
+          - else
+            %i.far.fa-heart
+  - else
+    %p.noposts 記事はありません
+
+- unless posts.total_pages == 1
+  .paginate
+    = link_to_prev_page posts, "", class: "prev-page"
+    - unless posts.out_of_range?
+      .now_page= "#{posts.current_page}/#{posts.total_pages}"
+    = link_to_next_page posts, "", class: "next-page"

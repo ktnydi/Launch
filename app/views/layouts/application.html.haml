@@ -19,41 +19,35 @@
     = favicon_link_tag('apple-touch-icon.png', {:rel => 'apple-touch-icon-precomposed', :sizes => '152x152', :type => 'image/png'})
     %link{:crossorigin => "anonymous", :href => "https://use.fontawesome.com/releases/v5.7.1/css/all.css", :integrity => "sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr", :rel => "stylesheet"}
     %link{:href => "https://fonts.googleapis.com/icon?family=Material+Icons", :rel => "stylesheet"}
+    %link{href: "https://fonts.googleapis.com/css?family=Lato:400,700&display=swap", rel: "stylesheet"}
     = stylesheet_link_tag '/editor/lib/codemirror.css', media: 'all'
     = stylesheet_link_tag '/editor/theme/neat.css', media: 'all'
     = stylesheet_link_tag '/editor/highlight/atom-one-dark.css', media: 'all'
-    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
-    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    = stylesheet_link_tag    'application', media: 'all'
+    = javascript_include_tag 'application'
     = javascript_include_tag '/editor/marked/marked.min.js'
     = javascript_include_tag '/editor/highlight/highlight.pack.js'
   %body{:ontouchstart => ""}
-    .wrapper
-      = render 'share/header'
-      = yield
+    = render 'share/header'
+    = yield
+    - if user_signed_in?
       = render 'share/footer'
     = render "share/menu"
 
     :javascript
+      var body = document.getElementsByTagName('body')[0]
       var hamburger = document.getElementById('hamburger');
       var menu = document.getElementById('menu');
-      var body = document.getElementsByTagName('body')[0];
-      var header = document.getElementById('header');
       var cls_btn = document.getElementById('cls-btn');
       var notice = document.getElementById('notice');
       var alert = document.getElementById('alert');
 
-      hamburger.addEventListener('click', function() {
-        var clazz = body.className;
-        if (clazz === 'active') {
-          body.className = '';
-          header.style.right = '0';
-          menu.style.visibility = 'hidden';
-        } else {
-          body.className = 'active';
-          header.style.right = '250px';
-          menu.style.visibility = 'visible';
-        }
-      })
+      (function() {
+        hamburger.addEventListener('click', ()=>{
+          hamburger.classList.toggle('active')
+          menu.classList.toggle('show')
+        })
+      })()
 
       if (notice || alert) {
         close(cls_btn, notice);
@@ -65,16 +59,3 @@
           cls_obj.style.display = 'none';
         });
       }
-
-      var search = document.getElementById('search');
-      var search_label = document.getElementById('label');
-      var search_field = document.getElementById('field');
-      search.addEventListener('click', function() {
-        var clazz = search_label.className;
-        if (clazz === 'active') {
-          search_label.className = '';
-        } else {
-          search_label.className = 'active';
-          search_field.focus();
-        }
-      });

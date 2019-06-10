@@ -4,70 +4,104 @@
     .nocomment
       %i#cls-btn.fas.fa-times
       = error
-.post-wrapper
-  .container
-    %main
-      %h1.main-title= @post.title
-      .created_at
-        Created by #{@post.user.name}
-        \#{@post.created_at.strftime("%Y.%m.%d")}
-      .content
-        != markdown @post.content
-      .comment-wrapper
-        #comment
-          = render "comment", comments: @post.comments
-        - if user_signed_in?
-          .comment-field
-            %h3 コメントする
-            %ul.toggle-field
-              %li#edit{:style => "border-bottom: 3px solid #009688; color: #009688;"} 編集
-              %li#preview プレビュー
-            .comment-edit
-              = form_for @comment, url: "/comment/#{@post.id}", remote: true do |f|
-                = f.text_area :content, id: "md-comment", placeholder: "コメントを入力してください", style: "display: block;"
-                #comment-preview.comment-md-preview{:style => "display: none;"}
-                %input#comment-submit{:type => "submit", :value => "投稿"}/
-      .icon
-        .like
-          %span#heart
-            = render "post", post: @post
-        .comment
-          %p= @post.comments.count
-          = link_to "#comment" do
-            %i.material-icons comment
+%main
+  .container.post_container
+    .post_index
+      .post_info_wrapper
+        .post_info
+          .author
+            = image_tag gravatar_image(@post.user), size: 50
+            %span.name= @post.user.name
+          - if user_signed_in?
+            - if other_user?(@post.user.uuid)
+              %button.follow_btn{data: {id: @post.user.id}}= render "follows/follow", user: @post.user
+        .edit_wrapper
+          .updated_at= "#{@post.updated_at.strftime("%Y-%m-%d")}に更新"
+          - unless other_user?(@post.user.uuid)
+            %ul.edit_list
+              %li= link_to "編集", edit_post_path(@post)
+              %li= link_to "削除", post_path(@post), method: :delete, data: { confirm: "本当に削除しますか？一度、記事を削除すると元に戻せなくなります。"}
+
+      %h2.main_title= @post.title
+      .user_action
+        %button.heart#heart
+          = render "post", post: @post
         - if @post.app_url.present?
-          .app-url
-            %p LINK
+          %button.github
             = link_to @post.app_url, target: :_blank do
-              %i.material-icons link
-    %aside
-      .author
-        %h3 この記事のクリエイター
-        = image_tag gravatar_image(@author), size: 120
-        .author-name
-          = link_to @author.name, user_posts_path(@author), data: {  "turbolinks" => false }
-        #follow
-          = render "follows/follow", other: @author
+              %i.fab.fa-github
+        - else
+          %button.github.no_url
+            %i.fab.fa-github
+        %button.share#share_btn
+          %i.fas.fa-share-alt
+    .content
+      != markdown @post.content
+
+    .comment_wrapper
+      #comment
+        = render "comment", comments: @post.comments
+      - if user_signed_in?
+        .parent_modal
+        .child_modal
+          .comment-edit
+            = form_for @comment, url: "/comment/#{@post.id}", html: { id: "comment_form", class: "comment_form" } do |f|
+              = f.text_area :content, id: "comment_area", placeholder: "コメントを入力"
+            .preview_area.hide
+            .btn_wrapper
+              %button#comment_submit{type: "submit", form: "comment_form"}
+                コメントを送信
+              .preview
+                %i.far.fa-eye-slash
+        %button.show_comment_form_btn
+          %i.far.fa-comment
 :javascript
-  var edit = document.getElementById('edit');
-  var preview = document.getElementById('preview')
-  var md_comment = document.getElementById('md-comment');
-  var comment_preview = document.getElementById('comment-preview');
+  var comment_form = document.getElementById('comment_form')
+  var comment_area = document.getElementById('comment_area')
+  var preview_area = document.getElementsByClassName('preview_area')[0]
+  var preview = document.getElementsByClassName('preview')[0]
+  var child_modal = document.getElementsByClassName('child_modal')[0]
+  var parent_modal = document.getElementsByClassName('parent_modal')[0]
+  var show_comment_form_btn = document.getElementsByClassName('show_comment_form_btn')[0]
+  var comment_submit = document.getElementById('comment_submit')
 
-  SwitchField(edit, preview, md_comment, comment_preview);
-  SwitchField(preview, edit, comment_preview, md_comment);
-
-  function SwitchField(btn1, btn2, elem1, elem2) {
-    btn1.addEventListener('click', function() {
-      btn1.style.borderBottom = "3px solid #009688";
-      btn2.style.border = 'none';
-      btn1.style.color = "#009688";
-      btn2.style.color = "inherit";
-      elem1.style.display = 'block';
-      elem2.style.display = 'none';
-    });
-  }
-
-  md_comment.addEventListener('keyup', function() {
-    comment_preview.innerHTML = marked(md_comment.value);
+  show_comment_form_btn.addEventListener('click', ()=>{
+    child_modal.classList.add('show')
+    parent_modal.classList.add('show')
   })
+
+  parent_modal.addEventListener('click', ()=>{
+    child_modal.classList.remove('show')
+    parent_modal.classList.remove('show')
+  })
+
+  comment_submit.setAttribute('disabled', 'disabled')
+  comment_area.addEventListener('keyup', ()=>{
+    preview_area.innerHTML = marked(comment_area.value)
+    if (comment_area.value.length > 0) {
+      comment_submit.removeAttribute('disabled')
+    } else {
+      comment_submit.setAttribute('disabled', 'disabled')
+    }
+  })
+
+  preview.addEventListener('click', ()=>{
+    var icon = preview.children[0]
+    icon.classList.toggle('fa-eye-slash')
+    icon.classList.toggle('fa-eye')
+    comment_form.classList.toggle('hide')
+    preview_area.classList.toggle('hide')
+  })
+
+  // ssl通信を利用した場合に有効
+  if (navigator.share) {
+    const share_btn = document.getElementById('share_btn')
+    share_btn.classList.add('support')
+    share_btn.addEventListener('click', ()=>{
+      navigator.share({
+        url  : location.href,
+        title: document.title,
+        text : '',
+      })
+    })
+  }

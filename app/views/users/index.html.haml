@@ -1,68 +1,44 @@
 - if flash[:post_notice]
-  #notification.notice
+  #notification.notice.notification
     = flash[:post_notice]
-.posts-home-wrapper
-  .container
-    %aside.page-left
-      .account-wrapper
-        %h1 ユーザー
-        .account
-          - if @user
-            = image_tag gravatar_image(@user), size: 80
-            .current-user-name
-              = link_to @user.name, user_posts_path(@user), data: { "turbolinks" => false }
-            %table.follow
-              %tr
-                %th
-                  = link_to "投稿した数", user_myposts_path(@user), data: { "turbolinks" => false }
-                %th
-                  = link_to "フォロー", user_myfollows_path(@user), data: { "turbolinks" => false }
-                %th
-                  = link_to "フォロワー", user_myfollowers_path(@user), data: { "turbolinks" => false }
-              %tr
-                %td
-                  = @user.posts.status_public.count
-                %td
-                  = @user.followings.count
-                %td
-                  = @user.followers.count
-      .posts-rank-wrapper
-        .period
-          %h3 アクセスランキング
-          .select-period
-            - if params[:period]
-              = link_to "Day", "?period=today", data: { "turbolinks" => false }
-            - else
-              = link_to "Day", "?period=today", data: { "turbolinks" => false }, class: "select"
-            = link_to "Week", "?period=week", data: { "turbolinks" => false }
-            = link_to "Month", "?period=month", data: { "turbolinks" => false }
-        .posts-list
-          - if @posts.present?
-            - @posts.each do |post|
-              .post
-                .post-title
-                  %h2
-                    = link_to post.title, post_path(post), data: { "turbolinks": false }
-                  .post-bottom
-                    .left
-                      %span.heart
-                        - if current_user && post.likes.find_by(user_id: current_user.id)
-                          %i.material-icons.favorite favorite
-                        - else
-                          %i.material-icons.unfavorite favorite_border
-                        %span= post.likes.count
-                      ・
-                      %span
-                        = post.user.name
-                    %p
-                      = post.created_at.strftime("%Y.%m.%d")
-          - else
-            .post
-              %h2
-                投稿された記事はありません。
-    .page-right
-      - if @user
-        .followings-posts-wrapper
-          .followings
-            %h3 新着記事
-          = render "share/list", objs: @following_posts
+%main.home_wrapper
+  .home_top_wrapper
+    .login_user
+      .user
+        = image_tag gravatar_image(@user), size: 50
+        %span= @user.name
+      - unless other_user?(@user.uuid)
+        .edit_user
+          = link_to edit_user_registration_path do
+            %i.fas.fa-cog
+    .accompany
+      .follow
+        = link_to user_follows_list_path(@user) do
+          フォロー
+          %span.count= @user.active_follows.count
+      .follower
+        = link_to user_followers_list_path(@user) do
+          フォロワー
+          %span.count= @user.passive_follows.count
+  .posts_wrapper_contents
+    .toggle_index
+      = link_to "投稿", user_posts_path(@user), class: "index_tweet"
+      = link_to "いいね", "#{user_posts_path(@user)}/?posts=like", class: "index_like"
+    .container
+      = render "share/card", posts: @posts
+%button.write_post
+  = link_to new_post_path do
+    .line
+
+:javascript
+  const param = window.location.search
+  const index_tweet = document.getElementsByClassName('index_tweet')[0]
+  const index_like = document.getElementsByClassName('index_like')[0]
+
+  if (param.length > 0) {
+    index_like.classList.add('active')
+    index_tweet.classList.remove('active')
+  } else {
+    index_like.classList.remove('active')
+    index_tweet.classList.add('active')
+  }

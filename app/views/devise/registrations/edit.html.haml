@@ -1,68 +1,69 @@
 - @page_title = "アカウント設定"
-.user-f-wrapper
+%main.authenticate_edit_form
   .container
     = render "devise/shared/error_messages", resource: resource
-    .tab-select
-      #t-profile.tab プロフィール
-      #t-password.tab パスワード
-      #t-destroy.tab アカウント削除
-      .tab-bottom
-        #active-tab.underline
-    .edit
+    .box
       = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, id: "left-form" }) do |f|
-        #profile.f-profile.f.active
-          .field
-            = image_tag gravatar_image(current_user), class: "user-image", id: "user-image"
-            = link_to "画像を変更", "https://ja.gravatar.com/", data: {confirm: "画像を変更するには、現在登録中のメールアドレスでGravatarを作成する必要があります。"}, class: "change_image", target: :_blank
-          .field
-            = f.label :name
-            = f.text_field :name, autofocus: true, required: true
-          .field
-            = f.label :email
-            = f.email_field :email, autofocus: true, required: true, autocomplete: "email"
-          - if devise_mapping.confirmable? && resource.pending_reconfirmation?
-            %div
-              Currently waiting confirmation for: #{resource.unconfirmed_email}
-          .actions
-            = f.submit "更新"
+        .field
+          = image_tag gravatar_image(current_user), class: "user-image", id: "user-image"
+          %br
+          = link_to "Gravatarで画像を変更", "https://ja.gravatar.com/", class: "change_image", target: :_blank
+        .field
+          = f.label :name
+          = f.text_field :name, autofocus: true, required: true
+        .field
+          = f.label :email
+          = f.email_field :email, autofocus: true, required: true, autocomplete: "email"
+        - if devise_mapping.confirmable? && resource.pending_reconfirmation?
+          %div
+            Currently waiting confirmation for: #{resource.unconfirmed_email}
+        .actions
+          = f.submit "更新"
+    .box
       = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, id: "center-form" }) do |f|
-        #password.f-password.f
-          .field
-            = f.label :current_password
-            = f.password_field :current_password, autocomplete: "current-password", required: true
-          .field
-            = f.label :password do
-              新しいパスワード
-              - if @minimum_password_length
-                %span
-                  ：#{@minimum_password_length}文字以上
-              = f.password_field :password, autocomplete: "new-password", required: true
-          .field
-            = f.label :password_confirmation do
-              新しいパスワードの確認
-              \#{f.password_field :password_confirmation, autocomplete: "new-password", required: true}
-            %p#judge.correspond-password
-          .actions
-            = f.submit "パスワードを変更", id: "submit", disabled: true, style: "background-color: #E0E0E0"
-      #destroy.f-destroy.f
-        .de-account
-          .caution 重要：ご確認ください！
-          %p アカウントを削除すると二度と復元することはできません。
-        = button_to "削除する", registration_path(resource_name), data: { confirm: "本当によろしいですか？" }, method: :delete
+        .field
+          = f.label :current_password
+          = f.password_field :current_password, autocomplete: "current-password", required: true
+        .field
+          = f.label :password
+          = f.password_field :password, autocomplete: "new-password", required: true
+        .field
+          = f.label :password_confirmation
+          = f.password_field :password_confirmation, autocomplete: "new-password", required: true
+        .actions
+          = f.submit "パスワードを変更"
+    .box
+      .delete_account
+        %h2 アカウントの削除
+        %p.caution 削除したアカウントは二度と元に戻せません。
+        = link_to "削除", registration_path(resource_name), data: { confirm: "削除したアカウントは二度と元に戻すことができません。\n本当によろしいですか？" }, method: :delete
 :javascript
-  var new_password = document.getElementById('user_password');
-  var new_confirmation_password = document.getElementById('user_password_confirmation');
-  var judge = document.getElementById('judge');
   var submit = document.getElementById('submit');
+  var input = document.querySelectorAll('.field input');
 
-  new_confirmation_password.addEventListener('keyup', function() {
-    if (this.value && this.value === new_password.value) {
-      judge.textContent = '';
-      submit.removeAttribute('disabled');
-      submit.style.backgroundColor = '#009688';
-    } else {
-      judge.textContent = '新しいパスワードと一致させてください。';
-      submit.setAttribute('disabled', 'disabled');
-      submit.style.backgroundColor = '#E0E0E0';
+  const move_form_label = (target) => {
+    if (target.nodeName === 'INPUT') {
+      var field = target.parentNode
+      field.classList.add('focus')
     }
-  });
+  }
+
+  for (var i = 0, len = input.length; i < len; i++) {
+    var target = input.item(i)
+    if (target.value.length > 0 && target.type !== 'hidden') {
+      move_form_label(target)
+    }
+
+    target.addEventListener('focus', (e)=>{
+      var target = e.target
+      move_form_label(target)
+    })
+
+    target.addEventListener('blur', (e) => {
+      var target = e.target
+      if (target.value.length === 0) {
+        var field = target.parentNode
+        field.classList.remove('focus')
+      }
+    })
+  }

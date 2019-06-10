@@ -4,59 +4,10 @@
   color: #999;
 }
 
-header.editor {
-  border-bottom: 1px solid $border-color;
-  .back {
-    display: inline-block;
-    height: 50px;
-    a {
-      height: 50px;
-      width: auto;
-      display: flex;
-      align-items: center;
-      text-decoration: none;
-      font-size: 1.6rem;
-      color: $font-color;
-      transition: all .15s;
-      &:hover {
-        color: $main-color;
-        i {
-          color: $main-color;
-        }
-      }
-      i {
-        font-size: 2.4rem;
-        transition: all 0.15s;
-      }
-    }
-  }
-  .submit {
-    display: flex;
-    align-items: center;
-    input[type="submit"] {
-      display: inline-block;
-      padding: 8px 24px;
-      margin-left: 12px;
-      border: none;
-      border-radius: 3px;
-      font-size: 1.3rem;
-      cursor: pointer;
-      background-color: $main-color;
-      color: $white;
-      transition: all .15s;
-      @media all and (max-width: 1024px) {
-        padding: 8px 12px;
-      }
-      &:hover {
-        background-color: $sub-color;
-      }
-    }
-  }
-}
-
 form.f-editor {
   width: 100%;
-  height: calc(100vh - 50px);
+  margin-top: 60px;
+  height: calc(100vh - 60px);
   input[type="text"], input[type="url"] {
     display: block;
     width: 100%;
@@ -111,7 +62,7 @@ form.f-editor {
 }
 
 #md-preview, .content, .comment-md-preview, .md-comment {
-  padding: 24px;
+  padding: 16px;
   word-break: break-all;
   background-color: $white;
   color: $font-color;
@@ -183,8 +134,9 @@ form.f-editor {
 }
 
 .editor-errors {
-  width: 400px;
+  width: 600px;
   padding: 24px;
+  margin: 0 auto;
   box-shadow: 0 2px 17px 1px rgba(0, 0, 0, 0.12);
   border: 1px solid rgba(153, 24, 24, 0.3);
   border-radius: 3px;
@@ -192,16 +144,13 @@ form.f-editor {
   background-color: rgba(153, 24, 24, 0.1);
   color: #833131;
   position: fixed;
-  top: 150px;
-  right: 50px;
+  bottom: 24px;
+  right: 0;
+  left: 0;
   z-index: 9999;
+  animation: show_error 5s ease 0s forwards;
   @media all and (max-width: 1024px) {
     width: 95%;
-    margin: auto;
-    top: auto;
-    bottom: 24px;
-    right: 0;
-    left: 0;
   }
   .clear {
     font-size: 1.6rem;
@@ -216,5 +165,18 @@ form.f-editor {
   }
   ul {
     margin: 8px 0;
+  }
+}
+
+.editor-errors.hidden {
+  transform: translateY(150%);
+}
+
+@keyframes show_error {
+  0%, 100% {
+    transform: translateY(150%);
+  }
+  20%, 80% {
+    transform: translateY(0);
   }
 }
