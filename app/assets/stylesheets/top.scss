@@ -58,11 +58,9 @@
 @keyframes text {
   from {
     opacity: 0;
-    transform: translateY(-20px);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
   }
 }
 
@@ -102,6 +100,8 @@
 }
 
 .authenticate {
+  transform: scale(0);
+  animation: scale .3s linear 2.5s forwards;
   a {
     display: block;
     width: 200px;
@@ -118,5 +118,17 @@
       background-color: $sub-color;
       box-shadow: 0 2px 17px 1px rgba(0, 0, 0, 0.1);
     }
+  }
+}
+
+@keyframes scale {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
   }
 }

@@ -17,7 +17,7 @@
               %button.follow_btn{data: {id: @post.user.id}}= render "follows/follow", user: @post.user
         .edit_wrapper
           .updated_at= "#{@post.updated_at.strftime("%Y-%m-%d")}に更新"
-          - unless other_user?(@post.user.uuid)
+          - if user_signed_in? && !other_user?(@post.user.uuid)
             %ul.edit_list
               %li= link_to "編集", edit_post_path(@post)
               %li= link_to "削除", post_path(@post), method: :delete, data: { confirm: "本当に削除しますか？一度、記事を削除すると元に戻せなくなります。"}

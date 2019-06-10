@@ -12,10 +12,9 @@
           .placeholder 記事タイトルで検索
         = button_tag do
           %i.fas.fa-search
-      .posts-link
+      .nav_link
         = link_to "ホーム", users_path
         = link_to "記事一覧", posts_path
-      .user-link
         = link_to "ダッシュボード", user_path(current_user.id)
         = link_to "アカウント設定", edit_user_registration_path
         = link_to "ログアウト", destroy_user_session_path, method: :delete
@@ -26,11 +25,11 @@
           .placeholder 記事タイトルで検索
         = button_tag do
           %i.fas.fa-search
-      .posts-link
-        = link_to "ホーム", root_path
+      .nav_link
+        = link_to "ホーム", root_path, class: "home"
         = link_to "記事一覧", posts_path
-      = link_to "ログイン", new_user_session_path
-      = link_to "アカウント作成", new_user_registration_path
+        = link_to "ログイン", new_user_session_path
+        = link_to "アカウント作成", new_user_registration_path
 :javascript
   (function() {
     document.addEventListener('keyup', (e)=>{
