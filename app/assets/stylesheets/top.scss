@@ -1,5 +1,35 @@
 @import 'variables';
 
+.circle {
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.05);
+  transform: translate(50%, -50%);
+}
+
+.circle_bigger {
+  width: 800px;
+  height: 800px;
+  position: absolute;
+  right: 1200px;
+  top: 600px;
+}
+
+.circle_middle {
+  width: 500px;
+  height: 500px;
+  position: absolute;
+  right: 500px;
+  top: 400px;
+}
+
+.circle_smaller {
+  width: 160px;
+  height: 160px;
+  position: absolute;
+  right: 160px;
+  top: 200px;
+}
+
 .position_center {
   width: 100%;
   padding: 0 24px;

@@ -1,26 +1,31 @@
 - if flash[:post_notice]
   #notification.notice.notification
     = flash[:post_notice]
-%main.posts_wrapper
+%main.home_wrapper
   .home_top_wrapper
     .login_user
       .user
         = image_tag gravatar_image(@user), size: 50
         %span= @user.name
-      .accompany
-        .follow
-          = link_to user_follows_list_path(@user) do
-            フォロー
-            %span.count= @user.active_follows.count
-        .follower
-          = link_to user_followers_list_path(@user) do
-            フォロワー
-            %span.count= @user.passive_follows.count
+      - unless other_user?(@user.uuid)
+        .edit_user
+          = link_to edit_user_registration_path do
+            %i.fas.fa-cog
+    .accompany
+      .follow
+        = link_to user_follows_list_path(@user) do
+          フォロー
+          %span.count= @user.active_follows.count
+      .follower
+        = link_to user_followers_list_path(@user) do
+          フォロワー
+          %span.count= @user.passive_follows.count
+  .posts_wrapper_contents
     .toggle_index
       = link_to "投稿", user_posts_path(@user), class: "index_tweet"
       = link_to "いいね", "#{user_posts_path(@user)}/?posts=like", class: "index_like"
-  .container
-    = render "share/card", posts: @posts
+    .container
+      = render "share/card", posts: @posts
 %button.write_post
   = link_to new_post_path do
     .line

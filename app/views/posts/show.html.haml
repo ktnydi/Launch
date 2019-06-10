@@ -9,17 +9,18 @@
     .post_index
       .post_info_wrapper
         .post_info
-          = image_tag gravatar_image(@post.user), size: 50
-          %span= @post.user.name
-          .created_at= @post.created_at.strftime("%Y-%m-%d")
-        - if user_signed_in?
-          - if other_user?(@post.user.uuid)
-            %button.follow_btn{data: {id: @post.user.id}}= render "follows/follow", user: @post.user
-          - else
-            .edit_wrapper
-              %ul.edit_list
-                %li= link_to "編集", edit_post_path(@post)
-                %li= link_to "削除", post_path(@post), method: :delete, data: { confirm: "本当に削除しますか？一度、記事を削除すると元に戻せなくなります。"}
+          .author
+            = image_tag gravatar_image(@post.user), size: 50
+            %span.name= @post.user.name
+          - if user_signed_in?
+            - if other_user?(@post.user.uuid)
+              %button.follow_btn{data: {id: @post.user.id}}= render "follows/follow", user: @post.user
+        .edit_wrapper
+          .updated_at= "#{@post.updated_at.strftime("%Y-%m-%d")}に更新"
+          - unless other_user?(@post.user.uuid)
+            %ul.edit_list
+              %li= link_to "編集", edit_post_path(@post)
+              %li= link_to "削除", post_path(@post), method: :delete, data: { confirm: "本当に削除しますか？一度、記事を削除すると元に戻せなくなります。"}
 
       %h2.main_title= @post.title
       .user_action

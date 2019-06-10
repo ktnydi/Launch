@@ -1,15 +1,18 @@
 @import "variables";
 
 .post_index {
-  padding: 60px 24px 24px;
+  padding: 60px 16px 24px;
   background-color: $white;
   .post_info_wrapper {
-    padding: 24px 0 48px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    padding: 24px 0;
     color: $sub-font-color;
     .post_info {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .author {
       font-size: 1.2rem;
       line-height: 1.5em;
       display: flex;
@@ -20,12 +23,12 @@
         margin-right: 12px;
         border-radius: 999px;
       }
-      span, .created_at {
-        color: $sub-font-color;
-      }
-      .created_at::before {
-        content: '・';
-      }
+    }
+    .name, .updated_at {
+      color: $sub-font-color;
+    }
+    .updated_at {
+      font-size: 1.2rem;
     }
   }
   .main_title {
@@ -40,20 +43,25 @@
 
 // 記事編集
 .edit_wrapper {
+  padding: 12px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   .edit_list {
     padding: 0;
+    width: 90px;
     list-style: none;
     text-align: center;
     background-color: $white;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     li {
       background-color: $main-color;
-      margin-left: 8px;
       border-radius: 3px;
       a {
         display: block;
-        padding: 3px 8px;
+        padding: 5px 8px;
         font-size: 1.2rem;
         text-decoration: none;
         color: $white;
