@@ -379,7 +379,21 @@ main.follow, main.follower {
 }
 
 .notification {
+  padding: 8px 24px;
+  text-align: center;
+  font-size: 1.3rem;
+  border-radius: 1px;
+  box-shadow: 0 2px 17px 1px rgba(0, 0, 0, 0.1);
+  color: $white;
+  position: fixed;
+  top: 60px;
+  right: 16px;
+  z-index: 50;
   animation: notification 5s ease 0s forwards;
+  @media all and (max-width: 896px) {
+    max-width: 100%;
+    right: 0;
+  }
 }
 
 @keyframes notification {
@@ -394,49 +408,11 @@ main.follow, main.follower {
 }
 
 .notice {
-  padding: 8px 24px;
-  text-align: center;
-  border-radius: 3px;
-  box-shadow: 0 2px 17px 1px rgba(0, 0, 0, 0.1);
-  font-size: 1.3rem;
   background-color: $sub-color;
-  color: $white;
-  position: fixed;
-  top: 70px;
-  right: 40px;
-  z-index: 50;
-  @media all and (max-width: 1024px) {
-    right: 8px;
-  }
 }
 
 .alert {
-  padding: 8px 24px;
-  max-width: 95%;
-  text-align: center;
-  font-size: 1.6rem;
-  letter-spacing: 1px;
-  border-radius: 3px;
-  border: 1px solid rgba(153, 24, 24, 0.3);
-  border-left: 3px solid #833131;
-  background-color: rgba(153, 24, 24, 0.1);
-  color: #833131;
-  position: absolute;
-  top: 70px;
-  right: 16px;
-  .clear {
-    width: 22px;
-    height: 22px;
-    padding: 3px;
-    margin: auto;
-    font-size: 1.6rem;
-    font-weight: bold;
-    cursor: pointer;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: 3px;
-  }
+  background-color: #E75252;
 }
 
 .heart, .favorite, .unfavorite {

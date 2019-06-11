@@ -15,5 +15,14 @@
         %p.index__text
           あなたのアプリを紹介してフィードバックをもらおう！
       .authenticate
-        = link_to "アカウント作成", new_user_registration_path, class: "signup"
-        = link_to "ログイン", new_user_session_path, class: "login"
+        .login
+          = link_to new_user_session_path, class: "email" do
+            %i.fas.fa-envelope
+            %span Emailでログイン
+          = link_to user_twitter_omniauth_authorize_path, class: "twitter" do
+            %i.fab.fa-twitter
+            %span Twitterでログイン
+        .separate
+        = link_to new_user_registration_path, class: "signup" do
+          %i.fas.fa-user-plus
+          %span アカウント作成

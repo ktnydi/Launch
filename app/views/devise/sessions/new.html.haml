@@ -1,23 +1,23 @@
 - @page_title = "ログイン"
-%main
-  .container
-    .authenticate_form
-      %h2 ログイン
-      .form-wrapper
-        = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-          .field
-            = f.label :email
-            = f.email_field :email, autocomplete: "email", required: true
-          .field
-            = f.label :password
-            = f.password_field :password, autocomplete: "current-password", required: true
-          .actions
-            = f.submit "ログイン", id: "submit", disabled: true, style:  "background-color: #E0E0E0"
-            %p.or または
-            = link_to user_twitter_omniauth_authorize_path, class: "twitter" do
-              %i.fab.fa-twitter
-              Twitterでログイン
-        = render "devise/shared/links"
+%main.authenticate_form_wrapper
+  .authenticate_form
+    %h2 Emailでログイン
+    .form-wrapper
+      = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+        .field
+          = f.label :email
+          = f.email_field :email, autocomplete: "email", required: true
+        .field
+          = f.label :password
+          = f.password_field :password, autocomplete: "current-password", required: true
+        .actions
+          = f.submit "ログイン", id: "submit", disabled: true, style:  "background-color: #E0E0E0"
+      %p.separate
+      .sns_login
+        = link_to user_twitter_omniauth_authorize_path, class: "twitter" do
+          %i.fab.fa-twitter
+          %p Twitterでログイン
+      = render "devise/shared/links"
 :javascript
   var password = document.getElementById('user_password');
   var submit = document.getElementById('submit');
