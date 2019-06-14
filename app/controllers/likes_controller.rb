@@ -1,14 +1,16 @@
 class LikesController < ApplicationController
-  before_action :authenticate_user!
   before_action :post
 
 
   def create
-    @like = current_user.likes.create(post_id: params[:post_uuid])
+    @like = current_user && current_user.likes.create(post_id: params[:post_uuid])
     respond_to do |format|
       if @like
         format.js
         format.html
+      else
+        flash[:alert] = "いいねするにはログインが必要です。"
+        format.js { render js: "window.location = '#{new_user_session_path}';" }
       end
     end
   end

@@ -2,12 +2,12 @@
   ログイン中のユーザーが存在し、
   閲覧している記事にいいね済みか？
 - if current_user && post.like_user(current_user.id)
-  = link_to post_like_path(post, current_user.id), remote: true, method: :delete do
+  = link_to post_unlike_path(post), remote: true, method: :delete do
     %i.fas.fa-heart
     %p
       = post.likes.count
 - else
-  = link_to post_likes_path(post), remote: true, method: :post do
+  = link_to post_like_path(post), remote: true, method: :post do
     %i.far.fa-heart
     %p
       = post.likes.count

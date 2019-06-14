@@ -1,5 +1,5 @@
-.comments
-  - if comments.present?
+-if comments.present?
+  .comments.comment_list_wrapper
     %h3
       コメント
       %span.comment_count= comments.count
@@ -15,3 +15,19 @@
               %i.far.fa-trash-alt
         .comment_content
           != markdown comment.content
+
+.comment_form_wrapper
+  .comment_form_header
+    %h3 コメントする
+    .preview
+      %i.far.fa-eye
+  .comment-edit
+    = form_for @comment, url: "/comment/#{@post.id}", html: { id: "comment_form", class: "comment_form" }, remote: true do |f|
+      = f.text_area :content, id: "comment_area", placeholder: "Markdownで入力"
+    .preview_area.hide
+  .comment_form_bottom
+    %p.comment_length_wrapper<>
+      入力数
+      %span.comment_length 0
+    %button.comment_submit#comment_submit{type: "submit", form: "comment_form"}
+      送信

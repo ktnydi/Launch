@@ -24,60 +24,39 @@
 
       %h2.main_title= @post.title
       .user_action
-        %button.heart#heart
-          = render "post", post: @post
-        - if @post.app_url.present?
-          %button.github
-            = link_to @post.app_url, target: :_blank do
+        .heart_btn
+          %button.heart#heart
+            = render "post", post: @post
+        .github_btn
+          - if @post.app_url.present?
+            %button.github
+              = link_to @post.app_url, target: :_blank do
+                %i.fab.fa-github
+          - else
+            %button.github.no_url
               %i.fab.fa-github
-        - else
-          %button.github.no_url
-            %i.fab.fa-github
-        %button.share#share_btn
-          %i.fas.fa-share-alt
+        .share_btn#share_btn
+          %button.share
+            %i.fas.fa-share-alt
     .content
       != markdown @post.content
 
     .comment_wrapper
       #comment
         = render "comment", comments: @post.comments
-      - if user_signed_in?
-        .parent_modal
-        .child_modal
-          .comment-edit
-            = form_for @comment, url: "/comment/#{@post.id}", html: { id: "comment_form", class: "comment_form" } do |f|
-              = f.text_area :content, id: "comment_area", placeholder: "コメントを入力"
-            .preview_area.hide
-            .btn_wrapper
-              %button#comment_submit{type: "submit", form: "comment_form"}
-                コメントを送信
-              .preview
-                %i.far.fa-eye-slash
-        %button.show_comment_form_btn
-          %i.far.fa-comment
 :javascript
   var comment_form = document.getElementById('comment_form')
   var comment_area = document.getElementById('comment_area')
   var preview_area = document.getElementsByClassName('preview_area')[0]
   var preview = document.getElementsByClassName('preview')[0]
-  var child_modal = document.getElementsByClassName('child_modal')[0]
-  var parent_modal = document.getElementsByClassName('parent_modal')[0]
-  var show_comment_form_btn = document.getElementsByClassName('show_comment_form_btn')[0]
   var comment_submit = document.getElementById('comment_submit')
+  var comment_length = document.getElementsByClassName('comment_length')[0]
 
-  show_comment_form_btn.addEventListener('click', ()=>{
-    child_modal.classList.add('show')
-    parent_modal.classList.add('show')
-  })
-
-  parent_modal.addEventListener('click', ()=>{
-    child_modal.classList.remove('show')
-    parent_modal.classList.remove('show')
-  })
 
   comment_submit.setAttribute('disabled', 'disabled')
-  comment_area.addEventListener('keyup', ()=>{
+  comment_area.addEventListener('input', ()=>{
     preview_area.innerHTML = marked(comment_area.value)
+    comment_length.textContent = comment_area.value.length
     if (comment_area.value.length > 0) {
       comment_submit.removeAttribute('disabled')
     } else {
