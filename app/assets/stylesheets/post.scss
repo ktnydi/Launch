@@ -36,6 +36,9 @@
   }
   .user_action {
     margin: 24px 0 12px;
+    border: 1px solid $border-color;
+    border-radius: 3px;
+    overflow: hidden;
     display: flex;
     align-items: center;
   }
@@ -74,21 +77,21 @@
 .app_url {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   text-decoration: none;
   margin-right: 12px;
   color: $sub-font-color;
 }
 
-.heart, .github, .share {
-  height: 40px;
-  margin: 0 6px;
-  font-size: 1.6rem;
-  border-radius: 3px;
-  cursor: pointer;
+.heart_btn, .github_btn, .share_btn {
+  flex-grow: 1;
 }
 
-.github, .share {
-  flex-grow: 1;
+.heart, .github, .share {
+  height: 40px;
+  width: 100%;
+  font-size: 1.6rem;
+  cursor: pointer;
 }
 
 .heart, .github {
@@ -105,8 +108,6 @@
 
 // いいね
 .heart {
-  width: 50%;
-  border: 1px solid $border-color;
   background-color: $white;
   a {
     color: $sub-font-color;
@@ -129,12 +130,14 @@
 }
 
 // シェア
-.share {
-  background-color: #90A4AE;
-  color: #37474F;
+.share_btn {
   display: none;
   &.support {
     display: block;
+  }
+  .share {
+    background-color: #90A4AE;
+    color: #37474F;
   }
 }
 
@@ -145,25 +148,83 @@
 .github {
 }
 
-// コメント欄
-.comments {
-  padding: 0 24px;
+// コメント
+.comment_list_wrapper, .comment_form_wrapper {
+  padding: 24px;
   margin: 24px 0;
   background-color: $white;
   h3 {
-    padding: 12px 0;
     font-size: 1.6rem;
-    border-bottom: 1px solid $border-color;
-    .comment_count {
-      font-weight: normal;
+    margin-bottom: 24px;
+  }
+}
+
+.comment_form_wrapper {
+  .comment_form_header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .comment_form_bottom {
+    margin-top: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .comment_length_wrapper {
+      font-size: 1.2rem;
+      color: $sub-font-color;
+    }
+    .comment_submit {
+      padding: 5px 16px;
+      font-size: 1.4rem;
+      font-weight: bold;
+      border-radius: 2px;
+      cursor: pointer;
+      background-color: $main-color;
+      color: $white;
     }
   }
 }
 
-.comment {
-  padding: 24px 0;
+.preview {
+  width: 20px;
+  line-height: 20px;
+  margin-bottom: 24px;
+  text-align: center;
+  position: relative;
+  &::after {
+    visibility: hidden;
+    opacity: 0;
+    content: "プレビュー";
+    width: 100px;
+    line-height: 30px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 2px;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translate(-120%, -50%);
+    background-color: #212121;
+    color: $white;
+    transition: all .1s;
+  }
+  &:hover::after {
+    visibility: visible;
+    opacity: 1;
+  }
+  i {
+    cursor: pointer;
+    color: $sub-font-color;
+  }
 }
 
+// コメント欄のスタイル
+
+.comment {
+  margin-bottom: 24px;
+}
 .comment_user {
   display: flex;
   align-items: center;
@@ -200,43 +261,6 @@
 
 
 // コメントフォーム
-.parent_modal {
-  height: 100vh;
-  width: 100vw;
-  visibility: hidden;
-  opacity: 0;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 300;
-  background-color: rgba(0, 0, 0, .6);
-  transition: all .3s;
-}
-
-.child_modal {
-  width: 90%;
-  max-width: 400px;
-  padding: 30px 12px;
-  box-shadow: 0 2px 17px 1px rgba(0, 0, 0, 0.1);
-  opacity: 0;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  z-index: 400;
-  transform: translate(100vw, -50%);
-  background-color: $white;
-  transition: all .3s;
-}
-
-.parent_modal.show {
-  visibility: visible;
-  opacity: 1;
-}
-
-.child_modal.show {
-  opacity: 1;
-  transform: translate(-50%, -50%);
-}
 
 .comment-edit {
   padding: 12px;
@@ -255,65 +279,10 @@
   height: 200px;
   font-size: 1.6rem;
   background-color: transparent;
+  font-family: 'Lato', sans-serif;
+  resize: none;
 }
 
 .preview_area.hide, form.hide {
   display: none;
-}
-
-.btn_wrapper {
-  display: flex;
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translate(-50%, 50%);
-  button[type="submit"], .preview {
-    height: 50px;
-    border-radius: 999px;
-    font-size: 1.6rem;
-    box-shadow: 0 2px 17px 1px rgba(0, 0, 0, 0.1);
-    color: $white;
-    cursor: pointer;
-  }
-  button[type="submit"] {
-    display: inline-block;
-    width: 200px;
-    margin-right: 12px;
-    background-color: $main-color;
-  }
-  .preview {
-    width: 50px;
-    background-color: #3c3c3c;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-}
-
-// コメントフォームを表示するボタン
-.show_comment_form_btn {
-  width: 60px;
-  height: 60px;
-  border-radius: 999px;
-  box-shadow: 0 3px 3px rgba(0, 0, 0, .3);
-  cursor: pointer;
-  position: fixed;
-  bottom: 24px;
-  right: 24px;
-  z-index: 100;
-  background-color: $main-color;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all .5s;
-  @media all and (min-width: 896px) {
-    width: 150px;
-    height: 50px;
-    right: 50%;
-    transform: translateX(50%);
-  }
-  i {
-    font-size: 2rem;
-    color: $white;
-  }
 }

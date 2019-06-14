@@ -184,8 +184,9 @@
   .change_image {
     display: inline-block;
     width: 200px;
+    line-height: 45px;
     margin: 12px 0;
-    padding: 8px;
+    border-radius: 50px;
     box-shadow: 0 7px 15px rgba(0, 0, 0, .05);
     text-decoration: none;
     background-color: $white;
@@ -206,7 +207,8 @@
   a {
     display: inline-block;
     width: 200px;
-    padding: 8px 0;
+    line-height: 45px;
+    border-radius: 50px;
     text-decoration: none;
     background-color: #d14a4a;
     color: $white;

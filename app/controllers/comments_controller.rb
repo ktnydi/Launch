@@ -4,7 +4,10 @@ class CommentsController < ApplicationController
     @comment = current_user.comments.new(comment_params)
     @post = Post.find_by(uuid: params[:post_id])
     if @comment.save
-      redirect_to post_path(@post)
+      respond_to do |format|
+        @comment = Comment.new
+        format.js
+      end
     else
       redirect_to post_path(@post)
     end

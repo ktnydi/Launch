@@ -1,0 +1,2 @@
+var comment = document.getElementById('comment')
+comment.innerHTML = '<%= j(render "posts/comment", comments: @post.comments) %>'

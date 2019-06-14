@@ -8,7 +8,8 @@ Rails.application.routes.draw do
   root 'top#index'
   get '/terms' => 'terms#index'
   resources :posts, param: :uuid do
-    resources :likes, only: [:create, :destroy]
+    post '/like' => 'likes#create'
+    delete '/unlike' => 'likes#destroy'
   end
   resources :likes, only: [:index]
   resources :users, only: [:index, :show] do
