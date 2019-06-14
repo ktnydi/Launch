@@ -61,8 +61,7 @@ form.f-editor {
   overflow: scroll;
 }
 
-#md-preview, .content, .comment-md-preview, .md-comment {
-  padding: 16px;
+#md-preview, .content {
   word-break: break-all;
   background-color: $white;
   color: $font-color;

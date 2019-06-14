@@ -148,9 +148,38 @@
 .github {
 }
 
+.share_btn_wrapper {
+  margin-top: 60px;
+  h2 {
+    font-size: 1.6rem;
+    margin-bottom: 12px;
+  }
+  .share_for_sns {
+    display: flex;
+    align-items: center;
+    a {
+      display: flex;
+      justify-content: center;
+      width: 50px;
+      padding: 5px 0;
+      margin-right: 8px;
+      border-radius: 2px;
+      text-decoration: none;
+    }
+    .twitter {
+      background-color: #00acee;
+      color: $white;
+    }
+    .facebook {
+      background-color: #3B5998;
+      color: $white;
+    }
+  }
+}
+
 // コメント
 .comment_list_wrapper, .comment_form_wrapper {
-  padding: 24px;
+  padding: 24px 16px;
   margin: 24px 0;
   background-color: $white;
   h3 {

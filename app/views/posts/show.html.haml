@@ -38,9 +38,14 @@
         .share_btn#share_btn
           %button.share
             %i.fas.fa-share-alt
-    .content
-      != markdown @post.content
-
+      .content
+        != markdown @post.content
+      .share_btn_wrapper
+        .share_for_sns
+          %a.twitter{href: "http://twitter.com/share?url=#{request.url}"}
+            %i.fab.fa-twitter
+          %a.facebook{href: "https://www.facebook.com/sharer/sharer.php?u=#{request.url}"}
+            %i.fab.fa-facebook-f
     .comment_wrapper
       #comment
         = render "comment", comments: @post.comments
