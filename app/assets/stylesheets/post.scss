@@ -181,7 +181,7 @@
   }
 }
 
-.comment_form_wrapper {
+.comment_form_wrapper, .comment_edit_child_modal {
   .comment_form_header {
     display: flex;
     align-items: center;
@@ -255,7 +255,7 @@
   align-items: center;
   justify-content: space-between;
   color: $sub-font-color;
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   .user_info {
     display: flex;
     align-items: center;
@@ -266,14 +266,29 @@
       border-radius: 25px;
     }
   }
-  a {
-    text-decoration: none;
-    font-size: 2rem;
-    color: $sub-font-color;
+  .comment_created_at {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
-  .created_at::before {
-    content: "・";
-    display: inline-block;
+  .comment_edit_btn_wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    button {
+      font-size: 1.2rem;
+      cursor: pointer;
+      background-color: transparent;
+      color: $sub-font-color;
+      &:hover, &:hover > a {
+        text-decoration: underline;
+        color: $main-color;
+      }
+    }
+    a {
+      text-decoration: none;
+      color: $sub-font-color;
+    }
   }
 }
 
@@ -301,7 +316,7 @@
   -webkit-overflow-scrolling: touch;
 }
 
-.comment_form textarea {
+.comment_form textarea, .comment_update_form textarea {
   width: 100%;
   height: 200px;
   font-size: 1.6rem;
@@ -313,4 +328,30 @@
 
 .preview_area.hide, form.hide {
   display: none;
+}
+
+// コメント編集フォーム
+.comment_edit_parent_modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, .3);
+  display: none;
+  &.show {
+    display: block;
+  }
+  .comment_edit_child_modal {
+    width: 400px;
+    max-width: 90%;
+    padding: 24px;
+    border-radius: 2px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: $white;
+  }
 }

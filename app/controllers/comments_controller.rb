@@ -13,6 +13,14 @@ class CommentsController < ApplicationController
     end
   end
 
+  def update
+    @comment = Comment.find_by(id: params[:id])
+    @comment.content = params[:comment][:content]
+    if @comment.save
+      redirect_to post_path(@comment.post_id)
+    end
+  end
+
   def destroy
     @comment = Comment.find_by(id: params[:id])
     @post = @comment.post

@@ -57,7 +57,7 @@
   var preview = document.getElementsByClassName('preview')[0]
   var comment_submit = document.getElementById('comment_submit')
   var comment_length = document.getElementsByClassName('comment_length')[0]
-
+  var comment_edit_parent_modal = document.getElementsByClassName('comment_edit_parent_modal')
 
   comment_submit.setAttribute('disabled', 'disabled')
   comment_area.addEventListener('input', ()=>{
@@ -76,4 +76,22 @@
     icon.classList.toggle('fa-eye')
     comment_form.classList.toggle('hide')
     preview_area.classList.toggle('hide')
+  })
+
+  document.addEventListener('click', (e)=>{
+    var target = e.target
+    var target_data_id = target.getAttribute('data-id')
+    if (target.nodeName === 'BUTTON') {
+      for (var i = 0; i < comment_edit_parent_modal.length; i++) {
+        var parent_modal = comment_edit_parent_modal.item(i)
+        var parent_modal_data_id = parent_modal.getAttribute('data-id')
+        if (target_data_id === parent_modal_data_id) {
+          parent_modal.classList.add('show')
+          break
+        }
+      }
+    }
+    if (target.classList.contains('comment_edit_parent_modal')) {
+      target.classList.remove('show')
+    }
   })
