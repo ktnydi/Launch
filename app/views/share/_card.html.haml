@@ -1,6 +1,7 @@
 .card_wrapper
   - if posts.length > 0
     - posts.each do |post|
+      - puts post
       .card
         .main_title
           = link_to post.title, post_path(post.uuid)
@@ -9,9 +10,9 @@
             .author= post.user.name
             .created_at= post.created_at.strftime("%Y-%m-%d")
           - if current_user && post.like_user(current_user.id)
-            %i.fas.fa-heart
+            %i.fas.fa-heart.heart
           - else
-            %i.far.fa-heart
+            %i.far.fa-heart.heart
   - else
     %p.noposts 記事はありません
 

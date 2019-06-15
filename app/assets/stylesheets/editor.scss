@@ -61,40 +61,60 @@ form.f-editor {
   overflow: scroll;
 }
 
-#md-preview, .content, .comment-md-preview, .md-comment {
-  padding: 16px;
+#md-preview, .content, .comment_content, .preview_area {
   word-break: break-all;
   background-color: $white;
   color: $font-color;
-  * {
-    margin-bottom: 16px;
-    font-size: 1.6rem;
+  & > * {
+    margin-bottom: 12px;
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+  & >:first-child {
+    margin-top: 0;
   }
   h1, h2 {
-    margin: 32px 0 8px;
-    font-size: 2.8rem;
-    border-bottom: solid 1px $border-color;
+    margin: 80px 0 24px;
+    font-size: 2.4rem;
+    @media all and (max-width: 896px) {
+      font-size: 2rem;
+    }
   }
   h3 {
-    font-size: 2.4rem;
+    margin: 24px 0;
+    font-size: 2rem;
+    @media all and (max-width: 896px) {
+      font-size: 1.6rem;
+    }
   }
   h4 {
-    font-size: 2rem;
+    font-size: 1.6rem;
   }
   h5, h6 {
-    font-size: 1.6rem;
+    font-size: 1.4rem;
+  }
+  p {
+    line-height: 1.8em;
   }
   a {
     text-decoration: none;
     color: $sub-color;
   }
   ol, ul {
+    padding-left: 1em;
     li {
       margin: 0;
+      line-height: 1.8em;
     }
   }
   table {
+    display: block;
+    margin: 24px 0;
     border-collapse: collapse;
+    overflow-x: scroll;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
     tr {
       border: solid 1px $border-color;
     }
@@ -108,16 +128,16 @@ form.f-editor {
   }
   code {
     font-family: consolas, monaco;
-    border: 1px solid $border-color;
-    border-radius: 3px;
-    line-height: 1.8em;
+    border-radius: 2px;
     padding: 2px 5px;
-    background-color: #282c34;
-    color: #abb2bf;
+    background-color: #eee;
   }
   pre {
-      code {
+    margin: 24px 0;
+    code {
       padding: 12px;
+      background-color: #282c34;
+      color: #abb2bf;
     }
   }
   blockquote {

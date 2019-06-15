@@ -1,13 +1,17 @@
 @import "variables";
 
-.post_index {
+.post_content {
   padding: 60px 16px 24px;
   background-color: $white;
+  .post_index {
+    margin-bottom: 40px;
+  }
   .post_info_wrapper {
     padding: 24px 0;
     color: $sub-font-color;
     .post_info {
       width: 100%;
+      margin-bottom: 24px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -32,125 +36,143 @@
     }
   }
   .main_title {
-    font-size: 2rem;
+    margin-bottom: 8px;
+    font-size: 3.2rem;
+    @media all and (max-width: 896px) {
+      font-size: 2.8rem;
+    }
   }
-  .user_action {
-    margin: 24px 0 12px;
-    border: 1px solid $border-color;
-    border-radius: 3px;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
+}
+
+.post_detail_info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 1.4rem;
+  color: $sub-font-color;
+  @media all and (max-width: 896px) {
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .day {
+    margin-right: 12px;
+  }
+  .relative_url {
+    a {
+      text-decoration: none;
+      color: $main-color;
+    }
   }
 }
 
 // 記事編集
-.edit_wrapper {
-  padding: 12px 0;
+
+.edit_list {
+  padding: 0;
+  width: 90px;
+  list-style: none;
+  text-align: center;
+  background-color: $white;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  .edit_list {
-    padding: 0;
-    width: 90px;
-    list-style: none;
-    text-align: center;
-    background-color: $white;
+  li {
+    background-color: $main-color;
+    border-radius: 2px;
+    a {
+      display: block;
+      padding: 5px 8px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      text-decoration: none;
+      color: $white;
+    }
+  }
+}
+
+// 記事関連のボタン
+.heart_wrapper {
+  .heart {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    li {
-      background-color: $main-color;
-      border-radius: 3px;
-      a {
-        display: block;
-        padding: 5px 8px;
-        font-size: 1.2rem;
-        text-decoration: none;
-        color: $white;
+    text-decoration: none;
+    .heart_icon {
+      display: inline-block;
+      padding: 0 8px;
+      margin-right: 12px;
+      line-height: 30px;
+      border: 1px solid $border-color;
+      border-radius: 2px;
+      font-size: 1.4rem;
+    }
+    p {
+      position: relative;
+      line-height: 30px;
+      padding: 0 8px;
+      border: 1px solid $border-color;
+      border-radius: 2px;
+      font-size: 1.4rem;
+      color: $font-color;
+      &::after {
+        content: "";
+        border-right: 8px solid $white;
+        border-top: 8px solid transparent;
+        border-bottom: 8px solid transparent;
+        position: absolute;
+        left: -6px;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+      &::before {
+        content: "";
+        border-right: 8px solid $border-color;
+        border-top: 8px solid transparent;
+        border-bottom: 8px solid transparent;
+        position: absolute;
+        left: -8px;
+        top: 50%;
+        transform: translateY(-50%);
       }
     }
   }
 }
 
-// リンク
-.app_url {
+.share_btn_wrapper {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  text-decoration: none;
-  margin-right: 12px;
-  color: $sub-font-color;
-}
-
-.heart_btn, .github_btn, .share_btn {
-  flex-grow: 1;
-}
-
-.heart, .github, .share {
-  height: 40px;
-  width: 100%;
-  font-size: 1.6rem;
-  cursor: pointer;
-}
-
-.heart, .github {
-  a {
+  .share_for_sns {
     display: flex;
     align-items: center;
-    width: 100%;
-    height: 100%;
-    justify-content: center;
-    text-decoration: none;
-    color: $sub-font-color;
-  }
-}
-
-// いいね
-.heart {
-  background-color: $white;
-  a {
-    color: $sub-font-color;
-    p {
-      margin-left: 8px;
-      color: $sub-font-color;
+    a {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 50px;
+      height: 30px;
+      padding: 5px 0;
+      margin-right: 8px;
+      border-radius: 2px;
+      text-decoration: none;
+    }
+    .twitter {
+      background-color: #00acee;
+      color: $white;
+    }
+    .facebook {
+      background-color: #3B5998;
+      color: $white;
     }
   }
 }
 
-// github
-.github {
-  background-color: #2a2a2a;
-  i {
-    color: $white;
-  }
-  &.no_url {
-    background-color: #cccccc;
-  }
-}
-
-// シェア
-.share_btn {
-  display: none;
-  &.support {
-    display: block;
-  }
-  .share {
-    background-color: #90A4AE;
-    color: #37474F;
-  }
-}
-
-.fa-heart {
-  color: #EF5350;
-}
-
-.github {
+.content {
+  margin-bottom: 60px;
 }
 
 // コメント
 .comment_list_wrapper, .comment_form_wrapper {
-  padding: 24px;
+  padding: 24px 16px;
   margin: 24px 0;
   background-color: $white;
   h3 {
@@ -159,7 +181,7 @@
   }
 }
 
-.comment_form_wrapper {
+.comment_form_wrapper, .comment_edit_child_modal {
   .comment_form_header {
     display: flex;
     align-items: center;
@@ -224,13 +246,16 @@
 
 .comment {
   margin-bottom: 24px;
+  &:last-child {
+    margin-bottom: 0;
+  }
 }
 .comment_user {
   display: flex;
   align-items: center;
   justify-content: space-between;
   color: $sub-font-color;
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   .user_info {
     display: flex;
     align-items: center;
@@ -241,14 +266,29 @@
       border-radius: 25px;
     }
   }
-  a {
-    text-decoration: none;
-    font-size: 2rem;
-    color: $sub-font-color;
+  .comment_created_at {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
-  .created_at::before {
-    content: "・";
-    display: inline-block;
+  .comment_edit_btn_wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    button {
+      font-size: 1.2rem;
+      cursor: pointer;
+      background-color: transparent;
+      color: $sub-font-color;
+      &:hover, &:hover > a {
+        text-decoration: underline;
+        color: $main-color;
+      }
+    }
+    a {
+      text-decoration: none;
+      color: $sub-font-color;
+    }
   }
 }
 
@@ -272,12 +312,15 @@
   width: 100%;
   height: 200px;
   font-size: 1.6rem;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
 }
 
-.comment_form textarea {
+.comment_form textarea, .comment_update_form textarea {
   width: 100%;
   height: 200px;
   font-size: 1.6rem;
+  line-height: 1.8em;
   background-color: transparent;
   font-family: 'Lato', sans-serif;
   resize: none;
@@ -285,4 +328,30 @@
 
 .preview_area.hide, form.hide {
   display: none;
+}
+
+// コメント編集フォーム
+.comment_edit_parent_modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, .3);
+  display: none;
+  &.show {
+    display: block;
+  }
+  .comment_edit_child_modal {
+    width: 400px;
+    max-width: 90%;
+    padding: 24px;
+    border-radius: 2px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: $white;
+  }
 }

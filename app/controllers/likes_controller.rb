@@ -1,7 +1,6 @@
 class LikesController < ApplicationController
   before_action :post
 
-
   def create
     @like = current_user && current_user.likes.create(post_id: params[:post_uuid])
     respond_to do |format|

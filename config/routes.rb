@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   post '/comment/:post_id' => 'comments#create'
+  patch '/comment/:id' => 'comments#update'
   delete '/comment/:id/' => 'comments#destroy'
   devise_for :users, controllers: {
               registrations: 'registrations',
