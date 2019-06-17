@@ -1,0 +1,7 @@
+- if errors
+  #errors.editor-errors
+    %h3
+      保存に失敗しました。
+    %ul
+      - errors.each do |error|
+        %li= error
