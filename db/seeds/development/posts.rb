@@ -12,7 +12,7 @@ user_names.each_with_index do |val, idx|
     Post.create(
       title: "title#{i + 1}",
       content: "# Hello, world",
-      status: i % 2 == 0 ? "公開中" : "下書き",
+      status: i % 2 == 0 ? "公開中" : "編集中",
       user_id: user.uuid,
       uuid: SecureRandom.hex(10),
     )

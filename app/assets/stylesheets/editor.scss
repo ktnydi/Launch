@@ -1,100 +1,188 @@
 @import "variables";
 
-::-webkit-input-placeholder {
-  color: #999;
+.editor_form_toggle_tag {
+  height: 40px;
+  margin-left: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid $border-color;
+  border-radius: 2px;
+  @media all and (max-width: 896px) {
+    margin-left: 0;
+  }
+  .toggle_btn_wrapper {
+    display: flex;
+    .editor_show, .devide_show, .preview_show {
+      width: 40px;
+      line-height: 40px;
+      text-align: center;
+      font-size: 1.4rem;
+      cursor: pointer;
+      background-color: transparent;
+      color: $sub-font-color;
+      &.active {
+        background-color: rgba(0, 0, 0, 0.1);
+      }
+    }
+    .devide_show {
+      border-left: 1px solid $border-color;
+      border-right: 1px solid $border-color;
+    }
+  }
 }
 
-form.f-editor {
-  width: 100%;
-  margin-top: 60px;
+.editor_wrapper {
+  display: flex;
   height: calc(100vh - 60px);
+  margin-top: 60px;
+  .editor_form_wrapper, .editor_preview {
+    height: calc(100vh - 60px);
+    flex: 1;
+    flex-basis: 50%;
+    background-color: $white;
+    overflow: hidden;
+  }
+  .editor, .editor_preview {
+    padding: 16px;
+    overflow-y: scroll;
+  }
+  .editor {
+    width: 100%;
+    height: calc(100% - 80px);
+    font-family: 'Ubuntu Mono', monospace, 'Lato', sans-serif;
+    font-size: 1.6rem;
+    line-height: 1.8em;
+    resize: none;
+    background-color: #2a2a2a;
+    color: $white;
+    &::selection {
+      background-color: rgba(255, 255, 255, .15);
+    }
+  }
+  ::placeholder {
+    font-family: 'Lato', sans-serif;
+  }
+  .editor_form_wrapper.hidden {
+    display: none;
+  }
+  .editor_preview {
+    position: relative;
+    .status {
+      padding: 3px 8px;
+      border-radius: 2px;
+      font-size: 1.2rem;
+      position: absolute;
+      right: 16px;
+      top: 16px;
+      color: $sub-font-color;
+      background-color: rgba(0, 0, 0, .1);
+    }
+    .preview_content {
+      width: 100%;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+  }
+  .editor_preview.hidden {
+    display: none;
+  }
+}
+
+.editor_form_markdown {
+  height: 100%;
   input[type="text"], input[type="url"] {
     display: block;
     width: 100%;
     height: 40px;
-    padding: 0 2.5%;
+    padding: 0 16px;
     font-size: 1.6rem;
     border: none;
-    border-bottom: 1px solid $border-color;
-    background-color: $white;
+    background-color: #1a1a1a;
+    color: $white;
+  }
+  input[type="text"] {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.5);
   }
 }
 
-.editor-md {
-  position: relative;
-  height: calc(100% - 80px);
-}
-
-.CodeMirror {
-  font-size: 1.6rem;
-  border-right: solid 1px $border-color;
-  font-family: 'hiragino sans';
-  background-color: $white;
-  .CodeMirror-placeholder {
-    padding: 0 14px;
-    color: #999;
-  }
-  .CodeMirror-line {
-    padding: 0 14px;
-  }
-  .CodeMirror-linenumber {
-    width: 30px;
-    padding: 0 4px;
-  }
-  .CodeMirror-selected {
-    background-color: #B2DFDB;
-  }
-  .CodeMirror-scroll {
-    padding-bottom: 0;
+.autosave_message {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 100;
+  font-size: 1.4rem;
+  font-weight: bold;
+  opacity: 0;
+  color: $main-color;
+  &.save {
+    animation: autosave_message 5s linear 0s;
   }
 }
 
-#md-preview {
-  position: absolute;
-  top: 0;
-  right: 0;
-  display: inline-block;
-  float: right;
-  width: 50%;
-  height: 100%;
-  padding: 20px;
-  overflow: scroll;
+@keyframes autosave_message {
+  10%, 90% {
+    opacity: 1;
+  }
+  0%, 100% {
+    opacity: 0;
+  }
 }
 
-#md-preview, .content, .comment-md-preview, .md-comment {
-  padding: 16px;
+.preview_content, .content, .comment_content, .preview_area {
   word-break: break-all;
   background-color: $white;
   color: $font-color;
-  * {
-    margin-bottom: 16px;
-    font-size: 1.6rem;
+  & > * {
+    margin-bottom: 12px;
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+  & >:first-child {
+    margin-top: 0;
   }
   h1, h2 {
-    margin: 32px 0 8px;
-    font-size: 2.8rem;
-    border-bottom: solid 1px $border-color;
+    margin: 80px 0 24px;
+    font-size: 2.4rem;
+    @media all and (max-width: 896px) {
+      font-size: 2rem;
+    }
   }
   h3 {
-    font-size: 2.4rem;
+    margin: 24px 0;
+    font-size: 2rem;
+    @media all and (max-width: 896px) {
+      font-size: 1.6rem;
+    }
   }
   h4 {
-    font-size: 2rem;
+    font-size: 1.6rem;
   }
   h5, h6 {
-    font-size: 1.6rem;
+    font-size: 1.4rem;
+  }
+  p {
+    line-height: 1.8em;
   }
   a {
     text-decoration: none;
     color: $sub-color;
   }
   ol, ul {
+    padding-left: 1em;
     li {
       margin: 0;
+      line-height: 1.8em;
     }
   }
   table {
+    display: block;
+    margin: 24px 0;
     border-collapse: collapse;
+    overflow-x: scroll;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
     tr {
       border: solid 1px $border-color;
     }
@@ -108,22 +196,24 @@ form.f-editor {
   }
   code {
     font-family: consolas, monaco;
-    border: 1px solid $border-color;
-    border-radius: 3px;
-    line-height: 1.8em;
+    border-radius: 2px;
     padding: 2px 5px;
-    background-color: #282c34;
-    color: #abb2bf;
+    background-color: #eee;
   }
   pre {
-      code {
+    margin: 24px 0;
+    code {
       padding: 12px;
+      line-height: 1.7em;
+      background-color: #282c34;
+      color: #abb2bf;
     }
   }
   blockquote {
-    border-left: 5px solid $border-color;
-    padding-left: 12px;
+    padding: 16px;
+    margin: 24px 0;
     color: $sub-font-color;
+    background-color: rgba(0, 0, 0, .05);
   }
   hr {
     border: none;
@@ -138,11 +228,10 @@ form.f-editor {
   padding: 24px;
   margin: 0 auto;
   box-shadow: 0 2px 17px 1px rgba(0, 0, 0, 0.12);
-  border: 1px solid rgba(153, 24, 24, 0.3);
   border-radius: 3px;
   font-size: 1.3rem;
-  background-color: rgba(153, 24, 24, 0.1);
-  color: #833131;
+  background-color: #E75252;
+  color: $white;
   position: fixed;
   bottom: 24px;
   right: 0;
@@ -151,14 +240,6 @@ form.f-editor {
   animation: show_error 5s ease 0s forwards;
   @media all and (max-width: 1024px) {
     width: 95%;
-  }
-  .clear {
-    font-size: 1.6rem;
-    padding: 3px;
-    cursor: pointer;
-    position: absolute;
-    top: 0;
-    right: 0;
   }
   h3 {
     font-size: 1.6rem;

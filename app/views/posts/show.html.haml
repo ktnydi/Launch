@@ -6,78 +6,64 @@
       = error
 %main
   .container.post_container
-    .post_index
-      .post_info_wrapper
-        .post_info
-          .author
-            = image_tag gravatar_image(@post.user), size: 50
-            %span.name= @post.user.name
-          - if user_signed_in?
-            - if other_user?(@post.user.uuid)
-              %button.follow_btn{data: {id: @post.user.id}}= render "follows/follow", user: @post.user
-        .edit_wrapper
-          .updated_at= "#{@post.updated_at.strftime("%Y-%m-%d")}に更新"
-          - if user_signed_in? && !other_user?(@post.user.uuid)
-            %ul.edit_list
-              %li= link_to "編集", edit_post_path(@post)
-              %li= link_to "削除", post_path(@post), method: :delete, data: { confirm: "本当に削除しますか？一度、記事を削除すると元に戻せなくなります。"}
-
-      %h2.main_title= @post.title
-      .user_action
-        %button.heart#heart
+    .post_content
+      .post_index
+        .post_info_wrapper
+          .post_info
+            .author
+              = image_tag gravatar_image(@post.user), size: 50
+              %span.name= @post.user.name
+            - if user_signed_in?
+              - if other_user?(@post.user.uuid)
+                %button.follow_btn{data: {id: @post.user.id}}= render "follows/follow", user: @post.user
+              - else
+                %ul.edit_list
+                  %li= link_to "編集", edit_post_path(@post)
+                  %li= link_to "削除", post_path(@post), method: :delete, data: { confirm: "本当に削除しますか？一度、記事を削除すると元に戻せなくなります。"}
+          .share_btn_wrapper
+            .share_for_sns
+              %a.twitter{href: "http://twitter.com/share?url=#{request.url}"}
+                %i.fab.fa-twitter
+              %a.facebook{href: "https://www.facebook.com/sharer/sharer.php?u=#{request.url}"}
+                %i.fab.fa-facebook-f
+            .heart_wrapper#heart
+              = render "post", post: @post
+        %h2.main_title= @post.title
+        .post_detail_info
+          .post_day
+            %span.day= "公開：#{@post.created_at.strftime("%Y-%m-%d")}"
+            %span.day= "更新：#{@post.updated_at.strftime("%Y-%m-%d")}"
+          - if @post.app_url.present?
+            .relative_url
+              関連URL：
+              = link_to "#{@post.app_url.truncate(35)}", @post.app_url, target: "_blank"
+      .content
+        != markdown @post.content
+      .share_btn_wrapper
+        .share_for_sns
+          %a.twitter{href: "http://twitter.com/share?url=#{request.url}"}
+            %i.fab.fa-twitter
+          %a.facebook{href: "https://www.facebook.com/sharer/sharer.php?u=#{request.url}"}
+            %i.fab.fa-facebook-f
+        .heart_wrapper#heart
           = render "post", post: @post
-        - if @post.app_url.present?
-          %button.github
-            = link_to @post.app_url, target: :_blank do
-              %i.fab.fa-github
-        - else
-          %button.github.no_url
-            %i.fab.fa-github
-        %button.share#share_btn
-          %i.fas.fa-share-alt
-    .content
-      != markdown @post.content
-
     .comment_wrapper
       #comment
         = render "comment", comments: @post.comments
-      - if user_signed_in?
-        .parent_modal
-        .child_modal
-          .comment-edit
-            = form_for @comment, url: "/comment/#{@post.id}", html: { id: "comment_form", class: "comment_form" } do |f|
-              = f.text_area :content, id: "comment_area", placeholder: "コメントを入力"
-            .preview_area.hide
-            .btn_wrapper
-              %button#comment_submit{type: "submit", form: "comment_form"}
-                コメントを送信
-              .preview
-                %i.far.fa-eye-slash
-        %button.show_comment_form_btn
-          %i.far.fa-comment
 :javascript
   var comment_form = document.getElementById('comment_form')
   var comment_area = document.getElementById('comment_area')
   var preview_area = document.getElementsByClassName('preview_area')[0]
   var preview = document.getElementsByClassName('preview')[0]
-  var child_modal = document.getElementsByClassName('child_modal')[0]
-  var parent_modal = document.getElementsByClassName('parent_modal')[0]
-  var show_comment_form_btn = document.getElementsByClassName('show_comment_form_btn')[0]
   var comment_submit = document.getElementById('comment_submit')
-
-  show_comment_form_btn.addEventListener('click', ()=>{
-    child_modal.classList.add('show')
-    parent_modal.classList.add('show')
-  })
-
-  parent_modal.addEventListener('click', ()=>{
-    child_modal.classList.remove('show')
-    parent_modal.classList.remove('show')
-  })
+  var comment_length = document.getElementsByClassName('comment_length')[0]
+  var comment_update_btn = document.getElementsByClassName('comment_update_btn')
+  var comment_edit_parent_modal = document.getElementsByClassName('comment_edit_parent_modal')
 
   comment_submit.setAttribute('disabled', 'disabled')
-  comment_area.addEventListener('keyup', ()=>{
+  comment_area.addEventListener('input', ()=>{
     preview_area.innerHTML = marked(comment_area.value)
+    comment_length.textContent = comment_area.value.length
     if (comment_area.value.length > 0) {
       comment_submit.removeAttribute('disabled')
     } else {
@@ -93,15 +79,28 @@
     preview_area.classList.toggle('hide')
   })
 
-  // ssl通信を利用した場合に有効
-  if (navigator.share) {
-    const share_btn = document.getElementById('share_btn')
-    share_btn.classList.add('support')
-    share_btn.addEventListener('click', ()=>{
-      navigator.share({
-        url  : location.href,
-        title: document.title,
-        text : '',
-      })
+  for (var i = 0; i < comment_update_btn.length; i++) {
+    var update_btn = comment_update_btn.item(i)
+    update_btn.addEventListener('click', (e)=>{
+      var target = e.target
+      var target_data_id  = target.getAttribute('data-id')
+      for (var i = 0; i < comment_edit_parent_modal.length; i++) {
+        var parent_modal = comment_edit_parent_modal.item(i)
+        var parent_modal_data_id = parent_modal.getAttribute('data-id')
+        if (target_data_id === parent_modal_data_id) {
+          parent_modal.classList.add('show')
+          break
+        }
+      }
+    })
+  }
+
+  for (var i = 0; i < comment_edit_parent_modal.length; i++) {
+    var parent_modal = comment_edit_parent_modal.item(i)
+    parent_modal.addEventListener('click', (e)=>{
+      var target = e.target
+      if (target.classList.contains('show')) {
+        target.classList.remove('show')
+      }
     })
   }

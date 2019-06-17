@@ -60,6 +60,6 @@ class User < ApplicationRecord
   end
 
   def create_uuid
-    self.uuid = SecureRandom.hex(10)
+    self.uuid = SecureRandom.hex(10) if self.uuid.empty?
   end
 end

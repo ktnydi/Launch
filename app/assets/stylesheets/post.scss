@@ -1,13 +1,17 @@
 @import "variables";
 
-.post_index {
+.post_content {
   padding: 60px 16px 24px;
   background-color: $white;
+  .post_index {
+    margin-bottom: 40px;
+  }
   .post_info_wrapper {
     padding: 24px 0;
     color: $sub-font-color;
     .post_info {
       width: 100%;
+      margin-bottom: 24px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -32,144 +36,226 @@
     }
   }
   .main_title {
-    font-size: 2rem;
+    margin-bottom: 8px;
+    font-size: 3.2rem;
+    @media all and (max-width: 896px) {
+      font-size: 2.8rem;
+    }
   }
-  .user_action {
-    margin: 24px 0 12px;
-    display: flex;
-    align-items: center;
+}
+
+.post_detail_info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 1.4rem;
+  color: $sub-font-color;
+  @media all and (max-width: 896px) {
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .day {
+    margin-right: 12px;
+  }
+  .relative_url {
+    a {
+      text-decoration: none;
+      color: $main-color;
+    }
   }
 }
 
 // 記事編集
-.edit_wrapper {
-  padding: 12px 0;
+
+.edit_list {
+  padding: 0;
+  width: 90px;
+  list-style: none;
+  text-align: center;
+  background-color: $white;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  .edit_list {
-    padding: 0;
-    width: 90px;
-    list-style: none;
-    text-align: center;
-    background-color: $white;
+  li {
+    background-color: $main-color;
+    border-radius: 2px;
+    a {
+      display: block;
+      padding: 5px 8px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      text-decoration: none;
+      color: $white;
+    }
+  }
+}
+
+// 記事関連のボタン
+.heart_wrapper {
+  .heart {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    li {
-      background-color: $main-color;
-      border-radius: 3px;
-      a {
-        display: block;
-        padding: 5px 8px;
-        font-size: 1.2rem;
-        text-decoration: none;
-        color: $white;
+    text-decoration: none;
+    .heart_icon {
+      display: inline-block;
+      padding: 0 8px;
+      margin-right: 12px;
+      line-height: 30px;
+      border: 1px solid $border-color;
+      border-radius: 2px;
+      font-size: 1.4rem;
+    }
+    p {
+      position: relative;
+      line-height: 30px;
+      padding: 0 8px;
+      border: 1px solid $border-color;
+      border-radius: 2px;
+      font-size: 1.4rem;
+      color: $font-color;
+      &::after {
+        content: "";
+        border-right: 8px solid $white;
+        border-top: 8px solid transparent;
+        border-bottom: 8px solid transparent;
+        position: absolute;
+        left: -6px;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+      &::before {
+        content: "";
+        border-right: 8px solid $border-color;
+        border-top: 8px solid transparent;
+        border-bottom: 8px solid transparent;
+        position: absolute;
+        left: -8px;
+        top: 50%;
+        transform: translateY(-50%);
       }
     }
   }
 }
 
-// リンク
-.app_url {
+.share_btn_wrapper {
   display: flex;
   align-items: center;
-  text-decoration: none;
-  margin-right: 12px;
-  color: $sub-font-color;
-}
-
-.heart, .github, .share {
-  height: 40px;
-  margin: 0 6px;
-  font-size: 1.6rem;
-  border-radius: 3px;
-  cursor: pointer;
-}
-
-.github, .share {
-  flex-grow: 1;
-}
-
-.heart, .github {
-  a {
+  .share_for_sns {
     display: flex;
     align-items: center;
-    width: 100%;
-    height: 100%;
-    justify-content: center;
-    text-decoration: none;
-    color: $sub-font-color;
-  }
-}
-
-// いいね
-.heart {
-  width: 50%;
-  border: 1px solid $border-color;
-  background-color: $white;
-  a {
-    color: $sub-font-color;
-    p {
-      margin-left: 8px;
-      color: $sub-font-color;
+    a {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 50px;
+      height: 30px;
+      padding: 5px 0;
+      margin-right: 8px;
+      border-radius: 2px;
+      text-decoration: none;
+    }
+    .twitter {
+      background-color: #00acee;
+      color: $white;
+    }
+    .facebook {
+      background-color: #3B5998;
+      color: $white;
     }
   }
 }
 
-// github
-.github {
-  background-color: #2a2a2a;
-  i {
-    color: $white;
-  }
-  &.no_url {
-    background-color: #cccccc;
-  }
+.content {
+  margin-bottom: 60px;
 }
 
-// シェア
-.share {
-  background-color: #90A4AE;
-  color: #37474F;
-  display: none;
-  &.support {
-    display: block;
-  }
-}
-
-.fa-heart {
-  color: #EF5350;
-}
-
-.github {
-}
-
-// コメント欄
-.comments {
-  padding: 0 24px;
+// コメント
+.comment_list_wrapper, .comment_form_wrapper {
+  padding: 24px 16px;
   margin: 24px 0;
   background-color: $white;
   h3 {
-    padding: 12px 0;
     font-size: 1.6rem;
-    border-bottom: 1px solid $border-color;
-    .comment_count {
-      font-weight: normal;
+    margin-bottom: 24px;
+  }
+}
+
+.comment_form_wrapper, .comment_edit_child_modal {
+  .comment_form_header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .comment_form_bottom {
+    margin-top: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .comment_length_wrapper {
+      font-size: 1.2rem;
+      color: $sub-font-color;
+    }
+    .comment_submit {
+      padding: 5px 16px;
+      font-size: 1.4rem;
+      font-weight: bold;
+      border-radius: 2px;
+      cursor: pointer;
+      background-color: $main-color;
+      color: $white;
     }
   }
 }
 
-.comment {
-  padding: 24px 0;
+.preview {
+  width: 20px;
+  line-height: 20px;
+  margin-bottom: 24px;
+  text-align: center;
+  position: relative;
+  &::after {
+    visibility: hidden;
+    opacity: 0;
+    content: "プレビュー";
+    width: 100px;
+    line-height: 30px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 2px;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translate(-120%, -50%);
+    background-color: #212121;
+    color: $white;
+    transition: all .1s;
+  }
+  &:hover::after {
+    visibility: visible;
+    opacity: 1;
+  }
+  i {
+    cursor: pointer;
+    color: $sub-font-color;
+  }
 }
 
+// コメント欄のスタイル
+
+.comment {
+  margin-bottom: 24px;
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
 .comment_user {
   display: flex;
   align-items: center;
   justify-content: space-between;
   color: $sub-font-color;
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   .user_info {
     display: flex;
     align-items: center;
@@ -180,14 +266,29 @@
       border-radius: 25px;
     }
   }
-  a {
-    text-decoration: none;
-    font-size: 2rem;
-    color: $sub-font-color;
+  .comment_created_at {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
-  .created_at::before {
-    content: "・";
-    display: inline-block;
+  .comment_edit_btn_wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    button {
+      font-size: 1.2rem;
+      cursor: pointer;
+      background-color: transparent;
+      color: $sub-font-color;
+      &:hover, &:hover > a {
+        text-decoration: underline;
+        color: $main-color;
+      }
+    }
+    a {
+      text-decoration: none;
+      color: $sub-font-color;
+    }
   }
 }
 
@@ -200,43 +301,6 @@
 
 
 // コメントフォーム
-.parent_modal {
-  height: 100vh;
-  width: 100vw;
-  visibility: hidden;
-  opacity: 0;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 300;
-  background-color: rgba(0, 0, 0, .6);
-  transition: all .3s;
-}
-
-.child_modal {
-  width: 90%;
-  max-width: 400px;
-  padding: 30px 12px;
-  box-shadow: 0 2px 17px 1px rgba(0, 0, 0, 0.1);
-  opacity: 0;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  z-index: 400;
-  transform: translate(100vw, -50%);
-  background-color: $white;
-  transition: all .3s;
-}
-
-.parent_modal.show {
-  visibility: visible;
-  opacity: 1;
-}
-
-.child_modal.show {
-  opacity: 1;
-  transform: translate(-50%, -50%);
-}
 
 .comment-edit {
   padding: 12px;
@@ -248,72 +312,58 @@
   width: 100%;
   height: 200px;
   font-size: 1.6rem;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
 }
 
-.comment_form textarea {
+.comment_form textarea, .comment_update_form textarea {
   width: 100%;
   height: 200px;
   font-size: 1.6rem;
+  line-height: 1.8em;
   background-color: transparent;
+  font-family: 'Lato', sans-serif;
+  resize: none;
 }
 
 .preview_area.hide, form.hide {
   display: none;
 }
 
-.btn_wrapper {
-  display: flex;
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translate(-50%, 50%);
-  button[type="submit"], .preview {
-    height: 50px;
-    border-radius: 999px;
-    font-size: 1.6rem;
-    box-shadow: 0 2px 17px 1px rgba(0, 0, 0, 0.1);
-    color: $white;
-    cursor: pointer;
-  }
-  button[type="submit"] {
-    display: inline-block;
-    width: 200px;
-    margin-right: 12px;
-    background-color: $main-color;
-  }
-  .preview {
-    width: 50px;
-    background-color: #3c3c3c;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+// コメント編集フォーム
+.comment_edit_parent_modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, .3);
+  display: none;
+  &.show {
+    display: block;
+    animation: modal_show .15s linear 0s forwards;
   }
 }
 
-// コメントフォームを表示するボタン
-.show_comment_form_btn {
-  width: 60px;
-  height: 60px;
-  border-radius: 999px;
-  box-shadow: 0 3px 3px rgba(0, 0, 0, .3);
-  cursor: pointer;
-  position: fixed;
-  bottom: 24px;
-  right: 24px;
-  z-index: 100;
-  background-color: $main-color;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all .5s;
-  @media all and (min-width: 896px) {
-    width: 150px;
-    height: 50px;
-    right: 50%;
-    transform: translateX(50%);
+@keyframes modal_show {
+  from {
+    opacity: 0;
   }
-  i {
-    font-size: 2rem;
-    color: $white;
+  to {
+    opacity: 1;
   }
+}
+
+.comment_edit_child_modal {
+  width: 400px;
+  max-width: 90%;
+  padding: 24px;
+  border-radius: 2px;
+  box-shadow: 0 2px 17px 1px rgba(0, 0, 0, 0.1);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: $white;
 }
