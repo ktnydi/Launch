@@ -1,3 +1,8 @@
 - @page_title = "記事作成"
-= form_for @post, html: { class: "editor_form_wrapper", id: "posts" } do |f|
-  = render "share/editor_form", f: f
+.editor_wrapper
+  #editor_form_wrapper.editor_form_wrapper
+    = render "share/editor_form", post: @post
+  .editor_preview
+    .container.post_container.preview_content
+#edit_form_error
+  = render "share/error", errors: @errors

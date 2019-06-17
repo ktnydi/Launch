@@ -18,7 +18,7 @@
                   = link_to "削除", "/comment/#{comment.id}/", method: :delete, data: { confirm: "コメントを削除します。"}
         .comment_content
           != markdown comment.content
-        - if comment.user_id == current_user.uuid
+        - if user_signed_in? && comment.user_id == current_user.uuid
           .comment_edit_parent_modal{data: {id: "#{comment.id}"}}
             .comment_edit_child_modal
               .comment_form_header

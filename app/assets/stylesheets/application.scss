@@ -257,6 +257,9 @@ header {
       color: $white;
       background-color: $main-color;
     }
+    .autosave {
+      display: none;
+    }
   }
 }
 
@@ -647,7 +650,7 @@ footer {
   width: 250px;
   margin: 12px auto;
   border-radius: 999px;
-  box-shadow: 0 2px 17px 1px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 5px 17px 1px rgba(0, 0, 0, 0.05);
   font-weight: bold;
   display: flex;
   align-items: center;

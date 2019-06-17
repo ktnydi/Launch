@@ -32,13 +32,65 @@
   }
 }
 
-.editor_form_wrapper {
-  width: 100%;
-  margin-top: 60px;
+.editor_wrapper {
+  display: flex;
   height: calc(100vh - 60px);
+  margin-top: 60px;
+  .editor_form_wrapper, .editor_preview {
+    height: calc(100vh - 60px);
+    flex: 1;
+    flex-basis: 50%;
+    background-color: $white;
+    overflow: hidden;
+  }
+  .editor, .editor_preview {
+    padding: 16px;
+    overflow-y: scroll;
+  }
+  .editor {
+    width: 100%;
+    height: calc(100% - 80px);
+    font-family: 'Ubuntu Mono', monospace, 'Lato', sans-serif;
+    font-size: 1.6rem;
+    line-height: 1.8em;
+    resize: none;
+    background-color: #2a2a2a;
+    color: $white;
+    &::selection {
+      background-color: rgba(255, 255, 255, .15);
+    }
+  }
+  ::placeholder {
+    font-family: 'Lato', sans-serif;
+  }
+  .editor_form_wrapper.hidden {
+    display: none;
+  }
+  .editor_preview {
+    position: relative;
+    .status {
+      padding: 3px 8px;
+      border-radius: 2px;
+      font-size: 1.2rem;
+      position: absolute;
+      right: 16px;
+      top: 16px;
+      color: $sub-font-color;
+      background-color: rgba(0, 0, 0, .1);
+    }
+    .preview_content {
+      width: 100%;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+  }
+  .editor_preview.hidden {
+    display: none;
+  }
 }
 
 .editor_form_markdown {
+  height: 100%;
   input[type="text"], input[type="url"] {
     display: block;
     width: 100%;
@@ -54,37 +106,26 @@
   }
 }
 
-.editor_wrapper {
-  display: flex;
-  .editor_form_markdown, .editor_preview {
-    height: calc(100vh - 60px);
-    flex: 1;
-    flex-basis: 50%;
-    background-color: $white;
-    overflow: hidden;
+.autosave_message {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 100;
+  font-size: 1.4rem;
+  font-weight: bold;
+  opacity: 0;
+  color: $main-color;
+  &.save {
+    animation: autosave_message 5s linear 0s;
   }
-  .editor_form_markdown.hidden {
-    display: none;
+}
+
+@keyframes autosave_message {
+  10%, 90% {
+    opacity: 1;
   }
-  .editor, .editor_preview {
-    overflow-y: scroll;
-    padding: 16px;
-  }
-  .editor {
-    width: 100%;
-    height: calc(100% - 80px);
-    font-family: 'Ubuntu Mono', monospace, 'Lato', sans-serif;
-    font-size: 1.6rem;
-    line-height: 1.8em;
-    resize: none;
-    background-color: #2a2a2a;
-    color: $white;
-  }
-  ::placeholder {
-    font-family: 'Lato', sans-serif;
-  }
-  .editor_preview.hidden {
-    display: none;
+  0%, 100% {
+    opacity: 0;
   }
 }
 
@@ -163,14 +204,16 @@
     margin: 24px 0;
     code {
       padding: 12px;
+      line-height: 1.7em;
       background-color: #282c34;
       color: #abb2bf;
     }
   }
   blockquote {
-    border-left: 5px solid $border-color;
-    padding-left: 12px;
+    padding: 16px;
+    margin: 24px 0;
     color: $sub-font-color;
+    background-color: rgba(0, 0, 0, .05);
   }
   hr {
     border: none;

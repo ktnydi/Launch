@@ -57,6 +57,7 @@
   var preview = document.getElementsByClassName('preview')[0]
   var comment_submit = document.getElementById('comment_submit')
   var comment_length = document.getElementsByClassName('comment_length')[0]
+  var comment_update_btn = document.getElementsByClassName('comment_update_btn')
   var comment_edit_parent_modal = document.getElementsByClassName('comment_edit_parent_modal')
 
   comment_submit.setAttribute('disabled', 'disabled')
@@ -78,10 +79,11 @@
     preview_area.classList.toggle('hide')
   })
 
-  document.addEventListener('click', (e)=>{
-    var target = e.target
-    var target_data_id = target.getAttribute('data-id')
-    if (target.nodeName === 'BUTTON') {
+  for (var i = 0; i < comment_update_btn.length; i++) {
+    var update_btn = comment_update_btn.item(i)
+    update_btn.addEventListener('click', (e)=>{
+      var target = e.target
+      var target_data_id  = target.getAttribute('data-id')
       for (var i = 0; i < comment_edit_parent_modal.length; i++) {
         var parent_modal = comment_edit_parent_modal.item(i)
         var parent_modal_data_id = parent_modal.getAttribute('data-id')
@@ -90,8 +92,15 @@
           break
         }
       }
-    }
-    if (target.classList.contains('comment_edit_parent_modal')) {
-      target.classList.remove('show')
-    }
-  })
+    })
+  }
+
+  for (var i = 0; i < comment_edit_parent_modal.length; i++) {
+    var parent_modal = comment_edit_parent_modal.item(i)
+    parent_modal.addEventListener('click', (e)=>{
+      var target = e.target
+      if (target.classList.contains('show')) {
+        target.classList.remove('show')
+      }
+    })
+  }

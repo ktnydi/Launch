@@ -342,16 +342,28 @@
   display: none;
   &.show {
     display: block;
+    animation: modal_show .15s linear 0s forwards;
   }
-  .comment_edit_child_modal {
-    width: 400px;
-    max-width: 90%;
-    padding: 24px;
-    border-radius: 2px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: $white;
+}
+
+@keyframes modal_show {
+  from {
+    opacity: 0;
   }
+  to {
+    opacity: 1;
+  }
+}
+
+.comment_edit_child_modal {
+  width: 400px;
+  max-width: 90%;
+  padding: 24px;
+  border-radius: 2px;
+  box-shadow: 0 2px 17px 1px rgba(0, 0, 0, 0.1);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: $white;
 }

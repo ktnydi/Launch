@@ -25,12 +25,16 @@ before_action :access_draft, only: [:show]
   def create
     @post = current_user.posts.new(post_params)
     @post.uuid = SecureRandom.hex(10)
-    if @post.save
-      flash_notice(params[:commit])
-      redirect_to users_path
-    else
-      @errors = @post.errors.full_messages
-      render new_post_path, :layout => "editor"
+
+    respond_to do |format|
+      if @post.save
+        format.js { render :autosave } if params[:commit] == "autosave"
+        format.js { render js: "window.location = '#{post_path(@post)}'" }
+        format.html
+      else
+        @errors = @post.errors.full_messages
+        format.js { render :error }
+      end
     end
   end
 
@@ -42,9 +46,14 @@ before_action :access_draft, only: [:show]
   def update
     @post = Post.find_by(uuid: params[:uuid])
     @post.assign_attributes(post_params)
-    if @post.save
-      flash[:post_notice] = "記事を編集しました。"
-      redirect_to users_path
+    respond_to do |format|
+      if @post.save
+        format.js { head :ok } if params[:commit] == "autosave"
+        format.js { render js: "window.location = '#{post_path(@post)}'" }
+      else
+        @errors = @post.errors.full_messages
+        format.js { render :error, status: :unprocessable_entity }
+      end
     end
   end
 
@@ -52,11 +61,6 @@ before_action :access_draft, only: [:show]
     @post = Post.find_by(uuid: params[:uuid])
     @post.destroy
     redirect_to user_path(current_user)
-  end
-
-  def mypost
-    @posts = Post.status_public.where(user_id: params[:user_id]).order(created_at: :desc).page(params[:page]).per(10)
-    @user = User.find_by(uuid: params[:user_id])
   end
 
   private
@@ -81,18 +85,10 @@ before_action :access_draft, only: [:show]
   end
 
   def status(param)
-    if param == "下書き保存"
-      params[:post][:status] = "下書き"
-    else
+    if param == "記事を公開"
       params[:post][:status] = "公開中"
-    end
-  end
-
-  def flash_notice(param)
-    if param == "下書き保存"
-      flash[:post_notice] = "記事を下書きしました。"
     else
-      flash[:post_notice] = "記事を公開しました。"
+      params[:post][:status] = "下書き"
     end
   end
 
