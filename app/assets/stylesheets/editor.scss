@@ -46,6 +46,7 @@
   .editor, .editor_preview {
     padding: 16px;
     overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
   }
   .editor {
     width: 100%;
