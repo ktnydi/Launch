@@ -15,8 +15,7 @@
         = link_to "記事一覧", posts_path
     = form_tag posts_path, method: :get, class: 'search header_search' do
       = label_tag do
-        = text_field_tag "q", params[:q], autocomplete: "off", id: "field"
-        .placeholder 記事タイトルで検索
+        = text_field_tag "q", params[:q], required: true, autocomplete: "off", id: "field", placeholder: "記事タイトルで検索"
       = button_tag do
         %i.fas.fa-search
   .header-right
@@ -31,6 +30,16 @@
           = link_to "ダッシュボード", user_path(current_user.id)
           = link_to "アカウント設定", edit_user_registration_path
           = link_to "ログアウト", destroy_user_session_path, method: :delete
+.search_show_btn
+  %i.fas.fa-search.mobile
+.post_search_header
+  = form_tag posts_path, method: :get, class: 'mobile_search' do
+    = label_tag do
+      = text_field_tag "q", params[:q], required: true, autocomplete: "off", id: "field", placeholder: "記事タイトルで検索"
+    = button_tag do
+      %i.fas.fa-search
+  .search_close
+    %span.line
 .hamburger#hamburger
   %i.line
 - if flash[:notice]
@@ -39,3 +48,15 @@
 - elsif flash[:alert]
   %p.notification.alert
     = alert
+
+:javascript
+
+  const post_search = document.getElementsByClassName('post_search_header')[0]
+  const search_show = document.getElementsByClassName('search_show_btn')[0]
+  const search_close = document.getElementsByClassName('search_close')[0]
+  search_close.addEventListener('click', ()=>{
+    post_search.classList.remove('show')
+  })
+  search_show.addEventListener('click', ()=>{
+    post_search.classList.add('show')
+  })
