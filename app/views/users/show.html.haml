@@ -30,8 +30,7 @@
     .myposts-list
       = form_tag user_path(current_user), method: :get, name: "search_form", remote: true, class: 'search mypost_search' do
         = label_tag do
-          = text_field_tag "pq", params[:pq], id: "field", class: "search_field"
-          .placeholder 記事タイトルで検索
+          = text_field_tag "pq", params[:pq], id: "field", class: "search_field", placeholder: "記事タイトルで検索"
         = button_tag id: "go_search" do
           %i.fas.fa-search
       #table_wrapper.table_wrapper

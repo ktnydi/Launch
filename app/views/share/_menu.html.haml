@@ -1,17 +1,6 @@
 #menu.hamburger-menu-list
   %nav
     - if user_signed_in?
-      .user-name
-        = image_tag gravatar_image(current_user), size: 35
-        %br
-        %span= current_user.name
-      %hr
-      = form_tag posts_path, method: :get, class: 'search' do
-        = label_tag do
-          = text_field_tag "q", params[:q], autocomplete: "off", id: "field"
-          .placeholder 記事タイトルで検索
-        = button_tag do
-          %i.fas.fa-search
       .nav_link
         = link_to "ホーム", users_path
         = link_to "記事一覧", posts_path
@@ -19,39 +8,8 @@
         = link_to "アカウント設定", edit_user_registration_path
         = link_to "ログアウト", destroy_user_session_path, method: :delete
     - else
-      = form_tag posts_path, method: :get, class: 'search' do
-        = label_tag do
-          = text_field_tag "q", params[:q], autocomplete: "off", id: "field"
-          .placeholder 記事タイトルで検索
-        = button_tag do
-          %i.fas.fa-search
       .nav_link
         = link_to "ホーム", root_path, class: "home"
         = link_to "記事一覧", posts_path
         = link_to "ログイン", new_user_session_path
         = link_to "アカウント作成", new_user_registration_path
-:javascript
-  (function() {
-    document.addEventListener('keyup', (e)=>{
-      var target = e.target
-      if (target.nodeName === 'INPUT' && target.id === 'field') {
-        var has_value = target.value.length > 0
-        var placeholder = target.nextElementSibling
-        if (has_value) {
-          placeholder.classList.add('hide')
-        } else {
-          placeholder.classList.remove('hide')
-        }
-      }
-    })
-  })()
-
-  var inputs = document.querySelectorAll('.search input')
-  for (var i = 0, len = inputs.length; i < len; i++) {
-    var input = inputs.item(i)
-    var has_value = input.value.length > 0
-    if (has_value) {
-      var placeholder = input.nextElementSibling
-      placeholder.classList.add('hide')
-    }
-  }
