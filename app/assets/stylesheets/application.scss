@@ -520,9 +520,9 @@ footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  display: none;
+  visibility: hidden;
   &.show {
-    display: flex;
+    visibility: visible;
   }
   .mobile_search {
     height: 100%;

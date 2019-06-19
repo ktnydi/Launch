@@ -33,7 +33,7 @@
 .search_show_btn
   %i.fas.fa-search.mobile
 .post_search_header
-  = form_tag posts_path, method: :get, class: 'mobile_search' do
+  = form_tag posts_path, name: "search_header", method: :get, class: 'mobile_search' do
     = label_tag do
       = text_field_tag "q", params[:q], required: true, autocomplete: "off", id: "field", placeholder: "記事タイトルで検索"
     = button_tag do
@@ -59,4 +59,5 @@
   })
   search_show.addEventListener('click', ()=>{
     post_search.classList.add('show')
+    document.search_header.q.focus()
   })
