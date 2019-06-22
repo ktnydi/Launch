@@ -7,6 +7,7 @@ Rails.application.routes.draw do
               omniauth_callbacks: 'omniauth_callbacks'
               }
   root 'top#index'
+  resources :drafts, param: :article_token, except: [:index]
   get '/terms' => 'terms#index'
   resources :posts, param: :uuid do
     post '/like' => 'likes#create'

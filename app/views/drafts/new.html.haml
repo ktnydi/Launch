@@ -1,0 +1,7 @@
+- @page_title = "記事作成"
+.editor_wrapper
+  #editor_form_wrapper.editor_form_wrapper
+    = render "editor_form", draft: @draft
+  .editor_preview
+#edit_form_error
+  = render "error", errors: @errors

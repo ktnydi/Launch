@@ -21,7 +21,7 @@
   .header-right
     - if user_signed_in?
       %button.new-post
-        = link_to "記事を書く", new_post_path
+        = link_to "記事を書く", new_draft_path
       .user-name-toggle
         #toggle.user-name
           = image_tag gravatar_image(current_user), size: 35
