@@ -220,23 +220,23 @@
   }
 }
 
-.editor-errors {
-  width: 600px;
+.editor_errors {
+  width: 50%;
   padding: 24px;
-  margin: 0 auto;
   box-shadow: 0 2px 17px 1px rgba(0, 0, 0, 0.12);
-  border-radius: 3px;
   font-size: 1.3rem;
   background-color: #E75252;
   color: $white;
   position: fixed;
-  bottom: 24px;
   right: 0;
-  left: 0;
+  bottom: 0;
   z-index: 9999;
-  animation: show_error 5s ease 0s forwards;
+  transform: translateY(150%);
   @media all and (max-width: 1024px) {
-    width: 95%;
+    width: 100%;
+  }
+  &.show {
+    animation: show_error 5s ease 0s forwards;
   }
   h3 {
     font-size: 1.6rem;
@@ -244,10 +244,6 @@
   ul {
     margin: 8px 0;
   }
-}
-
-.editor-errors.hidden {
-  transform: translateY(150%);
 }
 
 @keyframes show_error {

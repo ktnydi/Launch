@@ -13,7 +13,7 @@
                 %button.follow_btn{data: {id: @public.user.id}}= render "follows/follow", user: @public.user
               - else
                 %ul.edit_list
-                  %li= link_to "削除", draft_path(@public), method: :delete, data: { confirm: "本当に削除しますか？一度、記事を削除すると元に戻せなくなります。"}
+                  %li= link_to "削除", public_path(@public.article_token), method: :delete, data: { confirm: "本当に削除しますか？一度、記事を削除すると元に戻せなくなります。"}
           .share_btn_wrapper
             .share_for_sns
               %a.twitter{href: "http://twitter.com/share?url=#{request.url}"}

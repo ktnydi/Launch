@@ -24,7 +24,6 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     })
     .done( (new_draft) => {
-      console.log(new_draft)
       window.location = `/drafts/${new_draft.article_token}`
     })
     .fail( (error) => {
@@ -80,7 +79,23 @@ document.addEventListener('DOMContentLoaded', function() {
       window.location = `/publics/${article_token}`
     })
     .fail( (error) => {
-      console.log(error)
+      const list = document.getElementById('editor_errors_list')
+      if (list.childNodes.length > 0) {
+        list.innerHTML = null
+      }
+      const error_messages = error.responseJSON
+      for (var i = 0; i < error_messages.length; i++) {
+        const child_list = document.createElement('li')
+        const error_message = error_messages[i]
+        const child_list_text = document.createTextNode(error_message)
+        child_list.appendChild(child_list_text)
+        list.appendChild(child_list)
+      }
+      const editor_errors = document.getElementsByClassName('editor_errors')[0]
+      editor_errors.classList.add('show')
+      setTimeout( () => {
+        editor_errors.classList.remove('show')
+      }, 5000)
     })
   }
 

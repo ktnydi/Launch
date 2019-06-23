@@ -19,4 +19,7 @@
     = render "editor_form", draft: @draft
   .editor_preview
 #edit_form_error
-  = render "error", errors: @errors
+  .editor_errors
+    %h3
+      保存に失敗しました。
+    %ul#editor_errors_list
