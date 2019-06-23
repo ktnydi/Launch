@@ -33,7 +33,6 @@ class DraftsController < ApplicationController
     respond_to do |format|
       if @draft.save
         format.json { render json: @draft }
-        format.html { render html: "hello" }
       else
         @errors = @draft.errors.full_messages
       end
@@ -42,6 +41,9 @@ class DraftsController < ApplicationController
 
   def destroy
     @draft = Draft.find_by(article_token: params[:article_token])
+    if @draft.destroy
+      render json: ""
+    end
   end
 
   :private

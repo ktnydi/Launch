@@ -19,7 +19,6 @@
     = javascript_include_tag '/editor/marked/marked.min.js'
     = javascript_include_tag '/editor/highlight/highlight.pack.js'
   %body{:ontouchstart => ""}
-    = render "editor_header"
     = yield
     :javascript
       const editor_show_btn = document.getElementsByClassName('editor_show')[0]

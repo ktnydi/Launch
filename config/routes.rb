@@ -8,6 +8,7 @@ Rails.application.routes.draw do
               }
   root 'top#index'
   resources :drafts, param: :article_token, except: [:index]
+  resources :publics, param: :article_token, except: [:new, :edit]
   get '/terms' => 'terms#index'
   resources :posts, param: :uuid do
     post '/like' => 'likes#create'

@@ -1,5 +1,12 @@
-%form.editor_form_wrapper#edit{name: "editor_form"}
+%form.editor_form#edit{ name: "editor_form" }
   .editor_form_markdown
-    = text_field_tag :title, draft.title, placeholder: "タイトル"
+    = text_field_tag :title, draft.title, placeholder: "タイトル", required: true
     = text_field_tag :category, draft.category, placeholder: "カテゴリー"
     = text_area_tag :content, draft.content, placeholder: "Markdownで内容を書く", col: 40, rows: 30, class: "editor"
+    %button{ type: "submit", name: "submit", style: "display: none; height: 0;"}
+  .editor_footer
+    .restore_message
+      %span.time 0
+      分前のバックアップデータがあります（
+      %span.restore_btn 復元する
+      ）
