@@ -34,6 +34,7 @@ class UsersController < ApplicationController
     else
       @publics = @user.publics.order(created_at: :desc).page(params[:page]).per(10)
     end
+    @drafts = @user.drafts.order(created_at: :desc).page(params[:page]).per(10)
   end
 
   private

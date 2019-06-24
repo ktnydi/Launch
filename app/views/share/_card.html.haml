@@ -1,5 +1,5 @@
 .card_wrapper
-  - if publics.length > 0
+  - if publics
     - publics.each do |public|
       .card
         .main_title
@@ -15,7 +15,7 @@
   - else
     %p.noposts 記事はありません
 
-- unless publics.total_pages == 1
+- if publics && publics.total_pages > 1
   .paginate
     = link_to_prev_page publics, "", class: "prev-page"
     - unless publics.out_of_range?

@@ -75,3 +75,46 @@
 .table_wrapper {
   position: relative;
 }
+
+.article_wrapper {
+  margin: 24px 0;
+  h2 {
+    font-size: 1.6rem;
+    margin-bottom: 12px;
+  }
+}
+
+.article_list_wrapper {
+  border-radius: 3px;
+  border: 1px solid rgba(0, 0, 0, .1);
+  background-color: $white;
+  .article {
+    padding: 12px 24px;
+    &:not(:last-child) {
+      border-bottom: 1px solid rgba(0, 0, 0, .1);
+    }
+    &:hover {
+      background-color: rgba(0, 0, 0, .01);
+    }
+    .link {
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      .flex_item {
+        flex: 1;
+        margin-left: 24px;
+      }
+      .article_title {
+        font-weight: bold;
+        font-size: 1.4rem;
+        margin-bottom: 12px;
+      }
+      .author_name, .created_at {
+        font-size: 1.2rem;
+        color: $sub-font-color;
+      }
+    }
+  }
+}
