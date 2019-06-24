@@ -11,14 +11,14 @@
             %span.name= comment.user.name
           .comment_created_at
             %span.updated_at= comment.updated_at.strftime("%Y-%m-%d")
-            - if user_signed_in? && comment.user_id === current_user.id
+            - if user_signed_in? && comment.user_token === current_user.uuid
               .comment_edit_btn_wrapper
                 %button.comment_update_btn{data: {id: "#{comment.id}"}} 編集
                 %button.comment_delete_btn
                   = link_to "削除", "/comment/#{comment.id}/", method: :delete, data: { confirm: "コメントを削除します。"}
         .comment_content
           != markdown comment.content
-        - if user_signed_in? && comment.user_id == current_user.uuid
+        - if user_signed_in? && comment.user_token == current_user.uuid
           .comment_edit_parent_modal{data: {id: "#{comment.id}"}}
             .comment_edit_child_modal
               .comment_form_header
@@ -36,7 +36,7 @@
     .preview
       %i.far.fa-eye
   .comment-edit
-    = form_for @comment, url: "/comment/#{@post.id}", html: { id: "comment_form", class: "comment_form" }, remote: true do |f|
+    = form_for @comment, url: "/comment/#{params[:article_token]}", html: { id: "comment_form", class: "comment_form" }, remote: true do |f|
       = f.text_area :content, id: "comment_area", placeholder: "Markdownで入力"
     .preview_area.hide
   .comment_form_bottom

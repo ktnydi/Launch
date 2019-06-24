@@ -11,14 +11,13 @@ class UsersController < ApplicationController
       @followings.each do |following|
         @following_ids << following.uuid
       end
-      if params[:posts]
-        @posts = @user.liked_posts.status_public.order(created_at: :desc).page(params[:page]).per(20)
+      if params[:article]
+        @publics = @user.liked_article.order(created_at: :desc).page(params[:page]).per(20)
       else
-        @posts = Post.status_public
-                               .where(user_id: @following_ids)
-                               .order(created_at: :desc)
-                               .page(params[:page])
-                               .per(20)
+        @publics = Public.where(user_token: @following_ids)
+                        .order(created_at: :desc)
+                        .page(params[:page])
+                        .per(20)
       end
     else
       redirect_to posts_path
@@ -27,13 +26,13 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find_by(uuid: params[:id])
-    if @posts = @user.posts.search(params[:pq]).page(params[:page]).per(10)
+    if @publics = @user.publics.search(params[:pq]).page(params[:page]).per(10)
       respond_to do |format|
         format.js
         format.html
       end
     else
-      @posts = @user.posts.order(created_at: :desc).page(params[:page]).per(10)
+      @publics = @user.publics.order(created_at: :desc).page(params[:page]).per(10)
     end
   end
 

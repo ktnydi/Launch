@@ -23,11 +23,11 @@
   .posts_wrapper_contents
     .toggle_index
       = link_to "投稿", user_posts_path(@user), class: "index_tweet"
-      = link_to "いいね", "#{user_posts_path(@user)}/?posts=like", class: "index_like"
+      = link_to "いいね", "#{user_posts_path(@user)}/?article=like", class: "index_like"
     .container
-      = render "share/card", posts: @posts
+      = render "share/card", publics: @publics
 %button.write_post
-  = link_to new_post_path do
+  = link_to new_draft_path do
     .line
 
 :javascript

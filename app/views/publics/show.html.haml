@@ -20,6 +20,8 @@
                 %i.fab.fa-twitter
               %a.facebook{href: "https://www.facebook.com/sharer/sharer.php?u=#{request.url}"}
                 %i.fab.fa-facebook-f
+            .heart_wrapper#heart
+              = render "like", public: @public
         %h2.main_title= @public.title
         .post_detail_info
           .post_day
@@ -32,6 +34,11 @@
             %i.fab.fa-twitter
           %a.facebook{href: "https://www.facebook.com/sharer/sharer.php?u=#{request.url}"}
             %i.fab.fa-facebook-f
+        .heart_wrapper#heart
+          = render "like", public: @public
+    .comment_wrapper
+      #comment
+        = render "comment", comments: @public.comments
 :javascript
   var comment_form = document.getElementById('comment_form')
   var comment_area = document.getElementById('comment_area')

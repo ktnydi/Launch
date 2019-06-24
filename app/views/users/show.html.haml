@@ -12,7 +12,7 @@
       .user_info_bottom
         .more_info
           .info_name 投稿数
-          %p.count= @user.posts.count
+          %p.count= @user.publics.count
         .more_info
           = link_to user_follows_list_path(@user) do
             .info_name フォロー
@@ -34,7 +34,7 @@
         = button_tag id: "go_search" do
           %i.fas.fa-search
       #table_wrapper.table_wrapper
-        = render "share/card", posts: @posts
+        = render "share/card", publics: @publics
 
 :javascript
   var go_search = document.getElementById('go_search')

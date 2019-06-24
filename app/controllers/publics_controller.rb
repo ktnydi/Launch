@@ -1,10 +1,15 @@
 class PublicsController < ApplicationController
   require 'securerandom'
   def index
+    @publics = Public.all.order(created_at: :desc).page(params[:page]).per(20)
+    if params[:q]
+      @publics = Public.all.search(params[:q]).page(params[:page]).per(20)
+    end
   end
 
   def show
     @public = Public.find_by(article_token: params[:article_token])
+    @comment = Comment.new
   end
 
   def create
