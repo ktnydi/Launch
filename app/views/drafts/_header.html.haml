@@ -11,6 +11,5 @@
         .preview_show
           %i.far.fa-eye
   .header-right
-    %input.draft{:form => "posts", :name => "commit", :type => "submit", :value => "下書き保存"}
-    %input.public{:form => "posts", :name => "commit", :type => "submit", :value => "記事を公開"}
-    %input.autosave{:form => "posts", :name => "commit", :type => "submit", :value => "autosave"}
+    %button.draft.form_btn 下書き保存
+    %button.public.form_btn 記事を公開

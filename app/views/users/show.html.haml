@@ -12,7 +12,7 @@
       .user_info_bottom
         .more_info
           .info_name 投稿数
-          %p.count= @user.posts.count
+          %p.count= @user.publics.count
         .more_info
           = link_to user_follows_list_path(@user) do
             .info_name フォロー
@@ -26,7 +26,7 @@
   .container
     .posts-controll-header
       %h2
-        あなたの記事一覧
+        投稿した記事
     .myposts-list
       = form_tag user_path(current_user), method: :get, name: "search_form", remote: true, class: 'search mypost_search' do
         = label_tag do
@@ -34,7 +34,19 @@
         = button_tag id: "go_search" do
           %i.fas.fa-search
       #table_wrapper.table_wrapper
-        = render "share/card", posts: @posts
+        = render "share/card", publics: @publics
+    .article_wrapper
+      %h2
+        編集中(未投稿)の記事
+      .article_list_wrapper
+        - @drafts.each do |draft|
+          .article
+            = link_to draft_path(draft.article_token), class: "link" do
+              = image_tag gravatar_image(draft.user), size: 40
+              .flex_item
+                %p.article_title= draft.title
+                %span.author_name= draft.user.name
+                %span.created_at= draft.created_at.strftime("%Y-%m-%d")
 
 :javascript
   var go_search = document.getElementById('go_search')

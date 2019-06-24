@@ -41,7 +41,6 @@
     flex: 1;
     flex-basis: 50%;
     background-color: $white;
-    overflow: hidden;
   }
   .editor, .editor_preview {
     padding: 16px;
@@ -49,26 +48,30 @@
     -webkit-overflow-scrolling: touch;
   }
   .editor {
+    display: block;
     width: 100%;
-    height: calc(100% - 80px);
+    height: calc(100% - 80px); // text_field分の高さを引く
     font-family: 'Ubuntu Mono', monospace, 'Lato', sans-serif;
     font-size: 1.6rem;
-    line-height: 1.8em;
+    line-height: 1.7em;
     resize: none;
     background-color: #2a2a2a;
     color: $white;
     &::selection {
       background-color: rgba(255, 255, 255, .15);
     }
-  }
-  ::placeholder {
-    font-family: 'Lato', sans-serif;
+    &::placeholder {
+      font-family: 'Lato', sans-serif;
+    }
   }
   .editor_form_wrapper.hidden {
     display: none;
   }
   .editor_preview {
     position: relative;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
     .status {
       padding: 3px 8px;
       border-radius: 2px;
@@ -79,11 +82,6 @@
       color: $sub-font-color;
       background-color: rgba(0, 0, 0, .1);
     }
-    .preview_content {
-      width: 100%;
-      max-width: 800px;
-      margin: 0 auto;
-    }
   }
   .editor_preview.hidden {
     display: none;
@@ -91,46 +89,44 @@
 }
 
 .editor_form_markdown {
-  height: 100%;
-  input[type="text"], input[type="url"] {
+  height: calc(100vh - 90px);
+  input[type="text"] {
     display: block;
     width: 100%;
     height: 40px;
     padding: 0 16px;
     font-size: 1.6rem;
     border: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.5);
     background-color: #1a1a1a;
     color: $white;
   }
-  input[type="text"] {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.editor_footer {
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  height: 30px;
+  font-size: 1.2rem;
+  background-color: #1a1a1a;
+  color: $white;
+  .restore_message {
+    display: none;
+    &.show {
+      display: block;
+    }
+    .restore_btn {
+      cursor: pointer;
+      color: $main-color;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
   }
 }
 
-.autosave_message {
-  position: fixed;
-  right: 16px;
-  bottom: 16px;
-  z-index: 100;
-  font-size: 1.4rem;
-  font-weight: bold;
-  opacity: 0;
-  color: #1F8A70;
-  &.save {
-    animation: autosave_message 5s linear 0s;
-  }
-}
-
-@keyframes autosave_message {
-  10%, 90% {
-    opacity: 1;
-  }
-  0%, 100% {
-    opacity: 0;
-  }
-}
-
-.preview_content, .content, .comment_content, .preview_area {
+.editor_preview, .content, .comment_content, .preview_area {
   word-break: break-all;
   background-color: $white;
   color: $font-color;
@@ -224,23 +220,23 @@
   }
 }
 
-.editor-errors {
-  width: 600px;
+.editor_errors {
+  width: 50%;
   padding: 24px;
-  margin: 0 auto;
   box-shadow: 0 2px 17px 1px rgba(0, 0, 0, 0.12);
-  border-radius: 3px;
   font-size: 1.3rem;
   background-color: #E75252;
   color: $white;
   position: fixed;
-  bottom: 24px;
   right: 0;
-  left: 0;
+  bottom: 0;
   z-index: 9999;
-  animation: show_error 5s ease 0s forwards;
+  transform: translateY(150%);
   @media all and (max-width: 1024px) {
-    width: 95%;
+    width: 100%;
+  }
+  &.show {
+    animation: show_error 5s ease 0s forwards;
   }
   h3 {
     font-size: 1.6rem;
@@ -248,10 +244,6 @@
   ul {
     margin: 8px 0;
   }
-}
-
-.editor-errors.hidden {
-  transform: translateY(150%);
 }
 
 @keyframes show_error {

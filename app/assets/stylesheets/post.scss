@@ -70,14 +70,13 @@
 
 .edit_list {
   padding: 0;
-  width: 90px;
   list-style: none;
   text-align: center;
   background-color: $white;
   display: flex;
   align-items: center;
-  justify-content: space-between;
   li {
+    margin-left: 8px;
     background-color: $main-color;
     border-radius: 2px;
     a {

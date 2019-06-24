@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  post '/comment/:post_id' => 'comments#create'
+  post '/comment/:article_token' => 'comments#create'
   patch '/comment/:id' => 'comments#update'
   delete '/comment/:id/' => 'comments#destroy'
   devise_for :users, controllers: {
@@ -7,8 +7,10 @@ Rails.application.routes.draw do
               omniauth_callbacks: 'omniauth_callbacks'
               }
   root 'top#index'
+  resources :drafts, param: :article_token, except: [:index]
+  resources :publics, param: :article_token, except: [:new, :edit, :update]
   get '/terms' => 'terms#index'
-  resources :posts, param: :uuid do
+  resources :publics, param: :article_token do
     post '/like' => 'likes#create'
     delete '/unlike' => 'likes#destroy'
   end

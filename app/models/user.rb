@@ -2,10 +2,11 @@ class User < ApplicationRecord
   require "securerandom"
   self.primary_key = "uuid"
 
-  has_many :posts, dependent: :destroy
-  has_many :comments, dependent: :destroy
-  has_many :likes, dependent: :destroy
-  has_many :liked_posts, through: :likes, source: :post
+  has_many :drafts, foreign_key: "user_token", dependent: :destroy
+  has_many :publics, foreign_key: "user_token", dependent: :destroy
+  has_many :comments, foreign_key: "user_token", dependent: :destroy
+  has_many :likes, foreign_key: "user_token", dependent: :destroy
+  has_many :liked_article, through: :likes, source: :public
   # フォローしたユーザー
   has_many :active_follows,
             class_name: "Follow",

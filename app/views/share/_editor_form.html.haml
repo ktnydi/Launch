@@ -1,7 +1,0 @@
-= form_for post, html: { class: "editor_form_wrapper", id: "posts", name: "editor_form" }, remote: true do |f|
-  .editor_form_markdown
-    = f.text_field :title, placeholder: "タイトル", required: true
-    = f.url_field :app_url, placeholder: "関連するURL"
-    = f.text_area :content, placeholder: "Markdownで内容を書く", col: 40, rows: 30, class: "editor"
-.autosave_message
-  自動保存しました。

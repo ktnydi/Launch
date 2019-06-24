@@ -242,6 +242,13 @@ header {
     }
   }
   .header-right {
+    .form_btn {
+      padding: 0 16px;
+      line-height: 40px;
+      font-size: 1.4rem;
+      border-radius: 2px;
+      cursor: pointer;
+    }
     .draft {
       color: $sub-font-color;
       background-color: transparent;
@@ -249,9 +256,6 @@ header {
     .public {
       color: $white;
       background-color: $main-color;
-    }
-    .autosave {
-      display: none;
     }
   }
 }
