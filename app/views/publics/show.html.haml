@@ -23,6 +23,10 @@
             .heart_wrapper#heart
               = render "like", public: @public
         %h2.main_title= @public.title
+        .article_tags
+          - @public.category.split(',').each do |tag|
+            = link_to "##{tag}", class: "tag_link" do
+              %span.tag_name= tag
         .post_detail_info
           .post_day
             %span.day= "公開：#{@public.created_at.strftime("%Y-%m-%d")}"

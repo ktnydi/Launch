@@ -126,6 +126,46 @@
   }
 }
 
+// selectize.js スタイル
+.selectize-control {
+  position: relative;
+  .items {
+    padding: 0 16px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    background-color: #1a1a1a;
+    overflow-x: scroll;
+    -webkit-overflow-scrolling: touch;
+    cursor: text;
+    .item {
+      display: inline-block;
+      margin-right: 8px;
+      padding: 0 8px;
+      line-height: 1.7;
+      border-radius: 50px;
+      font-size: 1.3rem;
+      cursor: pointer;
+      background-color: #2a2a2a;
+      color: $white;
+    }
+  }
+  #category-selectized {
+    width: auto !important;
+    padding: 0;
+    border: none;
+  }
+  .selectize-dropdown {
+    position: absolute;
+    top: 45px;
+    left: 0;
+    padding: 8px 16px;
+    box-shadow: 0 5px 17px 1px rgba(0, 0, 0, 0.05);
+    background-color: rgba(0, 0, 0, .8);
+    color: $white;
+  }
+}
+
 .editor_preview, .content, .comment_content, .preview_area {
   word-break: break-all;
   background-color: $white;

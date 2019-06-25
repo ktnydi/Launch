@@ -4,7 +4,6 @@ class UsersController < ApplicationController
 
   def index
     @user = params[:user_id] ? User.find_by(uuid: params[:user_id]) : current_user
-
     if @user
       @followings = @user.followings
       @following_ids = [@user.uuid]

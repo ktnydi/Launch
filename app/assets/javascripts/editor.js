@@ -4,6 +4,17 @@ document.addEventListener('DOMContentLoaded', function() {
   const draft = document.getElementsByClassName('draft')[0]
   const public = document.getElementsByClassName('public')[0]
 
+  $('#category').selectize({
+    delimiter: ',',
+    persist: false,
+    create: function(input) {
+      return {
+        value: input,
+        text: input,
+      }
+    }
+  })
+
   const article_token = () => {
     var path = window.location.pathname
     var has_token = path.match(/\/drafts\/(\w+)\/edit/)
@@ -111,7 +122,7 @@ document.addEventListener('DOMContentLoaded', function() {
   draft.addEventListener('click', (e)=>{
     e.preventDefault()
     if (!validation_of_presence()) {
-      return
+      return alert('タイトルを入力してください')
     }
 
     if (article_token()) {

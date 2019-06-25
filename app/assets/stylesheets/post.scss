@@ -36,11 +36,31 @@
     }
   }
   .main_title {
-    margin-bottom: 8px;
     font-size: 3.2rem;
     @media all and (max-width: 896px) {
       font-size: 2.8rem;
     }
+  }
+}
+
+.article_tags {
+  margin: 24px 0;
+  .tag_link {
+    margin-right: 12px;
+    display: inline-block;
+    line-height: 1.7em;
+    text-decoration: none;
+    border: 1px solid $border-color;
+    border-radius: 50px;
+    color: $font-color;
+    &:hover {
+      background-color: rgba(0, 0, 0, .05);
+    }
+  }
+  .tag_name {
+    padding: 0 15px;
+    font-size: 1.2rem;
+    cursor: pointer;
   }
 }
 

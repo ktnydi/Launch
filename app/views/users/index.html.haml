@@ -26,6 +26,24 @@
       = link_to "いいね", "#{user_posts_path(@user)}/?article=like", class: "index_like"
     .container
       = render "share/card", publics: @publics
+  .article_wrapper
+    .container
+      %h2
+        人気タグ
+      - Public.tag_ranking.each do |tag_name, count|
+        .article_tag
+          %h3
+            = "# #{tag_name}"
+            %span.tag_count= "(#{count})"
+          .article_list_wrapper
+            - Public.get_article_include_tag(tag_name).each do |article|
+              .article
+                = link_to public_path(article.article_token), class: "link" do
+                  = image_tag gravatar_image(article.user), size: 40
+                  .flex_item
+                    %p.article_title= article.title
+                    %span.author_name= article.user.name
+                    %span.created_at= article.created_at.strftime("%Y-%m-%d")
 %button.write_post
   = link_to new_draft_path do
     .line

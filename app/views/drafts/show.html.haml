@@ -22,6 +22,10 @@
               %a.facebook{href: "https://www.facebook.com/sharer/sharer.php?u=#{request.url}"}
                 %i.fab.fa-facebook-f
         %h2.main_title= @draft.title
+        .article_tags
+          - @draft.category.split(',').each do |tag|
+            = link_to "##{tag}", class: "tag_link" do
+              %span.tag_name= "# #{tag}"
         .post_detail_info
           .post_day
             %span.day= "作成：#{@draft.created_at.strftime("%Y-%m-%d")}"
