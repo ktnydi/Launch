@@ -1,8 +1,8 @@
 document.addEventListener('DOMContentLoaded', function() {
   const editor = document.getElementsByClassName('editor')[0]
-  const preview = document.querySelectorAll('.editor_preview')[0]
-  const draft = document.getElementsByClassName('draft')[0]
-  const public = document.getElementsByClassName('public')[0]
+  const preview = document.querySelectorAll('.editor_preview_content')[0]
+  const draft = document.getElementById('draft')
+  const public = document.getElementById('public')
 
   $('#category').selectize({
     delimiter: ',',
@@ -13,6 +13,19 @@ document.addEventListener('DOMContentLoaded', function() {
         text: input,
       }
     }
+  })
+
+  const scroll_sync = (e) => {
+    const extra_scroll = (preview.scrollHeight - preview.clientHeight) / (editor.scrollHeight - editor.clientHeight)
+    preview.scrollTop = editor.scrollTop * extra_scroll
+  }
+
+  editor.addEventListener('scroll', (e) => {
+    scroll_sync(e)
+  })
+
+  editor.addEventListener('input', (e) => {
+    scroll_sync(e)
   })
 
   const article_token = () => {
@@ -35,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     })
     .done( (new_draft) => {
-      window.location = `/drafts/${new_draft.article_token}`
+      window.location = `/users/${new_draft.user_token}`
     })
     .fail( (error) => {
     })
@@ -54,7 +67,8 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     })
     .done( (edit_draft) => {
-      window.location = `/drafts/${edit_draft.article_token}`
+      console.log(edit_draft)
+      window.location = `/users/${edit_draft.user_token}`
     })
     .fail( (error) => {
     })
@@ -112,7 +126,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
   const validation_of_presence = () => {
     if (document.editor_form.title.value === "" ) {
-      document.editor_form.submit.click()
       return false
     } else {
       return true
@@ -134,13 +147,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
   public.addEventListener('click', (e)=> {
     e.preventDefault()
-    if (validation_of_presence()) {
-      create_public()
-    }
+    create_public()
   })
 
   const editor_preview = () => {
-    if (editor.value.length > 0) {
+    if (editor.value.length >= 0) {
       preview.innerHTML = marked(editor.value)
     }
   }
@@ -152,7 +163,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const backup_time = storage.launch_backup_time
     const current_time = new Date().getTime()
     const since_backup = (current_time - backup_time) / (1000 * 60)
-    if (title || content) {
+    if (backup_title || backup_content) {
       const time = document.getElementsByClassName('time')[0]
       time.textContent = Math.round(since_backup)
       const restore_message = document.getElementsByClassName('restore_message')[0]
@@ -167,6 +178,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (title || content) {
       document.editor_form.title.value = title
       document.editor_form.content.value = content
+      preview.innerHTML = marked(content)
     }
   }
 

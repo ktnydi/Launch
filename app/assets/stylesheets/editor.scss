@@ -1,37 +1,5 @@
 @import "variables";
 
-.editor_form_toggle_tag {
-  height: 40px;
-  margin-left: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid $border-color;
-  border-radius: 2px;
-  @media all and (max-width: 896px) {
-    margin-left: 0;
-  }
-  .toggle_btn_wrapper {
-    display: flex;
-    .editor_show, .devide_show, .preview_show {
-      width: 40px;
-      line-height: 40px;
-      text-align: center;
-      font-size: 1.4rem;
-      cursor: pointer;
-      background-color: transparent;
-      color: $sub-font-color;
-      &.active {
-        background-color: rgba(0, 0, 0, 0.1);
-      }
-    }
-    .devide_show {
-      border-left: 1px solid $border-color;
-      border-right: 1px solid $border-color;
-    }
-  }
-}
-
 .editor_wrapper {
   display: flex;
   height: calc(100vh - 60px);
@@ -40,9 +8,13 @@
     height: calc(100vh - 60px);
     flex: 1;
     flex-basis: 50%;
+    min-width: 50%;
     background-color: $white;
+    @media all and (min-width: 1024px) {
+      max-width: 50%;
+    }
   }
-  .editor, .editor_preview {
+  .editor, .editor_preview_content {
     padding: 16px;
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
@@ -50,12 +22,13 @@
   .editor {
     display: block;
     width: 100%;
-    height: calc(100% - 80px); // text_field分の高さを引く
-    font-family: 'Ubuntu Mono', monospace, 'Lato', sans-serif;
-    font-size: 1.6rem;
+    height: 100%;
+    border-radius: 2px;
+    font-family: Monaco, monospace, sans-serif;
+    font-size: 1.4rem;
     line-height: 1.7em;
     resize: none;
-    background-color: #2a2a2a;
+    background-color: #1f2020;
     color: $white;
     &::selection {
       background-color: rgba(255, 255, 255, .15);
@@ -63,6 +36,9 @@
     &::placeholder {
       font-family: 'Lato', sans-serif;
     }
+  }
+  .editor_preview_content {
+    height: calc(100% - 60px);
   }
   .editor_form_wrapper.hidden {
     display: none;
@@ -72,15 +48,14 @@
     width: 100%;
     max-width: 800px;
     margin: 0 auto;
-    .status {
-      padding: 3px 8px;
-      border-radius: 2px;
-      font-size: 1.2rem;
-      position: absolute;
-      right: 16px;
-      top: 16px;
-      color: $sub-font-color;
-      background-color: rgba(0, 0, 0, .1);
+    &_top {
+      width: 100%;
+      height: 60px;
+      padding: 0 16px;
+      line-height: 60px;
+      font-size: 1.4rem;
+      font-weight: bold;
+      border-bottom: 1px solid rgba(0, 0, 0, .1);
     }
   }
   .editor_preview.hidden {
@@ -89,17 +64,29 @@
 }
 
 .editor_form_markdown {
-  height: calc(100vh - 90px);
-  input[type="text"] {
-    display: block;
-    width: 100%;
-    height: 40px;
-    padding: 0 16px;
-    font-size: 1.6rem;
-    border: none;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+  height: calc(100vh - 60px);
+  .box, .editor_box {
     background-color: #1a1a1a;
-    color: $white;
+  }
+  .box {
+    height: 60px;
+    padding: 10px;
+    border-bottom: 1px solid rgba(0, 0, 0, .5);
+    input[type="text"] {
+      display: block;
+      width: 100%;
+      height: 40px;
+      padding: 0 16px;
+      font-size: 1.4rem;
+      border: none;
+      border-radius: 2px;
+      background-color: #1f2020;
+      color: $white;
+    }
+  }
+  .editor_box {
+    height: calc(100% - 120px);
+    padding: 10px 10px 30px;
   }
 }
 
@@ -109,8 +96,11 @@
   padding: 0 16px;
   height: 30px;
   font-size: 1.2rem;
-  background-color: #1a1a1a;
   color: $white;
+  position: absolute;
+  bottom: 15px;
+  left: 0;
+  transform: translateY(50%);
   .restore_message {
     display: none;
     &.show {
@@ -134,19 +124,26 @@
     height: 40px;
     display: flex;
     align-items: center;
-    background-color: #1a1a1a;
+    border-radius: 2px;
+    background-color: #1f2020;
     overflow-x: scroll;
     -webkit-overflow-scrolling: touch;
     cursor: text;
+    &::-webkit-scrollbar {
+      display: none;
+    }
     .item {
       display: inline-block;
       margin-right: 8px;
       padding: 0 8px;
-      line-height: 1.7;
+      height: 1.7em;
+      line-height: 1.7em;
+      white-space: nowrap;
       border-radius: 50px;
-      font-size: 1.3rem;
+      letter-spacing: .5px;
+      font-size: 1.4rem;
       cursor: pointer;
-      background-color: #2a2a2a;
+      background-color: rgba(255, 255, 255, .1);
       color: $white;
     }
   }
@@ -166,7 +163,7 @@
   }
 }
 
-.editor_preview, .content, .comment_content, .preview_area {
+.editor_preview_content, .content, .comment_content, .preview_area {
   word-break: break-all;
   background-color: $white;
   color: $font-color;
@@ -178,10 +175,13 @@
   }
   & >:first-child {
     margin-top: 0;
+    border: none;
   }
   h1, h2 {
-    margin: 80px 0 24px;
-    font-size: 2.4rem;
+    margin: 50px 0 24px;
+    padding-top: 50px;
+    font-size: 2.2rem;
+    border-top: 1px solid $border-color;
     @media all and (max-width: 896px) {
       font-size: 2rem;
     }
@@ -232,7 +232,8 @@
     }
   }
   code {
-    font-family: consolas, monaco;
+    font-family: Monaco, monospace, sans-serif;
+    font-size: 1.4rem;
     border-radius: 2px;
     padding: 2px 5px;
     background-color: #eee;
@@ -257,6 +258,9 @@
     width: 100%;
     height: 1px;
     background-color: $border-color;
+  }
+  img {
+    max-width: 100%;
   }
 }
 

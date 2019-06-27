@@ -25,7 +25,7 @@
         .article_tags
           - @draft.category.split(',').each do |tag|
             = link_to "##{tag}", class: "tag_link" do
-              %span.tag_name= "# #{tag}"
+              %span.tag_name= tag
         .post_detail_info
           .post_day
             %span.day= "作成：#{@draft.created_at.strftime("%Y-%m-%d")}"

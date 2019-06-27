@@ -229,7 +229,7 @@ header {
 }
 
 .editor_header {
-  background-color: #f4f5f7;
+  background-color: $white;
   border-bottom: 1px solid $border-color;
   overflow-x: scroll;
   -webkit-overflow-scrolling : touch;
@@ -242,18 +242,22 @@ header {
     }
   }
   .header-right {
-    .form_btn {
+    .btn {
       padding: 0 16px;
+      margin-left: 10px;
       line-height: 40px;
       font-size: 1.4rem;
       border-radius: 2px;
       cursor: pointer;
     }
-    .draft {
-      color: $sub-font-color;
-      background-color: transparent;
+    .btn_white {
+      border: 1px solid rgba(0, 0, 0, .05);
+      background-color: #ECEFF1;
+      &:hover {
+        background-color: #e4e8eb;
+      }
     }
-    .public {
+    .btn_blue {
       color: $white;
       background-color: $main-color;
     }

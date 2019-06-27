@@ -9,7 +9,7 @@ class Public < ApplicationRecord
   validates :article_token, presence: true, uniqueness: true
   validates :title, presence: true, length: { maximum: 50 }
   validates :category, presence: true, length: { maximum: 20 }
-  validates :content, presence: true, length: { maximum: 3000 }
+  validates :content, presence: true, length: { maximum: 10000 }
   validates :user_token, presence: true
 
   def like_user(user_token)

@@ -2,14 +2,6 @@
   .header-left
     .logo
       = link_to "Launch", users_path
-    .editor_form_toggle_tag
-      .toggle_btn_wrapper
-        .editor_show
-          %i.fas.fa-pencil-alt
-        .devide_show.active
-          %i.fas.fa-book-open
-        .preview_show
-          %i.far.fa-eye
   .header-right
-    %button.draft.form_btn 下書き保存
-    %button.public.form_btn 記事を公開
+    %button#draft.btn.btn_white 下書き保存
+    %button#public.btn.btn_blue 記事を公開
