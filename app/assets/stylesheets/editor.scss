@@ -2,10 +2,10 @@
 
 .editor_wrapper {
   display: flex;
-  height: calc(100vh - 60px);
-  margin-top: 60px;
+  height: calc(100vh - 70px);
+  margin-top: 70px;
   .editor_form_wrapper, .editor_preview {
-    height: calc(100vh - 60px);
+    height: calc(100vh - 70px);
     flex: 1;
     flex-basis: 50%;
     min-width: 50%;
@@ -64,7 +64,7 @@
 }
 
 .editor_form_markdown {
-  height: calc(100vh - 60px);
+  height: calc(100vh - 70px);
   .box, .editor_box {
     background-color: #1a1a1a;
   }

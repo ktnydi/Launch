@@ -13,13 +13,3 @@
 //= require rails-ujs
 //= require activestorage
 //= require_tree .
-
-document.addEventListener('DOMContentLoaded', function() {
-  var toggle = document.getElementById('toggle');
-  var lists = document.getElementById('lists');
-  if (toggle) {
-    toggle.addEventListener('click', function() {
-      lists.classList.toggle('active')
-    });
-  }
-});
