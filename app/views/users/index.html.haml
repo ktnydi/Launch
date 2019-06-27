@@ -22,8 +22,8 @@
           %span.count= @user.passive_follows.count
   .posts_wrapper_contents
     .toggle_index
-      = link_to "投稿", user_posts_path(@user), class: "index_tweet"
-      = link_to "いいね", "#{user_posts_path(@user)}/?article=like", class: "index_like"
+      = link_to "投稿", users_path, class: "index_tweet"
+      = link_to "いいね", "#{users_path}/?article=like", class: "index_like"
     .container
       = render "share/card", publics: @publics
   .article_wrapper

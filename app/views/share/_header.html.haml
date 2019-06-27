@@ -13,10 +13,10 @@
           = link_to "ホーム", root_path, class: "home, link"
       %li.header_nav_li
         = link_to "記事一覧", publics_path, class: "article, link"
-    = form_tag publics_path, method: :get, class: 'search header_search' do
+    %form.search.header_search{action: "#{publics_path}", method: "get"}
       = label_tag do
         = text_field_tag "q", params[:q], required: true, autocomplete: "off", id: "field", placeholder: "記事タイトルで検索"
-      = button_tag do
+      %button{type: "submit"}
         %i.fas.fa-search
   .header-right
     - if user_signed_in?
