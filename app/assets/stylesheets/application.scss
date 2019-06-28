@@ -41,7 +41,7 @@ body {
 }
 
 html, body {
-  background-color: #f4f5f7;
+  background-color: $white;
   color: $font-color;
 }
 
@@ -306,9 +306,6 @@ main {
   &.authenticate_edit_form {
     padding-top: 70px;
   }
-  &.home_wrapper {
-    background-color: rgba(0, 150, 136, 0.05);
-  }
   &.post_wrapper {
     background-color: $white;
   }
@@ -476,6 +473,7 @@ footer {
   width: 100%;
   min-height: 50px;
   padding: 0 16px;
+  border-top: 1px solid $border-color;
   background-color: $white;
   @media all and (max-width: 896px) {
     text-align: center;
@@ -513,12 +511,8 @@ footer {
         }
         a {
           text-decoration: none;
-          font-size: 1.3rem;
-          color: $font-color;
-          transition: color .3s;
-          &:hover {
-            color: $main-color;
-          }
+          font-size: 1.4rem;
+          color: $sub-font-color;
         }
       }
     }

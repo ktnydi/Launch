@@ -1,62 +1,75 @@
-- if flash[:post_notice]
-  #notification.notice.notification
-    = flash[:post_notice]
 %main.home_wrapper
-  .home_top_wrapper
-    .login_user
-      .user
-        = image_tag gravatar_image(@user), size: 50
-        %span= @user.name
-      - unless other_user?(@user.uuid)
-        .edit_user
-          = link_to edit_user_registration_path do
-            %i.fas.fa-cog
-    .accompany
-      .follow
-        = link_to user_follows_list_path(@user) do
-          フォロー
-          %span.count= @user.active_follows.count
-      .follower
-        = link_to user_followers_list_path(@user) do
-          フォロワー
-          %span.count= @user.passive_follows.count
-  .posts_wrapper_contents
-    .toggle_index
-      = link_to "投稿", users_path, class: "index_tweet"
-      = link_to "いいね", "#{users_path}/?article=like", class: "index_like"
-    .container
-      = render "share/card", publics: @publics
-  .article_wrapper
-    .container
-      %h2
-        人気タグ
-      - Public.tag_ranking.each do |tag_name, count|
-        .article_tag
-          %h3
-            = "# #{tag_name}"
-            %span.tag_count= "(#{count})"
-          .article_list_wrapper
-            - Public.get_article_include_tag(tag_name).each do |article|
-              .article
-                = link_to public_path(article.article_token), class: "link" do
-                  = image_tag gravatar_image(article.user), size: 40
-                  .flex_item
-                    %p.article_title= article.title
-                    %span.author_name= article.user.name
-                    %span.created_at= article.created_at.strftime("%Y-%m-%d")
-%button.write_post
-  = link_to new_draft_path do
-    .line
-
-:javascript
-  const param = window.location.search
-  const index_tweet = document.getElementsByClassName('index_tweet')[0]
-  const index_like = document.getElementsByClassName('index_like')[0]
-
-  if (param.length > 0) {
-    index_like.classList.add('active')
-    index_tweet.classList.remove('active')
-  } else {
-    index_like.classList.remove('active')
-    index_tweet.classList.add('active')
-  }
+  .home_contents
+    .home_contents_left
+      = image_tag gravatar_image(current_user), size: 35, class: "user_image"
+      %b.username= current_user.name
+      .user_token= "@#{current_user.uuid}"
+      .user_status_info
+        = link_to user_follows_list_path(current_user.uuid), class: "link follow_link" do
+          .follow Follow
+          .count= current_user.followings.length
+        = link_to user_followers_list_path(current_user.uuid), class: "link follower_link" do
+          .follower Follower
+          .count= current_user.followers.length
+    .home_contents_center
+      .box
+        %h2.trend_article_heading
+          %span.sharp #
+          今日のトレンド
+        .article_list_wrapper
+          - @publics.each do |public|
+            .article
+              = link_to public_path(public.article_token), class: "link large_link" do
+                = image_tag gravatar_image(public.user), size: 40, class: "author_image"
+                .flex_item
+                  %p.article_title= public.title
+                  .tags
+                    - public.category.split(',').each do |tag|
+                      %span.tag_name= tag
+                  .list_bottom
+                    .list_bottom_left
+                      %span.author_name= "by #{public.user.name}"
+                      .thumbs_up
+                        %i.far.fa-thumbs-up
+                        %span.count 123
+                    %span.created_at= public.created_at.strftime("%Y-%m-%d")
+      .box
+        %h2.interest_tag_article_heading
+          %span.sharp #
+          注目のタグ
+        - Public.tag_ranking.each do |tag_name, article_count|
+          .tag_name_list
+            %h3.interest_tag_name= tag_name
+            .article_card_wrapper
+              - Public.get_article_include_tag(tag_name).each do |public|
+                .article
+                  = link_to public_path(public.article_token), class: "link" do
+                    .article_link_top
+                      = image_tag gravatar_image(public.user), size: 40, class: "author_image"
+                      %span.author_name= public.user.name
+                    .article_link_contents
+                      %p.article_title= public.title.truncate(35)
+                    .link_bottom
+                      .thumbs_up
+                        %i.far.fa-thumbs-up
+                        %span.count 123
+                      %span.created_at= public.created_at.strftime("%Y-%m-%d")
+      .box
+        %h2.latest_article_heading
+          %span.sharp #
+          最近投稿された記事
+        .article_list_wrapper
+          - @publics.each do |public|
+            .article
+              = link_to public_path(public.article_token), class: "link large_link" do
+                = image_tag gravatar_image(public.user), size: 40, class: "author_image"
+                .flex_item
+                  %p.article_title= public.title
+                  .tags
+                    - public.category.split(',').each do |tag|
+                      %span.tag_name= tag
+                  .list_bottom
+                    .list_bottom_left
+                      %span.author_name= "by #{public.user.name}"
+                    %span.created_at= public.created_at.strftime("%Y-%m-%d")
+        = link_to "もっとみる", publics_path, class: "more_latest_article_link"

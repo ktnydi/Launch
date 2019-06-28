@@ -3,24 +3,7 @@ class UsersController < ApplicationController
   before_action :forbiden_access, only: [:show]
 
   def index
-    @user = params[:user_id] ? User.find_by(uuid: params[:user_id]) : current_user
-    if @user
-      @followings = @user.followings
-      @following_ids = [@user.uuid]
-      @followings.each do |following|
-        @following_ids << following.uuid
-      end
-      if params[:article]
-        @publics = @user.liked_article.order(created_at: :desc).page(params[:page]).per(20)
-      else
-        @publics = Public.where(user_token: @following_ids)
-                        .order(created_at: :desc)
-                        .page(params[:page])
-                        .per(20)
-      end
-    else
-      redirect_to posts_path
-    end
+    @publics = Public.all.order(created_at: :desc).limit(5)
   end
 
   def show
