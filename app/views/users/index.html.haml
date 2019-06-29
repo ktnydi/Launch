@@ -44,7 +44,7 @@
             %p.recommend_registration_message Launchは学び続けるITエンジニアのための技術ブログです
             .authenticate_user
               %button.authenticate_user_registration
-                = link_to "会員登録する", new_user_registration_path, class: "authenticate_user_registration_link"
+                = link_to "会員登録する", "#", class: "authenticate_user_registration_link registration_link"
               %span.or OR
               %button.authenticate_user_login
                 = link_to "ログイン", new_user_session_path, class: "authenticate_user_login_link"
@@ -109,11 +109,42 @@
                       %span.author_name= "by #{public.user.name}"
                     %span.created_at= public.created_at.strftime("%Y-%m-%d")
         = link_to "もっとみる", publics_path, class: "more_latest_article_link"
+.registration_modal_parent
+.registration_modal_child
+  %h2.registration_heading アカウントを作成
+  .form-wrapper
+    = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+      .field
+        = f.text_field :name, placeholder: "ユーザー名", required: true, maxlength:"15"
+      .field
+        = f.email_field :email, placeholder: "メールアドレス", autocomplete: "email", required: true
+      .field
+        = f.password_field :password, placeholder: "パスワード", autocomplete: "new-password", required: true
+      %p.term
+        登録が完了すると#{link_to "利用規約", terms_path, target: :_blank}に同意したものとみなします。
+      .actions
+        = f.submit "登録", id: "submit"
+    %p.separate
+    .sns_login
+      = link_to user_twitter_omniauth_authorize_path, class: "twitter" do
+        %i.fab.fa-twitter
+        %p Twitterで登録
+    = render "devise/shared/links"
 :javascript
   const registration_links = document.getElementsByClassName('registration_link')
+  const registration_modal_parent = document.getElementsByClassName('registration_modal_parent')[0]
+
   for (let i = 0; i < registration_links.length; i++) {
     const registration_link = registration_links.item(i)
     registration_link.addEventListener('click', ()=>{
-      window.location = '/users/sign_up'
+      registration_modal_parent.classList.add('show')
+      registration_modal_parent.nextElementSibling.classList.add('show')
+      document.body.classList.add('hidden')
     })
   }
+
+  registration_modal_parent.addEventListener('click', ()=>{
+    registration_modal_parent.classList.remove('show')
+    registration_modal_parent.nextElementSibling.classList.remove('show')
+    document.body.classList.remove('hidden')
+  })
