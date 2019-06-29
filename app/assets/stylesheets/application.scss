@@ -97,19 +97,26 @@ header {
       display: flex;
     }
     .btn {
-      padding: 0 16px;
       margin-left: 10px;
       line-height: 40px;
       font-size: 1.4rem;
       border-radius: 2px;
       cursor: pointer;
       transition: .1s;
+      &_link {
+        display: block;
+        padding: 0 16px;
+        text-decoration: none;
+      }
     }
     .btn_white {
       border: 1px solid rgba(0, 0, 0, .05);
       background-color: #ECEFF1;
       &:hover {
         background-color: #e4e8eb;
+      }
+      .btn_link {
+        color: $font-color;
       }
     }
     .btn_blue {
@@ -118,6 +125,9 @@ header {
       &:hover {
         background-color: #068b7f
       }
+      .btn_link {
+        color: $white;
+      }
     }
     .link_editor {
       display: none;
@@ -125,11 +135,6 @@ header {
         display: block;
       }
     }
-  }
-  a {
-    display: block;
-    text-decoration: none;
-    color: $white;
   }
 }
 

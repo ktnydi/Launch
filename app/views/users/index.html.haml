@@ -1,17 +1,53 @@
 %main.home_wrapper
   .home_contents
     .home_contents_left
-      = image_tag gravatar_image(current_user), size: 35, class: "user_image"
-      %b.username= current_user.name
-      .user_token= "@#{current_user.uuid}"
-      .user_status_info
-        = link_to user_follows_list_path(current_user.uuid), class: "link follow_link" do
-          .follow Follow
-          .count= current_user.followings.length
-        = link_to user_followers_list_path(current_user.uuid), class: "link follower_link" do
-          .follower Follower
-          .count= current_user.followers.length
+      .box
+        .login_user_wrapper
+          - if user_signed_in?
+            = image_tag gravatar_image(current_user), size: 35, class: "user_image"
+            %b.username= current_user.name
+            .user_token= "@#{current_user.uuid}"
+            .user_status_info
+              %a.link.follow_link{href: "#{user_follows_list_path(current_user.uuid)}"}
+                .follow Follow
+                .count= current_user.followings.length
+              %a.link.follower_link{href: "#{user_followers_list_path(current_user.uuid)}"}
+                .follower Follower
+                .count= current_user.followers.length
+          - else
+            .user_image
+              %i.far.fa-user.guest_image
+            %b.username ゲスト
+            .user_token= "@guestuser"
+            .user_status_info
+              %a.link.follow_link.registration_link
+                .follow Follow
+                .count= 0
+              %a.link.follower_link.registration_link
+                .follower Follower
+                .count= 0
+      .box
+        .side_bar
+          - if user_signed_in?
+            %a.side_bar_link{href: "#{user_path(current_user)}"} ダッシュボード
+            %a.side_bar_link{href: "#"} 高く評価した記事
+            %a.side_bar_link{href: "#"} 閲覧履歴
+          - else
+            %a.side_bar_link.registration_link ダッシュボード
+            %a.side_bar_link.registration_link 高く評価した記事
+            %a.side_bar_link.registration_link 閲覧履歴
     .home_contents_center
+      - unless user_signed_in?
+        .box
+          .recommend_registration
+            %h2.recommend_registration_heading 学びをアウトプットしよう
+            %p.recommend_registration_message Launchは学び続けるITエンジニアのための技術ブログです
+            .authenticate_user
+              %button.authenticate_user_registration
+                = link_to "会員登録する", new_user_registration_path, class: "authenticate_user_registration_link"
+              %span.or OR
+              %button.authenticate_user_login
+                = link_to "ログイン", new_user_session_path, class: "authenticate_user_login_link"
       .box
         %h2.trend_article_heading
           %span.sharp #
@@ -73,3 +109,11 @@
                       %span.author_name= "by #{public.user.name}"
                     %span.created_at= public.created_at.strftime("%Y-%m-%d")
         = link_to "もっとみる", publics_path, class: "more_latest_article_link"
+:javascript
+  const registration_links = document.getElementsByClassName('registration_link')
+  for (let i = 0; i < registration_links.length; i++) {
+    const registration_link = registration_links.item(i)
+    registration_link.addEventListener('click', ()=>{
+      window.location = '/users/sign_up'
+    })
+  }

@@ -28,8 +28,7 @@
   %body{:ontouchstart => ""}
     = render 'share/header'
     = yield
-    - if user_signed_in?
-      = render 'share/footer'
+    = render 'share/footer'
     = render "share/menu"
 
     :javascript

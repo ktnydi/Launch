@@ -10,13 +10,16 @@
     &_left {
       width: 280px;
       height: calc(100vh - 70px);
-      padding: 24px;
       border-right: 1px solid $border-color;
       border-radius: 2px;
+      .box {
+        padding: 24px 0;
+        border-bottom: 1px solid $border-color;
+      }
     }
     &_center {
       width: 780px;
-      margin: 20px auto;
+      margin: 24px auto;
       .box {
         margin-bottom: 60px;
       }
@@ -29,38 +32,122 @@
   position: sticky;
   top: 70px;
   z-index: 50;
-  .user_image {
-    width: 72px;
-    height: 72px;
-    border-radius: 2px;
+  .login_user_wrapper {
+    padding: 0 24px;
+    .user_image {
+      display: inline-block;
+      width: 72px;
+      height: 72px;
+      border-radius: 2px;
+      .guest_image {
+        display: block;
+        line-height: 72px;
+        font-size: 50px;
+        background-color: rgba(0, 0, 0, .05);
+        color: rgba(0, 0, 0, .1);
+      }
+    }
+    .username {
+      display: block;
+      margin: 5px 0;
+      font-size: 1.6rem;
+    }
+    .user_token {
+      padding-bottom: 12px;
+      border-bottom: 1px solid $border-color;
+      font-size: 1.2rem;
+      color: $sub-font-color;
+    }
+    .user_status_info {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 12px;
+      .link {
+        margin: 0 12px;
+        text-decoration: none;
+        cursor: pointer;
+        color: $sub-font-color;
+        .follow, .follower {
+          font-size: 1.4rem;
+        }
+        .count {
+          font-size: 2rem;
+          color: $main-color;
+        }
+      }
+    }
   }
-  .username {
-    display: block;
-    margin: 5px 0;
-    font-size: 1.6rem;
+  .side_bar {
+    &_link {
+      display: block;
+      padding: 12px 24px;
+      text-decoration: none;
+      text-align: left;
+      font-size: 1.3rem;
+      cursor: pointer;
+      color: $font-color;
+      &:hover {
+        background-color: rgba(0, 0, 0, .03);
+      }
+    }
   }
-  .user_token {
-    margin-bottom: 12px;
-    padding-bottom: 12px;
-    border-bottom: 1px solid $border-color;
-    font-size: 1.4rem;
+}
+
+.recommend_registration {
+  border-top: 3px solid $main-color;
+  box-shadow: 0 3px 10px 1px rgba(0, 0, 0, 0.08);
+  padding: 24px;
+  text-align: center;
+  &_heading {
+    font-size: 2rem;
+    letter-spacing: .5px;
+  }
+  &_message {
+    margin: 10px 0 30px;
+    font-size: 1.3rem;
+    letter-spacing: .5px;
     color: $sub-font-color;
   }
-  .user_status_info {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    .link {
-      margin: 0 12px;
-      text-decoration: none;
-      color: $sub-font-color;
-      .follow, .follower {
+  .authenticate_user {
+    display: inline-flex;
+    flex-direction: column;
+    &_registration, &_login {
+      width: 150px;
+      height: 40px;
+      line-height: 40px;
+      border-radius: 2px;
+      cursor: pointer;
+      &_link {
+        text-decoration: none;
         font-size: 1.4rem;
+        display: block;
       }
-      .count {
-        font-size: 2rem;
-        color: $main-color;
+    }
+    &_registration {
+      background-color: $main-color;
+      &:hover {
+        background-color: #068b7f;
       }
+      &_link {
+        display: block;
+        color: $white;
+      }
+    }
+    &_login {
+      border: 1px solid rgba(0, 0, 0, .05);
+      background-color: #ECEFF1;
+      &:hover {
+        background-color: #e4e8eb;
+      }
+      &_link {
+        color: $font-color;
+      }
+    }
+    .or {
+      margin: 5px 0;
+      font-size: 1rem;
+      color: $sub-font-color;
     }
   }
 }
