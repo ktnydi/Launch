@@ -433,7 +433,7 @@ main.follow, main.follower {
   }
 }
 
-.notification {
+.notification, .error_explanation {
   padding: 8px 24px;
   text-align: center;
   font-size: 1.3rem;
@@ -441,13 +441,25 @@ main.follow, main.follower {
   box-shadow: 0 2px 17px 1px rgba(0, 0, 0, 0.1);
   color: $white;
   position: fixed;
-  top: 86px;
+  top: 70px;
   right: 16px;
   z-index: 50;
   animation: notification 5s ease 0s forwards;
   @media all and (max-width: 896px) {
     max-width: 100%;
     right: 0;
+  }
+}
+
+.error_explanation {
+  p {
+    font-weight: bold;
+    font-size: 1.6rem;
+  }
+  ul {
+    text-align: left;
+    padding: 8px 24px 0;
+    font-size: 1.3rem;
   }
 }
 
