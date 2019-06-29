@@ -6,7 +6,7 @@ Rails.application.routes.draw do
               registrations: 'registrations',
               omniauth_callbacks: 'omniauth_callbacks'
               }
-  root 'top#index'
+  root 'users#index'
   resources :drafts, param: :article_token, except: [:index]
   resources :publics, param: :article_token, except: [:new, :edit, :update]
   get '/terms' => 'terms#index'

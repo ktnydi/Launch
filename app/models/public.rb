@@ -40,7 +40,7 @@ class Public < ApplicationRecord
         articles << article
       end
     end
-    articles[0..4]
+    articles[0..2]
   end
 
   def self.tag_ranking
@@ -52,6 +52,6 @@ class Public < ApplicationRecord
     tags_list.flatten.uniq.each do |tag_name|
       tag_ranking[tag_name] = tags_list.flatten.count(tag_name)
     end
-    tag_ranking.sort_by{ |key, value| value }.reverse[0..4].to_h
+    tag_ranking.sort_by{ |key, value| value }.reverse[0..2].to_h
   end
 end
