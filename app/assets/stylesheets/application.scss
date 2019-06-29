@@ -69,11 +69,6 @@ input[type="checkbox"] {
   max-width: 800px;
   margin: 0 auto;
   padding: 0 16px;
-  &.post_container {
-    @media all and (max-width: 896px) {
-      padding: 0;
-    }
-  }
 }
 
 // ヘッダー

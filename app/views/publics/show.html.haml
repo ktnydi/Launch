@@ -1,19 +1,44 @@
 - @page_title = @public.title
 %main
-  .container.post_container
-    .post_content
-      .post_index
-        .post_info_wrapper
-          .post_info
-            .author
-              = image_tag gravatar_image(@public.user), size: 50
-              %span.name= @public.user.name
-            - if user_signed_in?
-              - if other_user?(@public.user.uuid)
-                %button.follow_btn{data: {id: @public.user.id}}= render "follows/follow", user: @public.user
-              - else
-                %ul.edit_list
-                  %li= link_to "削除", public_path(@public.article_token), method: :delete, data: { confirm: "本当に削除しますか？一度、記事を削除すると元に戻せなくなります。"}
+  .article_box
+    .article_box_left
+      .inner
+        .toc_box
+          %h2.toc_heading 目次
+          .toc
+    .article_box_center
+      .inner
+        .post_content
+          .post_index
+            .post_info_wrapper
+              .post_info
+                .author
+                  = image_tag gravatar_image(@public.user), size: 50
+                  %span.name= @public.user.name
+                - if user_signed_in?
+                  - if other_user?(@public.user.uuid)
+                    %button.follow_btn{data: {id: @public.user.id}}= render "follows/follow", user: @public.user
+                  - else
+                    %ul.edit_list
+                      %li= link_to "削除", public_path(@public.article_token), method: :delete, data: { confirm: "本当に削除しますか？一度、記事を削除すると元に戻せなくなります。"}
+              .share_btn_wrapper
+                .share_for_sns
+                  %a.twitter{href: "http://twitter.com/share?url=#{request.url}"}
+                    %i.fab.fa-twitter
+                  %a.facebook{href: "https://www.facebook.com/sharer/sharer.php?u=#{request.url}"}
+                    %i.fab.fa-facebook-f
+                .heart_wrapper#heart
+                  = render "like", public: @public
+            %h2.main_title= @public.title
+            .article_tags
+              - @public.category.split(',').each do |tag|
+                = link_to "##{tag}", class: "tag_link" do
+                  %span.tag_name= tag
+            .post_detail_info
+              .post_day
+                %span.day= "公開：#{@public.created_at.strftime("%Y-%m-%d")}"
+          .box_content
+            != markdown @public.content
           .share_btn_wrapper
             .share_for_sns
               %a.twitter{href: "http://twitter.com/share?url=#{request.url}"}
@@ -22,27 +47,9 @@
                 %i.fab.fa-facebook-f
             .heart_wrapper#heart
               = render "like", public: @public
-        %h2.main_title= @public.title
-        .article_tags
-          - @public.category.split(',').each do |tag|
-            = link_to "##{tag}", class: "tag_link" do
-              %span.tag_name= tag
-        .post_detail_info
-          .post_day
-            %span.day= "公開：#{@public.created_at.strftime("%Y-%m-%d")}"
-      .content
-        != markdown @public.content
-      .share_btn_wrapper
-        .share_for_sns
-          %a.twitter{href: "http://twitter.com/share?url=#{request.url}"}
-            %i.fab.fa-twitter
-          %a.facebook{href: "https://www.facebook.com/sharer/sharer.php?u=#{request.url}"}
-            %i.fab.fa-facebook-f
-        .heart_wrapper#heart
-          = render "like", public: @public
-    .comment_wrapper
-      #comment
-        = render "comment", comments: @public.comments
+        .comment_wrapper
+          #comment
+            = render "comment", comments: @public.comments
 :javascript
   var comment_form = document.getElementById('comment_form')
   var comment_area = document.getElementById('comment_area')
