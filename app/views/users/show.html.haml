@@ -41,12 +41,25 @@
       .article_list_wrapper
         - @drafts.each do |draft|
           .article
-            = link_to draft_path(draft.article_token), class: "link" do
-              = image_tag gravatar_image(draft.user), size: 40
+            = link_to edit_draft_path(draft.article_token), class: "link large_link" do
+              = image_tag gravatar_image(draft.user), size: 40, class: "author_image"
               .flex_item
                 %p.article_title= draft.title
-                %span.author_name= draft.user.name
-                %span.created_at= draft.created_at.strftime("%Y-%m-%d")
+                .tags
+                  - draft.category.split(',').each do |tag|
+                    %span.tag_name= tag
+                .list_bottom
+                  .list_bottom_left
+                    %span.author_name= "by #{draft.user.name}"
+                  %span.created_at= draft.created_at.strftime("%Y-%m-%d")
+
+      - if @drafts && @drafts.total_pages > 1
+        .paginate
+          = link_to_prev_page @drafts, "", class: "prev-page"
+          - unless @drafts.out_of_range?
+            .now_page= "#{@drafts.current_page}/#{@drafts.total_pages}"
+          = link_to_next_page @drafts, "", class: "next-page"
+
 
 :javascript
   var go_search = document.getElementById('go_search')

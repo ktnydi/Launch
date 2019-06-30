@@ -5,9 +5,8 @@
   .user_info {
     padding: 24px;
     text-align: center;
-    border-radius: 8px;
-    box-shadow: 0 5px 17px 1px rgba(0, 0, 0, 0.05);
-    background-color: $white;
+    border-radius: 2px;
+    border: 1px solid $border-color;
     position: relative;
   }
 }
@@ -17,7 +16,7 @@
   img {
     width: 70px;
     height: 70px;
-    border-radius: 50%;
+    border-radius: 2px;
     box-shadow: 0 5px 17px 1px rgba(0, 0, 0, 0.05);
   }
   .name, .uuid {
@@ -61,27 +60,24 @@
 }
 
 .posts-info-wrapper {
-  .posts-controll-header {
+  .posts-controll-header, .article_wrapper {
     h2 {
       margin: 16px 0;
       font-size: 1.6rem;
-      font-weight: normal;
       text-align: center;
-      color: $sub-font-color;
+      color: rgba(0, 0, 0, .6);
     }
   }
 }
 
 .table_wrapper {
   position: relative;
+  margin: 0 0 24px;
 }
 
 .article_wrapper {
-  margin: 24px 0;
-  h2 {
-    font-size: 1.6rem;
-    margin-bottom: 12px;
-  }
+  padding: 24px 0;
+  border-top: 1px solid $border-color;
 }
 
 .article_list_wrapper {

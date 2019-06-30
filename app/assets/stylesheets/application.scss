@@ -787,12 +787,12 @@ footer {
 .mypost_search {
   width: 100%;
   margin: 24px auto;
-  background-color: $white;
+  background-color: rgba(0, 0, 0, 0.08);
   input[type="text"] {
     color: $font-color;
   }
   button[type="submit"] i {
-    color: $sub-font-color;
+    color: rgba(0, 0, 0, .3);
   }
 }
 
@@ -835,7 +835,7 @@ footer {
 .paginate {
   width: 200px;
   height:50px;
-  margin: 24px auto;
+  margin: 24px auto 0;
   position: relative;
   .now_page {
     color: $sub-font-color;
