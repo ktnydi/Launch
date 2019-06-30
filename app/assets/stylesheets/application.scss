@@ -95,7 +95,9 @@ header {
       display: flex;
     }
     .btn {
+      width: 100px;
       margin-left: 10px;
+      text-align: center;
       line-height: 40px;
       font-size: 1.4rem;
       border-radius: 2px;
@@ -103,7 +105,6 @@ header {
       transition: .1s;
       &_link {
         display: block;
-        padding: 0 16px;
         text-decoration: none;
       }
     }
