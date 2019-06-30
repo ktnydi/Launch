@@ -33,6 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
       var h1_a_text = document.createTextNode(heading.textContent)
       h1_ul.setAttribute('class', 'heading1')
       h1_a.setAttribute('href', `#chapter_${i + 1}`)
+      h1_a.setAttribute('class', `chapter`)
       h1_a.dataset.innerlink = `chapter_${i + 1}`
       h1_a.appendChild(h1_a_text)
       h1_li.appendChild(h1_a)
@@ -47,6 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
       var h2_a_text = document.createTextNode(heading.textContent)
       h2_ul.setAttribute('class', 'heading2')
       h2_a.setAttribute('href', `#chapter_${i + 1}`)
+      h2_a.setAttribute('class', `chapter`)
       h2_a.dataset.innerlink = `chapter_${i + 1}`
       h2_a.appendChild(h2_a_text)
       h2_li.appendChild(h2_a)
@@ -65,6 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
       var h3_a_text = document.createTextNode(heading.textContent)
       h3_ul.setAttribute('class', 'heading3')
       h3_a.setAttribute('href', `#chapter_${i + 1}`)
+      h3_a.setAttribute('class', `chapter`)
       h3_a.dataset.innerlink = `chapter_${i + 1}`
       h3_a.appendChild(h3_a_text)
       h3_li.appendChild(h3_a)
@@ -77,4 +80,15 @@ document.addEventListener('DOMContentLoaded', () => {
       h2_last_li.appendChild(h3_ul)
     }
   }
+
+  $(function() {
+    $('.chapter').click(function() {
+      const speed = 400
+      const href = $(this).attr('href')
+      const target = $(href == '#' || href == '' ? 'html' : href)
+      const position = target.offset().top - target.height()
+      $('body, html').animate({scrollTop:position}, speed, 'swing')
+      return false
+    })
+  })
 })
