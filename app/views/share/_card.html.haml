@@ -1,19 +1,20 @@
-.card_wrapper
-  - if publics
-    - publics.each do |public|
-      .card
-        .main_title
-          = link_to public.title, public_path(public.article_token)
-        .post_info_wrapper
-          .post_info
-            .author= public.user.name
-            .created_at= public.created_at.strftime("%Y-%m-%d")
-          - if current_user && public.like_user(current_user.id)
-            %i.fas.fa-heart.heart
-          - else
-            %i.far.fa-heart.heart
-  - else
-    %p.noposts 記事はありません
+.article_list_wrapper
+  - publics.each do |public|
+    .article
+      = link_to public_path(public.article_token), class: "link large_link" do
+        = image_tag gravatar_image(public.user), size: 40, class: "author_image"
+        .flex_item
+          %p.article_title= public.title
+          .tags
+            - public.category.split(',').each do |tag|
+              %span.tag_name= tag
+          .list_bottom
+            .list_bottom_left
+              %span.author_name= "by #{public.user.name}"
+              .thumbs_up
+                %i.far.fa-thumbs-up
+                %span.count 123
+            %span.created_at= public.created_at.strftime("%Y-%m-%d")
 
 - if publics && publics.total_pages > 1
   .paginate

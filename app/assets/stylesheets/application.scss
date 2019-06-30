@@ -305,7 +305,7 @@ main {
     overflow: hidden;
   }
   &.home_wrapper,
-  &.posts_wrapper,
+  &.article_list,
   &.follow,
   &.authenticate_edit_form {
     padding-top: 70px;
@@ -821,6 +821,13 @@ footer {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+  }
+}
+
+// 記事一覧
+.article_list {
+  &_box {
+    padding: 50px 0;
   }
 }
 
