@@ -32,7 +32,7 @@ class Public < ApplicationRecord
     tags_list.flatten.uniq
   end
 
-  def self.get_article_include_tag(name)
+  def self.get_article_include_tag(name, length = 3)
     articles = []
     self.all.order(created_at: :desc).each do |article|
       tag_list = article.category.split(",")
@@ -40,7 +40,7 @@ class Public < ApplicationRecord
         articles << article
       end
     end
-    articles[0..2]
+    articles[0..(length - 1)]
   end
 
   def self.tag_ranking

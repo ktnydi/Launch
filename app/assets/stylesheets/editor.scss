@@ -175,16 +175,20 @@
   }
   & >:first-child {
     margin-top: 0;
+    padding: 0;
     border: none;
   }
   h1, h2 {
     margin: 50px 0 24px;
     padding-top: 50px;
     font-size: 2.2rem;
-    border-top: 1px solid $border-color;
     @media all and (max-width: 896px) {
       font-size: 2rem;
     }
+  }
+  h1 {
+    font-size: 2.6rem;
+    border-top: 1px solid $border-color;
   }
   h3 {
     margin: 24px 0;
@@ -204,7 +208,7 @@
   }
   a {
     text-decoration: none;
-    color: $sub-color;
+    color: $main-color;
   }
   ol, ul {
     padding-left: 1em;
@@ -261,6 +265,37 @@
   }
   img {
     max-width: 100%;
+  }
+}
+
+.comment_content {
+  margin-top: 15px;
+  * {
+    font-size: 1.4rem;
+  }
+  & > * {
+    margin-bottom: 5px;
+  }
+  h1, h2 {
+    font-size: 1.6rem;
+    margin: 0 0 5px;
+    padding: 0;
+  }
+  h3 {
+    font-size: 1.4rem;
+  }
+  h4 {
+    font-size: 1.4rem;
+  }
+  h5, h6 {
+    font-size: 1.4rem;
+  }
+  p {
+    font-size: 1.4rem;
+    margin: 0 0 10px;
+  }
+  pre, table, blockquote {
+    margin: 10px 0;
   }
 }
 

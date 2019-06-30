@@ -1,5 +1,10 @@
 @import "variables";
 
+.heading .sharp {
+  color: $main-color;
+  margin-right: 5px;
+}
+
 .article_box {
   margin-top: 70px;
   display: flex;
@@ -8,7 +13,7 @@
     flex: 1;
     background-color: $white;
     .inner {
-      width: 800px;
+      width: 780px;
       margin: 0 auto;
     }
   }
@@ -22,15 +27,18 @@
     top: 70px;
     z-index: 100px;
     overflow-y: scroll;
+    -webkit-overflow-scrolling: smooth;
     .inner {
-      .toc_box {
-        .toc_heading {
-          font-size: 2rem;
+      .box {
+        border-bottom: 1px solid $border-color;
+        &_heading {
+          font-size: 1.8rem;
           padding: 24px 16px 0;
         }
+      }
+      .toc_box {
         .toc {
           padding: 24px 0;
-          border-bottom: 1px solid $border-color;
           .heading1, .heading2, .heading3 {
             list-style: none;
             & > li > a {
@@ -57,10 +65,12 @@
 }
 
 .post_content {
-  padding: 0 16px 24px;
+  padding: 0 16px 50px;
   background-color: $white;
   .post_index {
-    margin-bottom: 40px;
+    padding-bottom: 40px;
+    margin-bottom: 50px;
+    border-bottom: 1px solid $border-color;
   }
   .post_info_wrapper {
     padding: 24px 0;
@@ -81,7 +91,7 @@
         width: 35px;
         height: 35px;
         margin-right: 12px;
-        border-radius: 999px;
+        border-radius: 2px;
       }
     }
     .name, .updated_at {
@@ -99,6 +109,10 @@
   }
 }
 
+.box_content {
+  margin-bottom: 60px;
+}
+
 .article_tags {
   margin: 24px 0;
   .tag_link {
@@ -108,6 +122,7 @@
     text-decoration: none;
     border: 1px solid $border-color;
     border-radius: 50px;
+    background-color: rgba(0, 0, 0, .03);
     color: $font-color;
     &:hover {
       background-color: rgba(0, 0, 0, .05);
@@ -134,12 +149,6 @@
   .day {
     margin-right: 12px;
   }
-  .relative_url {
-    a {
-      text-decoration: none;
-      color: $main-color;
-    }
-  }
 }
 
 // 記事編集
@@ -153,15 +162,13 @@
   align-items: center;
   li {
     margin-left: 8px;
-    background-color: $main-color;
     border-radius: 2px;
     a {
       display: block;
       padding: 5px 8px;
       font-size: 1.2rem;
-      font-weight: bold;
       text-decoration: none;
-      color: $white;
+      color: $sub-font-color;
     }
   }
 }
@@ -241,14 +248,13 @@
   }
 }
 
-.content {
-  margin-bottom: 60px;
+// コメント
+.comment_list_wrapper {
+  margin: 0 0 50px;
 }
 
-// コメント
-.comment_list_wrapper, .comment_form_wrapper {
-  padding: 24px 16px;
-  margin: 24px 0;
+.comment_list_wrapper, .comment_form_wrapper, .relative_article_wrapper {
+  border-top: 1px solid $border-color;
   background-color: $white;
   h3 {
     font-size: 1.6rem;
@@ -264,17 +270,10 @@
   }
   .comment_form_bottom {
     margin-top: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    .comment_length_wrapper {
-      font-size: 1.2rem;
-      color: $sub-font-color;
-    }
+    text-align: right;
     .comment_submit {
       padding: 5px 16px;
       font-size: 1.4rem;
-      font-weight: bold;
       border-radius: 2px;
       cursor: pointer;
       background-color: $main-color;
@@ -283,44 +282,15 @@
   }
 }
 
-.preview {
-  width: 20px;
-  line-height: 20px;
-  margin-bottom: 24px;
-  text-align: center;
-  position: relative;
-  &::after {
-    visibility: hidden;
-    opacity: 0;
-    content: "プレビュー";
-    width: 100px;
-    line-height: 30px;
-    font-size: 1.2rem;
-    font-weight: bold;
-    text-align: center;
-    border-radius: 2px;
-    position: absolute;
-    top: 50%;
-    left: 0;
-    transform: translate(-120%, -50%);
-    background-color: #212121;
-    color: $white;
-    transition: all .1s;
-  }
-  &:hover::after {
-    visibility: visible;
-    opacity: 1;
-  }
-  i {
-    cursor: pointer;
-    color: $sub-font-color;
-  }
+.comment_form_wrapper, .relative_article_wrapper {
+  padding: 50px 0;
 }
 
 // コメント欄のスタイル
 
 .comment {
-  margin-bottom: 24px;
+  padding: 15px 0;
+  border-bottom: 1px solid $border-color;
   &:last-child {
     margin-bottom: 0;
   }
@@ -338,10 +308,10 @@
       width: 25px;
       height: 25px;
       margin-right: 12px;
-      border-radius: 25px;
+      border-radius: 2px;
     }
   }
-  .comment_created_at {
+  .comment_edit {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -355,10 +325,6 @@
       cursor: pointer;
       background-color: transparent;
       color: $sub-font-color;
-      &:hover, &:hover > a {
-        text-decoration: underline;
-        color: $main-color;
-      }
     }
     a {
       text-decoration: none;
@@ -366,14 +332,6 @@
     }
   }
 }
-
-.comment_content {
-  margin-top: 12px;
-  padding: 12px;
-  border: 1px solid $border-color;
-  border-radius: 0 10px 10px 10px;
-}
-
 
 // コメントフォーム
 
@@ -383,7 +341,7 @@
   background-color: $white;
 }
 
-.comment_form, .preview_area {
+.comment_form {
   width: 100%;
   height: 200px;
   font-size: 1.6rem;
@@ -392,17 +350,14 @@
 }
 
 .comment_form textarea, .comment_update_form textarea {
+  display: block;
   width: 100%;
-  height: 200px;
+  height: 100%;
   font-size: 1.6rem;
   line-height: 1.8em;
   background-color: transparent;
   font-family: 'Lato', sans-serif;
   resize: none;
-}
-
-.preview_area.hide, form.hide {
-  display: none;
 }
 
 // コメント編集フォーム
@@ -413,32 +368,25 @@
   z-index: 999;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, .3);
+  background-color: rgba(0, 0, 0, .5);
   display: none;
   &.show {
     display: block;
-    animation: modal_show .15s linear 0s forwards;
-  }
-}
-
-@keyframes modal_show {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
   }
 }
 
 .comment_edit_child_modal {
-  width: 400px;
+  width: 800px;
   max-width: 90%;
   padding: 24px;
   border-radius: 2px;
-  box-shadow: 0 2px 17px 1px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: $white;
+  .comment_update_form {
+    height: 400px;
+  }
 }
