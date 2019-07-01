@@ -1,0 +1,2 @@
+class AccessAnalysis < ApplicationRecord
+end
