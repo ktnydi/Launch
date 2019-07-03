@@ -50,25 +50,32 @@
                 = link_to "ログイン", new_user_session_path, class: "authenticate_user_login_link"
       .box
         %h2.trend_article_heading
-          %span.sharp #
-          今日のトレンド
+          %span
+            %span.sharp #
+            %span#period<> 今日
+            のトレンド
+          %span
+            .select_period_btn_wrapper
+              = link_to "今日", root_path, class: "period_btn"
+              = link_to "今週", "?period=week", class: "period_btn"
+              = link_to "今月", "?period=month", class: "period_btn"
         .article_list_wrapper
-          - @publics.each do |public|
+          - @trend_articles.each do |article|
             .article
-              = link_to public_path(public.article_token), class: "link large_link" do
-                = image_tag gravatar_image(public.user), size: 40, class: "author_image"
+              = link_to public_path(article.article_token), class: "link large_link" do
+                = image_tag gravatar_image(article.user), size: 40, class: "author_image"
                 .flex_item
-                  %p.article_title= public.title
+                  %p.article_title= article.title
                   .tags
-                    - public.category.split(',').each do |tag|
+                    - article.category.split(',').each do |tag|
                       %span.tag_name= tag
                   .list_bottom
                     .list_bottom_left
-                      %span.author_name= "by #{public.user.name}"
+                      %span.author_name= "by #{article.user.name}"
                       .thumbs_up
                         %i.far.fa-thumbs-up
                         %span.count 123
-                    %span.created_at= public.created_at.strftime("%Y-%m-%d")
+                    %span.created_at= article.created_at.strftime("%Y-%m-%d")
       .box
         %h2.interest_tag_article_heading
           %span.sharp #
@@ -133,6 +140,22 @@
 :javascript
   const registration_links = document.getElementsByClassName('registration_link')
   const registration_modal_parent = document.getElementsByClassName('registration_modal_parent')[0]
+  const period_btns = document.getElementsByClassName('period_btn')
+  const period = document.getElementById('period')
+
+  for (let i = 0; i < period_btns.length; i++) {
+    const period_btn = period_btns.item(i)
+    period_btn.classList.remove('show')
+    if (period_btn.getAttribute('href') === window.location.search) {
+      period_btn.classList.add('show')
+      period.textContent = period_btn.textContent
+      break
+    }
+
+    if (window.location.search === "") {
+      period_btns[0].classList.add('show')
+    }
+  }
 
   for (let i = 0; i < registration_links.length; i++) {
     const registration_link = registration_links.item(i)

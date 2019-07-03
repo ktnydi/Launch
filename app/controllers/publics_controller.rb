@@ -1,5 +1,6 @@
 class PublicsController < ApplicationController
   require 'securerandom'
+  before_action :create_access_analysis, only: [:show]
   def index
     @publics = Public.all.order(created_at: :desc).page(params[:page]).per(20)
     if params[:q]
@@ -35,5 +36,13 @@ class PublicsController < ApplicationController
   :private
     def public_params
       params.require(:public).permit(:article_token, :title, :category, :content)
+    end
+
+    def create_access_analysis
+      access_analysis = AccessAnalysis.create(
+        article_token: params[:article_token],
+        access_source: request.referer,
+        user_token: current_user&.uuid || ""
+      )
     end
 end

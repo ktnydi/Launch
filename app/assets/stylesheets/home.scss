@@ -161,6 +161,28 @@
       color: $main-color;
     }
   }
+  .trend_article_heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .select_period_btn_wrapper {
+      display: flex;
+      .period_btn {
+        display: block;
+        padding: 2px 8px;
+        font-weight: normal;
+        font-size: 1.2rem;
+        text-decoration: none;
+        color: $no_active_color;
+        &.show {
+          border-radius: 2px;
+          border: 1px solid $border-color;
+          color: $font-color;
+          background-color: rgba(0, 0, 0, .03);
+        }
+      }
+    }
+  }
   .tag_name_list {
     margin-bottom: 24px;
     &:last-child {
