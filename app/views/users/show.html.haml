@@ -1,70 +1,79 @@
 - @page_title = "ダッシュボード"
-.user-info-wrapper
-  .container
-    .user_info
-      .user_info_top
-        = image_tag gravatar_image(@user), size: 70
-        %h2.name= @user.name
-        %p.uuid<>
-          ID：
-          = @user.uuid
-        %hr
-      .user_info_bottom
-        .more_info
-          .info_name 投稿数
-          %p.count= @user.publics.count
-        .more_info
-          = link_to user_follows_list_path(@user) do
-            .info_name フォロー
-            %p.count= @user.active_follows.count
-        .more_info
-          = link_to user_followers_list_path(@user) do
-            .info_name フォロワー
-            %p.count= @user.passive_follows.count
 
-.posts-info-wrapper
-  .container
-    .posts-controll-header
-      %h2
-        投稿した記事
-    .myposts-list
-      = form_tag user_path(current_user), method: :get, name: "search_form", remote: true, class: 'search mypost_search' do
-        = label_tag do
-          = text_field_tag "pq", params[:pq], id: "field", class: "search_field", placeholder: "記事タイトルで検索"
-        = button_tag id: "go_search" do
-          %i.fas.fa-search
-      #table_wrapper.table_wrapper
-        = render "share/card", publics: @publics
-    .article_wrapper
-      %h2
-        編集中(未投稿)の記事
-      .article_list_wrapper
-        - @drafts.each do |draft|
-          .article
-            = link_to edit_draft_path(draft.article_token), class: "link large_link" do
-              = image_tag gravatar_image(draft.user), size: 40, class: "author_image"
-              .flex_item
-                %p.article_title= draft.title
-                .tags
-                  - draft.category.split(',').each do |tag|
-                    %span.tag_name= tag
-                .list_bottom
-                  .list_bottom_left
-                    %span.author_name= "by #{draft.user.name}"
-                  %span.created_at= draft.created_at.strftime("%Y-%m-%d")
-
-      - if @drafts && @drafts.total_pages > 1
-        .paginate
-          = link_to_prev_page @drafts, "", class: "prev-page"
-          - unless @drafts.out_of_range?
-            .now_page= "#{@drafts.current_page}/#{@drafts.total_pages}"
-          = link_to_next_page @drafts, "", class: "next-page"
+%main.dashboard
+  .dashboard_left_box
+    .inner
+      = link_to "ダッシュボード", "#", class: "link dashboard_top"
+      = link_to "記事の管理", "#", class: "link dashboard_article_controll"
+      = link_to "コメント", "#", class: "link dashboard_article_comment"
+      = link_to "アクセス解析", "#", class: "link dashboard_access_analysis"
+  .dashboard_right_box
+    .inner
+      .figure
+        .box
+          %h3.access_count 今日のアクセス数
+          %p.value= access_count("day")
+        .box
+          %h3.access_count 今週のアクセス数
+          %p.value= access_count("week")
+        .box
+          %h3.access_count 今月のアクセス数
+          %p.value= access_count("month")
+        .box
+          %h3.access_count 総アクセス数
+          %p.value= access_count("")
+    .inner.divide
+      .user_info
+        .user_info_top
+          = image_tag gravatar_image(@user), size: 70
+          %h2.name= @user.name
+          %p.uuid<>
+            ID：
+            = @user.uuid
+        .user_info_bottom
+          .more_info
+            = link_to "#", class: "more_info_link" do
+              .info_name Article
+              %p.count= @user.publics.count
+          .more_info
+            = link_to user_follows_list_path(@user), class: "more_info_link" do
+              .info_name Follow
+              %p.count= @user.active_follows.count
+          .more_info
+            = link_to user_followers_list_path(@user), class: "more_info_link" do
+              .info_name Follower
+              %p.count= @user.passive_follows.count
+        .setting_user_account
+          = link_to "アカウント設定", edit_user_registration_path, class: "edit_user_link"
+      .draft_article
+        %h2.draft_article_heading
+          最近編集した記事
+          = link_to "#", class: "more_link" do
+            %i.fas.fa-arrow-right
+        .draft_article_list
+          - @drafts.limit(5).each do |draft|
+            = link_to edit_draft_path(draft.article_token), class: "link" do
+              %p.article_title= draft.title
+              %span.created_at= draft.created_at.strftime("%Y-%m-%d")
 
 
-:javascript
-  var go_search = document.getElementById('go_search')
-  var search_field = document.getElementsByClassName('search_field')[0]
+    -# .posts-info-wrapper
+    -#   .posts-controll-header
+    -#     %h2
+    -#       投稿した記事
+    -#   .myposts-list
+    -#     = form_tag user_path(current_user), method: :get, name: "search_form", remote: true, class: 'search mypost_search' do
+    -#       = label_tag do
+    -#         = text_field_tag "pq", params[:pq], id: "field", class: "search_field", placeholder: "記事タイトルで検索"
+    -#       = button_tag id: "go_search" do
+    -#         %i.fas.fa-search
+    -#     #table_wrapper.table_wrapper
+    -#       = render "share/card", publics: @publics
 
-  search_field.addEventListener('input', ()=>{
-    go_search.click()
-  })
+  :javascript
+    var go_search = document.getElementById('go_search')
+    var search_field = document.getElementsByClassName('search_field')[0]
+
+    search_field.addEventListener('input', ()=>{
+      go_search.click()
+    })

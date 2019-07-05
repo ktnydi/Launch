@@ -4,6 +4,7 @@ class Public < ApplicationRecord
   has_many :likes, foreign_key: "article_token" ,dependent: :destroy
   has_many :liked_users, through: :likes, source: :user
   has_many :comments, foreign_key: "article_token", dependent: :destroy
+  has_many :access_analyses, foreign_key: "article_token", dependent: :destroy
   belongs_to :user, foreign_key: "user_token"
 
   validates :article_token, presence: true, uniqueness: true

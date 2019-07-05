@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   before_action :authenticate_user!, only: [:show]
   before_action :forbiden_access, only: [:show]
   before_action :get_trend_articles, only: [:index]
+  before_action :get_article_analyses, only: [:show]
 
   def index
     @publics = Public.all.order(created_at: :desc).limit(5)
@@ -27,6 +28,46 @@ class UsersController < ApplicationController
       flash[:alert] = "このアクセスは禁止されています。"
       redirect_to users_path
     end
+  end
+
+  def access_analyses(period = "")
+    # current_userが投稿した記事
+    article_tokens = current_user.publics.pluck(:article_token)
+
+    period = case params[:period]
+      when "day"
+        1.day.ago.beginning_of_day
+      when "week"
+        1.week.ago.beginning_of_week
+      when "month"
+        1.month.ago.beginning_of_month
+      else
+        ""
+      end
+
+    # { article_token => access_count }
+    AccessAnalysis.where(article_token: article_tokens)
+                  .where("created_at > ?", period)
+                  .group(:article_token)
+                  .order("count_article_token DESC")
+                  .count(:article_token)
+  end
+
+  def get_article_analyses
+
+    # @many_access_articles = access_analyses(period).to_a[0...10].to_h.map do |key, value|
+    #   article = Public.find_by(article_token: key)
+    #   # access_source = article.access_analyses.group(:access_source).order("count_access_source DESC").count(:access_source)
+    # end
+
+    # @access_count = access_analyses.values.inject do |sum, value|
+    #   sum + value
+    # end
+
+    # @visitor_count = AccessAnalysis.select(:user_token, :article_token)
+    #                                .distinct
+    #                                .where(article_token: article_tokens)
+    #                                .length
   end
 
   def get_trend_articles
