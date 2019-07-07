@@ -1,0 +1,21 @@
+.inner
+  .article_comment
+    %h2.article_comment_heading コメント一覧
+    .article_comment_top
+      .flex_item.article_comment_user_name ユーザー名
+      .flex_item.article_comment_content 内容
+      .flex_item.article_comment_title 記事タイトル
+      .flex_item.article_comment_created_at 日時
+    - @comments.each do |comment|
+      .article_comment_box
+        = link_to public_path(comment.article_token), class: "article_comment_link" do
+          .flex_item.article_comment_user_name= comment.user.name
+          .flex_item.article_comment_content!= (markdown comment.content).gsub(/<.*?>/, "").truncate(80)
+          .flex_item.article_comment_title= comment.public.title.truncate(30)
+          .flex_item.article_comment_created_at= comment.created_at.strftime("%Y-%m-%d")
+- if @comments && @comments.total_pages > 1
+  .paginate
+    = link_to_prev_page @comments, "", class: "prev-page"
+    - unless @comments.out_of_range?
+      .now_page= "#{@comments.current_page}/#{@comments.total_pages}"
+    = link_to_next_page @comments, "", class: "next-page"

@@ -35,59 +35,8 @@
           %h3.title= article.title
           %span.pv= "アクセス数：#{AccessAnalysis.where(article_token: article.article_token).count}pv"
         %span.created_at= article.created_at.strftime("%Y-%m-%d")
-.inner
-  .article_comment
-    %h2.article_comment_heading コメント
-    .article_comment_top
-      .flex_item.article_comment_user_name ユーザー名
-      .flex_item.article_comment_content 内容
-      .flex_item.article_comment_title 記事タイトル
-      .flex_item.article_comment_created_at 日時
-    - @comments.each do |comment|
-      .article_comment_box
-        = link_to public_path(comment.article_token), class: "article_comment_link" do
-          .flex_item.article_comment_user_name= comment.user.name
-          .flex_item.article_comment_content!= (markdown comment.content).gsub(/<.*?>/, "").truncate(80)
-          .flex_item.article_comment_title= comment.public.title.truncate(30)
-          .flex_item.article_comment_created_at= comment.created_at.strftime("%Y-%m-%d")
-.inner
-  .draft_article
-    %h2.draft_article_heading
-      .draft_article_heading_left
-        記事の管理
-        .article_mode
-          %label.article_mode_select
-            = link_to "?mode=draft", class: "article_mode_select", remote: true, data: { mode: "draft" } do
-              %input.article_mode_select_draft{type: "radio", name: "article_select", checked: "checked"}
-              下書き
-          %label.article_mode_select
-            = link_to "?mode=public", class: "article_mode_select", remote: true, data: { mode: "public" } do
-              %input.article_mode_select_public{type: "radio", name: "article_select"}
-              公開済み
-      .draft_article_heading_right
-        削除モード
-        .toggle_btn
-          .circle
-    %table.table#article_table
-      = render "table", articles: @drafts
 
   :javascript
-    const toggle_btn = document.getElementsByClassName('toggle_btn')[0]
-
-
-    toggle_btn.addEventListener('click', ()=>{
-      toggle_btn.classList.toggle('active')
-      const links = document.getElementsByClassName('table_container_edit_link')
-      if (toggle_btn.classList.contains('active')) {
-        for (let i = 0; i < links.length; i++) {
-          links.item(i).classList.add('active')
-        }
-      } else {
-        for (let i = 0; i < links.length; i++) {
-          links.item(i).classList.remove('active')
-        }
-      }
-    })
 
     const drawing_chart = (data) => {
       let date = []

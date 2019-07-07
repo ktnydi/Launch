@@ -23,5 +23,7 @@ Rails.application.routes.draw do
 
   # get '/dashboard' => 'users#show', as: 'dashboard'
   get '/dashboard' => 'dashboard#index', as: 'dashboard'
+  get '/dashboard/articles' => 'dashboard#article', as: 'dashboard_article'
+  get '/dashboard/comments' => 'dashboard#comment', as: 'dashboard_comment'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

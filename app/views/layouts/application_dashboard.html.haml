@@ -43,3 +43,11 @@
           menu.classList.toggle('show')
         })
       })()
+
+      const dashboard_links = document.getElementsByClassName('dashboard_link')
+      for (let i = 0; i < dashboard_links.length; i++) {
+        const dashboard_link = dashboard_links.item(i)
+        if (dashboard_link.pathname === window.location.pathname) {
+          dashboard_link.classList.add('current')
+        }
+      }

@@ -1,16 +1,10 @@
 class DashboardController < ApplicationController
   before_action :authenticate_user!, only: [:index]
   before_action :get_trend_article_sources_with_current_user, only: [:index]
-  before_action :current_user_article_comment, only: [:index]
 
   layout "application_dashboard"
 
   def index
-
-    # category : article
-    @publics = current_user.publics.order(created_at: :desc).page(params[:page]).per(10)
-    @drafts = current_user.drafts.order(created_at: :desc).page(params[:page]).per(10)
-
     # acategory : analytics
     article_tokens = current_user.publics.pluck(:article_token)
     # { "YYYY-mm-dd" => access_count }
@@ -27,23 +21,31 @@ class DashboardController < ApplicationController
     end
 
     respond_to do |format|
-      if params[:mode]
-        format.js if params[:mode] == "draft"
-        format.js if params[:mode] == "public"
-      end
       format.js { render json: last_month }
       format.html
     end
 
   end
 
-  private
+  def article
+    if params[:mode] == "public"
+      @articles = current_user.publics.search(params[:q]).page(params[:page]).per(10)
+    else
+      @articles = current_user.drafts.search(params[:q]).page(params[:page]).per(10)
+    end
 
-  # category : comments
-  def current_user_article_comment
-    article_tokens = current_user.publics.pluck(:article_token)
-    @comments = Comment.where(article_token: article_tokens).order("created_at DESC")
+    respond_to do |format|
+      format.js
+      format.html
+    end
   end
+
+  def comment
+    article_tokens = current_user.publics.pluck(:article_token)
+    @comments = Comment.where(article_token: article_tokens).order("created_at DESC").page(params[:page]).per(10)
+  end
+
+  private
 
   # category : analytics
   def access_analyses(period = "")
