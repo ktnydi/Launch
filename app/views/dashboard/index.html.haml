@@ -5,22 +5,22 @@
     .inner
       .user_info
         .user_info_top
-          = image_tag gravatar_image(@user), size: 70
-          %h2.name= @user.name
-          %p.uuid= "@#{@user.uuid}"
+          = image_tag gravatar_image(current_user), size: 70
+          %h2.name= current_user.name
+          %p.uuid= "@#{current_user.uuid}"
         .user_info_bottom
           .more_info
             = link_to "#", class: "more_info_link" do
               .info_name Article
-              %p.count= @user.publics.count
+              %p.count= current_user.publics.count
           .more_info
-            = link_to user_follows_list_path(@user), class: "more_info_link" do
+            = link_to user_follows_list_path(current_user), class: "more_info_link" do
               .info_name Follow
-              %p.count= @user.active_follows.count
+              %p.count= current_user.active_follows.count
           .more_info
-            = link_to user_followers_list_path(@user), class: "more_info_link" do
+            = link_to user_followers_list_path(current_user), class: "more_info_link" do
               .info_name Follower
-              %p.count= @user.passive_follows.count
+              %p.count= current_user.passive_follows.count
         .setting_user_account
           = link_to "アカウント設定", edit_user_registration_path, class: "edit_user_link"
   .dashboard_right_box
@@ -74,29 +74,28 @@
               .flex_item.article_comment_content!= (markdown comment.content).gsub(/<.*?>/, "").truncate(80)
               .flex_item.article_comment_title= comment.public.title.truncate(30)
               .flex_item.article_comment_created_at= comment.created_at.strftime("%Y-%m-%d")
-    .draft_article
-      %h2.draft_article_heading
-        .draft_article_heading_left
-          記事の管理
-          .article_mode
-            %label.article_mode_select
-              = link_to "?mode=draft", class: "article_mode_select", remote: true, data: { mode: "draft" } do
-                %input.article_mode_select_draft{type: "radio", name: "article_select", checked: "checked"}
-                下書き
-            %label.article_mode_select
-              = link_to "?mode=public", class: "article_mode_select", remote: true, data: { mode: "public" } do
-                %input.article_mode_select_public{type: "radio", name: "article_select"}
-                公開済み
-        .draft_article_heading_right
-          削除モード
-          .toggle_btn
-            .circle
-      %table.table#article_table
-        = render "table", articles: @drafts
+    .inner
+      .draft_article
+        %h2.draft_article_heading
+          .draft_article_heading_left
+            記事の管理
+            .article_mode
+              %label.article_mode_select
+                = link_to "?mode=draft", class: "article_mode_select", remote: true, data: { mode: "draft" } do
+                  %input.article_mode_select_draft{type: "radio", name: "article_select", checked: "checked"}
+                  下書き
+              %label.article_mode_select
+                = link_to "?mode=public", class: "article_mode_select", remote: true, data: { mode: "public" } do
+                  %input.article_mode_select_public{type: "radio", name: "article_select"}
+                  公開済み
+          .draft_article_heading_right
+            削除モード
+            .toggle_btn
+              .circle
+        %table.table#article_table
+          = render "table", articles: @drafts
 
   :javascript
-    var go_search = document.getElementById('go_search')
-    var search_field = document.getElementsByClassName('search_field')[0]
     const toggle_btn = document.getElementsByClassName('toggle_btn')[0]
 
 

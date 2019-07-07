@@ -21,6 +21,7 @@ Rails.application.routes.draw do
     get '/followers' => 'follows#follower', as: "followers_list"
   end
 
-  get '/dashboard' => 'users#show', as: 'dashboard'
+  # get '/dashboard' => 'users#show', as: 'dashboard'
+  get '/dashboard' => 'dashboard#index', as: 'dashboard'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
