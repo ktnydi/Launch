@@ -3,6 +3,8 @@ class DashboardController < ApplicationController
   before_action :get_trend_article_sources_with_current_user, only: [:index]
   before_action :current_user_article_comment, only: [:index]
 
+  layout "application_dashboard"
+
   def index
 
     # category : article
