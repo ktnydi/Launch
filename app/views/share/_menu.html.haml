@@ -4,7 +4,7 @@
       .nav_link
         = link_to "ホーム", users_path
         = link_to "記事一覧", publics_path
-        = link_to "ダッシュボード", user_path(current_user.id)
+        = link_to "ダッシュボード", dashboard_path
         = link_to "アカウント設定", edit_user_registration_path
         = link_to "ログアウト", destroy_user_session_path, method: :delete
     - else

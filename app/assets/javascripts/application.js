@@ -91,4 +91,26 @@ document.addEventListener('DOMContentLoaded', () => {
       return false
     })
   })
+
+  // const article_mode_select = (mode) => {
+  //   $.ajax({
+  //     type: 'GET',
+  //     url: `?mode=${mode}`,
+  //   })
+  //   .done((data) => {
+  //     console.log(JSON.parse(data))
+  //   })
+  //   .fail((error) => {
+  //     console.log(error)
+  //   })
+  // }
+  //
+  // const article_selects = document.getElementsByName('article_select')
+  // for ( let i = 0; i < article_selects.length; i++) {
+  //   const article_select = article_selects.item(i)
+  //   article_select.addEventListener('click', (e)=>{
+  //     if (e.target.checked) {
+  //     }
+  //   })
+  // }
 })

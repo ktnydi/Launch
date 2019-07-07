@@ -3,10 +3,26 @@
 %main.dashboard
   .dashboard_left_box
     .inner
-      = link_to "ダッシュボード", "#", class: "link dashboard_top"
-      = link_to "記事の管理", "#", class: "link dashboard_article_controll"
-      = link_to "コメント", "#", class: "link dashboard_article_comment"
-      = link_to "アクセス解析", "#", class: "link dashboard_access_analysis"
+      .user_info
+        .user_info_top
+          = image_tag gravatar_image(@user), size: 70
+          %h2.name= @user.name
+          %p.uuid= "@#{@user.uuid}"
+        .user_info_bottom
+          .more_info
+            = link_to "#", class: "more_info_link" do
+              .info_name Article
+              %p.count= @user.publics.count
+          .more_info
+            = link_to user_follows_list_path(@user), class: "more_info_link" do
+              .info_name Follow
+              %p.count= @user.active_follows.count
+          .more_info
+            = link_to user_followers_list_path(@user), class: "more_info_link" do
+              .info_name Follower
+              %p.count= @user.passive_follows.count
+        .setting_user_account
+          = link_to "アカウント設定", edit_user_registration_path, class: "edit_user_link"
   .dashboard_right_box
     .inner
       .figure
@@ -23,57 +39,132 @@
           %h3.access_count 総アクセス数
           %p.value= access_count("")
     .inner.divide
-      .user_info
-        .user_info_top
-          = image_tag gravatar_image(@user), size: 70
-          %h2.name= @user.name
-          %p.uuid<>
-            ID：
-            = @user.uuid
-        .user_info_bottom
-          .more_info
-            = link_to "#", class: "more_info_link" do
-              .info_name Article
-              %p.count= @user.publics.count
-          .more_info
-            = link_to user_follows_list_path(@user), class: "more_info_link" do
-              .info_name Follow
-              %p.count= @user.active_follows.count
-          .more_info
-            = link_to user_followers_list_path(@user), class: "more_info_link" do
-              .info_name Follower
-              %p.count= @user.passive_follows.count
-        .setting_user_account
-          = link_to "アカウント設定", edit_user_registration_path, class: "edit_user_link"
-      .draft_article
-        %h2.draft_article_heading
-          最近編集した記事
-          = link_to "#", class: "more_link" do
-            %i.fas.fa-arrow-right
-        .draft_article_list
-          - @drafts.limit(5).each do |draft|
-            = link_to edit_draft_path(draft.article_token), class: "link" do
-              %p.article_title= draft.title
-              %span.created_at= draft.created_at.strftime("%Y-%m-%d")
-
-
-    -# .posts-info-wrapper
-    -#   .posts-controll-header
-    -#     %h2
-    -#       投稿した記事
-    -#   .myposts-list
-    -#     = form_tag user_path(current_user), method: :get, name: "search_form", remote: true, class: 'search mypost_search' do
-    -#       = label_tag do
-    -#         = text_field_tag "pq", params[:pq], id: "field", class: "search_field", placeholder: "記事タイトルで検索"
-    -#       = button_tag id: "go_search" do
-    -#         %i.fas.fa-search
-    -#     #table_wrapper.table_wrapper
-    -#       = render "share/card", publics: @publics
+      .access_analyses
+        %h2.access_analyses_heading
+          直近30日間のアクセス数
+        .graph
+          %canvas.chartjs#chartjs
+      .access_source
+        %h2.access_source_heading 上位のアクセス元
+        - @access_analyses[0..4].each do |access_analysis|
+          .access_source_box
+            = link_to access_analysis.source, access_analysis.source, class: "access_source_path"
+            %span.percent= "(#{(access_analysis.count.to_f * 100 / @trend_articles.first.access_analyses.count).round(1)}%)"
+    .inner
+      .access_article
+        %h2.access_article_heading アクセスが多い記事
+        - @trend_articles[0..4].each do |article|
+          = link_to public_path(article), class: "access_article_link" do
+            .flex_item
+              %h3.title= article.title
+              %span.pv= "アクセス数：#{AccessAnalysis.where(article_token: article.article_token).count}pv"
+            %span.created_at= article.created_at.strftime("%Y-%m-%d")
+    .inner
+      .article_comment
+        %h2.article_comment_heading コメント
+        .article_comment_top
+          .flex_item.article_comment_user_name ユーザー名
+          .flex_item.article_comment_content 内容
+          .flex_item.article_comment_title 記事タイトル
+          .flex_item.article_comment_created_at 日時
+        - @comments.each do |comment|
+          .article_comment_box
+            = link_to public_path(comment.article_token), class: "article_comment_link" do
+              .flex_item.article_comment_user_name= comment.user.name
+              .flex_item.article_comment_content!= (markdown comment.content).gsub(/<.*?>/, "").truncate(80)
+              .flex_item.article_comment_title= comment.public.title.truncate(30)
+              .flex_item.article_comment_created_at= comment.created_at.strftime("%Y-%m-%d")
+    .draft_article
+      %h2.draft_article_heading
+        .draft_article_heading_left
+          記事の管理
+          .article_mode
+            %label.article_mode_select
+              = link_to "?mode=draft", class: "article_mode_select", remote: true, data: { mode: "draft" } do
+                %input.article_mode_select_draft{type: "radio", name: "article_select", checked: "checked"}
+                下書き
+            %label.article_mode_select
+              = link_to "?mode=public", class: "article_mode_select", remote: true, data: { mode: "public" } do
+                %input.article_mode_select_public{type: "radio", name: "article_select"}
+                公開済み
+        .draft_article_heading_right
+          削除モード
+          .toggle_btn
+            .circle
+      %table.table#article_table
+        = render "table", articles: @drafts
 
   :javascript
     var go_search = document.getElementById('go_search')
     var search_field = document.getElementsByClassName('search_field')[0]
+    const toggle_btn = document.getElementsByClassName('toggle_btn')[0]
 
-    search_field.addEventListener('input', ()=>{
-      go_search.click()
+
+    toggle_btn.addEventListener('click', ()=>{
+      toggle_btn.classList.toggle('active')
+      const links = document.getElementsByClassName('table_container_edit_link')
+      if (toggle_btn.classList.contains('active')) {
+        for (let i = 0; i < links.length; i++) {
+          links.item(i).classList.add('active')
+        }
+      } else {
+        for (let i = 0; i < links.length; i++) {
+          links.item(i).classList.remove('active')
+        }
+      }
+    })
+
+    const drawing_chart = (data) => {
+      let date = []
+      let access_counts = []
+
+      data = JSON.parse(data)
+      for (key in data) {
+        date.push(key)
+        access_counts.push(data[key])
+      }
+
+      let chart_canvas = document.getElementById('chartjs').getContext('2d')
+
+      Chart.defaults.global.defaultFontColor = 'rgba(0, 0, 0, 0.54)'
+      Chart.defaults.global.defaultFontSize = 12
+      let chart = new Chart(chart_canvas, {
+        type: "line",
+        data: {
+          labels: date,
+          datasets: [{
+            label: "アクセス数",
+            data: access_counts,
+            backgroundColor: [
+              'rgba(0, 150, 136, .3)'
+            ],
+            borderColor: [
+              'rgba(0, 150, 136, 1)'
+            ],
+            borderWidth: 1,
+            lineTension: 0,
+          }]
+        },
+        options: {
+          maintainAspectRatio: false,
+          scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+          },
+        }
+      })
+    }
+
+    $.ajax({
+      type: 'GET',
+      url: '/dashboard',
+    })
+    .done( (data) => {
+      drawing_chart(data)
+    })
+    .fail( (error) => {
+
     })

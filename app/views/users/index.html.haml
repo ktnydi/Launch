@@ -29,7 +29,7 @@
       .box
         .side_bar
           - if user_signed_in?
-            %a.side_bar_link{href: "#{user_path(current_user)}"} ダッシュボード
+            %a.side_bar_link{href: "#{dashboard_path}"} ダッシュボード
             %a.side_bar_link{href: "#"} 高く評価した記事
             %a.side_bar_link{href: "#"} 閲覧履歴
           - else
