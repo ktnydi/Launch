@@ -18,28 +18,24 @@
       :type => 'image/png'})
     = favicon_link_tag('apple-touch-icon.png', {:rel => 'apple-touch-icon-precomposed', :sizes => '152x152', :type => 'image/png'})
     %link{:crossorigin => "anonymous", :href => "https://use.fontawesome.com/releases/v5.7.1/css/all.css", :integrity => "sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr", :rel => "stylesheet"}
-    %link{:href => "https://fonts.googleapis.com/icon?family=Material+Icons", :rel => "stylesheet"}
     %link{href: "https://fonts.googleapis.com/css?family=Lato:400,700|Ubuntu+Mono&display=swap", rel: "stylesheet"}
     %script{src: "https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"}
     %script{src: "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"}
-    = stylesheet_link_tag '/editor/highlight/atom-one-dark.css', media: 'all'
     = stylesheet_link_tag    'application', media: 'all'
     = javascript_include_tag 'application'
-    = javascript_include_tag '/editor/marked/marked.min.js'
-    = javascript_include_tag '/editor/highlight/highlight.pack.js'
   %body{:ontouchstart => ""}
     = render 'share/header'
-    = yield
+    %main.dashboard
+      .dashboard_left_box
+        = render "dashboard/dashboard_sidebar"
+      .dashboard_right_box
+        = yield
     = render 'share/footer'
     = render "share/menu"
 
     :javascript
-      var body = document.getElementsByTagName('body')[0]
       var hamburger = document.getElementById('hamburger');
       var menu = document.getElementById('menu');
-      var cls_btn = document.getElementById('cls-btn');
-      var notice = document.getElementById('notice');
-      var alert = document.getElementById('alert');
 
       (function() {
         hamburger.addEventListener('click', ()=>{
@@ -48,13 +44,10 @@
         })
       })()
 
-      if (notice || alert) {
-        close(cls_btn, notice);
-        close(cls_btn, alert);
-      }
-
-      function close(cls_btn, cls_obj) {
-        cls_btn.addEventListener('click', function() {
-          cls_obj.style.display = 'none';
-        });
+      const dashboard_links = document.getElementsByClassName('dashboard_link')
+      for (let i = 0; i < dashboard_links.length; i++) {
+        const dashboard_link = dashboard_links.item(i)
+        if (dashboard_link.pathname === window.location.pathname) {
+          dashboard_link.classList.add('current')
+        }
       }

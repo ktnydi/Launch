@@ -1,0 +1,15 @@
+- @page_title = "記事編集"
+= render "header"
+.editor_wrapper
+  #editor_form_wrapper.editor_form_wrapper
+    = render "editor_form", draft: @draft
+  .editor_preview
+    .editor_preview_top
+      %i.fas.fa-terminal
+      プレビュー
+    .editor_preview_content
+#edit_form_error
+  .editor_errors
+    %h3
+      保存に失敗しました。
+    %ul#editor_errors_list

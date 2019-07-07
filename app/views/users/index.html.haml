@@ -1,44 +1,173 @@
-- if flash[:post_notice]
-  #notification.notice.notification
-    = flash[:post_notice]
 %main.home_wrapper
-  .home_top_wrapper
-    .login_user
-      .user
-        = image_tag gravatar_image(@user), size: 50
-        %span= @user.name
-      - unless other_user?(@user.uuid)
-        .edit_user
-          = link_to edit_user_registration_path do
-            %i.fas.fa-cog
-    .accompany
-      .follow
-        = link_to user_follows_list_path(@user) do
-          フォロー
-          %span.count= @user.active_follows.count
-      .follower
-        = link_to user_followers_list_path(@user) do
-          フォロワー
-          %span.count= @user.passive_follows.count
-  .posts_wrapper_contents
-    .toggle_index
-      = link_to "投稿", user_posts_path(@user), class: "index_tweet"
-      = link_to "いいね", "#{user_posts_path(@user)}/?posts=like", class: "index_like"
-    .container
-      = render "share/card", posts: @posts
-%button.write_post
-  = link_to new_post_path do
-    .line
-
+  .home_contents
+    .home_contents_left
+      .box
+        .login_user_wrapper
+          - if user_signed_in?
+            = image_tag gravatar_image(current_user), size: 35, class: "user_image"
+            %b.username= current_user.name
+            .user_token= "@#{current_user.uuid}"
+            .user_status_info
+              %a.link.follow_link{href: "#{user_follows_list_path(current_user.uuid)}"}
+                .follow Follow
+                .count= current_user.followings.length
+              %a.link.follower_link{href: "#{user_followers_list_path(current_user.uuid)}"}
+                .follower Follower
+                .count= current_user.followers.length
+          - else
+            .user_image
+              %i.far.fa-user.guest_image
+            %b.username ゲスト
+            .user_token= "@guestuser"
+            .user_status_info
+              %a.link.follow_link.registration_link
+                .follow Follow
+                .count= 0
+              %a.link.follower_link.registration_link
+                .follower Follower
+                .count= 0
+      .box
+        .side_bar
+          - if user_signed_in?
+            %a.side_bar_link{href: "#{dashboard_path}"} ダッシュボード
+            %a.side_bar_link{href: "#"} 高く評価した記事
+            %a.side_bar_link{href: "#"} 閲覧履歴
+          - else
+            %a.side_bar_link.registration_link ダッシュボード
+            %a.side_bar_link.registration_link 高く評価した記事
+            %a.side_bar_link.registration_link 閲覧履歴
+    .home_contents_center
+      - unless user_signed_in?
+        .box
+          .recommend_registration
+            %h2.recommend_registration_heading 学びをアウトプットしよう
+            %p.recommend_registration_message Launchは学び続けるITエンジニアのための技術ブログです
+            .authenticate_user
+              %button.authenticate_user_registration
+                = link_to "会員登録する", "#", class: "authenticate_user_registration_link registration_link"
+              %span.or OR
+              %button.authenticate_user_login
+                = link_to "ログイン", new_user_session_path, class: "authenticate_user_login_link"
+      .box
+        %h2.trend_article_heading
+          %span
+            %span.sharp #
+            %span#period<> 今日
+            のトレンド
+          %span
+            .select_period_btn_wrapper
+              = link_to "今日", root_path, class: "period_btn"
+              = link_to "今週", "?period=week", class: "period_btn"
+              = link_to "今月", "?period=month", class: "period_btn"
+        .article_list_wrapper
+          - @trend_articles.each do |article|
+            .article
+              = link_to public_path(article.article_token), class: "link large_link" do
+                = image_tag gravatar_image(article.user), size: 40, class: "author_image"
+                .flex_item
+                  %p.article_title= article.title
+                  .tags
+                    - article.category.split(',').each do |tag|
+                      %span.tag_name= tag
+                  .list_bottom
+                    .list_bottom_left
+                      %span.author_name= "by #{article.user.name}"
+                      .thumbs_up
+                        %i.far.fa-thumbs-up
+                        %span.count 123
+                    %span.created_at= article.created_at.strftime("%Y-%m-%d")
+      .box
+        %h2.interest_tag_article_heading
+          %span.sharp #
+          注目のタグ
+        - Public.tag_ranking.each do |tag_name, article_count|
+          .tag_name_list
+            %h3.interest_tag_name= tag_name
+            .article_card_wrapper
+              - Public.get_article_include_tag(tag_name).each do |public|
+                .article
+                  = link_to public_path(public.article_token), class: "link" do
+                    .article_link_top
+                      = image_tag gravatar_image(public.user), size: 40, class: "author_image"
+                      %span.author_name= public.user.name
+                    .article_link_contents
+                      %p.article_title= public.title.truncate(35)
+                    .link_bottom
+                      .thumbs_up
+                        %i.far.fa-thumbs-up
+                        %span.count 123
+                      %span.created_at= public.created_at.strftime("%Y-%m-%d")
+      .box
+        %h2.latest_article_heading
+          %span.sharp #
+          最近投稿された記事
+        .article_list_wrapper
+          - @publics.each do |public|
+            .article
+              = link_to public_path(public.article_token), class: "link large_link" do
+                = image_tag gravatar_image(public.user), size: 40, class: "author_image"
+                .flex_item
+                  %p.article_title= public.title
+                  .tags
+                    - public.category.split(',').each do |tag|
+                      %span.tag_name= tag
+                  .list_bottom
+                    .list_bottom_left
+                      %span.author_name= "by #{public.user.name}"
+                    %span.created_at= public.created_at.strftime("%Y-%m-%d")
+        = link_to "もっとみる", publics_path, class: "more_latest_article_link"
+.registration_modal_parent
+.registration_modal_child
+  %h2.registration_heading アカウントを作成
+  .form-wrapper
+    = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+      .field
+        = f.text_field :name, placeholder: "ユーザー名", required: true, maxlength:"15"
+      .field
+        = f.email_field :email, placeholder: "メールアドレス", autocomplete: "email", required: true
+      .field
+        = f.password_field :password, placeholder: "パスワード", autocomplete: "new-password", required: true
+      %p.term
+        登録が完了すると#{link_to "利用規約", terms_path, target: :_blank}に同意したものとみなします。
+      .actions
+        = f.submit "登録", id: "submit"
+    %p.separate
+    .sns_login
+      = link_to user_twitter_omniauth_authorize_path, class: "twitter" do
+        %i.fab.fa-twitter
+        %p Twitterで登録
+    = render "devise/shared/links"
 :javascript
-  const param = window.location.search
-  const index_tweet = document.getElementsByClassName('index_tweet')[0]
-  const index_like = document.getElementsByClassName('index_like')[0]
+  const registration_links = document.getElementsByClassName('registration_link')
+  const registration_modal_parent = document.getElementsByClassName('registration_modal_parent')[0]
+  const period_btns = document.getElementsByClassName('period_btn')
+  const period = document.getElementById('period')
 
-  if (param.length > 0) {
-    index_like.classList.add('active')
-    index_tweet.classList.remove('active')
-  } else {
-    index_like.classList.remove('active')
-    index_tweet.classList.add('active')
+  for (let i = 0; i < period_btns.length; i++) {
+    const period_btn = period_btns.item(i)
+    period_btn.classList.remove('show')
+    if (period_btn.getAttribute('href') === window.location.search) {
+      period_btn.classList.add('show')
+      period.textContent = period_btn.textContent
+      break
+    }
+
+    if (window.location.search === "") {
+      period_btns[0].classList.add('show')
+    }
   }
+
+  for (let i = 0; i < registration_links.length; i++) {
+    const registration_link = registration_links.item(i)
+    registration_link.addEventListener('click', ()=>{
+      registration_modal_parent.classList.add('show')
+      registration_modal_parent.nextElementSibling.classList.add('show')
+      document.body.classList.add('hidden')
+    })
+  }
+
+  registration_modal_parent.addEventListener('click', ()=>{
+    registration_modal_parent.classList.remove('show')
+    registration_modal_parent.nextElementSibling.classList.remove('show')
+    document.body.classList.remove('hidden')
+  })

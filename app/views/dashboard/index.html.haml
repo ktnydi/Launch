@@ -1,0 +1,94 @@
+- @page_title = "ダッシュボード"
+
+.inner
+  .figure
+    .box
+      %h3.access_count 今日のアクセス数
+      %p.value= access_count("day")
+    .box
+      %h3.access_count 今週のアクセス数
+      %p.value= access_count("week")
+    .box
+      %h3.access_count 今月のアクセス数
+      %p.value= access_count("month")
+    .box
+      %h3.access_count 総アクセス数
+      %p.value= access_count("")
+.inner.divide
+  .access_analyses
+    %h2.access_analyses_heading
+      直近30日間のアクセス数
+    .graph
+      %canvas.chartjs#chartjs
+  .access_source
+    %h2.access_source_heading 上位のアクセス元
+    - @access_analyses[0..4].each do |access_analysis|
+      .access_source_box
+        = link_to access_analysis.source, access_analysis.source, class: "access_source_path"
+        %span.percent= "(#{(access_analysis.count.to_f * 100 / @trend_articles.first.access_analyses.count).round(1)}%)"
+.inner
+  .access_article
+    %h2.access_article_heading アクセスが多い記事
+    - @trend_articles[0..4].each do |article|
+      = link_to public_path(article), class: "access_article_link" do
+        .flex_item
+          %h3.title= article.title
+          %span.pv= "アクセス数：#{AccessAnalysis.where(article_token: article.article_token).count}pv"
+        %span.created_at= article.created_at.strftime("%Y-%m-%d")
+
+  :javascript
+
+    const drawing_chart = (data) => {
+      let date = []
+      let access_counts = []
+
+      data = JSON.parse(data)
+      for (key in data) {
+        date.push(key)
+        access_counts.push(data[key])
+      }
+
+      let chart_canvas = document.getElementById('chartjs').getContext('2d')
+
+      Chart.defaults.global.defaultFontColor = 'rgba(0, 0, 0, 0.54)'
+      Chart.defaults.global.defaultFontSize = 12
+      let chart = new Chart(chart_canvas, {
+        type: "line",
+        data: {
+          labels: date,
+          datasets: [{
+            label: "アクセス数",
+            data: access_counts,
+            backgroundColor: [
+              'rgba(0, 150, 136, .3)'
+            ],
+            borderColor: [
+              'rgba(0, 150, 136, 1)'
+            ],
+            borderWidth: 1,
+            lineTension: 0,
+          }]
+        },
+        options: {
+          maintainAspectRatio: false,
+          scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+          },
+        }
+      })
+    }
+
+    $.ajax({
+      type: 'GET',
+      url: '/dashboard',
+    })
+    .done( (data) => {
+      drawing_chart(data)
+    })
+    .fail( (error) => {
+
+    })

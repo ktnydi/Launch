@@ -2,12 +2,13 @@ class LikesController < ApplicationController
   before_action :post
 
   def create
-    @like = current_user && current_user.likes.create(post_id: params[:post_uuid])
+    @like = current_user && current_user.likes.new(article_token: params[:public_article_token])
     respond_to do |format|
-      if @like
+      if @like.save
         format.js
         format.html
       else
+        p @like.errors.full_messages
         flash[:alert] = "いいねするにはログインが必要です。"
         format.js { render js: "window.location = '#{new_user_session_path}';" }
       end
@@ -15,7 +16,7 @@ class LikesController < ApplicationController
   end
 
   def destroy
-    @like = current_user.likes.find_by(post_id: params[:post_uuid])
+    @like = current_user.likes.find_by(article_token: params[:public_article_token])
     respond_to do |format|
       if @like.destroy
         format.js
@@ -26,6 +27,6 @@ class LikesController < ApplicationController
 
   private
     def post
-      @post = Post.find_by(uuid: params[:post_uuid])
+      @public = Public.find_by(article_token: params[:public_article_token])
     end
 end
