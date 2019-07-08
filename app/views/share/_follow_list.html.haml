@@ -3,7 +3,7 @@
     %li.user_list
       .user
         = image_tag gravatar_image(user), size: 50
-        %h2.name= link_to user.name, user_posts_path(user)
+        %h2.name= user.name
       - if current_user.uuid == params[:user_id]
         .follow_btn{data: {id: user.id}}
           = render "follows/follow", user: user
