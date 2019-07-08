@@ -49,7 +49,7 @@
               %button.authenticate_user_login
                 = link_to "ログイン", new_user_session_path, class: "authenticate_user_login_link"
       .box
-        %h2.trend_article_heading
+        %h2.trend_article_heading.heading_2
           %span
             %span.sharp #
             %span#period<> 今日
@@ -59,7 +59,7 @@
               = link_to "今日", root_path, class: "period_btn"
               = link_to "今週", "?period=week", class: "period_btn"
               = link_to "今月", "?period=month", class: "period_btn"
-        .article_list_wrapper
+        .inner.article_list_wrapper
           - @trend_articles.each do |article|
             .article
               = link_to public_path(article.article_token), class: "link large_link" do
@@ -77,31 +77,32 @@
                         %span.count 123
                     %span.created_at= article.created_at.strftime("%Y-%m-%d")
       .box
-        %h2.interest_tag_article_heading
+        %h2.interest_tag_article_heading.heading_2
           %span.sharp #
           注目のタグ
-        - Public.tag_ranking.each do |tag_name, article_count|
-          .tag_name_list
-            %h3.interest_tag_name= tag_name
-            .article_card_wrapper
-              - Public.get_article_include_tag(tag_name).each do |public|
-                .article
-                  = link_to public_path(public.article_token), class: "link" do
-                    .article_link_top
-                      = image_tag gravatar_image(public.user), size: 40, class: "author_image"
-                      %span.author_name= public.user.name
-                    .article_link_contents
-                      %p.article_title= public.title.truncate(35)
-                    .link_bottom
-                      .thumbs_up
-                        %i.far.fa-thumbs-up
-                        %span.count 123
-                      %span.created_at= public.created_at.strftime("%Y-%m-%d")
+        .inner
+          - Public.tag_ranking.each do |tag_name, article_count|
+            .tag_name_list
+              %h3.interest_tag_name= tag_name
+              .article_card_wrapper
+                - Public.get_article_include_tag(tag_name).each do |public|
+                  .article
+                    = link_to public_path(public.article_token), class: "link" do
+                      .article_link_top
+                        = image_tag gravatar_image(public.user), size: 40, class: "author_image"
+                        %span.author_name= public.user.name
+                      .article_link_contents
+                        %p.article_title= public.title.truncate(35)
+                      .link_bottom
+                        .thumbs_up
+                          %i.far.fa-thumbs-up
+                          %span.count 123
+                        %span.created_at= public.created_at.strftime("%Y-%m-%d")
       .box
-        %h2.latest_article_heading
+        %h2.latest_article_heading.heading_2
           %span.sharp #
           最近投稿された記事
-        .article_list_wrapper
+        .inner.article_list_wrapper
           - @publics.each do |public|
             .article
               = link_to public_path(public.article_token), class: "link large_link" do

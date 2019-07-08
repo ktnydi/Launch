@@ -310,6 +310,9 @@ main {
   &.history,
   &.authenticate_edit_form {
     padding-top: 70px;
+    .inner {
+      margin-top: 10px;
+    }
   }
   &.post_wrapper {
     background-color: $white;

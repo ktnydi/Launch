@@ -153,14 +153,6 @@
 }
 
 .home_contents_center {
-  .trend_article_heading, .interest_tag_article_heading, .latest_article_heading {
-    margin-bottom: 12px;
-    font-size: 1.6rem;
-    .sharp {
-      margin-right: 5px;
-      color: $main-color;
-    }
-  }
   .trend_article_heading {
     display: flex;
     align-items: center;
