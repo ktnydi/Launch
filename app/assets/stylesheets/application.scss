@@ -339,6 +339,14 @@ main.follow, main.follower {
   }
 }
 
+.heading_2 {
+  font-size: 1.6rem;
+  .sharp {
+    margin-right: 5px;
+    color: $main-color;
+  }
+}
+
 .accompany_btn_index {
   width: 100%;
   background-color: $main-color;
