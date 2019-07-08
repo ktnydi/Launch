@@ -975,14 +975,14 @@ footer {
 
 .article_card_wrapper {
   .article {
-    box-shadow: 0 3px 10px 1px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 2px 2px 1px rgba(0, 0, 0, 0.08);
     border-top: 3px solid $main-color;
     border-radius: 2px;
     background-color: #fafafa;
     transition: .3s;
     &:hover {
       transform: translateY(-5px);
-      box-shadow: 0 8px 15px 1px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 7px 14px 1px rgba(0, 0, 0, 0.08);
     }
     .link {
       height: 150px;
