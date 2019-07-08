@@ -307,6 +307,7 @@ main {
   &.home_wrapper,
   &.article_list,
   &.follow,
+  &.history,
   &.authenticate_edit_form {
     padding-top: 70px;
   }
@@ -335,6 +336,14 @@ main.follow, main.follower {
       background-color: $white;
       font-weight: bold;
     }
+  }
+}
+
+.heading_2 {
+  font-size: 1.6rem;
+  .sharp {
+    margin-right: 5px;
+    color: $main-color;
   }
 }
 
@@ -825,7 +834,7 @@ footer {
 }
 
 // 記事一覧
-.article_list {
+.article_list, .history {
   &_box {
     padding: 50px 0;
   }

@@ -21,6 +21,8 @@ Rails.application.routes.draw do
     get '/followers' => 'follows#follower', as: "followers_list"
   end
 
+  get '/history' => 'publics#history', as: "history"
+
   # get '/dashboard' => 'users#show', as: 'dashboard'
   get '/dashboard' => 'dashboard#index', as: 'dashboard'
   get '/dashboard/articles' => 'dashboard#article', as: 'dashboard_article'

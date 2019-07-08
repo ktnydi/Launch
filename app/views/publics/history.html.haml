@@ -1,0 +1,8 @@
+- @page_title = "閲覧履歴"
+%main.history
+  .history_box
+    .container
+      %h2.heading_2
+        %span.sharp #
+        閲覧履歴
+      = render "share/card", publics: @history_publics
