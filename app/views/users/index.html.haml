@@ -8,10 +8,10 @@
             %b.username= current_user.name
             .user_token= "@#{current_user.uuid}"
             .user_status_info
-              %a.link.follow_link{href: "#{user_follows_list_path(current_user.uuid)}"}
+              %a.link.follow_link{href: follows_list_path}
                 .follow Follow
                 .count= current_user.followings.length
-              %a.link.follower_link{href: "#{user_followers_list_path(current_user.uuid)}"}
+              %a.link.follower_link{href: followers_list_path}
                 .follower Follower
                 .count= current_user.followers.length
           - else

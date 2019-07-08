@@ -17,9 +17,10 @@ Rails.application.routes.draw do
   resources :likes, only: [:index]
   resources :users, only: [:index] do
     resources :follows, only: [:create, :destroy]
-    get '/follows' => 'follows#follow', as: "follows_list"
-    get '/followers' => 'follows#follower', as: "followers_list"
   end
+
+  get '/follows' => 'follows#follow', as: "follows_list"
+  get '/followers' => 'follows#follower', as: "followers_list"
 
   get '/history' => 'publics#history', as: "history"
 
