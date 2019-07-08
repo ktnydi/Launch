@@ -347,6 +347,77 @@ main.follow, main.follower {
   }
 }
 
+.article_list_wrapper {
+  border-radius: 3px;
+  border: 1px solid rgba(0, 0, 0, .1);
+  background-color: $white;
+  .article {
+    &:not(:last-child) {
+      border-bottom: 1px solid rgba(0, 0, 0, .1);
+    }
+    &:hover {
+      background-color: rgba(0, 0, 0, .02);
+    }
+    .link {
+      display: block;
+      padding: 10px;
+      text-decoration: none;
+      color: inherit;
+      .article_title {
+        font-weight: bold;
+        font-size: 1.4rem;
+        margin-bottom: 5px;
+      }
+      .list_bottom {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 12px;
+        font-size: 1.2rem;
+        color: $sub-font-color;
+        &_left {
+          display: flex;
+          align-items: center;
+          .thumbs_up {
+            display: flex;
+            align-items: center;
+            margin-left: 12px;
+            .fa-thumbs-up {
+              margin-right: 5px;
+              color: $main-color;
+            }
+          }
+        }
+      }
+    }
+    .large_link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 24px;
+      .author_image {
+        width: 40px;
+        height: 40px;
+        border-radius: 2px;
+      }
+      .flex_item {
+        flex: 1;
+        margin-left: 24px;
+      }
+      .tags {
+        font-size: 1rem;
+        .tag_name {
+          padding: 2px 8px;
+          margin-right: 5px;
+          border: 1px solid $border-color;
+          border-radius: 50px;
+          color: $sub-font-color;
+        }
+      }
+    }
+  }
+}
+
 .accompany_btn_index {
   width: 100%;
   background-color: $main-color;
