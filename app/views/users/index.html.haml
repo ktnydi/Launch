@@ -31,7 +31,7 @@
           - if user_signed_in?
             %a.side_bar_link{href: "#{dashboard_path}"} ダッシュボード
             %a.side_bar_link{href: "#"} 高く評価した記事
-            %a.side_bar_link{href: "#"} 閲覧履歴
+            %a.side_bar_link{href: history_path} 閲覧履歴
           - else
             %a.side_bar_link.registration_link ダッシュボード
             %a.side_bar_link.registration_link 高く評価した記事

@@ -307,6 +307,7 @@ main {
   &.home_wrapper,
   &.article_list,
   &.follow,
+  &.history,
   &.authenticate_edit_form {
     padding-top: 70px;
   }
@@ -825,7 +826,7 @@ footer {
 }
 
 // 記事一覧
-.article_list {
+.article_list, .history {
   &_box {
     padding: 50px 0;
   }
