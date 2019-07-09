@@ -6,23 +6,81 @@
 }
 
 .article_box {
-  margin-top: 70px;
+  margin: 70px auto 0;
+  width: 1200px;
   display: flex;
-  background-color: #f4f5f7;
+  &_left {
+    align-self: flex-start;
+    position: sticky;
+    position: -webkit-sticky;
+    top: 120px;
+    text-align: right;
+    flex-basis: 120px;
+    .inner {
+      display: inline-block;
+      padding: 0 24px;
+      .user_action_btn {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        .btn {
+          border-radius: 50%;
+          text-decoration: none;
+          box-shadow: 0 2px 2px 1px rgba(0, 0, 0, 0.08);
+        }
+        .good {
+          width: 60px;
+          height: 60px;
+          .heart {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 60px;
+            border: 1px solid $main-color;
+            position: relative;
+            background-color: $white;
+            .fa-thumbs-up {
+              font-size: 2rem;
+            }
+            .count {
+              position: absolute;
+              top: 0;
+              left: 50%;
+              transform: translate(-50%, -150%);
+              color: $sub-font-color;
+            }
+            &.gooded {
+              background-color: $main-color;
+              color: $white;
+            }
+          }
+        }
+        .twitter, .facebook {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 50px;
+          height: 50px;
+          margin-top: 10px;
+          color: $white;
+        }
+        .twitter {
+          background-color: #00acee;
+        }
+        .facebook {
+          background-color: #3B5998;
+        }
+      }
+    }
+  }
   &_center {
     flex: 1;
     background-color: $white;
-    .inner {
-      width: 780px;
-      margin: 0 auto;
-    }
   }
-  &_left {
+  &_right {
     flex-basis: 280px;
     min-width: 280px;
-    height: calc(100vh - 70px);
-    border-right: 1px solid $border-color;
-    background-color: $white;
+    align-self: flex-start;
     position: sticky;
     top: 70px;
     z-index: 100px;
@@ -30,20 +88,19 @@
     -webkit-overflow-scrolling: smooth;
     .inner {
       .box {
-        border-bottom: 1px solid $border-color;
         &_heading {
           font-size: 1.8rem;
-          padding: 24px 16px 0;
+          padding: 24px 24px 0;
         }
       }
       .toc_box {
         .toc {
-          padding: 24px 0;
+          padding: 24px;
           .heading1, .heading2, .heading3 {
             list-style: none;
             & > li > a {
               display: block;
-              padding: 3px 16px;
+              padding: 3px 0;
               text-decoration: none;
               font-size: 1.2rem;
               color: $sub-font-color;
@@ -62,11 +119,20 @@
       }
     }
   }
+  &_bottom {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 0 280px 0 120px;
+  }
+}
+
+.article_box + .article_box {
+  margin-top: 0;
 }
 
 .post_content {
-  padding: 0 16px 50px;
-  background-color: $white;
+  padding: 0 24px 0;
   .post_index {
     padding-bottom: 40px;
     margin-bottom: 50px;
@@ -117,20 +183,20 @@
   margin: 24px 0;
   .tag_link {
     margin-right: 12px;
-    display: inline-block;
-    line-height: 1.7em;
+    display: inline-flex;
+    align-items: center;
     text-decoration: none;
-    border: 1px solid $border-color;
-    border-radius: 50px;
-    background-color: rgba(0, 0, 0, .03);
+    background-color: rgba(0, 0, 0, .05);
+    border-radius: 2px;
     color: $font-color;
     &:hover {
-      background-color: rgba(0, 0, 0, .05);
+      background-color: rgba(0, 0, 0, .08);
     }
   }
   .tag_name {
-    padding: 0 15px;
-    font-size: 1.2rem;
+    line-height: 30px;
+    padding: 0 10px;
+    font-size: 1.3rem;
     cursor: pointer;
   }
 }
@@ -253,9 +319,9 @@
   margin: 0 0 50px;
 }
 
-.comment_list_wrapper, .comment_form_wrapper, .relative_article_wrapper {
+.comment_form_wrapper, .relative_article_wrapper {
   border-top: 1px solid $border-color;
-  background-color: $white;
+  padding: 50px 0;
   h3 {
     font-size: 1.6rem;
     margin-bottom: 24px;
@@ -267,33 +333,45 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    h3 {
+      font-size: 1.6rem;
+      margin-bottom: 24px;
+    }
   }
   .comment_form_bottom {
     margin-top: 12px;
     text-align: right;
     .comment_submit {
-      padding: 5px 16px;
+      line-height: 40px;
+      width: 150px;
       font-size: 1.4rem;
       border-radius: 2px;
       cursor: pointer;
+      box-shadow: 0 2px 2px 1px rgba(0, 0, 0, 0.08);
       background-color: $main-color;
       color: $white;
     }
   }
 }
 
-.comment_form_wrapper, .relative_article_wrapper {
-  padding: 50px 0;
-}
-
 // コメント欄のスタイル
 
+.comment_wrapper {
+  width: 100%;
+  background-color: $white;
+}
 .comment {
-  padding: 15px 0;
-  border-bottom: 1px solid $border-color;
+  padding: 24px;
+  margin-top: 24px;
+  border: 1px solid $border-color;
+  border-radius: 2px;
+  background-color: $white;
   &:last-child {
     margin-bottom: 0;
   }
+}
+.comment + .comment {
+  margin-top: 24px;
 }
 .comment_user {
   display: flex;
@@ -301,7 +379,7 @@
   justify-content: space-between;
   color: $sub-font-color;
   font-size: 1.2rem;
-  .user_info {
+  &_info {
     display: flex;
     align-items: center;
     img {
@@ -336,7 +414,6 @@
 // コメントフォーム
 
 .comment-edit {
-  padding: 12px;
   border: 1px solid $border-color;
   background-color: $white;
 }
@@ -353,9 +430,10 @@
   display: block;
   width: 100%;
   height: 100%;
+  padding: 12px;
   font-size: 1.6rem;
   line-height: 1.8em;
-  background-color: transparent;
+  background-color: rgba(0, 0, 0, .02);
   font-family: 'Lato', sans-serif;
   resize: none;
 }

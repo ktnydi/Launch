@@ -14,13 +14,13 @@
     - comments.each do |comment|
       .comment
         .comment_user
-          .user_info
+          .comment_user_info
             = image_tag gravatar_image(comment.user), size: 60
             %span.name= comment.user.name
           .comment_edit
             - if user_signed_in? && comment.user_token === current_user.uuid
               .comment_edit_btn_wrapper
-                %button.comment_update_btn{data: {id: "#{comment.id}"}} コメントを編集する
+                %button.comment_update_btn{data: {id: "#{comment.id}"}} コメントを編集
                 ・
                 %button.comment_delete_btn<>
                   = link_to "削除", "/comment/#{comment.id}/", method: :delete, data: { confirm: "コメントを削除します。"}
