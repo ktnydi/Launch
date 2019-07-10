@@ -74,7 +74,7 @@
                       %span.author_name= "by #{article.user.name}"
                       .thumbs_up
                         %i.far.fa-thumbs-up
-                        %span.count 123
+                        %span.count= article.likes.count
                     %span.created_at= article.created_at.strftime("%Y-%m-%d")
       .box
         %h2.interest_tag_article_heading.heading_2
@@ -96,7 +96,7 @@
                       .link_bottom
                         .thumbs_up
                           %i.far.fa-thumbs-up
-                          %span.count 123
+                          %span.count= public.likes.count
                         %span.created_at= public.created_at.strftime("%Y-%m-%d")
       .box
         %h2.latest_article_heading.heading_2

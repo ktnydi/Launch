@@ -13,7 +13,7 @@
               %span.author_name= "by #{public.user.name}"
               .thumbs_up
                 %i.far.fa-thumbs-up
-                %span.count 123
+                %span.count= public.likes.count
             %span.created_at= public.created_at.strftime("%Y-%m-%d")
 
 - if publics && publics.total_pages > 1
