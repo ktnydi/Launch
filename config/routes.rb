@@ -19,6 +19,8 @@ Rails.application.routes.draw do
     resources :follows, only: [:create, :destroy]
   end
 
+  resources :bookmarks, only: [:create, :destroy]
+
   get '/follows' => 'follows#follow', as: "follows_list"
   get '/followers' => 'follows#follower', as: "followers_list"
 

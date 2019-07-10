@@ -10,12 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_01_001135) do
+ActiveRecord::Schema.define(version: 2019_07_10_020018) do
 
   create_table "access_analyses", force: :cascade do |t|
     t.string "article_token", null: false
     t.string "access_source", null: false
     t.string "user_token", default: "", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "bookmarks", force: :cascade do |t|
+    t.string "user_token", null: false
+    t.string "article_token", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
