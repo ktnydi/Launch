@@ -44,6 +44,10 @@ class PublicsController < ApplicationController
                              .per(20)
   end
 
+  def good
+    @good_articles = current_user.liked_article.page(params[:page]).per(20)
+  end
+
   :private
     def public_params
       params.require(:public).permit(:article_token, :title, :category, :content)

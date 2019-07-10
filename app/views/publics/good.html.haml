@@ -1,0 +1,8 @@
+- @page_title = "閲覧履歴"
+%main.history
+  .history_box
+    .container
+      %h2.heading_2
+        %span.sharp #
+        高く評価した記事
+      = render "share/card", publics: @good_articles
