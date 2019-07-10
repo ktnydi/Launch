@@ -36,13 +36,25 @@
     :javascript
       var hamburger = document.getElementById('hamburger');
       var menu = document.getElementById('menu');
+      var menu_parent = document.getElementsByClassName('hamburger-menu-list-parent')[0];
 
       (function() {
         hamburger.addEventListener('click', ()=>{
           hamburger.classList.toggle('active')
           menu.classList.toggle('show')
+          menu_parent.classList.toggle('show')
+          document.body.classList.toggle('hidden')
         })
-      })()
+      })();
+
+      (function() {
+        menu_parent.addEventListener('click', ()=>{
+          hamburger.classList.toggle('active')
+          menu.classList.toggle('show')
+          menu_parent.classList.toggle('show')
+          document.body.classList.toggle('hidden')
+        })
+      })();
 
       const dashboard_links = document.getElementsByClassName('dashboard_link')
       for (let i = 0; i < dashboard_links.length; i++) {

@@ -34,9 +34,9 @@
     = render "share/menu"
 
     :javascript
-      var body = document.getElementsByTagName('body')[0]
       var hamburger = document.getElementById('hamburger');
       var menu = document.getElementById('menu');
+      var menu_parent = document.getElementsByClassName('hamburger-menu-list-parent')[0];
       var cls_btn = document.getElementById('cls-btn');
       var notice = document.getElementById('notice');
       var alert = document.getElementById('alert');
@@ -45,8 +45,19 @@
         hamburger.addEventListener('click', ()=>{
           hamburger.classList.toggle('active')
           menu.classList.toggle('show')
+          menu_parent.classList.toggle('show')
+          document.body.classList.toggle('hidden')
         })
-      })()
+      })();
+
+      (function() {
+        menu_parent.addEventListener('click', ()=>{
+          hamburger.classList.toggle('active')
+          menu.classList.toggle('show')
+          menu_parent.classList.toggle('show')
+          document.body.classList.toggle('hidden')
+        })
+      })();
 
       if (notice || alert) {
         close(cls_btn, notice);
