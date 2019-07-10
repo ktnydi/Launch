@@ -1,42 +1,57 @@
 - @page_title = "アカウント設定"
 %main.authenticate_edit_form
-  .container
-    = render "devise/shared/error_messages", resource: resource
-    .box
-      = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, id: "left-form" }) do |f|
-        .field
-          = image_tag gravatar_image(current_user), class: "user-image", id: "user-image"
-          %br
-          = link_to "Gravatarで画像を変更", "https://ja.gravatar.com/", class: "change_image", target: :_blank
-        .field
-          = f.label :name
-          = f.text_field :name, autofocus: true, required: true
-        .field
-          = f.label :email
-          = f.email_field :email, autofocus: true, required: true, autocomplete: "email"
-        - if devise_mapping.confirmable? && resource.pending_reconfirmation?
-          %div
-            Currently waiting confirmation for: #{resource.unconfirmed_email}
-        .actions
-          = f.submit "更新"
-    .box
-      = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, id: "center-form" }) do |f|
-        .field
-          = f.label :current_password
-          = f.password_field :current_password, autocomplete: "current-password", required: true
-        .field
-          = f.label :password
-          = f.password_field :password, autocomplete: "new-password", required: true
-        .field
-          = f.label :password_confirmation
-          = f.password_field :password_confirmation, autocomplete: "new-password", required: true
-        .actions
-          = f.submit "パスワードを変更"
-    .box
-      .delete_account
+  = render "devise/shared/error_messages", resource: resource
+  .box.account_edit
+    .inner
+      .description_box
+        %h2 アカウント編集
+        %p.description
+          ログインで使用するメールアドレスを変更します。
+      .setting_box
+        = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, id: "left-form" }) do |f|
+          .field
+            = f.label :name
+            = f.text_field :name, autofocus: true, required: true
+          .field
+            = f.label :email
+            = f.email_field :email, autofocus: true, required: true, autocomplete: "email"
+          - if devise_mapping.confirmable? && resource.pending_reconfirmation?
+            %div
+              Currently waiting confirmation for: #{resource.unconfirmed_email}
+          .actions
+            = f.submit "更新"
+          .gravatar
+            = image_tag gravatar_image(current_user), size: 35, class: "avatar"
+            .avatar_setting
+              アバターを変更する。
+              = link_to "Gravatar", "https://ja.gravatar.com/", class: "link_gravatar", target: :_blank
+  .box.password_edit
+    .inner
+      .description_box
+        %h2 パスワード編集
+        %p.description
+          ログインで使用するパスワードを変更します。
+      .setting_box
+        = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, id: "center-form" }) do |f|
+          .field
+            = f.label :current_password
+            = f.password_field :current_password, autocomplete: "current-password", required: true
+          .field
+            = f.label :password
+            = f.password_field :password, autocomplete: "new-password", required: true
+          .field
+            = f.label :password_confirmation
+            = f.password_field :password_confirmation, autocomplete: "new-password", required: true
+          .actions
+            = f.submit "パスワードを変更"
+  .box.account_destroy
+    .inner
+      .description_box
         %h2 アカウントの削除
-        %p.caution 削除したアカウントは二度と元に戻せません。
-        = link_to "削除", registration_path(resource_name), data: { confirm: "削除したアカウントは二度と元に戻すことができません。\n本当によろしいですか？" }, method: :delete
+        %p.description 削除したアカウントは二度と元に戻せません。
+      .setting_box
+        .delete_account
+          = link_to "削除", registration_path(resource_name), data: { confirm: "削除したアカウントは二度と元に戻すことができません。\n本当によろしいですか？" }, method: :delete
 :javascript
   var submit = document.getElementById('submit');
   var input = document.querySelectorAll('.field input');
