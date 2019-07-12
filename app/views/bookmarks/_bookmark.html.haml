@@ -1,0 +1,6 @@
+- if Bookmark.find_by(user_token: current_user.uuid, article_token: @public.article_token)
+  = link_to public_unbookmarks_path(@public.article_token), method: :delete, remote: true, class: "btn unbookmark" do
+    %i.fas.fa-bookmark
+- else
+  = link_to public_bookmarks_path(@public.article_token), method: :post, remote: true, class: "btn bookmark" do
+    %i.fas.fa-bookmark
