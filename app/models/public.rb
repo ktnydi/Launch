@@ -22,7 +22,7 @@ class Public < ApplicationRecord
   def self.search(query)
     rel = order(created_at: :desc)
     if query.present?
-      rel = rel.where("title LIKE ?", "%#{query}%")
+      rel = rel.where("title LIKE ? OR category LIKE ?", "%#{query}%", "%#{query}%")
     end
     rel
   end
