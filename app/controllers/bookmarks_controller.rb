@@ -1,6 +1,10 @@
 class BookmarksController < ApplicationController
   before_action :get_public
 
+  def index
+    @bookmark_publics = current_user.bookmark_articles.page(params[:page]).per(20)
+  end
+
   def create
     bookmark = current_user.bookmarks.new(article_token: params[:public_article_token])
     if bookmark.save

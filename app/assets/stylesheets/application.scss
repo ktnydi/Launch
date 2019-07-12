@@ -309,6 +309,7 @@ main {
   &.follow,
   &.follower,
   &.history,
+  &.bookmark,
   &.authenticate_edit_form {
     padding-top: 70px;
     .inner {
@@ -867,7 +868,7 @@ footer {
 }
 
 // 記事一覧
-.article_list, .history {
+.article_list, .history, .bookmark {
   &_box {
     padding: 50px 0;
   }

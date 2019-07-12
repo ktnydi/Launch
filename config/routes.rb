@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     delete '/unbookmarks' => 'bookmarks#destroy'
   end
   resources :likes, only: [:index]
+  get '/bookmarks' => 'bookmarks#index', as: "bookmarks"
   resources :users, only: [:index] do
     resources :follows, only: [:create, :destroy]
   end
