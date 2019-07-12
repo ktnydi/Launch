@@ -13,13 +13,13 @@ Rails.application.routes.draw do
   resources :publics, param: :article_token do
     post '/like' => 'likes#create'
     delete '/unlike' => 'likes#destroy'
+    post '/bookmarks' => 'bookmarks#create'
+    delete '/unbookmarks' => 'bookmarks#destroy'
   end
   resources :likes, only: [:index]
   resources :users, only: [:index] do
     resources :follows, only: [:create, :destroy]
   end
-
-  resources :bookmarks, only: [:create, :destroy]
 
   get '/follows' => 'follows#follow', as: "follows_list"
   get '/followers' => 'follows#follower', as: "followers_list"

@@ -6,6 +6,8 @@
         .user_action_btn
           .good#toggle_good
             = render "like", public: @public
+          .bookmark_btn
+            = render 'bookmarks/bookmark', public: @public
           %a.btn.twitter{href: "http://twitter.com/share?url=#{request.url}"}
             %i.fab.fa-twitter
           %a.btn.facebook{href: "https://www.facebook.com/sharer/sharer.php?u=#{request.url}"}
