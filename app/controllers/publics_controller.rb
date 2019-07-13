@@ -35,6 +35,9 @@ class PublicsController < ApplicationController
 
   def tag
     @publics = Public.where("category LIKE ?", "%#{params[:category]}%").order("created_at DESC").page(params[:page]).per(20)
+    if @publics.count < 1
+      redirect_to root_path
+    end
   end
 
   def history

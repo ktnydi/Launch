@@ -939,6 +939,22 @@ footer {
   }
 }
 
+.article_list {
+  .tag_box {
+    margin-bottom: 40px;
+    text-align: center;
+    .tag_title {
+      font-size: 3rem;
+      font-weight: normal;
+    }
+    .description {
+      margin-top: 20px;
+      font-size: 1.4rem;
+      color: $sub-font-color;
+    }
+  }
+}
+
 // ページネイト
 .paginate {
   width: 200px;
