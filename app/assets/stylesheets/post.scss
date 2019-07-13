@@ -29,15 +29,26 @@
 
 .article_box {
   margin: 70px auto 0;
-  width: 1200px;
+  width: 100%;
   display: flex;
+  background-color: $white;
+  @media all and (max-width: 896px) {
+    padding: 0;
+  }
+  &_left, &_right {
+    flex: 1;
+    flex-basis: 200px;
+    padding: 0 24px;
+  }
   &_left {
     align-self: flex-start;
     position: sticky;
     position: -webkit-sticky;
     top: 120px;
     text-align: right;
-    flex-basis: 120px;
+    @media all and (max-width: 1024px) {
+      display: none;
+    }
     .inner {
       display: inline-block;
       padding: 0 24px;
@@ -96,11 +107,12 @@
     }
   }
   &_center {
-    flex: 1;
+    width: 100%;
+    max-width: 720px;
+    margin: 0 auto;
     background-color: $white;
   }
   &_right {
-    flex-basis: 280px;
     min-width: 280px;
     align-self: flex-start;
     position: sticky;
@@ -108,6 +120,9 @@
     z-index: 100px;
     overflow-y: scroll;
     -webkit-overflow-scrolling: smooth;
+    @media all and (max-width: 1024px) {
+      display: none;
+    }
     .inner {
       .box {
         &_heading {
@@ -141,12 +156,6 @@
       }
     }
   }
-  &_bottom {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    padding: 0 280px 0 120px;
-  }
 }
 
 .article_box + .article_box {
@@ -154,7 +163,9 @@
 }
 
 .post_content {
-  padding: 0 24px 0;
+  @media all and (max-width: 896px) {
+    padding: 0 16px;
+  }
   .post_index {
     padding-bottom: 40px;
     margin-bottom: 50px;
@@ -239,26 +250,10 @@
   }
 }
 
-// 記事編集
-
-.edit_list {
-  padding: 0;
-  list-style: none;
-  text-align: center;
-  background-color: $white;
-  display: flex;
-  align-items: center;
-  li {
-    margin-left: 8px;
-    border-radius: 2px;
-    a {
-      display: block;
-      padding: 5px 8px;
-      font-size: 1.2rem;
-      text-decoration: none;
-      color: $sub-font-color;
-    }
-  }
+.article_box_bottom {
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto;
 }
 
 // 記事関連のボタン
@@ -338,15 +333,19 @@
 
 // コメント
 .comment_list_wrapper {
-  margin: 0 0 50px;
+  @media all and (max-width: 896px) {
+    padding: 0 16px;
+  }
 }
 
 .comment_form_wrapper, .relative_article_wrapper {
-  border-top: 1px solid $border-color;
-  padding: 50px 0;
+  padding-top: 40px;
   h3 {
     font-size: 1.6rem;
     margin-bottom: 24px;
+    @media all and (max-width: 896px) {
+      padding: 0 16px;
+    }
   }
 }
 
@@ -363,13 +362,16 @@
   .comment_form_bottom {
     margin-top: 12px;
     text-align: right;
+    @media all and (max-width: 896px) {
+      text-align: center;
+    }
     .comment_submit {
       line-height: 40px;
       width: 150px;
       font-size: 1.4rem;
       border-radius: 2px;
       cursor: pointer;
-      box-shadow: 0 2px 2px 1px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 5px 17px 1px rgba(0, 0, 0, 0.1);
       background-color: $main-color;
       color: $white;
     }
@@ -380,7 +382,12 @@
 
 .comment_wrapper {
   width: 100%;
-  background-color: $white;
+  padding: 0 0 16px;
+  .inner {
+    width: 100%;
+    max-width: 720px;
+    margin: 0 auto 50px;
+  }
 }
 .comment {
   padding: 24px;
@@ -388,6 +395,9 @@
   border: 1px solid $border-color;
   border-radius: 2px;
   background-color: $white;
+  @media all and (max-width: 896px) {
+    padding: 16px;
+  }
   &:last-child {
     margin-bottom: 0;
   }
@@ -421,7 +431,7 @@
     align-items: center;
     justify-content: space-between;
     button {
-      font-size: 1.2rem;
+      font-size: 1rem;
       cursor: pointer;
       background-color: transparent;
       color: $sub-font-color;
@@ -435,17 +445,15 @@
 
 // コメントフォーム
 
-.comment-edit {
-  border: 1px solid $border-color;
-  background-color: $white;
-}
-
 .comment_form {
   width: 100%;
   height: 200px;
   font-size: 1.6rem;
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
+  @media all and (max-width: 896px) {
+    padding: 0 16px;
+  }
 }
 
 .comment_form textarea, .comment_update_form textarea {
@@ -455,6 +463,7 @@
   padding: 12px;
   font-size: 1.6rem;
   line-height: 1.8em;
+  border: 1px solid $border-color;
   background-color: rgba(0, 0, 0, .02);
   font-family: 'Lato', sans-serif;
   resize: none;

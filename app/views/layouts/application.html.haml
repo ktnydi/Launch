@@ -27,7 +27,7 @@
     = javascript_include_tag 'application'
     = javascript_include_tag '/editor/marked/marked.min.js'
     = javascript_include_tag '/editor/highlight/highlight.pack.js'
-  %body{:ontouchstart => ""}
+  %body
     = render 'share/header'
     = yield
     = render 'share/footer'

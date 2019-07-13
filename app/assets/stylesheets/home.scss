@@ -12,14 +12,23 @@
       height: calc(100vh - 70px);
       border-right: 1px solid $border-color;
       border-radius: 2px;
+      background-color: $white;
+      @media all and (max-width: 896px) {
+        display: none;
+      }
       .box {
         padding: 24px 0;
         border-bottom: 1px solid $border-color;
       }
     }
     &_center {
-      width: 780px;
+      width: 100%;
+      max-width: 780px;
       margin: 24px auto;
+      padding: 0 16px;
+      @media all and (max-width: 896px) {
+        padding: 0;
+      }
       .box {
         margin-bottom: 60px;
       }
@@ -99,6 +108,10 @@
   box-shadow: 0 2px 2px 1px rgba(0, 0, 0, 0.08);
   padding: 24px;
   text-align: center;
+  background-color: $white;
+  @media all and (max-width: 896px) {
+    margin: 0 16px;
+  }
   &_heading {
     font-size: 2rem;
     letter-spacing: .5px;
@@ -190,16 +203,18 @@
 
 .more_latest_article_link {
   display: block;
-  margin-top: 24px;
-  width: 100%;
-  line-height: 50px;
-  border: 1px solid $border-color;
+  width: 150px;
+  margin: 24px auto 0;
+  border-radius: 2px;
+  line-height: 45px;
   text-align: center;
   text-decoration: none;
   font-size: 1.4rem;
-  color: $sub-font-color;
+  box-shadow: 0 5px 17px 1px rgba(0, 0, 0, 0.1);
+  background-color: #FFA726;
+  color: $white;
   &:hover {
-    background-color: rgba(0, 0, 0, .02);
+    background-color: #ed9a20;
   }
 }
 
