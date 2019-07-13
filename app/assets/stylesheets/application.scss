@@ -48,7 +48,7 @@ html, body {
   color: $font-color;
 }
 
-input, textarea, button {
+input, textarea, button, select {
   -webkit-appearance: none;
   outline: none;
   padding: 0;
@@ -68,7 +68,6 @@ input[type="checkbox"] {
   width: 100%;
   max-width: 800px;
   margin: 0 auto;
-  padding: 0 16px;
 }
 
 // ヘッダー
@@ -84,8 +83,20 @@ header {
   display: flex;
   justify-content: space-between;
   align-content: center;
+  @media all and (max-width: 896px) {
+    justify-content: center;
+  }
 }
 header {
+  .header-mobile {
+    display: none;
+    @media all and (max-width: 896px) {
+      display: block;
+      a {
+        font-size: 2.4rem;
+      }
+    }
+  }
   .header-right {
     display: none;
     align-items: center;
@@ -297,6 +308,7 @@ header {
 main {
   width: 100%;
   flex: 1;
+  background-color: #f4f5f7;
   &.top_page {
     height: 100vh;
     background: $main-color;
@@ -323,9 +335,45 @@ main {
 
 .heading_2 {
   font-size: 1.6rem;
+  @media all and (max-width: 896px) {
+    padding: 0 16px;
+  }
   .sharp {
     margin-right: 5px;
     color: $main-color;
+  }
+}
+
+.mobile_select_box {
+  display: none;
+  padding: 0 16px;
+  margin-bottom: 24px;
+  position: relative;
+  @media all and (max-width: 896px) {
+    display: block;
+  }
+  &:before {
+    font-family: 'Font Awesome 5 Free';
+    content: '\f0d7';
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: 32px;
+    transform: translateY(-50%);
+    font-weight: bold;
+    color: rgba(0, 0, 0, .5);
+  }
+  .select_link {
+    display: block;
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    padding: 0 10px;
+    border: none;
+    border-radius: 2px;
+    box-shadow: 0 2px 2px 1px rgba(0, 0, 0, 0.08);
+    font-size: 1.4rem;
+    background-color: $white;
   }
 }
 
@@ -333,10 +381,15 @@ main {
   border-radius: 3px;
   border: 1px solid rgba(0, 0, 0, .1);
   background-color: $white;
+  @media all and (max-width: 896px) {
+    border-radius: 0;
+    border: none;
+    padding: 0 16px;
+  }
+  .article + .article {
+    border-top: 1px solid rgba(0, 0, 0, .1);
+  }
   .article {
-    &:not(:last-child) {
-      border-bottom: 1px solid rgba(0, 0, 0, .1);
-    }
     &:hover {
       background-color: rgba(0, 0, 0, .02);
     }
@@ -377,22 +430,29 @@ main {
       align-items: center;
       justify-content: space-between;
       padding: 12px 24px;
+      @media all and (max-width: 896px) {
+        padding: 12px 0;
+      }
       .author_image {
         width: 40px;
         height: 40px;
         border-radius: 2px;
+        align-self: flex-start;
       }
       .flex_item {
         flex: 1;
         margin-left: 24px;
+        @media all and (max-width: 896px) {
+          margin-left: 16px;
+        }
       }
       .tags {
         font-size: 1rem;
         .tag_name {
           padding: 2px 8px;
           margin-right: 5px;
-          border: 1px solid $border-color;
-          border-radius: 50px;
+          border-radius: 2px;
+          background-color: rgba(0, 0, 0, .05);
           color: $sub-font-color;
         }
       }
@@ -569,7 +629,7 @@ footer {
   background-color: $white;
   @media all and (max-width: 896px) {
     text-align: center;
-    padding: 24px 0;
+    padding: 16px 0;
   }
   .footer {
     width: 100%;
@@ -586,6 +646,7 @@ footer {
       @media all and (max-width: 896px) {
         width: 100%;
         padding-top: 24px;
+        font-size: 1rem;
       }
     }
     ul {
@@ -596,17 +657,18 @@ footer {
       }
       li {
         display: inline-block;
-        margin-left: 24px;
-        @media all and (max-width: 896px) {
-          display: block;
-          margin: 12px 0;
-        }
         a {
           text-decoration: none;
           font-size: 1.4rem;
           color: $sub-font-color;
+          @media all and (max-width: 896px) {
+            font-size: 1.2rem;
+          }
         }
       }
+    }
+    li + li {
+      margin-left: 24px;
     }
   }
 }
@@ -871,6 +933,9 @@ footer {
 .article_list, .history, .bookmark {
   &_box {
     padding: 50px 0;
+    @media all and (max-width: 896px) {
+      padding: 24px 0 50px;
+    }
   }
 }
 
@@ -924,16 +989,32 @@ footer {
 .article_card_wrapper {
   display: flex;
   padding: 24px 8px;
+  @media all and (max-width: 896px) {
+    flex-direction: column;
+  }
   .article {
     flex-basis: 240px;
     margin-right: 30px;
+    @media all and (max-width: 896px) {
+      margin: 0 0 24px 0;
+      flex-basis: auto;
+    }
     &:last-child {
       margin: 0;
     }
   }
 }
 
+.interest_tag_article_box {
+  @media all and (max-width: 896px) {
+    display: none;
+  }
+}
 .article_card_wrapper {
+  @media all and (max-width: 896px) {
+    overflow: scroll;
+    -webkit-overflow-scrolling: touch;
+  }
   .article {
     box-shadow: 0 2px 2px 1px rgba(0, 0, 0, 0.08);
     border-top: 3px solid $main-color;

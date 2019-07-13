@@ -6,9 +6,9 @@
   .comment-edit
     = form_for @comment, url: "/comment/#{params[:article_token]}", html: { id: "comment_form", class: "comment_form" }, remote: true do |f|
       = f.text_area :content, id: "comment_area", placeholder: "Markdownで入力"
-  .comment_form_bottom
-    %button.comment_submit#comment_submit{type: "submit", form: "comment_form"}
-      コメントする
+    .comment_form_bottom
+      %button.comment_submit#comment_submit{type: "submit", form: "comment_form"}
+        コメントする
 -if comments.present?
   .comments.comment_list_wrapper
     - comments.each do |comment|

@@ -49,6 +49,7 @@
               %span.or OR
               %button.authenticate_user_login
                 = link_to "ログイン", new_user_session_path, class: "authenticate_user_login_link"
+      = render "share/select"
       .box
         %h2.trend_article_heading.heading_2
           %span
@@ -77,7 +78,7 @@
                         %i.far.fa-thumbs-up
                         %span.count= article.likes.count
                     %span.created_at= article.created_at.strftime("%Y-%m-%d")
-      .box
+      .box.interest_tag_article_box
         %h2.interest_tag_article_heading.heading_2
           %span.sharp #
           注目のタグ

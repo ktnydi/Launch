@@ -24,9 +24,6 @@
                 - if user_signed_in?
                   - if other_user?(@public.user.uuid)
                     %button.follow_btn{data: {id: @public.user.id}}= render "follows/follow", user: @public.user
-                  - else
-                    %ul.edit_list
-                      %li= link_to "記事を削除する", public_path(@public.article_token), method: :delete, data: { confirm: "本当に削除しますか？一度、記事を削除すると元に戻せなくなります。"}
             %h2.main_title= @public.title
             .article_tags
               - @public.category.split(',').each do |tag|
@@ -46,34 +43,33 @@
         .toc_box.box
           %h2.box_heading 目次
           .toc
-  .article_box
-    .article_box_bottom
-      .relative_article_wrapper
-        %h3.heading
-          %span.sharp #
-          関連する記事
-        .article_list_wrapper
-          - Public.get_article_include_tag(@public.category.split(",")[0], 5).each do |article|
-            - if article.article_token == @public.article_token
-              - next
-            .article
-              = link_to public_path(article.article_token), class: "link large_link" do
-                = image_tag gravatar_image(article.user), size: 40, class: "author_image"
-                .flex_item
-                  %p.article_title= article.title
-                  .tags
-                    - article.category.split(',').each do |tag|
-                      %span.tag_name= tag
-                  .list_bottom
-                    .list_bottom_left
-                      %span.author_name= "by #{article.user.name}"
-                      .thumbs_up
-                        %i.far.fa-thumbs-up
-                        %span.count= article.likes.count
-                    %span.created_at= article.created_at.strftime("%Y-%m-%d")
-      .comment_wrapper
-        #comment
-          = render "comment", comments: @public.comments
+  .article_box_bottom
+    .relative_article_wrapper
+      %h3.heading
+        %span.sharp #
+        関連する記事
+      .article_list_wrapper
+        - Public.get_article_include_tag(@public.category.split(",")[0], 5).each do |article|
+          - if article.article_token == @public.article_token
+            - next
+          .article
+            = link_to public_path(article.article_token), class: "link large_link" do
+              = image_tag gravatar_image(article.user), size: 40, class: "author_image"
+              .flex_item
+                %p.article_title= article.title
+                .tags
+                  - article.category.split(',').each do |tag|
+                    %span.tag_name= tag
+                .list_bottom
+                  .list_bottom_left
+                    %span.author_name= "by #{article.user.name}"
+                    .thumbs_up
+                      %i.far.fa-thumbs-up
+                      %span.count= article.likes.count
+                  %span.created_at= article.created_at.strftime("%Y-%m-%d")
+  .comment_wrapper
+    #comment.inner
+      = render "comment", comments: @public.comments
 :javascript
   var comment_form = document.getElementById('comment_form')
   var comment_area = document.getElementById('comment_area')

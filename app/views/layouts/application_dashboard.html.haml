@@ -23,7 +23,7 @@
     %script{src: "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"}
     = stylesheet_link_tag    'application', media: 'all'
     = javascript_include_tag 'application'
-  %body{:ontouchstart => ""}
+  %body
     = render 'share/header'
     %main.dashboard
       .dashboard_left_box

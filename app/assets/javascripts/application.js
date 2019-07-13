@@ -91,4 +91,23 @@ document.addEventListener('DOMContentLoaded', () => {
       return false
     })
   })
+
+  const select_link = document.getElementsByClassName('select_link')[0]
+  const select_link_options = document.getElementsByClassName('select_link_option')
+
+  select_link.addEventListener('change', ()=>{
+    for (let i = 0; i < select_link_options.length; i++) {
+      const option = select_link_options.item(i)
+      if (option.selected) {
+        window.location = option.dataset.url
+      }
+    }
+  })
+
+  for (let i = 0; i < select_link_options.length; i++) {
+    const option = select_link_options.item(i)
+    if (option.dataset.url === window.location.pathname) {
+      option.selected = "selected"
+    }
+  }
 })
