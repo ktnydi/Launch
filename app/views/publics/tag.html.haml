@@ -1,0 +1,11 @@
+- @page_title = params[:category]
+%main.article_list
+  .article_list_box
+    .container
+      .tag_box
+        %h2.tag_title= "#{params[:category]}"
+        %p.description= "「#{params[:category]}」に関するお気に入りの記事を発見しよう！"
+      %h2.heading_2
+        %span.sharp #
+        新着の投稿
+      = render "share/card", publics: @publics

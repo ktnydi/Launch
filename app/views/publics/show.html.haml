@@ -27,7 +27,7 @@
             %h2.main_title= @public.title
             .article_tags
               - @public.category.split(',').each do |tag|
-                = link_to "##{tag}", class: "tag_link" do
+                = link_to tags_path(tag), class: "tag_link" do
                   .tag_name= tag
             .post_detail_info
               .post_day

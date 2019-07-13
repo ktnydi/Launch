@@ -33,6 +33,13 @@ class PublicsController < ApplicationController
     end
   end
 
+  def tag
+    @publics = Public.where("category LIKE ?", "%#{params[:category]}%").order("created_at DESC").page(params[:page]).per(20)
+    if @publics.count < 1
+      redirect_to root_path
+    end
+  end
+
   def history
     @history_publics = Public.joins(:access_analyses)
                              .select("publics.*, max(access_analyses.created_at) as last_access_time")

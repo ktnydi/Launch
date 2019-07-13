@@ -25,6 +25,7 @@ Rails.application.routes.draw do
   get '/follows' => 'follows#follow', as: "follows_list"
   get '/followers' => 'follows#follower', as: "followers_list"
 
+  get '/tags/:category' => 'publics#tag', as: "tags"
   get '/history' => 'publics#history', as: "history"
   get '/goods' => 'publics#good', as: "goods"
 
