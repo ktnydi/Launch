@@ -31,7 +31,7 @@ class PublicsController < ApplicationController
   def destroy
     @public = Public.find_by(article_token: params[:article_token])
     if @public.destroy
-      redirect_to user_path(current_user)
+      redirect_to dashboard_article_path + "?mode=public"
     end
   end
 
