@@ -73,17 +73,6 @@ document.addEventListener('DOMContentLoaded', function() {
     })
   }
 
-  const delete_draft = () => {
-    $.ajax({
-      type: 'DELETE',
-      url: `/drafts/${article_token()}`,
-    })
-    .done( (delete_success) => {
-    })
-    .fail( (error) => {
-    })
-  }
-
   const create_public = () => {
     $.ajax({
       type: 'POST',
