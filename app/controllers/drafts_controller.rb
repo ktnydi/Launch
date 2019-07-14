@@ -40,10 +40,7 @@ class DraftsController < ApplicationController
   def destroy
     @draft = Draft.find_by(article_token: params[:article_token])
     if @draft.destroy
-      respond_to do |format|
-        @articles = current_user.drafts.search(params[:q]).page(params[:page]).per(10)
-        format.js { render "dashboard/article" }
-      end
+      redirect_to dashboard_article_path + "?mode=draft"
     end
   end
 
