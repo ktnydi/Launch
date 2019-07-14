@@ -29,6 +29,27 @@
     = javascript_include_tag '/editor/highlight/highlight.pack.js'
   %body
     = render 'share/header'
+    .registration_modal_parent
+    .registration_modal_child
+      %h2.registration_heading アカウントを作成
+      .form-wrapper
+        = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+          .field
+            = f.text_field :name, placeholder: "ユーザー名", required: true, maxlength:"15"
+          .field
+            = f.email_field :email, placeholder: "メールアドレス", autocomplete: "email", required: true
+          .field
+            = f.password_field :password, placeholder: "パスワード", autocomplete: "new-password", required: true
+          %p.term
+            登録が完了すると#{link_to "利用規約", terms_path, target: :_blank}に同意したものとみなします。
+          .actions
+            = f.submit "登録", id: "submit"
+        %p.separate
+        .sns_login
+          = link_to user_twitter_omniauth_authorize_path, class: "twitter" do
+            %i.fab.fa-twitter
+            %p Twitterで登録
+        = render "devise/shared/links"
     = yield
     = render 'share/footer'
     = render "share/menu"
@@ -69,3 +90,19 @@
           cls_obj.style.display = 'none';
         });
       }
+
+      const registration_modal_parent = document.getElementsByClassName('registration_modal_parent')[0]
+
+      document.body.addEventListener('ajax:error', (e)=>{
+        const xhr = e.detail[2]
+        if (xhr.status === 401) {
+          registration_modal_parent.classList.add('show')
+          registration_modal_parent.nextElementSibling.classList.add('show')
+        }
+      })
+
+      registration_modal_parent.addEventListener('click', ()=>{
+        console.log('hello')
+        registration_modal_parent.classList.remove('show')
+        registration_modal_parent.nextElementSibling.classList.remove('show')
+      })

@@ -1,5 +1,6 @@
 class BookmarksController < ApplicationController
   before_action :get_public
+  before_action :authenticate_user!
 
   def index
     @bookmark_publics = current_user.bookmark_articles.page(params[:page]).per(20)
