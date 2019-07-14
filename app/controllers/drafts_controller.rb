@@ -30,12 +30,10 @@ class DraftsController < ApplicationController
   def update
     @draft = Draft.find_by(article_token: params[:article_token])
     @draft.assign_attributes(draft_params)
-    respond_to do |format|
-      if @draft.save
-        format.json { render json: @draft }
-      else
-        @errors = @draft.errors.full_messages
-      end
+    if @draft.save
+      render json: { url: dashboard_article_path }
+    else
+      @errors = @draft.errors.full_messages
     end
   end
 

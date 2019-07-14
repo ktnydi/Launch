@@ -66,9 +66,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
       }
     })
-    .done( (edit_draft) => {
-      console.log(edit_draft)
-      window.location = `/users/${edit_draft.user_token}`
+    .done( (data) => {
+      window.location = data.url
     })
     .fail( (error) => {
     })
