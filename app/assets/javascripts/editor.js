@@ -86,10 +86,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
       }
     })
-    .done( (new_public) => {
-      delete_draft()
-      const article_token = new_public.article_token
-      window.location = `/publics/${article_token}`
+    .done( (data) => {
+      window.location = data.url
     })
     .fail( (error) => {
       const list = document.getElementById('editor_errors_list')

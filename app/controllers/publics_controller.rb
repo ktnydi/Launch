@@ -20,7 +20,9 @@ class PublicsController < ApplicationController
     end
     @public.user_token = current_user.uuid
     if @public.save
-      render json: @public
+      draft = Draft.find_by(article_token: @public.article_token)
+      draft&.destroy
+      render json: { url: dashboard_article_path + '?mode=public' }
     else
       render json: @public.errors.full_messages, status: :unprocessable_entity
     end
