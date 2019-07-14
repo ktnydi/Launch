@@ -16,7 +16,7 @@ class DraftsController < ApplicationController
     @draft.article_token = SecureRandom.hex(10)
     @draft.user_token = current_user.uuid
     if @draft.save
-      render json: @draft
+      render json: { url: dashboard_article_path }
     else
       @errors = @draft.errors.full_messages
     end

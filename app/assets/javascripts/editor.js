@@ -47,8 +47,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
       }
     })
-    .done( (new_draft) => {
-      window.location = `/users/${new_draft.user_token}`
+    .done( (data) => {
+      window.location = data.url
     })
     .fail( (error) => {
     })
