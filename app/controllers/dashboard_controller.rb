@@ -20,11 +20,7 @@ class DashboardController < ApplicationController
       end
     end
 
-    respond_to do |format|
-      format.js { render json: last_month }
-      format.html
-    end
-
+    gon.last_month = last_month
   end
 
   def article

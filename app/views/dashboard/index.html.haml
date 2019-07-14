@@ -42,7 +42,6 @@
       let date = []
       let access_counts = []
 
-      data = JSON.parse(data)
       for (key in data) {
         date.push(key)
         access_counts.push(data[key])
@@ -82,13 +81,4 @@
       })
     }
 
-    $.ajax({
-      type: 'GET',
-      url: '/dashboard',
-    })
-    .done( (data) => {
-      drawing_chart(data)
-    })
-    .fail( (error) => {
-
-    })
+    drawing_chart(gon.last_month)
