@@ -76,6 +76,8 @@ class DashboardController < ApplicationController
     end
 
     # [ {"id"=>nil, "access_source"=>"http://sample.com", "access_count"=>123 } ]
-    @access_analyses = @trend_articles.first.access_analyses.select("count(access_source) as count, access_source as source").group(:access_source)
+    if @trend_articles.length > 0
+      @access_analyses = @trend_articles.first.access_analyses.select("count(access_source) as count, access_source as source").group(:access_source)
+    end
   end
 end

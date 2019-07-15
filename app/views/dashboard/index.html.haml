@@ -22,10 +22,11 @@
       %canvas.chartjs#chartjs
   .access_source
     %h2.access_source_heading 上位のアクセス元
-    - @access_analyses[0..4].each do |access_analysis|
-      .access_source_box
-        = link_to access_analysis.source, access_analysis.source, class: "access_source_path"
-        %span.percent= "(#{(access_analysis.count.to_f * 100 / @trend_articles.first.access_analyses.count).round(1)}%)"
+    - if @access_analyses
+      - @access_analyses[0..4].each do |access_analysis|
+        .access_source_box
+          = link_to access_analysis.source, access_analysis.source, class: "access_source_path"
+          %span.percent= "(#{(access_analysis.count.to_f * 100 / @trend_articles.first.access_analyses.count).round(1)}%)"
 .inner
   .access_article
     %h2.access_article_heading アクセスが多い記事
