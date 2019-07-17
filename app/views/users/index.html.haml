@@ -29,7 +29,7 @@
       .box
         .side_bar
           - if user_signed_in?
-            %a.side_bar_link{href: "#{dashboard_path}"} ダッシュボード
+            %a.side_bar_link{href: "#{dashboard_path}?period=all"} ダッシュボード
             %a.side_bar_link{href: goods_path} 高く評価した記事
             %a.side_bar_link{href: bookmarks_path} ブックマークした記事
             %a.side_bar_link{href: history_path} 閲覧履歴

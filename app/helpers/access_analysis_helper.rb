@@ -6,11 +6,11 @@ module AccessAnalysisHelper
 
     period = case period_range
              when "day"
-               Time.zone.now.beginning_of_day
+               1.day.ago
              when "week"
-               Time.zone.now.beginning_of_week
+               1.week.ago
              when "month"
-               Time.zone.now.beginning_of_month
+               1.month.ago
              else
                ""
              end
@@ -24,7 +24,7 @@ module AccessAnalysisHelper
     access_count = access_analyses.values.inject do |sum, value|
       sum + value
     end
-    
+
     access_count || 0
   end
 end

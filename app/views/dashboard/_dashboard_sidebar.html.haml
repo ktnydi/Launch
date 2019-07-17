@@ -20,6 +20,6 @@
     .setting_user_account
       = link_to "アカウント設定", edit_user_registration_path, class: "edit_user_link"
 .inner
-  = link_to "アクセス解析", dashboard_path, class: "dashboard_link"
+  = link_to "アクセス解析", "#{dashboard_path}?period=all", class: "dashboard_link"
   = link_to "記事の管理", dashboard_article_path + "?mode=draft", class: "dashboard_link"
   = link_to "コメント一覧", dashboard_comment_path, class: "dashboard_link"

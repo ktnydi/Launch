@@ -24,7 +24,7 @@
           %span= current_user.name
           %i.fas.fa-caret-down
         #lists.toggle-list
-          = link_to "ダッシュボード", dashboard_path
+          = link_to "ダッシュボード", "#{dashboard_path}?period=all"
           = link_to "アカウント設定", edit_user_registration_path
           = link_to "ログアウト", destroy_user_session_path, method: :delete
     - else

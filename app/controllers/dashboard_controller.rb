@@ -1,6 +1,7 @@
 class DashboardController < ApplicationController
   before_action :authenticate_user!, only: [:index]
   before_action :get_trend_article_sources_with_current_user, only: [:index]
+  before_action :trend_articles, only: [:index]
 
   layout "application_dashboard"
 
@@ -8,7 +9,7 @@ class DashboardController < ApplicationController
     # acategory : analytics
     article_tokens = current_user.publics.pluck(:article_token)
     # { "YYYY-mm-dd" => access_count }
-    count_by_created_at = AccessAnalysis.where(article_token: article_tokens).where("created_at > ?", 29.day.ago.beginning_of_day).select("date(created_at)").group("date(created_at)").count("date(created_at)")
+    count_by_created_at = AccessAnalysis.where(article_token: article_tokens).access_within_date_range(29.days.ago.beginning_of_day)
 
     last_month = {}
     29.downto(0).each do |i|
@@ -42,42 +43,16 @@ class DashboardController < ApplicationController
   end
 
   private
+    def trend_articles
+      @trend_articles = Public.where(user_token: current_user.uuid).limit(5).get_trend_articles(date(params[:period]))
+    end
 
-  # category : analytics
-  def access_analyses(period = "")
-    # current_userが投稿した記事
-    article_tokens = current_user.publics.pluck(:article_token)
-
-    period = case params[:period]
-      when "day"
-        1.day.ago.beginning_of_day
-      when "week"
-        1.week.ago.beginning_of_week
-      when "month"
-        1.month.ago.beginning_of_month
-      else
-        ""
+    # category : analytics
+    def get_trend_article_sources_with_current_user
+      # [ {"id"=>nil, "access_source"=>"http://sample.com", "access_count"=>123 } ]
+      if trend_articles.length > 0
+        @access_analyses = Public.where(user_token: current_user.uuid).get_trend_article_sources(date(params[:period])).limit(5)
+        @sum_access = trend_articles.first.access_analyses.where("created_at > ?", date(params[:period])).count
       end
-
-    # { article_token => access_count }
-    AccessAnalysis.where(article_token: article_tokens)
-                  .where("created_at > ?", period)
-                  .group(:article_token)
-                  .order("count_article_token DESC")
-                  .count(:article_token)
-  end
-
-  # category : analytics
-  def get_trend_article_sources_with_current_user
-    @trend_articles = []
-    access_analyses.each do |key, _|
-      article = Public.find_by(article_token: key)
-      @trend_articles << article
     end
-
-    # [ {"id"=>nil, "access_source"=>"http://sample.com", "access_count"=>123 } ]
-    if @trend_articles.length > 0
-      @access_analyses = @trend_articles.first.access_analyses.select("count(access_source) as count, access_source as source").group(:access_source)
-    end
-  end
 end
