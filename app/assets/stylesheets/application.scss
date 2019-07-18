@@ -1002,100 +1002,11 @@ footer {
   }
 }
 
-.article_card_wrapper {
-  display: flex;
-  padding: 24px 0;
-  @media all and (max-width: 896px) {
-    flex-direction: column;
-  }
-  .article {
-    flex-basis: calc(100% / 3 - 12px);
-    @media all and (max-width: 896px) {
-      margin: 0 0 24px 0;
-      flex-basis: auto;
-    }
-    &:last-child {
-      margin: 0;
-    }
-  }
-  .article + .article {
-    margin-left: 18px
-  }
-}
-
-.interest_tag_article_box {
-  @media all and (max-width: 896px) {
-    display: none;
-  }
-}
-.article_card_wrapper {
-  @media all and (max-width: 896px) {
-    overflow: scroll;
-    -webkit-overflow-scrolling: touch;
-  }
-  .link {
-    height: 150px;
-    display: block;
-    border-radius: 2px;
-    text-decoration: none;
-    position: relative;
-    color: $font-color;
-    display: block;
-    box-shadow: 0 2px 2px 1px rgba(0, 0, 0, 0.08);
-    border-top: 3px solid $main-color;
-    border-radius: 2px;
-    background-color: #fafafa;
-    transition: .3s;
-    &:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 5px 14px 1px rgba(0, 0, 0, 0.08);
-    }
-    &_bottom {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-size: 1rem;
-      color: $sub-font-color;
-      position: absolute;
-      left: 16px;
-      bottom: 16px;
-      .thumbs_up {
-        display: flex;
-        align-items: center;
-        .fa-thumbs-up {
-          margin-right: 3px;
-          color: $main-color;
-        }
-      }
-      .created_at {
-        margin-left: 8px;
-      }
-    }
-    .article_link_top {
-      display: flex;
-      align-items: center;
-      padding: 15px;
-      border-bottom: 1px solid $border-color;
-      .author_image {
-        width: 20px;
-        height: 20px;
-      }
-      .author_name {
-        margin-left: 8px;
-        font-size: 1rem;
-        color: $sub-font-color;
-      }
-    }
-    .article_link_contents {
-      padding: 15px;
-      position: relative;
-      .article_title {
-        font-weight: bold;
-        font-size: 1.2rem;
-      }
-    }
-  }
-}
+// .interest_tag_article_box {
+//   @media all and (max-width: 896px) {
+//     display: none;
+//   }
+// }
 
 .article_not_found {
   padding: 100px 16px;

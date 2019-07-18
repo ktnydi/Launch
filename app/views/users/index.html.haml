@@ -89,23 +89,10 @@
           注目のタグ
         - if Public.tag_ranking.length > 0
           .inner
-            - Public.tag_ranking.each do |tag_name, article_count|
-              .tag_name_list
-                %h3.interest_tag_name= tag_name
-                .article_card_wrapper
-                  - Public.get_same_tag_articles(tag_name).each do |public|
-                    .article
-                      = link_to public_path(public.article_token), class: "link" do
-                        .article_link_top
-                          = image_tag gravatar_image(public.user), size: 40, class: "author_image"
-                          %span.author_name= public.user.name
-                        .article_link_contents
-                          %p.article_title= public.title.truncate(35)
-                        .link_bottom
-                          .thumbs_up
-                            %i.far.fa-thumbs-up
-                            %span.count= public.likes.count
-                          %span.created_at= public.created_at.strftime("%Y-%m-%d")
+            .tag_ranking
+              - Public.tag_ranking(20).each do |tag_name, _|
+                = link_to tags_path(tag_name), class: "tag_link" do
+                  .tag_name= tag_name
         - else
           .article_not_found
             %h3.article_not_found_head 公開されている記事がありません。

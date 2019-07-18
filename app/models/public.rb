@@ -60,10 +60,10 @@ class Public < ApplicationRecord
     tag_lists.count(tag_name)
   end
 
-  scope :tag_ranking, -> do
+  scope :tag_ranking, -> (num = 1) do
     tag_ranking = tag_lists(uniquness: true).map do |tag_name|
       [tag_name, tag_count(tag_name)]
     end
-    tag_ranking.sort_by(&:last).reverse.to_h
+    tag_ranking.sort_by(&:last).reverse[0..(num - 1)].to_h
   end
 end
