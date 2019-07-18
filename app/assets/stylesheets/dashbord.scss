@@ -197,6 +197,7 @@
     .access_source_path {
       display: block;
       text-decoration: none;
+      word-break: break-all;
       font-size: 1.4rem;
       color: $main-color;
     }
