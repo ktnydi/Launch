@@ -62,6 +62,7 @@
       var notice = document.getElementById('notice');
       var alert = document.getElementById('alert');
       const registration_modal_parent = document.getElementsByClassName('registration_modal_parent')[0];
+      const registration_links = document.getElementsByClassName('registration_link');
 
       (function() {
         hamburger.addEventListener('click', ()=>{
@@ -90,6 +91,14 @@
         cls_btn.addEventListener('click', function() {
           cls_obj.style.display = 'none';
         });
+      }
+
+      for (let i = 0; i < registration_links.length; i++) {
+        const registration_link = registration_links.item(i)
+        registration_link.addEventListener('click', ()=>{
+          registration_modal_parent.classList.add('show')
+          registration_modal_parent.nextElementSibling.classList.add('show')
+        })
       }
 
       document.body.addEventListener('ajax:error', (e)=>{
