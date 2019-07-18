@@ -36,8 +36,10 @@ class Public < ApplicationRecord
       .order("count DESC")
   end
 
-  scope :get_same_tag_articles, -> (tag_name) do
-    self.where("category LIKE ?", "%#{tag_name}%").order(created_at: :desc)
+  scope :get_same_tag_articles, -> (article) do
+    tag = article.category.split(",").first
+    current_article_token = article.article_token
+    self.where("category LIKE ?", "%#{tag}%").where.not(article_token: current_article_token).order(created_at: :desc)
   end
 
   scope :search, -> (query) do
