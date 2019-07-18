@@ -36,7 +36,11 @@ class Public < ApplicationRecord
       .order("count DESC")
   end
 
-  def self.search(query)
+  scope :get_same_tag_articles, -> (tag_name) do
+    self.where("category LIKE ?", "%#{tag_name}%").order(created_at: :desc)
+  end
+
+  scope :search, -> (query) do
     rel = order(created_at: :desc)
     if query.present?
       rel = rel.where("title LIKE ? OR category LIKE ?", "%#{query}%", "%#{query}%")
@@ -44,34 +48,22 @@ class Public < ApplicationRecord
     rel
   end
 
-  def self.get_tags
-    tags_list = self.all.map do |article|
-      article.category.split(',')
+  scope :tag_lists, -> (uniquness: false) do
+    rel = self.all.pluck(:category).map{ |tags| tags.split(",") }.flatten
+    if uniquness
+      rel = rel.uniq
     end
-
-    tags_list.flatten.uniq
+    rel
   end
 
-  def self.get_article_include_tag(name, length = 3)
-    articles = []
-    self.all.order(created_at: :desc).each do |article|
-      tag_list = article.category.split(",")
-      if tag_list.include?(name)
-        articles << article
-      end
-    end
-    articles[0..(length - 1)]
+  scope :tag_count, -> (tag_name) do
+    tag_lists.count(tag_name)
   end
 
-  def self.tag_ranking
-    tags_list = self.all.map do |article|
-      article.category.split(',')
+  scope :tag_ranking, -> do
+    tag_ranking = tag_lists(uniquness: true).map do |tag_name|
+      [tag_name, tag_count(tag_name)]
     end
-
-    tag_ranking = {}
-    tags_list.flatten.uniq.each do |tag_name|
-      tag_ranking[tag_name] = tags_list.flatten.count(tag_name)
-    end
-    tag_ranking.sort_by{ |key, value| value }.reverse[0..2].to_h
+    tag_ranking.sort_by(&:last).reverse.to_h
   end
 end

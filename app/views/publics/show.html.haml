@@ -49,7 +49,7 @@
         %span.sharp #
         関連する記事
       .article_list_wrapper
-        - Public.get_article_include_tag(@public.category.split(",")[0], 5).each do |article|
+        - Public.get_same_tag_articles(@public.category.split(",").first).limit(5).each do |article|
           - if article.article_token == @public.article_token
             - next
           .article

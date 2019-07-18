@@ -1096,3 +1096,24 @@ footer {
     }
   }
 }
+
+.article_not_found {
+  padding: 100px 16px;
+  margin: 10px 0 0;
+  text-align: center;
+  border: 1px solid $border-color;
+  border-radius: 2px;
+  background-color: $white;
+  @media all and (max-width: 896px) {
+    margin: 10px 16px 0;
+  }
+  &_head {
+    font-weight: normal;
+    font-size: 1.6rem;
+  }
+  &_message {
+    margin-top: 30px;
+    font-size: 1.4rem;
+    color: $sub-font-color;
+  }
+}
