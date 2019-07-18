@@ -446,15 +446,21 @@ main {
         &_left {
           display: flex;
           align-items: center;
+          flex-wrap: wrap;
+          .author_name {
+            margin-right: 12px;
+          }
           .thumbs_up {
             display: flex;
             align-items: center;
-            margin-left: 12px;
             .fa-thumbs-up {
               margin-right: 5px;
               color: $main-color;
             }
           }
+        }
+        .created_at {
+          white-space: nowrap;
         }
       }
     }
@@ -989,9 +995,13 @@ footer {
   .tag_box {
     margin-bottom: 40px;
     text-align: center;
+    padding: 0 16px;
     .tag_title {
       font-size: 3rem;
       font-weight: normal;
+      @media all and (max-width: 896px) {
+        font-size: 2rem;
+      }
     }
     .description {
       margin-top: 20px;
