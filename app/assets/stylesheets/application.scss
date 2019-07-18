@@ -548,15 +548,21 @@ main {
 
 .user_list_wrapper {
   padding: 0;
-  margin-top: 24px;
+  margin: 24px 0 0;
   list-style: none;
   background-color: $white;
   box-shadow: 0 2px 2px 1px rgba(0, 0, 0, 0.08);
+  @media all and (max-width: 896px) {
+    margin: 24px 16px 0;
+  }
   .user_list {
     padding: 24px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    @media all and (max-width: 896px) {
+      padding: 16px;
+    }
     .user {
       display: flex;
       align-items: center;
@@ -568,6 +574,7 @@ main {
       }
       .name {
         font-size: 1.4rem;
+        padding-right: 16px;
         a {
           text-decoration: none;
           color: $font-color;
@@ -1041,12 +1048,6 @@ footer {
   }
 }
 
-// .interest_tag_article_box {
-//   @media all and (max-width: 896px) {
-//     display: none;
-//   }
-// }
-
 .article_not_found {
   padding: 100px 16px;
   margin: 10px 0 0;
@@ -1066,4 +1067,15 @@ footer {
     font-size: 1.4rem;
     color: $sub-font-color;
   }
+}
+
+.user_not_found {
+  padding: 30px 0;
+  margin: 24px 16px 0;
+  text-align: center;
+  border: 1px solid $border-color;
+  border-radius: 2px;
+  font-size: 1.4rem;
+  background-color: $white;
+  color: $sub-font-color;
 }
