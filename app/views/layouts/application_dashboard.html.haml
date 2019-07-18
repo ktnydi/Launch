@@ -58,9 +58,9 @@
       })();
 
       const sidebar_links = document.getElementsByClassName('sidebar_link')
-      for (let i = 0; i < dashboard_links.length; i++) {
-        const sidebar_link = dashboard_links.item(i)
-        if (dashboard_link.pathname === window.location.pathname) {
-          dashboard_link.classList.add('current')
+      for (let i = 0; i < sidebar_links.length; i++) {
+        const sidebar_link = sidebar_links.item(i)
+        if (sidebar_link.pathname === window.location.pathname) {
+          sidebar_link.classList.add('current')
         }
       }
