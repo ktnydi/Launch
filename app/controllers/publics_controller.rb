@@ -1,7 +1,8 @@
 class PublicsController < ApplicationController
   require 'securerandom'
-  before_action :create_access_analysis, only: [:show]
   before_action :authenticate_user!, only: [:create, :destroy, :history, :good]
+  before_action :confirm_params, only: [:show]
+  before_action :create_access_analysis, only: [:show]
   def index
     @publics = Public.all.order(created_at: :desc).page(params[:page]).per(20)
     if params[:q]
@@ -69,5 +70,11 @@ class PublicsController < ApplicationController
         access_source: request.referer,
         user_token: current_user&.uuid || ""
       )
+    end
+
+    def confirm_params
+      unless Public.find_by(article_token: params[:article_token])
+        redirect_to root_path
+      end
     end
 end
