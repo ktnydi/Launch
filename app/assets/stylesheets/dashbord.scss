@@ -37,38 +37,6 @@
   }
 }
 
-.dashboard_left_box {
-  .inner {
-    padding: 24px 0;
-  }
-  .dashboard_link {
-    display: block;
-    padding: 0 24px;
-    line-height: 50px;
-    text-align: center;
-    text-decoration: none;
-    font-size: 1.4rem;
-    color: $no_active_color;
-    &:hover {
-      background-color: rgba(0, 0, 0, .03);
-    }
-    &.current {
-      color: $font-color;
-      position: relative;
-      &:before {
-        display: block;
-        content: '';
-        width: 3px;
-        height: 50px;
-        background-color: $main-color;
-        position: absolute;
-        top: 0;
-        right: 0;
-      }
-    }
-  }
-}
-
 .dashboard_right_box .figure {
   display: flex;
   @media all and (max-width: 896px) {
@@ -533,11 +501,19 @@
     }
   }
   &_top {
-    img {
+    .user_image {
+      display: inline-block;
       width: 70px;
       height: 70px;
       border-radius: 2px;
       box-shadow: 0 5px 17px 1px rgba(0, 0, 0, 0.05);
+      .guest_image {
+        display: block;
+        line-height: 70px;
+        font-size: 50px;
+        background-color: rgba(0, 0, 0, .05);
+        color: rgba(0, 0, 0, .1);
+      }
     }
     .name {
       margin-top: 5px;

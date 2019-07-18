@@ -1,0 +1,36 @@
+.box
+  .user_info
+    .user_info_top
+      - if user_signed_in?
+        = image_tag gravatar_image(current_user), size: 70, class: "user_image"
+      - else
+        %span.user_image
+          %i.far.fa-user.guest_image
+      %h2.name= current_user ? current_user.name : "ゲスト"
+      %p.uuid= current_user ? "@#{current_user.uuid}" : "@guestuser"
+    .user_info_bottom
+      .more_info
+        = link_to "#{dashboard_article_path}?mode=public", class: "more_info_link" do
+          .info_name Article
+          %p.count= current_user ? current_user.publics.count : 0
+      .more_info
+        = link_to follows_list_path, class: "more_info_link" do
+          .info_name Follow
+          %p.count= current_user ? current_user.active_follows.count : 0
+      .more_info
+        = link_to followers_list_path, class: "more_info_link" do
+          .info_name Follower
+          %p.count= current_user ? current_user.passive_follows.count : 0
+    - if controller_name == "dashboard"
+      .setting_user_account
+        = link_to "アカウント設定", edit_user_registration_path, class: "edit_user_link"
+.box
+  - if controller_name == "users"
+    = link_to "ダッシュボード", "#{dashboard_path}?period=all", class: "sidebar_link"
+    = link_to "高く評価した記事", goods_path, class: "sidebar_link"
+    = link_to "ブックマーク", bookmarks_path, class: "sidebar_link"
+    = link_to "閲覧履歴", history_path, class: "sidebar_link"
+  - else
+    = link_to "アクセス解析", "#{dashboard_path}?period=all", class: "sidebar_link"
+    = link_to "記事の管理", dashboard_article_path + "?mode=draft", class: "sidebar_link"
+    = link_to "コメント一覧", dashboard_comment_path, class: "sidebar_link"

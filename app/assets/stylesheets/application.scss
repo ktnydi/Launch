@@ -304,6 +304,39 @@ header {
   }
 }
 
+// サイドバー
+.dashboard_left_box, .home_contents_left {
+  .box {
+    padding: 24px 0;
+  }
+  .dashboard_link, .sidebar_link {
+    display: block;
+    padding: 0 24px;
+    line-height: 50px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 1.4rem;
+    color: $font-color;
+    &:hover {
+      background-color: rgba(0, 0, 0, .03);
+    }
+    &.current {
+      position: relative;
+      background-color: rgba(0, 0, 0, .03);
+      &:before {
+        display: block;
+        content: '';
+        width: 3px;
+        height: 50px;
+        background-color: $main-color;
+        position: absolute;
+        top: 0;
+        right: 0;
+      }
+    }
+  }
+}
+
 // メインコンテンツ
 main {
   width: 100%;

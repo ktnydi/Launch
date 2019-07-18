@@ -1,42 +1,7 @@
 %main.home_wrapper
   .home_contents
     .home_contents_left
-      .box
-        .login_user_wrapper
-          - if user_signed_in?
-            = image_tag gravatar_image(current_user), size: 35, class: "user_image"
-            %b.username= current_user.name
-            .user_token= "@#{current_user.uuid}"
-            .user_status_info
-              %a.link.follow_link{href: follows_list_path}
-                .follow Follow
-                .count= current_user.followings.length
-              %a.link.follower_link{href: followers_list_path}
-                .follower Follower
-                .count= current_user.followers.length
-          - else
-            .user_image
-              %i.far.fa-user.guest_image
-            %b.username ゲスト
-            .user_token= "@guestuser"
-            .user_status_info
-              %a.link.follow_link.registration_link
-                .follow Follow
-                .count= 0
-              %a.link.follower_link.registration_link
-                .follower Follower
-                .count= 0
-      .box
-        .side_bar
-          - if user_signed_in?
-            %a.side_bar_link{href: "#{dashboard_path}?period=all"} ダッシュボード
-            %a.side_bar_link{href: goods_path} 高く評価した記事
-            %a.side_bar_link{href: bookmarks_path} ブックマークした記事
-            %a.side_bar_link{href: history_path} 閲覧履歴
-          - else
-            %a.side_bar_link.registration_link ダッシュボード
-            %a.side_bar_link.registration_link 高く評価した記事
-            %a.side_bar_link.registration_link 閲覧履歴
+      = render "share/sidebar"
     .home_contents_center
       - unless user_signed_in?
         .box

@@ -28,7 +28,7 @@
     = render 'share/header'
     %main.dashboard
       .dashboard_left_box
-        = render "dashboard/dashboard_sidebar"
+        = render "share/sidebar"
       .dashboard_right_box
         = yield
     = render 'share/footer'
@@ -57,9 +57,9 @@
         })
       })();
 
-      const dashboard_links = document.getElementsByClassName('dashboard_link')
+      const sidebar_links = document.getElementsByClassName('sidebar_link')
       for (let i = 0; i < dashboard_links.length; i++) {
-        const dashboard_link = dashboard_links.item(i)
+        const sidebar_link = dashboard_links.item(i)
         if (dashboard_link.pathname === window.location.pathname) {
           dashboard_link.classList.add('current')
         }

@@ -1,6 +1,7 @@
 class PublicsController < ApplicationController
   require 'securerandom'
   before_action :create_access_analysis, only: [:show]
+  before_action :authenticate_user!, only: [:create, :destroy, :history, :good]
   def index
     @publics = Public.all.order(created_at: :desc).page(params[:page]).per(20)
     if params[:q]

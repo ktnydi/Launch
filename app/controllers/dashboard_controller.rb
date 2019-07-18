@@ -1,5 +1,5 @@
 class DashboardController < ApplicationController
-  before_action :authenticate_user!, only: [:index]
+  before_action :authenticate_user!
   before_action :get_trend_article_sources_with_current_user, only: [:index]
   before_action :trend_articles, only: [:index]
 

@@ -16,10 +16,6 @@
       @media all and (max-width: 896px) {
         display: none;
       }
-      .box {
-        padding: 24px 0;
-        border-bottom: 1px solid $border-color;
-      }
     }
     &_center {
       width: 100%;
@@ -31,73 +27,6 @@
       }
       .box {
         margin-bottom: 60px;
-      }
-    }
-  }
-}
-
-.home_contents_left {
-  text-align: center;
-  position: sticky;
-  top: 70px;
-  z-index: 50;
-  .login_user_wrapper {
-    padding: 0 24px;
-    .user_image {
-      display: inline-block;
-      width: 72px;
-      height: 72px;
-      border-radius: 2px;
-      .guest_image {
-        display: block;
-        line-height: 72px;
-        font-size: 50px;
-        background-color: rgba(0, 0, 0, .05);
-        color: rgba(0, 0, 0, .1);
-      }
-    }
-    .username {
-      display: block;
-      margin: 5px 0;
-      font-size: 1.6rem;
-    }
-    .user_token {
-      padding-bottom: 12px;
-      border-bottom: 1px solid $border-color;
-      font-size: 1.2rem;
-      color: $sub-font-color;
-    }
-    .user_status_info {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-top: 12px;
-      .link {
-        margin: 0 12px;
-        text-decoration: none;
-        cursor: pointer;
-        color: $sub-font-color;
-        .follow, .follower {
-          font-size: 1.4rem;
-        }
-        .count {
-          font-size: 2rem;
-          color: $main-color;
-        }
-      }
-    }
-  }
-  .side_bar {
-    &_link {
-      display: block;
-      padding: 12px 16px;
-      text-decoration: none;
-      text-align: left;
-      font-size: 1.3rem;
-      cursor: pointer;
-      color: $font-color;
-      &:hover {
-        background-color: rgba(0, 0, 0, .03);
       }
     }
   }
