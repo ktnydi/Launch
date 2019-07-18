@@ -13,6 +13,10 @@
       border-right: 1px solid $border-color;
       border-radius: 2px;
       background-color: $white;
+      position: sticky;
+      top: 70px;
+      left: 0;
+      z-index: 90;
       @media all and (max-width: 896px) {
         display: none;
       }
