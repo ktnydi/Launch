@@ -87,8 +87,6 @@
             %h3.article_not_found_head 公開されている記事がありません。
             %p.article_not_found_message 最近投稿された記事はここに表示されます。
 :javascript
-  const registration_links = document.getElementsByClassName('registration_link')
-  const registration_modal_parent = document.getElementsByClassName('registration_modal_parent')[0]
   const period_btns = document.getElementsByClassName('period_btn')
   const period = document.getElementById('period')
 
@@ -105,18 +103,3 @@
       period_btns[0].classList.add('show')
     }
   }
-
-  for (let i = 0; i < registration_links.length; i++) {
-    const registration_link = registration_links.item(i)
-    registration_link.addEventListener('click', ()=>{
-      registration_modal_parent.classList.add('show')
-      registration_modal_parent.nextElementSibling.classList.add('show')
-      document.body.classList.add('hidden')
-    })
-  }
-
-  registration_modal_parent.addEventListener('click', ()=>{
-    registration_modal_parent.classList.remove('show')
-    registration_modal_parent.nextElementSibling.classList.remove('show')
-    document.body.classList.remove('hidden')
-  })

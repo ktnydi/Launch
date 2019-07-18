@@ -61,6 +61,7 @@
       var cls_btn = document.getElementById('cls-btn');
       var notice = document.getElementById('notice');
       var alert = document.getElementById('alert');
+      const registration_modal_parent = document.getElementsByClassName('registration_modal_parent')[0];
 
       (function() {
         hamburger.addEventListener('click', ()=>{
@@ -90,8 +91,6 @@
           cls_obj.style.display = 'none';
         });
       }
-
-      const registration_modal_parent = document.getElementsByClassName('registration_modal_parent')[0]
 
       document.body.addEventListener('ajax:error', (e)=>{
         const xhr = e.detail[2]
