@@ -116,6 +116,7 @@
     min-width: 280px;
     align-self: flex-start;
     position: sticky;
+    position: -webkit-sticky;
     top: 70px;
     z-index: 100px;
     overflow-y: scroll;

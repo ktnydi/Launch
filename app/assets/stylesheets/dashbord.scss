@@ -9,6 +9,7 @@
     height: calc(100vh - 70px);
     border-right: 1px solid $border-color;
     position: sticky;
+    position: -webkit-sticky;
     top: 70px;
     background-color: $white;
     .inner + .inner {
