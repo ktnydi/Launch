@@ -24,7 +24,7 @@ module ApplicationHelper
     user.gravatar_url(default: "retro")
   end
 
-  def other_user?(user_uuid)
-    current_user.uuid != user_uuid
+  def article_author?(author)
+    current_user.uuid == author.uuid
   end
 end

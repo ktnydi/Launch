@@ -22,7 +22,7 @@
                   = image_tag gravatar_image(@public.user), size: 50
                   %span.name= @public.user.name
                 - if user_signed_in?
-                  - if other_user?(@public.user.uuid)
+                  - unless article_author?(@public.user)
                     %button.follow_btn{data: {id: @public.user.id}}= render "follows/follow", user: @public.user
             %h2.main_title= @public.title
             .article_tags
