@@ -192,6 +192,18 @@
   &.show {
     display: block;
   }
+  .modal_close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    cursor: pointer;
+    font-size: 2rem;
+    color: $sub-font-color;
+  }
   .registration_heading {
     padding: 24px 32px 0;
     font-size: 2rem;
@@ -206,6 +218,7 @@
     padding: 0 8px;
     margin-bottom: 15px;
     border: 1px solid $border-color;
+    background-color: $white;
     font-size: 1.4rem;
   }
   input[type="password"] {

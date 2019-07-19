@@ -1,0 +1,23 @@
+.registration_modal_parent
+.registration_modal_child
+  %span.modal_close
+    %i.fas.fa-times
+  %h2.registration_heading アカウントを作成
+  .form-wrapper
+    = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { id: "modal_new_user" }) do |f|
+      .field
+        = f.text_field :name, placeholder: "ユーザー名", required: true, maxlength:"15", id: "modal_user_name"
+      .field
+        = f.email_field :email, placeholder: "メールアドレス", autocomplete: "email", required: true, id: "modal_user_email"
+      .field
+        = f.password_field :password, placeholder: "パスワード", autocomplete: "new-password", required: true, id: "modal_user_password"
+      %p.term
+        登録が完了すると#{link_to "利用規約", terms_path, target: :_blank}に同意したものとみなします。
+      .actions
+        = f.submit "登録", id: "modal_submit"
+    %p.separate
+    .sns_login
+      = link_to user_twitter_omniauth_authorize_path, method: :post, class: "twitter" do
+        %i.fab.fa-twitter
+        %p Twitterで登録
+    = render "devise/shared/links"
