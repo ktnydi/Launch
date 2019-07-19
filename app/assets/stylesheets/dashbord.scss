@@ -419,16 +419,16 @@
     font-size: 1.4rem;
     &_heading, &_container {
       text-align: left;
-      &_title, &_updated_at, &_pv, &_comment, &_edit {
+      &_title, &_updated_at, &_pv, &_good, &_comment, &_edit {
         padding: 15px 24px;
       }
       &_title {
-        width: 600px;
+        width: 500px;
       }
       &_updated_at, &_edit {
-        width: calc((100% - 600px - 110px) / 2);
+        width: calc((100% - 500px - 110px) / 2);
       }
-      &_pv, &_comment {
+      &_pv, &_good, &_comment {
         width: 110px;
       }
     }
