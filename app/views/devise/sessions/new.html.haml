@@ -15,7 +15,7 @@
           = f.submit "ログイン", id: "submit", class: "login_submit"
       %p.separate
       .sns_login
-        = link_to user_twitter_omniauth_authorize_path, class: "twitter" do
+        = link_to user_twitter_omniauth_authorize_path, method: :post, class: "twitter" do
           %i.fab.fa-twitter
           %p Twitterでログイン
       = render "devise/shared/links"
