@@ -18,7 +18,7 @@ class DraftsController < ApplicationController
     if @draft.save
       render json: { url: dashboard_article_path }
     else
-      @errors = @draft.errors.full_messages
+      render json: @draft.errors.full_messages, status: :unprocessable_entity
     end
   end
 
@@ -33,7 +33,7 @@ class DraftsController < ApplicationController
     if @draft.save
       render json: { url: dashboard_article_path }
     else
-      @errors = @draft.errors.full_messages
+      render json: @draft.errors.full_messages, status: :unprocessable_entity
     end
   end
 
