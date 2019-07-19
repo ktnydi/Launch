@@ -18,12 +18,13 @@
     - if user_signed_in?
       %button.btn.btn_blue.link_editor
         = link_to "記事を書く", new_draft_path, class: "btn_link"
-      .user-name-toggle
-        #toggle.user-name
-          = image_tag gravatar_image(current_user), size: 35
-          %span= current_user.name
-          %i.fas.fa-caret-down
-        #lists.toggle-list
+      %details.header_right_menu
+        %summary.user_name
+          .user_name_inner
+            = image_tag gravatar_image(current_user), size: 35
+            %span= current_user.name
+            %i.fas.fa-caret-down
+        .toggle-list
           = link_to "ダッシュボード", "#{dashboard_path}?period=all"
           = link_to "アカウント設定", edit_user_registration_path
           = link_to "ログアウト", destroy_user_session_path, method: :delete

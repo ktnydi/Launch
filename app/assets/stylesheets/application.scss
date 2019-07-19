@@ -148,30 +148,41 @@ header {
   }
 }
 
-.user-name-toggle {
+.header_right_menu {
   position: relative;
   margin-left: 8px;
   @media all and (max-width: 896px) {
     display: none;
   }
   &:hover {
-    background-color: rgba(0, 0, 0, 0.05);
-    .user-name .fa-caret-down {
+    background-color: rgba(0, 0, 0, .03);
+    .user_name_inner .fa-caret-down {
       color: $font-color;
     }
-    .toggle-list {
-      display: block;
-    }
   }
-  .user-name {
+  &[open] > .user_name:before {
+    content: "";
+    display: block;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 150;
+  }
+  .user_name {
     height: 70px;
     padding: 0 8px;
-    line-height: 50px;
+    line-height: 70px;
+    outline: none;
+    list-style: none;
     cursor: pointer;
-    font-size: 1.3rem;
-    display: flex;
-    align-items: center;
-    color: $font-color;
+    &_inner {
+      font-size: 1.3rem;
+      display: flex;
+      align-items: center;
+      color: $font-color;
+    }
     img {
       display: inline-block;
       width: 20px;
@@ -184,6 +195,9 @@ header {
       margin-left: 8px;
       color: $no_active_color;
     }
+    &::-webkit-details-marker {
+      display: none;
+    }
   }
   .toggle-list {
     min-width: 160px;
@@ -191,10 +205,10 @@ header {
     border-radius: 2px;
     border: 1px solid $border-color;
     box-shadow: 0 2px 17px 1px rgba(0, 0, 0, 0.1);
-    position: absolute;
+    position: fixed;
     top: 60px;
-    right: 0;
-    display: none;
+    right: 16px;
+    z-index: 200;
     &:before {
       content: "";
       border-bottom: 8px solid $border-color;
@@ -206,7 +220,7 @@ header {
     }
     &:after {
       content: "";
-      border-bottom: 8px solid #f4f5f7;
+      border-bottom: 8px solid $white;
       border-right: 8px solid transparent;
       border-left: 8px solid transparent;
       position: absolute;
@@ -223,7 +237,7 @@ header {
       color: $font-color;
       transition: all .1s;
       &:hover {
-        background-color: rgba(0, 0, 0, 0.05);
+        background-color: rgba(0, 0, 0, .03);
       }
     }
   }
