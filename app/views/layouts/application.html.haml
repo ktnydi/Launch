@@ -20,32 +20,48 @@
     %link{:crossorigin => "anonymous", :href => "https://use.fontawesome.com/releases/v5.7.1/css/all.css", :integrity => "sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr", :rel => "stylesheet"}
     %link{:href => "https://fonts.googleapis.com/icon?family=Material+Icons", :rel => "stylesheet"}
     %link{href: "https://fonts.googleapis.com/css?family=Lato:400,700|Ubuntu+Mono&display=swap", rel: "stylesheet"}
+    %script{src: "https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"}
+    %script{src: "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"}
     = stylesheet_link_tag '/editor/highlight/atom-one-dark.css', media: 'all'
     = stylesheet_link_tag    'application', media: 'all'
     = javascript_include_tag 'application'
     = javascript_include_tag '/editor/marked/marked.min.js'
     = javascript_include_tag '/editor/highlight/highlight.pack.js'
-  %body{:ontouchstart => ""}
+  %body
     = render 'share/header'
+    = render 'share/modal_authenticate'
     = yield
-    - if user_signed_in?
-      = render 'share/footer'
+    = render 'share/footer'
     = render "share/menu"
 
     :javascript
-      var body = document.getElementsByTagName('body')[0]
       var hamburger = document.getElementById('hamburger');
       var menu = document.getElementById('menu');
+      var menu_parent = document.getElementsByClassName('hamburger-menu-list-parent')[0];
       var cls_btn = document.getElementById('cls-btn');
       var notice = document.getElementById('notice');
       var alert = document.getElementById('alert');
+      const registration_modal_parent = document.getElementsByClassName('registration_modal_parent')[0];
+      const registration_links = document.getElementsByClassName('registration_link');
+      const modal_close = document.getElementsByClassName('modal_close')[0];
 
       (function() {
         hamburger.addEventListener('click', ()=>{
           hamburger.classList.toggle('active')
           menu.classList.toggle('show')
+          menu_parent.classList.toggle('show')
+          document.body.classList.toggle('hidden')
         })
-      })()
+      })();
+
+      (function() {
+        menu_parent.addEventListener('click', ()=>{
+          hamburger.classList.toggle('active')
+          menu.classList.toggle('show')
+          menu_parent.classList.toggle('show')
+          document.body.classList.toggle('hidden')
+        })
+      })();
 
       if (notice || alert) {
         close(cls_btn, notice);
@@ -57,3 +73,29 @@
           cls_obj.style.display = 'none';
         });
       }
+
+      for (let i = 0; i < registration_links.length; i++) {
+        const registration_link = registration_links.item(i)
+        registration_link.addEventListener('click', ()=>{
+          registration_modal_parent.classList.add('show')
+          registration_modal_parent.nextElementSibling.classList.add('show')
+        })
+      }
+
+      document.body.addEventListener('ajax:error', (e)=>{
+        const xhr = e.detail[2]
+        if (xhr.status === 401) {
+          registration_modal_parent.classList.add('show')
+          registration_modal_parent.nextElementSibling.classList.add('show')
+        }
+      })
+
+      registration_modal_parent.addEventListener('click', ()=>{
+        registration_modal_parent.classList.remove('show')
+        registration_modal_parent.nextElementSibling.classList.remove('show')
+      })
+
+      modal_close.addEventListener('click', ()=>{
+        registration_modal_parent.classList.remove('show')
+        registration_modal_parent.nextElementSibling.classList.remove('show')
+      })

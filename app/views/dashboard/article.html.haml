@@ -1,0 +1,67 @@
+.inner
+  .draft_article
+    %h2.draft_article_heading
+      .draft_article_heading_left
+        記事の管理
+        .article_mode
+          %label.article_mode_select
+            %input.article_mode_select_draft{type: "radio", name: "article_select", checked: "checked", data: {url: "?mode=draft"}}
+            下書き
+          %label.article_mode_select
+            %input.article_mode_select_public{type: "radio", name: "article_select", data: {url: "?mode=public"}}
+            公開済み
+      .draft_article_heading_right
+        .search_article
+          %form.search_article_form{action: dashboard_article_path, method: "get", data: {remote: "true"}}
+            = hidden_field_tag "mode", params[:mode]
+            = text_field_tag "q", params[:q], autocomplete: "off", id: "field", placeholder: "記事を検索", class: "search_article_form_field"
+            %button.search_article_form_btn{type: "submit"}
+              %i.fas.fa-search
+        .destroy_mode
+          削除モード
+          .toggle_btn
+            .circle
+    - if @articles.length > 0
+      #article_table
+        = render "article_table", articles: @articles
+    - else
+      .dashboard_article_not_found
+        %h3.dashboard_article_not_found_head 記事データがありません
+        %p.dashboard_article_not_found_message
+          Launchでは、学びをアウトプットすることを大切にしています。
+          %br
+          少しでも日々の学びの中で気づいたことや、共有したいことがあれば気楽に投稿してみましょう。
+        = link_to "記事を書く", new_draft_path, class: "writing"
+
+:javascript
+  const toggle_btn = document.getElementsByClassName('toggle_btn')[0]
+  const article_selects = document.getElementsByName('article_select')
+
+  toggle_btn.addEventListener('click', ()=>{
+    toggle_btn.classList.toggle('active')
+    const links = document.getElementsByClassName('table_container_edit_link')
+    if (toggle_btn.classList.contains('active')) {
+      for (let i = 0; i < links.length; i++) {
+        links.item(i).classList.add('active')
+      }
+    } else {
+      for (let i = 0; i < links.length; i++) {
+        links.item(i).classList.remove('active')
+      }
+    }
+  })
+
+  for (let i = 0; i < article_selects.length; i++) {
+    const article_select = article_selects.item(i)
+
+    if (window.location.search.indexOf(article_select.dataset.url) >= 0) {
+      article_select.checked = 'checked'
+    }
+
+    article_select.addEventListener('click', (e)=>{
+      const target = e.target
+      if (target.nodeName === 'INPUT') {
+        window.location = window.location.pathname + target.dataset.url
+      }
+    })
+  }

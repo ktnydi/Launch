@@ -1,0 +1,28 @@
+%table.table
+  %tr.table_heading
+    %th.table_heading_title 記事
+    %th.table_heading_updated_at 更新日
+    %th.table_heading_pv PV
+    %th.table_heading_good 高評価
+    %th.table_heading_comment コメント
+    %th.table_heading_edit 編集
+  - articles.each do |article|
+    %tr.table_container
+      %td.table_container_title= article.title.truncate(50)
+      %td.table_container_updated_at= article.updated_at.strftime("%Y-%m-%d")
+      %td.table_container_pv= article.respond_to?(:access_analyses) ? article.access_analyses.count : 0
+      %td.table_container_good= article.respond_to?(:likes) ? article.likes.count : 0
+      %td.table_container_comment= article.respond_to?(:comments) ? article.comments.count : 0
+      %td.table_container_edit
+        - if params[:mode] == "public"
+          = link_to "記事を見る", public_path(article), class: "table_container_edit_link edit"
+          = link_to "削除する", public_path(article), class: "table_container_edit_link destroy", method: "delete", data: { confirm: "本当に削除しますか?" }
+        - else
+          = link_to "編集を続ける", edit_draft_path(article), class: "table_container_edit_link edit"
+          = link_to "削除する", draft_path(article), class: "table_container_edit_link destroy", method: "delete", data: { confirm: "本当に削除しますか?" }
+- if @articles && @articles.total_pages > 1
+  .paginate.table_paginate
+    = link_to_prev_page @articles, "", class: "prev-page"
+    - unless @articles.out_of_range?
+      .now_page= "#{@articles.current_page}/#{@articles.total_pages}"
+    = link_to_next_page @articles, "", class: "next-page"

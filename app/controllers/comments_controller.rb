@@ -1,7 +1,10 @@
 class CommentsController < ApplicationController
+  before_action :authenticate_user!
+  
   def create
     @comment = current_user && current_user.comments.new(comment_params)
-    @post = Post.find_by(uuid: params[:post_id])
+    @comment.article_token = params[:article_token]
+    @public = Public.find_by(article_token: params[:article_token])
     respond_to do |format|
       if @comment&.save
         @comment = Comment.new
@@ -17,21 +20,20 @@ class CommentsController < ApplicationController
     @comment = Comment.find_by(id: params[:id])
     @comment.content = params[:comment][:content]
     if @comment.save
-      redirect_to post_path(@comment.post_id)
+      redirect_to public_path(@comment.article_token)
     end
   end
 
   def destroy
     @comment = Comment.find_by(id: params[:id])
-    @post = @comment.post
+    @public = @comment.public
     if @comment.destroy
-      redirect_to post_path(@post)
+      redirect_to public_path(@public)
     end
   end
 
   private
   def comment_params
-    params[:comment][:post_id] = params[:post_id]
-    params.require(:comment).permit(:post_id, :content)
+    params.require(:comment).permit(:content)
   end
 end

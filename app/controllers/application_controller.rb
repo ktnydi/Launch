@@ -1,10 +1,19 @@
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
 
-
-  # custom for devise
-  def after_sign_in_path_for(resource)
-    users_path
+  def date(period = "")
+    case period
+    when "day"
+      1.day.ago
+    when "week"
+      1.week.ago
+    when "month"
+      1.month.ago
+    when "all"
+      ""
+    else
+      1.day.ago
+    end
   end
 
   protected

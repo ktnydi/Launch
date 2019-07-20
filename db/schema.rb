@@ -10,12 +10,37 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_30_081020) do
+ActiveRecord::Schema.define(version: 2019_07_10_020018) do
+
+  create_table "access_analyses", force: :cascade do |t|
+    t.string "article_token", null: false
+    t.string "access_source", null: false
+    t.string "user_token", default: "", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "bookmarks", force: :cascade do |t|
+    t.string "user_token", null: false
+    t.string "article_token", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "comments", force: :cascade do |t|
-    t.string "user_id", null: false
-    t.string "post_id", null: false
+    t.string "user_token", null: false
+    t.string "article_token", null: false
     t.string "content", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "drafts", force: :cascade do |t|
+    t.string "article_token"
+    t.string "title"
+    t.string "category"
+    t.text "content"
+    t.string "user_token"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -28,21 +53,20 @@ ActiveRecord::Schema.define(version: 2019_05_30_081020) do
   end
 
   create_table "likes", force: :cascade do |t|
-    t.string "user_id", null: false
-    t.string "post_id", null: false
+    t.string "user_token", null: false
+    t.string "article_token", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "posts", force: :cascade do |t|
-    t.string "title"
-    t.text "content"
+  create_table "publics", force: :cascade do |t|
+    t.string "article_token", null: false
+    t.string "title", null: false
+    t.string "category", null: false
+    t.text "content", null: false
+    t.string "user_token", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "app_url"
-    t.string "user_id", default: "", null: false
-    t.string "status", default: "", null: false
-    t.string "uuid", default: "", null: false
   end
 
   create_table "users", force: :cascade do |t|

@@ -1,0 +1,39 @@
+.comment_form_wrapper
+  .comment_form_header
+    %h3.heading
+      %span.sharp #
+      = "#{comments.count}件のコメント"
+  .comment-edit
+    = form_for @comment, url: "/comment/#{params[:article_token]}", html: { id: "comment_form", class: "comment_form" }, remote: true do |f|
+      = f.text_area :content, id: "comment_area", placeholder: "Markdownで入力"
+    .comment_form_bottom
+      %button.comment_submit#comment_submit{type: "submit", form: "comment_form"}
+        コメントする
+-if comments.present?
+  .comments.comment_list_wrapper
+    - comments.each do |comment|
+      .comment
+        .comment_user
+          .comment_user_info
+            = image_tag gravatar_image(comment.user), size: 60
+            %span.name= comment.user.name
+          .comment_edit
+            - if user_signed_in? && comment.user_token === current_user.uuid
+              .comment_edit_btn_wrapper
+                %button.comment_update_btn{data: {id: "#{comment.id}"}} コメントを編集
+                ・
+                %button.comment_delete_btn<>
+                  = link_to "削除", "/comment/#{comment.id}/", method: :delete, data: { confirm: "コメントを削除します。"}
+        .comment_content
+          != markdown comment.content
+        - if user_signed_in? && comment.user_token == current_user.uuid
+          .comment_edit_parent_modal{data: {id: "#{comment.id}"}}
+            .comment_edit_child_modal
+              .comment_form_header
+                %h3 コメントを編集
+              .comment-edit
+                = form_for comment, url: "/comment/#{comment.id}", html: { id: "comment_update_form_#{comment.id}", class: "comment_update_form" } do |f|
+                  = f.text_area :content, id: "comment_update_area", placeholder: "Markdownで入力"
+              .comment_form_bottom
+                %button.comment_submit{type: "submit", form: "comment_update_form_#{comment.id}"}
+                  更新する

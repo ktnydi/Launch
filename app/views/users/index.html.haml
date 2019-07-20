@@ -1,44 +1,105 @@
-- if flash[:post_notice]
-  #notification.notice.notification
-    = flash[:post_notice]
 %main.home_wrapper
-  .home_top_wrapper
-    .login_user
-      .user
-        = image_tag gravatar_image(@user), size: 50
-        %span= @user.name
-      - unless other_user?(@user.uuid)
-        .edit_user
-          = link_to edit_user_registration_path do
-            %i.fas.fa-cog
-    .accompany
-      .follow
-        = link_to user_follows_list_path(@user) do
-          フォロー
-          %span.count= @user.active_follows.count
-      .follower
-        = link_to user_followers_list_path(@user) do
-          フォロワー
-          %span.count= @user.passive_follows.count
-  .posts_wrapper_contents
-    .toggle_index
-      = link_to "投稿", user_posts_path(@user), class: "index_tweet"
-      = link_to "いいね", "#{user_posts_path(@user)}/?posts=like", class: "index_like"
-    .container
-      = render "share/card", posts: @posts
-%button.write_post
-  = link_to new_post_path do
-    .line
-
+  .home_contents
+    .home_contents_left
+      = render "share/sidebar"
+    .home_contents_center
+      - unless user_signed_in?
+        .box
+          .recommend_registration
+            %h2.recommend_registration_heading 学びをアウトプットしよう
+            %p.recommend_registration_message Launchは学び続けるITエンジニアのための技術ブログです
+            .authenticate_user
+              %button.authenticate_user_registration
+                = link_to "会員登録する", "#", class: "authenticate_user_registration_link registration_link"
+              %span.or OR
+              %button.authenticate_user_login
+                = link_to "ログイン", new_user_session_path, class: "authenticate_user_login_link"
+      = render "share/select"
+      .box
+        %h2.trend_article_heading.heading_2
+          %span
+            %span.sharp #
+            %span#period<> 今日
+            のトレンド
+          %span
+            .select_period_btn_wrapper
+              = link_to "今日", root_path, class: "period_btn"
+              = link_to "今週", "?period=week", class: "period_btn"
+              = link_to "今月", "?period=month", class: "period_btn"
+        - if @trend_articles.length > 0
+          .inner.article_list_wrapper
+            - @trend_articles.each do |article|
+              .article
+                = link_to public_path(article.article_token), class: "link large_link" do
+                  = image_tag gravatar_image(article.user), size: 40, class: "author_image"
+                  .flex_item
+                    %p.article_title= article.title
+                    .tags
+                      - article.category.split(',').each do |tag|
+                        %span.tag_name= tag
+                    .list_bottom
+                      .list_bottom_left
+                        %span.author_name= "by #{article.user.name}"
+                        .thumbs_up
+                          %i.far.fa-thumbs-up
+                          %span.count= article.likes.count
+                      %span.created_at= article.created_at.strftime("%Y-%m-%d")
+        - else
+          .article_not_found
+            %h3.article_not_found_head 公開されている記事がありません。
+            %p.article_not_found_message アクセスが多い記事はここに表示されます。
+      .box.interest_tag_article_box
+        %h2.interest_tag_article_heading.heading_2
+          %span.sharp #
+          注目のタグ
+        - if Public.tag_ranking.length > 0
+          .inner
+            .tag_ranking
+              - Public.tag_ranking(20).each do |tag_name, _|
+                = link_to tags_path(tag_name), class: "tag_link" do
+                  .tag_name= tag_name
+        - else
+          .article_not_found
+            %h3.article_not_found_head 公開されている記事がありません。
+            %p.article_not_found_message 多く使われているタグはここに表示されます。
+      .box
+        %h2.latest_article_heading.heading_2
+          %span.sharp #
+          最近投稿された記事
+        - if @publics.length > 0
+          .inner.article_list_wrapper
+            - @publics.each do |public|
+              .article
+                = link_to public_path(public.article_token), class: "link large_link" do
+                  = image_tag gravatar_image(public.user), size: 40, class: "author_image"
+                  .flex_item
+                    %p.article_title= public.title
+                    .tags
+                      - public.category.split(',').each do |tag|
+                        %span.tag_name= tag
+                    .list_bottom
+                      .list_bottom_left
+                        %span.author_name= "by #{public.user.name}"
+                      %span.created_at= public.created_at.strftime("%Y-%m-%d")
+          = link_to "もっとみる", publics_path, class: "more_latest_article_link"
+        - else
+          .article_not_found
+            %h3.article_not_found_head 公開されている記事がありません。
+            %p.article_not_found_message 最近投稿された記事はここに表示されます。
 :javascript
-  const param = window.location.search
-  const index_tweet = document.getElementsByClassName('index_tweet')[0]
-  const index_like = document.getElementsByClassName('index_like')[0]
+  const period_btns = document.getElementsByClassName('period_btn')
+  const period = document.getElementById('period')
 
-  if (param.length > 0) {
-    index_like.classList.add('active')
-    index_tweet.classList.remove('active')
-  } else {
-    index_like.classList.remove('active')
-    index_tweet.classList.add('active')
+  for (let i = 0; i < period_btns.length; i++) {
+    const period_btn = period_btns.item(i)
+    period_btn.classList.remove('show')
+    if (period_btn.getAttribute('href') === window.location.search) {
+      period_btn.classList.add('show')
+      period.textContent = period_btn.textContent
+      break
+    }
+
+    if (window.location.search === "") {
+      period_btns[0].classList.add('show')
+    }
   }

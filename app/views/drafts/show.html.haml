@@ -1,9 +1,4 @@
-- @page_title = @post.title
-- if errors = @comment.errors.full_messages
-  - errors.each do |error|
-    .nocomment
-      %i#cls-btn.fas.fa-times
-      = error
+- @page_title = @draft.title
 %main
   .container.post_container
     .post_content
@@ -11,45 +6,38 @@
         .post_info_wrapper
           .post_info
             .author
-              = image_tag gravatar_image(@post.user), size: 50
-              %span.name= @post.user.name
+              = image_tag gravatar_image(@draft.user), size: 50
+              %span.name= @draft.user.name
             - if user_signed_in?
-              - if other_user?(@post.user.uuid)
-                %button.follow_btn{data: {id: @post.user.id}}= render "follows/follow", user: @post.user
+              - if other_user?(@draft.user.uuid)
+                %button.follow_btn{data: {id: @draft.user.id}}= render "follows/follow", user: @draft.user
               - else
                 %ul.edit_list
-                  %li= link_to "編集", edit_post_path(@post)
-                  %li= link_to "削除", post_path(@post), method: :delete, data: { confirm: "本当に削除しますか？一度、記事を削除すると元に戻せなくなります。"}
+                  %li= link_to "編集", edit_draft_path(@draft.article_token)
+                  %li= link_to "削除", draft_path(@draft.article_token), method: :delete, data: { confirm: "本当に削除しますか？一度、記事を削除すると元に戻せなくなります。"}
           .share_btn_wrapper
             .share_for_sns
               %a.twitter{href: "http://twitter.com/share?url=#{request.url}"}
                 %i.fab.fa-twitter
               %a.facebook{href: "https://www.facebook.com/sharer/sharer.php?u=#{request.url}"}
                 %i.fab.fa-facebook-f
-            .heart_wrapper#heart
-              = render "post", post: @post
-        %h2.main_title= @post.title
+        %h2.main_title= @draft.title
+        .article_tags
+          - @draft.category.split(',').each do |tag|
+            = link_to "##{tag}", class: "tag_link" do
+              %span.tag_name= tag
         .post_detail_info
           .post_day
-            %span.day= "公開：#{@post.created_at.strftime("%Y-%m-%d")}"
-            %span.day= "更新：#{@post.updated_at.strftime("%Y-%m-%d")}"
-          - if @post.app_url.present?
-            .relative_url
-              関連URL：
-              = link_to "#{@post.app_url.truncate(35)}", @post.app_url, target: "_blank"
+            %span.day= "作成：#{@draft.created_at.strftime("%Y-%m-%d")}"
+            %span.day= "更新：#{@draft.updated_at.strftime("%Y-%m-%d")}"
       .content
-        != markdown @post.content
+        != markdown @draft.content
       .share_btn_wrapper
         .share_for_sns
           %a.twitter{href: "http://twitter.com/share?url=#{request.url}"}
             %i.fab.fa-twitter
           %a.facebook{href: "https://www.facebook.com/sharer/sharer.php?u=#{request.url}"}
             %i.fab.fa-facebook-f
-        .heart_wrapper#heart
-          = render "post", post: @post
-    .comment_wrapper
-      #comment
-        = render "comment", comments: @post.comments
 :javascript
   var comment_form = document.getElementById('comment_form')
   var comment_area = document.getElementById('comment_area')

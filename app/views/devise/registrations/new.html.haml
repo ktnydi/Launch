@@ -17,28 +17,15 @@
         %p.term
           登録が完了すると#{link_to "利用規約", terms_path, target: :_blank}に同意したものとみなします。
         .actions
-          = f.submit "登録", id: "submit", disabled: true, style: "background-color: #E0E0E0"
+          = f.submit "登録", id: "submit", class: "registration_submit"
       %p.separate
       .sns_login
-        = link_to user_twitter_omniauth_authorize_path, class: "twitter" do
+        = link_to user_twitter_omniauth_authorize_path, method: :post, class: "twitter" do
           %i.fab.fa-twitter
           %p Twitterで登録
       = render "devise/shared/links"
 :javascript
-  var password = document.getElementById('user_password');
-  var submit = document.getElementById('submit');
   var input = document.querySelectorAll('.field input');
-
-  password.addEventListener('keyup', function() {
-    var password_length = this.value.length;
-    if (password_length >= 6) {
-      submit.removeAttribute('disabled');
-      submit.style.backgroundColor = '#009688';
-    } else {
-      submit.setAttribute('disabled', 'disabled');
-      submit.style.backgroundColor = '#E0E0E0';
-    }
-  });
 
   const move_form_label = (target) => {
     if (target.nodeName === 'INPUT') {

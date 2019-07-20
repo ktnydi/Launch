@@ -1,9 +1,0 @@
-- @page_title = "記事編集"
-.editor_wrapper
-  #editor_form_wrapper.editor_form_wrapper
-    = render "share/editor_form", post: @post
-  .editor_preview
-    %span.status= @post.status
-    .preview_content
-#edit_form_error
-  = render "share/error", errors: @errors

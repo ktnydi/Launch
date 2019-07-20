@@ -11,70 +11,13 @@
     = csp_meta_tag
     %link{:crossorigin => "anonymous", :href => "https://use.fontawesome.com/releases/v5.7.1/css/all.css", :integrity => "sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr", :rel => "stylesheet"}/
     %link{:href => "https://fonts.googleapis.com/icon?family=Material+Icons", :rel => "stylesheet"}/
-    %link{href: "https://fonts.googleapis.com/css?family=Lato:400,700|Ubuntu+Mono&display=swap", rel: "stylesheet"}
-    %script{src: "http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"}
+    %link{href: "https://fonts.googleapis.com/css?family=Lato:400,700&display=swap", rel: "stylesheet"}
+    %script{src: "https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"}
+    %script{src: "https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js"}
     = stylesheet_link_tag '/editor/highlight/atom-one-dark.css', media: 'all'
     = stylesheet_link_tag    'application', media: 'all'
     = javascript_include_tag 'application'
     = javascript_include_tag '/editor/marked/marked.min.js'
     = javascript_include_tag '/editor/highlight/highlight.pack.js'
-  %body{:ontouchstart => ""}
-    = render "share/editor_header"
+  %body
     = yield
-    :javascript
-      const editor_show_btn = document.getElementsByClassName('editor_show')[0]
-      const devide_show_btn = document.getElementsByClassName('devide_show')[0]
-      const preview_show_btn = document.getElementsByClassName('preview_show')[0]
-      const editor = document.getElementsByClassName('editor_form_wrapper')[0]
-      const preview = document.getElementsByClassName('editor_preview')[0]
-
-      const editor_show = () => {
-        preview.classList.add('hidden')
-        editor.classList.remove('hidden')
-        editor_show_btn.classList.add('active')
-        devide_show_btn.classList.remove('active')
-        preview_show_btn.classList.remove('active')
-      }
-
-      const devide_show = () => {
-        editor.classList.remove('hidden')
-        preview.classList.remove('hidden')
-        editor_show_btn.classList.remove('active')
-        devide_show_btn.classList.add('active')
-        preview_show_btn.classList.remove('active')
-      }
-
-      const preview_show = () => {
-        editor.classList.add('hidden')
-        preview.classList.remove('hidden')
-        editor_show_btn.classList.remove('active')
-        devide_show_btn.classList.remove('active')
-        preview_show_btn.classList.add('active')
-      }
-
-      switch (window.location.hash) {
-        case '#editor':
-          editor_show()
-          break
-        case '#devide':
-          devide_show()
-          break
-        case '#preview':
-          preview_show()
-          break
-        default:
-          break
-      }
-
-      editor_show_btn.addEventListener('click', ()=>{
-        editor_show()
-        history.replaceState(null, null, "#editor")
-      })
-      devide_show_btn.addEventListener('click', ()=>{
-        devide_show()
-        history.replaceState(null, null, "#devide")
-      })
-      preview_show_btn.addEventListener('click', ()=>{
-        preview_show()
-        history.replaceState(null, null, "#preview")
-      })

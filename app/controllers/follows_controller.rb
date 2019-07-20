@@ -1,4 +1,5 @@
 class FollowsController < ApplicationController
+  before_action :authenticate_user!
   before_action :user
 
   def create
@@ -27,12 +28,12 @@ class FollowsController < ApplicationController
   end
 
   def follow
-    @user = User.find_by(uuid: params[:user_id])
+    @user = User.find_by(uuid: current_user.uuid)
     @followings = @user.followings.page(params[:page]).per(20)
   end
 
   def follower
-    @user = User.find_by(uuid: params[:user_id])
+    @user = User.find_by(uuid: current_user.uuid)
     @followers = @user.followers.page(params[:page]).per(20)
   end
 

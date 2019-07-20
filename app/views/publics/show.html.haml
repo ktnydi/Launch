@@ -1,0 +1,114 @@
+- @page_title = @public.title
+%main
+  .article_box
+    .article_box_left
+      .inner
+        .user_action_btn
+          .good#toggle_good
+            = render "like", public: @public
+          .bookmark_btn
+            = render 'bookmarks/bookmark', public: @public
+          %a.btn.twitter{href: "http://twitter.com/share?url=#{request.url}"}
+            %i.fab.fa-twitter
+          %a.btn.facebook{href: "https://www.facebook.com/sharer/sharer.php?u=#{request.url}"}
+            %i.fab.fa-facebook-f
+    .article_box_center
+      .inner
+        .post_content
+          .post_index
+            .post_info_wrapper
+              .post_info
+                .author
+                  = image_tag gravatar_image(@public.user), size: 50
+                  %span.name= @public.user.name
+                - if user_signed_in?
+                  - unless article_author?(@public.user)
+                    %button.follow_btn{data: {id: @public.user.id}}= render "follows/follow", user: @public.user
+            %h2.main_title= @public.title
+            .article_tags
+              - @public.category.split(',').each do |tag|
+                = link_to tags_path(tag), class: "tag_link" do
+                  .tag_name= tag
+            .post_detail_info
+              .post_day
+                %span.day= "公開日：#{@public.created_at.strftime("%Y-%m-%d")}"
+          .box_content
+            != markdown @public.content
+          .article_tags
+            - @public.category.split(',').each do |tag|
+              = link_to "##{tag}", class: "tag_link" do
+                .tag_name= tag
+    .article_box_right
+      .inner
+        .toc_box.box
+          %h2.box_heading 目次
+          .toc
+  .article_box_bottom
+    .relative_article_wrapper
+      %h3.heading
+        %span.sharp #
+        関連する記事
+      .article_list_wrapper
+        - if Public.get_same_tag_articles(@public).length > 0
+          - Public.get_same_tag_articles(@public).limit(5).each do |article|
+            .article
+              = link_to public_path(article.article_token), class: "link large_link" do
+                = image_tag gravatar_image(article.user), size: 40, class: "author_image"
+                .flex_item
+                  %p.article_title= article.title
+                  .tags
+                    - article.category.split(',').each do |tag|
+                      %span.tag_name= tag
+                  .list_bottom
+                    .list_bottom_left
+                      %span.author_name= "by #{article.user.name}"
+                      .thumbs_up
+                        %i.far.fa-thumbs-up
+                        %span.count= article.likes.count
+                    %span.created_at= article.created_at.strftime("%Y-%m-%d")
+        - else
+          %p.relative_article_not_found 関連する記事はありません。
+  .comment_wrapper
+    #comment.inner
+      = render "comment", comments: @public.comments
+:javascript
+  var comment_form = document.getElementById('comment_form')
+  var comment_area = document.getElementById('comment_area')
+  var comment_submit = document.getElementById('comment_submit')
+  var comment_update_btn = document.getElementsByClassName('comment_update_btn')
+  var comment_edit_parent_modal = document.getElementsByClassName('comment_edit_parent_modal')
+
+  comment_submit.setAttribute('disabled', 'disabled')
+  comment_area.addEventListener('input', ()=>{
+    if (comment_area.value.length > 0) {
+      comment_submit.removeAttribute('disabled')
+    } else {
+      comment_submit.setAttribute('disabled', 'disabled')
+    }
+  })
+
+  for (var i = 0; i < comment_update_btn.length; i++) {
+    var update_btn = comment_update_btn.item(i)
+    update_btn.addEventListener('click', (e)=>{
+      var target = e.target
+      var target_data_id  = target.getAttribute('data-id')
+      for (var i = 0; i < comment_edit_parent_modal.length; i++) {
+        var parent_modal = comment_edit_parent_modal.item(i)
+        var parent_modal_data_id = parent_modal.getAttribute('data-id')
+        if (target_data_id === parent_modal_data_id) {
+          parent_modal.classList.add('show')
+          break
+        }
+      }
+    })
+  }
+
+  for (var i = 0; i < comment_edit_parent_modal.length; i++) {
+    var parent_modal = comment_edit_parent_modal.item(i)
+    parent_modal.addEventListener('click', (e)=>{
+      var target = e.target
+      if (target.classList.contains('show')) {
+        target.classList.remove('show')
+      }
+    })
+  }

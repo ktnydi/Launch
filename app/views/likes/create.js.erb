@@ -1,5 +1,2 @@
-var hearts = document.getElementsByClassName('heart_wrapper')
-for (var i = 0; i < hearts.length; i++) {
-  const heart = hearts.item(i)
-  heart.innerHTML = '<%= j(render "posts/post", post: @post) %>'
-}
+var toggle_good = document.getElementById('toggle_good')
+toggle_good.innerHTML = '<%= j(render "publics/like", public: @public) %>'

@@ -1,0 +1,14 @@
+- @page_title = "ブックマーク"
+%main.bookmark
+  .bookmark_box
+    = render "share/select"
+    .container
+      %h2.heading_2
+        %span.sharp #
+        ブックマーク
+      - if @bookmark_publics.length > 0
+        = render "share/card", publics: @bookmark_publics
+      - else
+        .article_not_found
+          %h3.article_not_found_head ブックマークした記事がありません。
+          %p.article_not_found_message ブックマークを活用してお気に入りの記事を保存しよう！
