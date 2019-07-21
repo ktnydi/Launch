@@ -12,7 +12,7 @@ module AccessAnalysisHelper
              when "month"
                1.month.ago
              else
-               ""
+               100.years.ago
              end
 
     access_analyses = AccessAnalysis.where(article_token: article_tokens)
@@ -20,7 +20,6 @@ module AccessAnalysisHelper
                                     .group(:article_token)
                                     .order("count_article_token DESC")
                                     .count(:article_token)
-
     access_count = access_analyses.values.inject do |sum, value|
       sum + value
     end
