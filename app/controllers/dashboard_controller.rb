@@ -9,8 +9,9 @@ class DashboardController < ApplicationController
     # acategory : analytics
     article_tokens = current_user.publics.pluck(:article_token)
     # { "YYYY-mm-dd" => access_count }
-    count_by_created_at = AccessAnalysis.where(article_token: article_tokens).access_within_date_range(29.days.ago.beginning_of_day)
-
+    count_by_created_at = AccessAnalysis.where(article_token: article_tokens)
+                            .access_within_date_range(29.days.ago.beginning_of_day)
+                            .map{ |date, count| [date.strftime("%Y-%m-%d"), count] }.to_h
     last_month = {}
     29.downto(0).each do |i|
       day = i.day.ago.beginning_of_day
@@ -52,7 +53,7 @@ class DashboardController < ApplicationController
       # [ {"id"=>nil, "access_source"=>"http://sample.com", "access_count"=>123 } ]
       if trend_articles.length > 0
         @access_analyses = Public.where(user_token: current_user.uuid).get_trend_article_sources(date(params[:period])).limit(5)
-        @sum_access = trend_articles.first.access_analyses.where("created_at > ?", date(params[:period])).count
+        @sum_access = trend_articles.first.access_analyses.where("created_at > ?", date(params[:period])).length
       end
     end
 end

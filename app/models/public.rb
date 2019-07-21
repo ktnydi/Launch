@@ -23,7 +23,7 @@ class Public < ApplicationRecord
     joins(:access_analyses)
       .select("publics.*, count(access_analyses.article_token) as count")
       .where("access_analyses.created_at > ?", period)
-      .group("access_analyses.article_token")
+      .group("publics.id, access_analyses.article_token")
       .order("count DESC")
   end
 
@@ -31,7 +31,6 @@ class Public < ApplicationRecord
     get_trend_articles(period).first
       .access_analyses
       .select("count(access_source) as count, access_source as source")
-      .where("created_at > ?", period)
       .group(:access_source)
       .order("count DESC")
   end

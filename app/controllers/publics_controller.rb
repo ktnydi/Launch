@@ -48,7 +48,7 @@ class PublicsController < ApplicationController
     @history_publics = Public.joins(:access_analyses)
                              .select("publics.*, max(access_analyses.created_at) as last_access_time")
                              .where("access_analyses.user_token = ?", current_user.uuid)
-                             .group("access_analyses.article_token")
+                             .group("publics.id, access_analyses.article_token")
                              .order("last_access_time desc")
                              .limit(40)
                              .page(params[:page])
