@@ -106,17 +106,19 @@ header {
       display: flex;
     }
     .btn {
-      width: 100px;
       margin-left: 10px;
+      padding: 0 15px;
       text-align: center;
       line-height: 40px;
       font-size: 1.4rem;
       border-radius: 2px;
       cursor: pointer;
+      background-color: transparent;
       transition: .1s;
       &_link {
         display: block;
         text-decoration: none;
+        color: $font-color;
       }
     }
     .btn_white {
