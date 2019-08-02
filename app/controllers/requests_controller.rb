@@ -3,6 +3,7 @@ class RequestsController < ApplicationController
   before_action :authenticate_user!, except: [:index]
 
   def index
+    @requests = Request.all.order('created_at DESC').page(params[:page]).per(20)
   end
 
   def new

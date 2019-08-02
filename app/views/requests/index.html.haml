@@ -1,0 +1,25 @@
+- @page_title = "リクエスト一覧"
+%main.request_list
+  .main
+    .container
+      %h2.heading_2
+        %span.sharp #
+        リクエスト一覧
+      - if @requests.length > 0
+        .request_card_wrapper
+          - @requests.each do |request|
+            .request_card
+              = link_to "#", class: "card_inner" do
+                .card_inner_top
+                  %h3.title= request.category
+                  %p.content= request.content
+                .card_inner_bottom
+                  .card_inner_bottom_left
+                    = image_tag gravatar_image(request.user), size: 20
+                    %span.request_user= "by #{request.user.name}"
+                  .card_inner_bottom_right
+                    %span.created_at= request.created_at.strftime('%Y-%m-%d')
+      - else
+        .article_not_found
+          %h3.article_not_found_head リクエストがありません。
+          %p.article_not_found_message 探している記事が見つからない場合、リクエストすることができます。
