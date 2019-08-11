@@ -9,7 +9,7 @@
         .request_card_wrapper
           - @requests.each do |request|
             .request_card
-              = link_to "#", class: "card_inner" do
+              = link_to request_path(request.token), class: "card_inner" do
                 .card_inner_top
                   %h3.title= request.category
                   %p.content= request.content
