@@ -35,6 +35,26 @@ document.addEventListener('DOMContentLoaded', function() {
     return token
   }
 
+  const save_error_message = (error) => {
+    const list = document.getElementById('editor_errors_list')
+    if (list.childNodes.length > 0) {
+      list.innerHTML = null
+    }
+    const error_messages = error.responseJSON
+    for (var i = 0; i < error_messages.length; i++) {
+      const child_list = document.createElement('li')
+      const error_message = error_messages[i]
+      const child_list_text = document.createTextNode(error_message)
+      child_list.appendChild(child_list_text)
+      list.appendChild(child_list)
+    }
+    const editor_errors = document.getElementsByClassName('editor_errors')[0]
+    editor_errors.classList.add('show')
+    setTimeout( () => {
+      editor_errors.classList.remove('show')
+    }, 5000)
+  }
+
   const create_draft = () => {
     $.ajax({
       type: 'POST',
@@ -47,10 +67,12 @@ document.addEventListener('DOMContentLoaded', function() {
         }
       }
     })
-    .done( (new_draft) => {
-      window.location = `/users/${new_draft.user_token}`
+    .done( (data) => {
+      console.log('hoge')
+      window.location = data.url
     })
     .fail( (error) => {
+      save_error_message(error)
     })
   }
 
@@ -66,22 +88,11 @@ document.addEventListener('DOMContentLoaded', function() {
         }
       }
     })
-    .done( (edit_draft) => {
-      console.log(edit_draft)
-      window.location = `/users/${edit_draft.user_token}`
+    .done( (data) => {
+      window.location = data.url
     })
     .fail( (error) => {
-    })
-  }
-
-  const delete_draft = () => {
-    $.ajax({
-      type: 'DELETE',
-      url: `/drafts/${article_token()}`,
-    })
-    .done( (delete_success) => {
-    })
-    .fail( (error) => {
+      save_error_message(error)
     })
   }
 
@@ -98,29 +109,11 @@ document.addEventListener('DOMContentLoaded', function() {
         }
       }
     })
-    .done( (new_public) => {
-      delete_draft()
-      const article_token = new_public.article_token
-      window.location = `/publics/${article_token}`
+    .done( (data) => {
+      window.location = data.url
     })
     .fail( (error) => {
-      const list = document.getElementById('editor_errors_list')
-      if (list.childNodes.length > 0) {
-        list.innerHTML = null
-      }
-      const error_messages = error.responseJSON
-      for (var i = 0; i < error_messages.length; i++) {
-        const child_list = document.createElement('li')
-        const error_message = error_messages[i]
-        const child_list_text = document.createTextNode(error_message)
-        child_list.appendChild(child_list_text)
-        list.appendChild(child_list)
-      }
-      const editor_errors = document.getElementsByClassName('editor_errors')[0]
-      editor_errors.classList.add('show')
-      setTimeout( () => {
-        editor_errors.classList.remove('show')
-      }, 5000)
+      save_error_message(error)
     })
   }
 

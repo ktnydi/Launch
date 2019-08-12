@@ -19,7 +19,7 @@
             %div
               Currently waiting confirmation for: #{resource.unconfirmed_email}
           .actions
-            = f.submit "更新"
+            = f.submit "更新", class: "edit_submit"
           .gravatar
             = image_tag gravatar_image(current_user), size: 35, class: "avatar"
             .avatar_setting
@@ -43,7 +43,7 @@
             = f.label :password_confirmation
             = f.password_field :password_confirmation, autocomplete: "new-password", required: true
           .actions
-            = f.submit "パスワードを変更"
+            = f.submit "パスワードを変更", class: "edit_submit"
   .box.account_destroy
     .inner
       .description_box
@@ -51,7 +51,11 @@
         %p.description 削除したアカウントは二度と元に戻せません。
       .setting_box
         .delete_account
-          = link_to "削除", registration_path(resource_name), data: { confirm: "削除したアカウントは二度と元に戻すことができません。\n本当によろしいですか？" }, method: :delete
+          = link_to "削除",
+            registration_path(resource_name),
+            data: { confirm: "削除したアカウントは二度と元に戻すことができません。\n本当によろしいですか？" },
+            method: :delete,
+            class: "edit_submit"
 :javascript
   var submit = document.getElementById('submit');
   var input = document.querySelectorAll('.field input');

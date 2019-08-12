@@ -3,17 +3,25 @@
 .inner
   .figure
     .box
-      %h3.access_count 今日のアクセス数
-      %p.value= access_count("day")
+      %h3.access_count 24時間
+      %p.value
+        = access_count("day")
+        %span.pv PV
     .box
-      %h3.access_count 今週のアクセス数
-      %p.value= access_count("week")
+      %h3.access_count 1週間
+      %p.value
+        = access_count("week")
+        %span.pv PV
     .box
-      %h3.access_count 今月のアクセス数
-      %p.value= access_count("month")
+      %h3.access_count 1ヶ月間
+      %p.value
+        = access_count("month")
+        %span.pv PV
     .box
-      %h3.access_count 総アクセス数
-      %p.value= access_count("")
+      %h3.access_count 全体
+      %p.value
+        = access_count("")
+        %span.pv PV
 .inner.divide
   .access_analyses
     %h2.access_analyses_heading
@@ -22,19 +30,28 @@
       %canvas.chartjs#chartjs
   .access_source
     %h2.access_source_heading 上位のアクセス元
-    - @access_analyses[0..4].each do |access_analysis|
-      .access_source_box
-        = link_to access_analysis.source, access_analysis.source, class: "access_source_path"
-        %span.percent= "(#{(access_analysis.count.to_f * 100 / @trend_articles.first.access_analyses.count).round(1)}%)"
+    - if @access_analyses
+      - @access_analyses.each do |access_analysis|
+        .access_source_box
+          = link_to access_analysis.source, access_analysis.source, class: "access_source_path"
+          %span.percent= "(#{(access_analysis.count * 100.0 / @sum_access).round(1)}%)"
+    - else
+      .access_not_found
+        アクセスデータがありません
 .inner
   .access_article
-    %h2.access_article_heading アクセスが多い記事
-    - @trend_articles[0..4].each do |article|
-      = link_to public_path(article), class: "access_article_link" do
-        .flex_item
-          %h3.title= article.title
-          %span.pv= "アクセス数：#{AccessAnalysis.where(article_token: article.article_token).count}pv"
-        %span.created_at= article.created_at.strftime("%Y-%m-%d")
+    %h2.access_article_heading
+      アクセスが多い記事
+    - if @trend_articles.length > 0
+      - @trend_articles.each do |article|
+        = link_to public_path(article), class: "access_article_link" do
+          .flex_item
+            %h3.title= article.title
+            %span.pv= "アクセス数：#{article.count}pv"
+          %span.created_at= article.created_at.strftime("%Y-%m-%d")
+    - else
+      .access_not_found
+        アクセスデータがありません
 
   :javascript
 
@@ -42,7 +59,6 @@
       let date = []
       let access_counts = []
 
-      data = JSON.parse(data)
       for (key in data) {
         date.push(key)
         access_counts.push(data[key])
@@ -82,13 +98,4 @@
       })
     }
 
-    $.ajax({
-      type: 'GET',
-      url: '/dashboard',
-    })
-    .done( (data) => {
-      drawing_chart(data)
-    })
-    .fail( (error) => {
-
-    })
+    drawing_chart(gon.last_month)

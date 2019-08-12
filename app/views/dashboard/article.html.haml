@@ -21,9 +21,17 @@
           削除モード
           .toggle_btn
             .circle
-    #article_table
-      = render "article_table", articles: @articles
-
+    - if @articles.length > 0
+      #article_table
+        = render "article_table", articles: @articles
+    - else
+      .dashboard_article_not_found
+        %h3.dashboard_article_not_found_head 記事データがありません
+        %p.dashboard_article_not_found_message
+          Launchでは、学びをアウトプットすることを大切にしています。
+          %br
+          少しでも日々の学びの中で気づいたことや、共有したいことがあれば気楽に投稿してみましょう。
+        = link_to "記事を書く", new_draft_path, class: "writing"
 
 :javascript
   const toggle_btn = document.getElementsByClassName('toggle_btn')[0]

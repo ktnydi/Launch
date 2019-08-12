@@ -1,42 +1,7 @@
 %main.home_wrapper
   .home_contents
     .home_contents_left
-      .box
-        .login_user_wrapper
-          - if user_signed_in?
-            = image_tag gravatar_image(current_user), size: 35, class: "user_image"
-            %b.username= current_user.name
-            .user_token= "@#{current_user.uuid}"
-            .user_status_info
-              %a.link.follow_link{href: follows_list_path}
-                .follow Follow
-                .count= current_user.followings.length
-              %a.link.follower_link{href: followers_list_path}
-                .follower Follower
-                .count= current_user.followers.length
-          - else
-            .user_image
-              %i.far.fa-user.guest_image
-            %b.username ゲスト
-            .user_token= "@guestuser"
-            .user_status_info
-              %a.link.follow_link.registration_link
-                .follow Follow
-                .count= 0
-              %a.link.follower_link.registration_link
-                .follower Follower
-                .count= 0
-      .box
-        .side_bar
-          - if user_signed_in?
-            %a.side_bar_link{href: "#{dashboard_path}"} ダッシュボード
-            %a.side_bar_link{href: goods_path} 高く評価した記事
-            %a.side_bar_link{href: bookmarks_path} ブックマークした記事
-            %a.side_bar_link{href: history_path} 閲覧履歴
-          - else
-            %a.side_bar_link.registration_link ダッシュボード
-            %a.side_bar_link.registration_link 高く評価した記事
-            %a.side_bar_link.registration_link 閲覧履歴
+      = render "share/sidebar"
     .home_contents_center
       - unless user_signed_in?
         .box
@@ -61,88 +26,67 @@
               = link_to "今日", root_path, class: "period_btn"
               = link_to "今週", "?period=week", class: "period_btn"
               = link_to "今月", "?period=month", class: "period_btn"
-        .inner.article_list_wrapper
-          - @trend_articles.each do |article|
-            .article
-              = link_to public_path(article.article_token), class: "link large_link" do
-                = image_tag gravatar_image(article.user), size: 40, class: "author_image"
-                .flex_item
-                  %p.article_title= article.title
-                  .tags
-                    - article.category.split(',').each do |tag|
-                      %span.tag_name= tag
-                  .list_bottom
-                    .list_bottom_left
-                      %span.author_name= "by #{article.user.name}"
-                      .thumbs_up
-                        %i.far.fa-thumbs-up
-                        %span.count= article.likes.count
-                    %span.created_at= article.created_at.strftime("%Y-%m-%d")
+        - if @trend_articles.length > 0
+          .inner.article_list_wrapper
+            - @trend_articles.each do |article|
+              .article
+                = link_to public_path(article.article_token), class: "link large_link" do
+                  = image_tag gravatar_image(article.user), size: 40, class: "author_image"
+                  .flex_item
+                    %p.article_title= article.title
+                    .tags
+                      - article.category.split(',').each do |tag|
+                        %span.tag_name= tag
+                    .list_bottom
+                      .list_bottom_left
+                        %span.author_name= "by #{article.user.name}"
+                        .thumbs_up
+                          %i.far.fa-thumbs-up
+                          %span.count= article.likes.count
+                      %span.created_at= article.created_at.strftime("%Y-%m-%d")
+        - else
+          .article_not_found
+            %h3.article_not_found_head 公開されている記事がありません。
+            %p.article_not_found_message アクセスが多い記事はここに表示されます。
       .box.interest_tag_article_box
         %h2.interest_tag_article_heading.heading_2
           %span.sharp #
           注目のタグ
-        .inner
-          - Public.tag_ranking.each do |tag_name, article_count|
-            .tag_name_list
-              %h3.interest_tag_name= tag_name
-              .article_card_wrapper
-                - Public.get_article_include_tag(tag_name).each do |public|
-                  .article
-                    = link_to public_path(public.article_token), class: "link" do
-                      .article_link_top
-                        = image_tag gravatar_image(public.user), size: 40, class: "author_image"
-                        %span.author_name= public.user.name
-                      .article_link_contents
-                        %p.article_title= public.title.truncate(35)
-                      .link_bottom
-                        .thumbs_up
-                          %i.far.fa-thumbs-up
-                          %span.count= public.likes.count
-                        %span.created_at= public.created_at.strftime("%Y-%m-%d")
+        - if Public.tag_ranking.length > 0
+          .inner
+            .tag_ranking
+              - Public.tag_ranking(20).each do |tag_name, _|
+                = link_to tags_path(tag_name), class: "tag_link" do
+                  .tag_name= tag_name
+        - else
+          .article_not_found
+            %h3.article_not_found_head 公開されている記事がありません。
+            %p.article_not_found_message 多く使われているタグはここに表示されます。
       .box
         %h2.latest_article_heading.heading_2
           %span.sharp #
           最近投稿された記事
-        .inner.article_list_wrapper
-          - @publics.each do |public|
-            .article
-              = link_to public_path(public.article_token), class: "link large_link" do
-                = image_tag gravatar_image(public.user), size: 40, class: "author_image"
-                .flex_item
-                  %p.article_title= public.title
-                  .tags
-                    - public.category.split(',').each do |tag|
-                      %span.tag_name= tag
-                  .list_bottom
-                    .list_bottom_left
-                      %span.author_name= "by #{public.user.name}"
-                    %span.created_at= public.created_at.strftime("%Y-%m-%d")
-        = link_to "もっとみる", publics_path, class: "more_latest_article_link"
-.registration_modal_parent
-.registration_modal_child
-  %h2.registration_heading アカウントを作成
-  .form-wrapper
-    = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
-      .field
-        = f.text_field :name, placeholder: "ユーザー名", required: true, maxlength:"15"
-      .field
-        = f.email_field :email, placeholder: "メールアドレス", autocomplete: "email", required: true
-      .field
-        = f.password_field :password, placeholder: "パスワード", autocomplete: "new-password", required: true
-      %p.term
-        登録が完了すると#{link_to "利用規約", terms_path, target: :_blank}に同意したものとみなします。
-      .actions
-        = f.submit "登録", id: "submit"
-    %p.separate
-    .sns_login
-      = link_to user_twitter_omniauth_authorize_path, class: "twitter" do
-        %i.fab.fa-twitter
-        %p Twitterで登録
-    = render "devise/shared/links"
+        - if @publics.length > 0
+          .inner.article_list_wrapper
+            - @publics.each do |public|
+              .article
+                = link_to public_path(public.article_token), class: "link large_link" do
+                  = image_tag gravatar_image(public.user), size: 40, class: "author_image"
+                  .flex_item
+                    %p.article_title= public.title
+                    .tags
+                      - public.category.split(',').each do |tag|
+                        %span.tag_name= tag
+                    .list_bottom
+                      .list_bottom_left
+                        %span.author_name= "by #{public.user.name}"
+                      %span.created_at= public.created_at.strftime("%Y-%m-%d")
+          = link_to "もっとみる", publics_path, class: "more_latest_article_link"
+        - else
+          .article_not_found
+            %h3.article_not_found_head 公開されている記事がありません。
+            %p.article_not_found_message 最近投稿された記事はここに表示されます。
 :javascript
-  const registration_links = document.getElementsByClassName('registration_link')
-  const registration_modal_parent = document.getElementsByClassName('registration_modal_parent')[0]
   const period_btns = document.getElementsByClassName('period_btn')
   const period = document.getElementById('period')
 
@@ -159,18 +103,3 @@
       period_btns[0].classList.add('show')
     }
   }
-
-  for (let i = 0; i < registration_links.length; i++) {
-    const registration_link = registration_links.item(i)
-    registration_link.addEventListener('click', ()=>{
-      registration_modal_parent.classList.add('show')
-      registration_modal_parent.nextElementSibling.classList.add('show')
-      document.body.classList.add('hidden')
-    })
-  }
-
-  registration_modal_parent.addEventListener('click', ()=>{
-    registration_modal_parent.classList.remove('show')
-    registration_modal_parent.nextElementSibling.classList.remove('show')
-    document.body.classList.remove('hidden')
-  })

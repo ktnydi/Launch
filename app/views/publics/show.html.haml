@@ -22,7 +22,7 @@
                   = image_tag gravatar_image(@public.user), size: 50
                   %span.name= @public.user.name
                 - if user_signed_in?
-                  - if other_user?(@public.user.uuid)
+                  - unless article_author?(@public.user)
                     %button.follow_btn{data: {id: @public.user.id}}= render "follows/follow", user: @public.user
             %h2.main_title= @public.title
             .article_tags
@@ -49,24 +49,25 @@
         %span.sharp #
         関連する記事
       .article_list_wrapper
-        - Public.get_article_include_tag(@public.category.split(",")[0], 5).each do |article|
-          - if article.article_token == @public.article_token
-            - next
-          .article
-            = link_to public_path(article.article_token), class: "link large_link" do
-              = image_tag gravatar_image(article.user), size: 40, class: "author_image"
-              .flex_item
-                %p.article_title= article.title
-                .tags
-                  - article.category.split(',').each do |tag|
-                    %span.tag_name= tag
-                .list_bottom
-                  .list_bottom_left
-                    %span.author_name= "by #{article.user.name}"
-                    .thumbs_up
-                      %i.far.fa-thumbs-up
-                      %span.count= article.likes.count
-                  %span.created_at= article.created_at.strftime("%Y-%m-%d")
+        - if Public.get_same_tag_articles(@public).length > 0
+          - Public.get_same_tag_articles(@public).limit(5).each do |article|
+            .article
+              = link_to public_path(article.article_token), class: "link large_link" do
+                = image_tag gravatar_image(article.user), size: 40, class: "author_image"
+                .flex_item
+                  %p.article_title= article.title
+                  .tags
+                    - article.category.split(',').each do |tag|
+                      %span.tag_name= tag
+                  .list_bottom
+                    .list_bottom_left
+                      %span.author_name= "by #{article.user.name}"
+                      .thumbs_up
+                        %i.far.fa-thumbs-up
+                        %span.count= article.likes.count
+                    %span.created_at= article.created_at.strftime("%Y-%m-%d")
+        - else
+          %p.relative_article_not_found 関連する記事はありません。
   .comment_wrapper
     #comment.inner
       = render "comment", comments: @public.comments

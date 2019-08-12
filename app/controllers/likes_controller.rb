@@ -1,4 +1,5 @@
 class LikesController < ApplicationController
+  before_action :authenticate_user!
   before_action :post
 
   def create
@@ -7,10 +8,6 @@ class LikesController < ApplicationController
       if @like.save
         format.js
         format.html
-      else
-        p @like.errors.full_messages
-        flash[:alert] = "いいねするにはログインが必要です。"
-        format.js { render js: "window.location = '#{new_user_session_path}';" }
       end
     end
   end

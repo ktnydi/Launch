@@ -1,1 +1,0 @@
-require 'uikit/sass/rails'

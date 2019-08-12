@@ -5,4 +5,13 @@
       %h2.heading_2
         %span.sharp #
         記事一覧
-      = render "share/card", publics: @publics
+      - if @publics.length > 0
+        = render "share/card", publics: @publics
+      - else
+        .article_not_found
+          - if params[:q]
+            %h3.article_not_found_head 検索条件にマッチする結果が見つかりませんでした。
+            %p.article_not_found_message 検索条件を変更してください。
+          - else
+            %h3.article_not_found_head 公開されている記事がありません。
+            %p.article_not_found_message 記事を投稿して知見を共有しよう。

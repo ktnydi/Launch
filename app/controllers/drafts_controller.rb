@@ -16,9 +16,9 @@ class DraftsController < ApplicationController
     @draft.article_token = SecureRandom.hex(10)
     @draft.user_token = current_user.uuid
     if @draft.save
-      render json: @draft
+      render json: { url: dashboard_article_path }
     else
-      @errors = @draft.errors.full_messages
+      render json: @draft.errors.full_messages, status: :unprocessable_entity
     end
   end
 
@@ -30,19 +30,17 @@ class DraftsController < ApplicationController
   def update
     @draft = Draft.find_by(article_token: params[:article_token])
     @draft.assign_attributes(draft_params)
-    respond_to do |format|
-      if @draft.save
-        format.json { render json: @draft }
-      else
-        @errors = @draft.errors.full_messages
-      end
+    if @draft.save
+      render json: { url: dashboard_article_path }
+    else
+      render json: @draft.errors.full_messages, status: :unprocessable_entity
     end
   end
 
   def destroy
     @draft = Draft.find_by(article_token: params[:article_token])
     if @draft.destroy
-      render json: ""
+      redirect_to dashboard_article_path + "?mode=draft"
     end
   end
 

@@ -1,0 +1,17 @@
+- @page_title = "リクエスト"
+%main.request_box
+  .container
+    .box
+      .page_title
+        %h2.title 記事をリクエスト
+        %p.subtitle
+          お探ししている記事が見つからなかった場合、欲しい記事をリクエストできます。
+          %br
+          リクエストを見たユーザーが記事を書いてくれるかもしれません。
+    .box
+      = form_with url: requests_path, local: true, class: 'request_form' do |f|
+        .field
+          = f.text_field :category, placeholder: '欲しい記事のテーマ', class: 'request_form_title'
+        .field
+          = f.text_area :content, placeholder: '「特にココが詳しく知りたい」と思う部分があれば入力してください（任意）', class: 'request_form_content'
+        %button.submit リクエストする

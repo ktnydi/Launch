@@ -6,4 +6,9 @@
       %h2.heading_2
         %span.sharp #
         ブックマーク
-      = render "share/card", publics: @bookmark_publics
+      - if @bookmark_publics.length > 0
+        = render "share/card", publics: @bookmark_publics
+      - else
+        .article_not_found
+          %h3.article_not_found_head ブックマークした記事がありません。
+          %p.article_not_found_message ブックマークを活用してお気に入りの記事を保存しよう！

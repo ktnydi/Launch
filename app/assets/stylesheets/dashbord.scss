@@ -9,6 +9,7 @@
     height: calc(100vh - 70px);
     border-right: 1px solid $border-color;
     position: sticky;
+    position: -webkit-sticky;
     top: 70px;
     background-color: $white;
     .inner + .inner {
@@ -32,38 +33,6 @@
       @media all and (max-width: 896px) {
         padding: 0;
         margin: 24px 0;
-      }
-    }
-  }
-}
-
-.dashboard_left_box {
-  .inner {
-    padding: 24px 0;
-  }
-  .dashboard_link {
-    display: block;
-    padding: 0 24px;
-    line-height: 50px;
-    text-align: center;
-    text-decoration: none;
-    font-size: 1.4rem;
-    color: $no_active_color;
-    &:hover {
-      background-color: rgba(0, 0, 0, .03);
-    }
-    &.current {
-      color: $font-color;
-      position: relative;
-      &:before {
-        display: block;
-        content: '';
-        width: 3px;
-        height: 50px;
-        background-color: $main-color;
-        position: absolute;
-        top: 0;
-        right: 0;
       }
     }
   }
@@ -94,6 +63,10 @@
       margin-top: 5px;
       font-size: 2.4rem;
       color: $main-color;
+      .pv {
+        font-size: 1.4rem;
+        color: $font-color;
+      }
     }
   }
   .box:last-child {
@@ -120,7 +93,7 @@
   @media all and (max-width: 896px) {
     flex-direction: column;
   }
-  .user_info, .access_analyses {
+  .access_source, .access_analyses {
     flex: 1;
   }
 }
@@ -225,12 +198,58 @@
     .access_source_path {
       display: block;
       text-decoration: none;
+      word-break: break-all;
       font-size: 1.4rem;
       color: $main-color;
     }
     .percent {
       margin-left: 10px;
       color: $sub-font-color;
+    }
+  }
+}
+
+.access_source, .access_article, .article_comment {
+  .access_not_found, .comment_not_found {
+    height: calc(100% - 60px);
+    min-height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    color: $sub-font-color;
+  }
+}
+
+.draft_article {
+  .dashboard_article_not_found {
+    padding: 100px 0;
+    text-align: center;
+    &_head {
+      font-weight: normal;
+      font-size: 1.6rem;
+    }
+    &_message {
+      margin-top: 30px;
+      line-height: 1.7em;
+      font-size: 1.4rem;
+      color: $sub-font-color;
+    }
+    .writing {
+      display: inline-block;
+      width: 150px;
+      height: 40px;
+      line-height: 40px;
+      margin-top: 15px;
+      text-align: center;
+      text-decoration: none;
+      border-radius: 2px;
+      font-size: 1.4rem;
+      background-color: $main-color;
+      color: $white;
+      &:hover {
+        background-color: #068b7f
+      }
     }
   }
 }
@@ -401,16 +420,16 @@
     font-size: 1.4rem;
     &_heading, &_container {
       text-align: left;
-      &_title, &_updated_at, &_pv, &_comment, &_edit {
+      &_title, &_updated_at, &_pv, &_good, &_comment, &_edit {
         padding: 15px 24px;
       }
       &_title {
-        width: 600px;
+        width: 500px;
       }
       &_updated_at, &_edit {
-        width: calc((100% - 600px - 110px) / 2);
+        width: calc((100% - 500px - 110px) / 2);
       }
-      &_pv, &_comment {
+      &_pv, &_good, &_comment {
         width: 110px;
       }
     }
@@ -484,11 +503,19 @@
     }
   }
   &_top {
-    img {
+    .user_image {
+      display: inline-block;
       width: 70px;
       height: 70px;
       border-radius: 2px;
       box-shadow: 0 5px 17px 1px rgba(0, 0, 0, 0.05);
+      .guest_image {
+        display: block;
+        line-height: 70px;
+        font-size: 50px;
+        background-color: rgba(0, 0, 0, .05);
+        color: rgba(0, 0, 0, .1);
+      }
     }
     .name {
       margin-top: 5px;

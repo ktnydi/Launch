@@ -1,5 +1,7 @@
 class PublicsController < ApplicationController
   require 'securerandom'
+  before_action :authenticate_user!, only: [:create, :destroy, :history, :good]
+  before_action :confirm_params, only: [:show]
   before_action :create_access_analysis, only: [:show]
   def index
     @publics = Public.all.order(created_at: :desc).page(params[:page]).per(20)
@@ -20,7 +22,9 @@ class PublicsController < ApplicationController
     end
     @public.user_token = current_user.uuid
     if @public.save
-      render json: @public
+      draft = Draft.find_by(article_token: @public.article_token)
+      draft&.destroy
+      render json: { url: dashboard_article_path + '?mode=public' }
     else
       render json: @public.errors.full_messages, status: :unprocessable_entity
     end
@@ -29,7 +33,7 @@ class PublicsController < ApplicationController
   def destroy
     @public = Public.find_by(article_token: params[:article_token])
     if @public.destroy
-      redirect_to user_path(current_user)
+      redirect_to dashboard_article_path + "?mode=public"
     end
   end
 
@@ -44,7 +48,7 @@ class PublicsController < ApplicationController
     @history_publics = Public.joins(:access_analyses)
                              .select("publics.*, max(access_analyses.created_at) as last_access_time")
                              .where("access_analyses.user_token = ?", current_user.uuid)
-                             .group("access_analyses.article_token")
+                             .group("publics.id, access_analyses.article_token")
                              .order("last_access_time desc")
                              .limit(40)
                              .page(params[:page])
@@ -66,5 +70,11 @@ class PublicsController < ApplicationController
         access_source: request.referer,
         user_token: current_user&.uuid || ""
       )
+    end
+
+    def confirm_params
+      unless Public.find_by(article_token: params[:article_token])
+        redirect_to root_path
+      end
     end
 end

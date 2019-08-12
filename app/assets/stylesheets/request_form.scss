@@ -1,0 +1,53 @@
+@import 'variables';
+
+.request_box {
+  padding: 60px 0;
+  text-align: center;
+  .page_title {
+    padding: 24px;
+    margin: 24px 0 0;
+    .subtitle {
+      margin: 15px 0 0;
+      color: $sub-font-color;
+    }
+  }
+  .request_form {
+    &_title {
+      width: 100%;
+      height: 45px;
+      padding: 0 16px;
+      margin: 24px 0 0;
+      border: 1px solid $border-color;
+      border-radius: 2px;
+      font-size: 1.4rem;
+      background-color: $white;
+    }
+    &_content {
+      width: 100%;
+      height: 280px;
+      padding: 16px;
+      margin: 24px 0 0;
+      border: 1px solid $border-color;
+      border-radius: 2px;
+      font-size: 1.4rem;
+      resize: none;
+      background-color: $white;
+    }
+    .submit {
+      width: 150px;
+      height: 45px;
+      margin: 24px 0 0;
+      line-height: 45px;
+      box-shadow: 0 5px 17px 1px rgba(0, 0, 0, 0.1);
+      border-radius: 2px;
+      text-align: center;
+      font-size: 1.4rem;
+      cursor: pointer;
+      background-color: #11cb6e;
+      color: $white;
+      &:hover {
+        background-color: #12c36a;
+      }
+    }
+  }
+}

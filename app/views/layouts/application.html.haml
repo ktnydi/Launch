@@ -29,6 +29,7 @@
     = javascript_include_tag '/editor/highlight/highlight.pack.js'
   %body
     = render 'share/header'
+    = render 'share/modal_authenticate'
     = yield
     = render 'share/footer'
     = render "share/menu"
@@ -40,6 +41,9 @@
       var cls_btn = document.getElementById('cls-btn');
       var notice = document.getElementById('notice');
       var alert = document.getElementById('alert');
+      const registration_modal_parent = document.getElementsByClassName('registration_modal_parent')[0];
+      const registration_links = document.getElementsByClassName('registration_link');
+      const modal_close = document.getElementsByClassName('modal_close')[0];
 
       (function() {
         hamburger.addEventListener('click', ()=>{
@@ -69,3 +73,29 @@
           cls_obj.style.display = 'none';
         });
       }
+
+      for (let i = 0; i < registration_links.length; i++) {
+        const registration_link = registration_links.item(i)
+        registration_link.addEventListener('click', ()=>{
+          registration_modal_parent.classList.add('show')
+          registration_modal_parent.nextElementSibling.classList.add('show')
+        })
+      }
+
+      document.body.addEventListener('ajax:error', (e)=>{
+        const xhr = e.detail[2]
+        if (xhr.status === 401) {
+          registration_modal_parent.classList.add('show')
+          registration_modal_parent.nextElementSibling.classList.add('show')
+        }
+      })
+
+      registration_modal_parent.addEventListener('click', ()=>{
+        registration_modal_parent.classList.remove('show')
+        registration_modal_parent.nextElementSibling.classList.remove('show')
+      })
+
+      modal_close.addEventListener('click', ()=>{
+        registration_modal_parent.classList.remove('show')
+        registration_modal_parent.nextElementSibling.classList.remove('show')
+      })

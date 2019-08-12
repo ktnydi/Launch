@@ -6,4 +6,9 @@
       %h2.heading_2
         %span.sharp #
         閲覧履歴
-      = render "share/card", publics: @history_publics
+      - if @history_publics.length > 0
+        = render "share/card", publics: @history_publics
+      - else
+        .article_not_found
+          %h3.article_not_found_head 閲覧した記事がありません。
+          %p.article_not_found_message 気になる記事を閲覧して知見を広げよう！
