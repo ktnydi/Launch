@@ -2,21 +2,24 @@
   - publics.each do |public|
     .article
       = link_to public_path(public.article_token), class: "link large_link" do
-        = image_tag gravatar_image(public.user), size: 40, class: "author_image"
         .flex_item
-          %p.article_title= public.title
-          .tags
-            - public.category.split(',').each do |tag|
-              %span.tag_name= tag
+          .list_top
+            %p.article_title= public.title
+            %p.article_content= strip_tags markdown public.content.truncate(180)
+            .tags
+              - public.category.split(',').each do |tag|
+                %span.tag_name= tag
           .list_bottom
             .list_bottom_left
+              = image_tag gravatar_image(public.user), size: 20, class: 'author_image'
               %span.author_name= "by #{public.user.name}"
+            .list_bottom_right
               .thumbs_up
                 %i.far.fa-thumbs-up
                 %span.count= public.likes.count
-            %span.created_at= public.created_at.strftime("%Y-%m-%d")
+              %span.created_at= public.created_at.strftime("%Y-%m-%d")
 
-- if publics && publics.total_pages > 1
+- if controller_name != "users" && publics && publics.total_pages > 1
   .paginate
     = link_to_prev_page publics, "", class: "prev-page"
     - unless publics.out_of_range?

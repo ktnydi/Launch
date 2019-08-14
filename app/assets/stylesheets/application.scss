@@ -324,17 +324,17 @@ header {
     font-size: 1.4rem;
     color: $font-color;
     &:hover {
-      background-color: rgba(0, 0, 0, .03);
+      background-color: $hover_white;
     }
     &.current {
       position: relative;
-      background-color: rgba(0, 0, 0, .03);
+      background-color: $hover_white;
       &:before {
         display: block;
         content: '';
         width: 3px;
         height: 50px;
-        background-color: $main-color;
+        background-color: $primary_color;
         position: absolute;
         top: 0;
         right: 0;
@@ -366,7 +366,7 @@ main {
   &.authenticate_edit_form {
     padding-top: 70px;
     .inner {
-      margin-top: 10px;
+      margin-top: 20px;
     }
   }
   &.post_wrapper {
@@ -376,12 +376,13 @@ main {
 
 .heading_2 {
   font-size: 1.6rem;
+  letter-spacing: .3px;
   @media all and (max-width: 896px) {
     padding: 0 16px;
   }
-  .sharp {
+  .sharp, .icon {
     margin-right: 5px;
-    color: $main-color;
+    color: $primary_color;
   }
 }
 
@@ -419,56 +420,73 @@ main {
 }
 
 .article_list_wrapper {
-  border-radius: 3px;
-  border: 1px solid rgba(0, 0, 0, .1);
-  background-color: $white;
+  border-radius: 2px;
   @media all and (max-width: 896px) {
     border-radius: 0;
     border: none;
     padding: 0 16px;
   }
   .article + .article {
-    border-top: 1px solid rgba(0, 0, 0, .1);
+    margin-top: 15px;
   }
   .article {
+    border-radius: 2px;
+    box-shadow: $highest_box_shadow;
+    background-color: $white;
     &:hover {
-      background-color: rgba(0, 0, 0, .02);
+      background-color: $hover_white;
     }
     .link {
       display: block;
-      padding: 10px;
       text-decoration: none;
       color: inherit;
       .article_title {
         font-weight: bold;
-        font-size: 1.4rem;
-        margin-bottom: 5px;
+        font-size: 1.6rem;
+      }
+      .article_content {
+        margin-top: 10px;
+        font-size: 1rem;
+        color: $sub-font-color;
+      }
+      .list_top, .list_bottom {
+        padding: 12px 24px;
       }
       .list_bottom {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        margin-top: 12px;
+        border-top: 1px solid $border-color;
         font-size: 1.2rem;
         color: $sub-font-color;
         &_left {
           display: flex;
           align-items: center;
           flex-wrap: wrap;
-          .author_name {
-            margin-right: 12px;
+          .author_image {
+            width: 20px;
+            height: 20px;
+            border-radius: 2px;
           }
+          .author_name {
+            margin-left: 12px;
+          }
+        }
+        &_right {
+          display: flex;
+          align-items: center;
           .thumbs_up {
             display: flex;
             align-items: center;
             .fa-thumbs-up {
-              margin-right: 5px;
-              color: $main-color;
+              margin:  0 5px 0 10px;
+              color: $primary_color;
             }
           }
-        }
-        .created_at {
-          white-space: nowrap;
+          .created_at {
+            margin-left: 12px;
+            white-space: nowrap;
+          }
         }
       }
     }
@@ -476,24 +494,17 @@ main {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 12px 24px;
       @media all and (max-width: 896px) {
         padding: 12px 0;
       }
-      .author_image {
-        width: 40px;
-        height: 40px;
-        border-radius: 2px;
-        align-self: flex-start;
-      }
       .flex_item {
         flex: 1;
-        margin-left: 24px;
         @media all and (max-width: 896px) {
           margin-left: 16px;
         }
       }
       .tags {
+        margin-top: 10px;
         font-size: 1rem;
         .tag_name {
           padding: 2px 8px;
