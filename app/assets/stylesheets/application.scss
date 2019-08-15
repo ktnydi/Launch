@@ -356,13 +356,10 @@ main {
     overflow: hidden;
   }
   &.home_wrapper,
-  &.article_list,
   &.request_list,
   &.request_detail,
   &.follow,
   &.follower,
-  &.history,
-  &.bookmark,
   &.authenticate_edit_form {
     padding-top: 70px;
     .inner {
@@ -1009,9 +1006,24 @@ footer {
 }
 
 // 記事一覧
-.article_list, .history, .bookmark {
+.article_list, .history, .bookmark, .good {
+  margin-top: 70px;
+  &_header {
+    padding: 20px 16px;
+    background-color: $white;
+    box-shadow: $smaller_box_shadow;
+    .page_label {
+      font-size: 1.2rem;
+      color: $sub-font-color;
+    }
+    .page_title {
+      margin-top: 5px;
+      font-size: 2.4rem;
+      letter-spacing: .3px;
+    }
+  }
   &_box {
-    padding: 50px 0;
+    padding: 40px 0;
     @media all and (max-width: 896px) {
       padding: 24px 0 50px;
     }
@@ -1060,6 +1072,10 @@ footer {
     text-align: center;
     text-decoration: none;
     color: $sub-font-color;
+    transition: .1s;
+    &:hover {
+      color: $primary_color;
+    }
   }
   .prev-page {
     position: absolute;
