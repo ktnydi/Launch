@@ -108,7 +108,7 @@
     }
     .restore_btn {
       cursor: pointer;
-      color: $main-color;
+      color: $primary_color;
       &:hover {
         text-decoration: underline;
       }
@@ -206,7 +206,7 @@
   }
   a {
     text-decoration: none;
-    color: $main-color;
+    color: $primary_color;
   }
   ol, ul {
     padding-left: 2em;
@@ -303,7 +303,7 @@
   padding: 24px;
   box-shadow: 0 2px 17px 1px rgba(0, 0, 0, 0.12);
   font-size: 1.3rem;
-  background-color: #E75252;
+  background-color: $alert_color;
   color: $white;
   position: fixed;
   right: 0;

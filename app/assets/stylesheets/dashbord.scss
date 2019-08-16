@@ -48,7 +48,7 @@
     padding: 24px;
     text-align: center;
     border-radius: 2px;
-    border-top: 3px solid $main-color;
+    border-top: 3px solid $primary_color;
     box-shadow: 0 2px 2px 1px rgba(0, 0, 0, 0.08);
     background-color: $white;
     @media all and (max-width: 896px) {
@@ -62,7 +62,7 @@
     .value {
       margin-top: 5px;
       font-size: 2.4rem;
-      color: $main-color;
+      color: $primary_color;
       .pv {
         font-size: 1.4rem;
         color: $font-color;
@@ -72,7 +72,7 @@
   .box:last-child {
     @media all and (max-width: 896px) {
       border-radius: 2px;
-      border-top: 3px solid $main-color;
+      border-top: 3px solid $primary_color;
     }
   }
   .box + .box {
@@ -99,7 +99,7 @@
 }
 
 .access_analyses {
-  border-top: 3px solid $main-color;
+  border-top: 3px solid $primary_color;
   border-radius: 2px;
   box-shadow: 0 2px 2px 1px rgba(0, 0, 0, 0.08);
   background-color: $white;
@@ -130,7 +130,7 @@
     line-height: 60px;
     font-size: 1.4rem;
     font-weight: normal;
-    background-color: $main-color;
+    background-color: $primary_color;
     color: $white;
   }
 }
@@ -174,7 +174,7 @@
 
 .access_source {
   margin-left: 24px;
-  border-top: 3px solid $main-color;
+  border-top: 3px solid $primary_color;
   border-radius: 2px;
   box-shadow: 0 2px 2px 1px rgba(0, 0, 0, 0.08);
   background-color: $white;
@@ -200,7 +200,7 @@
       text-decoration: none;
       word-break: break-all;
       font-size: 1.4rem;
-      color: $main-color;
+      color: $primary_color;
     }
     .percent {
       margin-left: 10px;
@@ -245,10 +245,10 @@
       text-decoration: none;
       border-radius: 2px;
       font-size: 1.4rem;
-      background-color: $main-color;
+      background-color: $primary_color;
       color: $white;
       &:hover {
-        background-color: #068b7f
+        background-color: $hover_primary_color;
       }
     }
   }
@@ -307,7 +307,7 @@
     font-size: 1.4rem;
     font-weight: normal;
     letter-spacing: 1px;
-    background-color: $main-color;
+    background-color: $primary_color;
     color: $white;
     display: flex;
     justify-content: space-between;

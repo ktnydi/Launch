@@ -351,7 +351,7 @@ main {
   background-color: #f4f5f7;
   &.top_page {
     height: 100vh;
-    background: $main-color;
+    background: $primary_color;
     color: $white;
     position: relative;
     overflow: hidden;
@@ -563,7 +563,7 @@ main {
         left: 0;
         width: 100%;
         height: 3px;
-        border-bottom: 3px solid $main-color;
+        border-bottom: 3px solid $primary_color;
       }
     }
   }
@@ -676,11 +676,11 @@ main {
 }
 
 .notice {
-  background-color: $sub-color;
+  background-color: $notice_color;
 }
 
 .alert {
-  background-color: #E75252;
+  background-color: $alert_color;
 }
 
 footer {

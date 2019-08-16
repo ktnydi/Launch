@@ -226,18 +226,18 @@
     line-height: 45px;
     font-size: 1.4rem;
     border-radius: 2px;
-    background-color: $main-color;
+    background-color: $primary_color;
     color: $white;
     cursor: pointer;
     &:hover {
-      background-color: #068b7f;
+      background-color: $hover_primary_color;
     }
   }
   .term {
     margin: 12px 0;
     font-size: 1.4rem;
     a {
-      color: $main-color;
+      color: $primary_color;
       text-decoration: none;
     }
   }
@@ -268,10 +268,10 @@
       border-radius: 2px;
       text-decoration: none;
       color: $white;
-      background-color: rgba(0, 172, 238, 1);
+      background-color: $twitter_color;
       position: relative;
       &:hover {
-        background-color: rgba(0, 172, 238, 0.8);
+        background-color: $hover_twitter_color;
       }
       i {
         margin-left: 24px;
@@ -289,6 +289,6 @@
   .link a {
     text-decoration: none;
     font-size: 1.4rem;
-    color: $main-color;
+    color: $primary_color;
   }
 }
