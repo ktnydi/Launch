@@ -2,12 +2,12 @@
   ログイン中のユーザーが存在し、
   閲覧している記事にいいね済みか？
 - if current_user && public.like_user(current_user.uuid)
-  = link_to public_unlike_path(public.article_token), remote: true, method: :delete, class: "heart btn gooded" do
+  = link_to public_unlike_path(public.article_token), remote: true, method: :delete, class: "btn good gooding" do
     %i.fas.fa-check
     %p.count
       = public.likes.count
 - else
-  = link_to public_like_path(public.article_token), remote: true, method: :post, class: "heart btn" do
+  = link_to public_like_path(public.article_token), remote: true, method: :post, class: "btn good" do
     %i.far.fa-thumbs-up
     %p.count
       = public.likes.count

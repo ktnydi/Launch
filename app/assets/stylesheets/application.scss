@@ -618,18 +618,18 @@ main {
     line-height: 30px;
     text-align: center;
     border-radius: 2px;
-    box-shadow: 0 5px 17px 1px rgba(0, 0, 0, 0.1);
-    font-size: 1.2rem;
+    font-size: 1.4rem;
+    letter-spacing: .3px;
   }
   .follow {
-    border: 1px solid $main-color;
-    background-color: $main-color;
+    border: 1px solid $primary_color;
+    background-color: $primary_color;
     color: $white;
   }
   .unfollow {
-    border: 1px solid $main-color;
+    border: 1px solid $primary_color;
     background-color: $white;
-    color: $main-color;
+    color: $primary_color;
   }
 }
 
@@ -680,10 +680,6 @@ main {
 
 .alert {
   background-color: #E75252;
-}
-
-.heart, .favorite, .unfavorite {
-  color: $main-color;
 }
 
 footer {
