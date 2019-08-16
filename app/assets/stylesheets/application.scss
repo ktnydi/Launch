@@ -266,7 +266,8 @@ header {
     text-decoration: none;
     font-size: 2.4rem;
     font-weight: bold;
-    color: $primary_color;
+    font-family: serif;
+    color: $white;
     @media all and (max-width: 1024px) {
       font-size: 2rem;
     }
