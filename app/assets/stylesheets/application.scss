@@ -357,7 +357,6 @@ main {
     overflow: hidden;
   }
   &.home_wrapper,
-  &.request_list,
   &.request_detail,
   &.follow,
   &.follower,
@@ -1003,7 +1002,7 @@ footer {
 }
 
 // 記事一覧
-.article_list, .history, .bookmark, .good {
+.article_list, .history, .bookmark, .good, .request_list {
   margin-top: 70px;
   &_header {
     padding: 20px 16px;

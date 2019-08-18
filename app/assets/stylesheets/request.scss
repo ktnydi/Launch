@@ -1,27 +1,31 @@
 @import 'variables';
 
 // common
-.request_list .container, .request_detail .container {
+.request_detail .container {
   padding: 40px 0;
 }
 
 // request_list
 .request_card_wrapper {
-  margin-top: 10px;
   .request_card + .request_card {
     margin-top: 20px;
   }
   .request_card {
-    border: 1px solid $border-color;
+    border-radius: 2px;
+    box-shadow: $highest_box_shadow;
     .card_inner {
       display: block;
       text-decoration: none;
       background-color: $white;
       color: $font-color;
+      &:hover {
+        background-color: $hover_white;
+      }
       .title {
         font-size: 1.4rem;
       }
       .content {
+        margin-top: 10px;
         font-size: 1.2rem;
         color: $sub-font-color;
       }
