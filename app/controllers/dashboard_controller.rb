@@ -11,7 +11,11 @@ class DashboardController < ApplicationController
     # { "YYYY-mm-dd" => access_count }
     count_by_created_at = AccessAnalysis.where(article_token: article_tokens)
                             .access_within_date_range(29.days.ago.beginning_of_day)
-                            .map{ |date, count| [date.strftime("%Y-%m-%d"), count] }.to_h
+                            .map{ |date, count|
+                              # DBがsqliteの時は、dateが文字列で渡される。(development)
+                              return [date.strftime("%Y-%m-%d"), count] unless date.class == String
+                              [date, count]
+                            }.to_h
     last_month = {}
     29.downto(0).each do |i|
       day = i.day.ago.beginning_of_day
