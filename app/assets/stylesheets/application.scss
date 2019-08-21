@@ -373,9 +373,6 @@ main {
 .heading_2 {
   font-size: 1.6rem;
   letter-spacing: .3px;
-  @media all and (max-width: 896px) {
-    padding: 0 16px;
-  }
   .sharp, .icon {
     margin-right: 5px;
     color: $primary_color;
@@ -384,7 +381,6 @@ main {
 
 .mobile_select_box {
   display: none;
-  padding: 0 16px;
   margin-bottom: 24px;
   position: relative;
   @media all and (max-width: 896px) {
@@ -421,7 +417,6 @@ main {
   @media all and (max-width: 896px) {
     border-radius: 0;
     border: none;
-    padding: 0 16px;
   }
   .article + .article {
     border-top: 1px solid $border-color;
@@ -494,9 +489,6 @@ main {
       }
       .flex_item {
         flex: 1;
-        @media all and (max-width: 896px) {
-          margin-left: 16px;
-        }
       }
       .tags {
         margin-top: 10px;

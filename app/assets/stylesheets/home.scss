@@ -9,6 +9,12 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
+    @media all and (max-width: 896px) {
+      flex-direction: column;
+    }
+    @media all and (max-width: 1024px) {
+      padding: 40px 16px;
+    }
     &_left {
       width: 250px;
       box-shadow: $highest_box_shadow;
@@ -37,6 +43,10 @@
     &_right {
       width: 250px;
       margin-left: 25px;
+      @media all and (max-width: 896px) {
+        margin: 0;
+        width: 100%;
+      }
     }
   }
 }
