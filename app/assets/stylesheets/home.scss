@@ -2,7 +2,7 @@
 
 .home_wrapper {
   .home_contents {
-    max-width: 1024px;
+    max-width: 1200px;
     width: 100%;
     margin: 0 auto;
     padding: 40px 0;
@@ -24,15 +24,19 @@
       }
     }
     &_center {
-      width: 100%;
+      flex: 1;
       margin: 0 auto;
-      padding: 0 0 0 80px;
+      padding: 0 0 0 25px;
       @media all and (max-width: 896px) {
         padding: 0;
       }
       .box {
         margin-bottom: 60px;
       }
+    }
+    &_right {
+      width: 250px;
+      margin-left: 25px;
     }
   }
 }

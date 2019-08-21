@@ -60,6 +60,9 @@
           .article_not_found
             %h3.article_not_found_head 公開されている記事がありません。
             %p.article_not_found_message 最近投稿された記事はここに表示されます。
+    .home_contents_right
+      %h2.heading_2 タグ・ランキング
+      = render "share/tag_ranking"
 :javascript
   const period_btns = document.getElementsByClassName('period_btn')
   const period = document.getElementById('period')
