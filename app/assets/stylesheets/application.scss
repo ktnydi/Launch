@@ -740,7 +740,7 @@ footer {
   }
   i {
     font-size: 2rem;
-    color: $font-color;
+    color: $white;
   }
 }
 
@@ -757,8 +757,11 @@ footer {
   align-items: center;
   justify-content: space-between;
   visibility: hidden;
+  transform: translateY(-100%);
+  transition: .15s;
   &.show {
     visibility: visible;
+    transform: translateY(0);
   }
   .mobile_search {
     height: 100%;
@@ -842,12 +845,15 @@ footer {
     width: 25px;
     height: 3px;
     border-radius: 3px;
-    background-color: $font-color;
+    background-color: $white;
     transition: all .3s;
   }
 }
 
 .hamburger.active {
+  .line, .line::before, .line::after {
+    background-color: $header_background_color;
+  }
   .line {
     transform: rotate(-45deg);
     &::before {
