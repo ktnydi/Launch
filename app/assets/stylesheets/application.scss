@@ -417,17 +417,16 @@ main {
 
 .article_list_wrapper {
   border-radius: 2px;
+  box-shadow: $highest_box_shadow;
   @media all and (max-width: 896px) {
     border-radius: 0;
     border: none;
     padding: 0 16px;
   }
   .article + .article {
-    margin-top: 15px;
+    border-top: 1px solid $border-color;
   }
   .article {
-    border-radius: 2px;
-    box-shadow: $highest_box_shadow;
     background-color: $white;
     &:hover {
       background-color: $hover_white;
@@ -445,14 +444,14 @@ main {
         font-size: 1rem;
         color: $sub-font-color;
       }
-      .list_top, .list_bottom {
-        padding: 12px 24px;
+      .list_top {
+        padding: 12px 24px 0;
       }
       .list_bottom {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        border-top: 1px solid $border-color;
+        padding: 12px 24px;
         font-size: 1.2rem;
         color: $sub-font-color;
         &_left {
