@@ -9,16 +9,12 @@
         = link_to "Home", root_path, class: "home, link"
       %li.header_nav_li
         = link_to "Latest Article", publics_path, class: "article, link"
-      %li.header_nav_li
-        = link_to "Request", requests_path, class: "request, link"
     %form.search.header_search#search_focus{action: "#{publics_path}", method: "get"}
       = label_tag nil, class: 'search_label' do
         %i.fas.fa-search
         = text_field_tag "q", params[:q], required: true, autocomplete: "off", id: "field", placeholder: "Search", class: 'search_field'
   .header-right
     - if user_signed_in?
-      %button.btn
-        = link_to "Do Request", new_request_path, class: "btn_link"
       %button.btn.btn_blue.link_editor
         = link_to "Write Article", new_draft_path, class: "btn_link"
       %details.header_right_menu

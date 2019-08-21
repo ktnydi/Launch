@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_28_104700) do
+ActiveRecord::Schema.define(version: 2019_08_20_091432) do
 
   create_table "access_analyses", force: :cascade do |t|
     t.string "article_token", null: false
@@ -65,15 +65,6 @@ ActiveRecord::Schema.define(version: 2019_07_28_104700) do
     t.string "category", null: false
     t.text "content", null: false
     t.string "user_token", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "requests", force: :cascade do |t|
-    t.string "token"
-    t.string "category"
-    t.text "content", default: "情報がありません。"
-    t.string "user_token"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -18,7 +18,6 @@ Rails.application.routes.draw do
     post '/bookmarks' => 'bookmarks#create'
     delete '/unbookmarks' => 'bookmarks#destroy'
   end
-  resources :requests, param: :request_token
   resources :likes, only: [:index]
   get '/bookmarks' => 'bookmarks#index', as: "bookmarks"
   resources :users, only: [:index] do
