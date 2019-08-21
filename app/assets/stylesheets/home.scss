@@ -56,9 +56,6 @@
   padding: 24px;
   text-align: center;
   background-color: $white;
-  @media all and (max-width: 896px) {
-    margin: 0 16px;
-  }
   &_heading {
     font-size: 2rem;
     letter-spacing: .5px;
