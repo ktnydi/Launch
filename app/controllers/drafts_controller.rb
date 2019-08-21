@@ -16,7 +16,7 @@ class DraftsController < ApplicationController
     @draft.article_token = SecureRandom.hex(10)
     @draft.user_token = current_user.uuid
     if @draft.save
-      render json: { url: dashboard_article_path }
+      render json: { url: dashboard_article_path + "?mode=draft" }
     else
       render json: @draft.errors.full_messages, status: :unprocessable_entity
     end
@@ -42,6 +42,11 @@ class DraftsController < ApplicationController
     if @draft.destroy
       redirect_to dashboard_article_path + "?mode=draft"
     end
+  end
+
+  def multiple_destroy
+    @drafts = Draft.where(article_token: params[:article_ids])
+    @drafts.delete_all
   end
 
   :private

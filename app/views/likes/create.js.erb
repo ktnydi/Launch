@@ -1,2 +1,4 @@
-var toggle_good = document.getElementById('toggle_good')
-toggle_good.innerHTML = '<%= j(render "publics/like", public: @public) %>'
+var good_btns = document.getElementsByClassName('good_btn')
+for (let i = 0; i < good_btns.length; i++) {
+  good_btns.item(i).innerHTML = '<%= j(render "publics/like", public: @public) %>'
+}

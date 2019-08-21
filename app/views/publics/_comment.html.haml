@@ -1,11 +1,15 @@
 .comment_form_wrapper
   .comment_form_header
     %h3.heading
-      %span.sharp #
       = "#{comments.count}件のコメント"
-  .comment-edit
+  .comment_edit_form
+    .toggle_view_btn_box
+      .view_btn.comment_edit_btn.current 編集
+      .view_btn.preview_show_btn プレビュー
     = form_for @comment, url: "/comment/#{params[:article_token]}", html: { id: "comment_form", class: "comment_form" }, remote: true do |f|
-      = f.text_area :content, id: "comment_area", placeholder: "Markdownで入力"
+      = f.text_area :content, id: "comment_area", placeholder: "Markdownで入力", class: 'comment_edit_area'
+      .preview_area.hide
+        %span.placeholder プレビューがここに表示されます。
     .comment_form_bottom
       %button.comment_submit#comment_submit{type: "submit", form: "comment_form"}
         コメントする
@@ -20,10 +24,10 @@
           .comment_edit
             - if user_signed_in? && comment.user_token === current_user.uuid
               .comment_edit_btn_wrapper
-                %button.comment_update_btn{data: {id: "#{comment.id}"}} コメントを編集
-                ・
-                %button.comment_delete_btn<>
-                  = link_to "削除", "/comment/#{comment.id}/", method: :delete, data: { confirm: "コメントを削除します。"}
+                %button.comment_update_btn{data: {id: "#{comment.id}"}}
+                  %i.fas.fa-pen.icon
+                = link_to "/comment/#{comment.id}/", method: :delete, data: { confirm: "コメントを削除します。"}, class: 'comment_delete_btn' do
+                  %i.fas.fa-trash-alt.icon
         .comment_content
           != markdown comment.content
         - if user_signed_in? && comment.user_token == current_user.uuid

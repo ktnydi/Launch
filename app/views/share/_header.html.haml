@@ -6,37 +6,31 @@
       = link_to "Launch", root_path
     %ul.header_nav
       %li.header_nav_li
-        = link_to "ホーム", root_path, class: "home, link"
+        = link_to "Home", root_path, class: "home, link"
       %li.header_nav_li
-        = link_to "記事一覧", publics_path, class: "article, link"
-      %li.header_nav_li
-        = link_to "リクエスト一覧", requests_path, class: "request, link"
-    %form.search.header_search{action: "#{publics_path}", method: "get"}
-      = label_tag do
-        = text_field_tag "q", params[:q], required: true, autocomplete: "off", id: "field", placeholder: "記事タイトルかタグで検索"
-      %button{type: "submit"}
+        = link_to "Latest Article", publics_path, class: "article, link"
+    %form.search.header_search#search_focus{action: "#{publics_path}", method: "get"}
+      = label_tag nil, class: 'search_label' do
         %i.fas.fa-search
+        = text_field_tag "q", params[:q], required: true, autocomplete: "off", id: "field", placeholder: "Search", class: 'search_field'
   .header-right
     - if user_signed_in?
-      %button.btn
-        = link_to "記事をリクエスト", new_request_path, class: "btn_link"
       %button.btn.btn_blue.link_editor
-        = link_to "記事を書く", new_draft_path, class: "btn_link"
+        = link_to "Write Article", new_draft_path, class: "btn_link"
       %details.header_right_menu
         %summary.user_name
           .user_name_inner
-            = image_tag gravatar_image(current_user), size: 35
-            %span= current_user.name
+            %i.far.fa-user
             %i.fas.fa-caret-down
         .toggle-list
-          = link_to "ダッシュボード", "#{dashboard_path}?period=all"
-          = link_to "アカウント設定", edit_user_registration_path
-          = link_to "ログアウト", destroy_user_session_path, method: :delete
+          = link_to "Dashboard", "#{dashboard_path}?period=all"
+          = link_to "Account Setting", edit_user_registration_path
+          = link_to "Logout", destroy_user_session_path, method: :delete
     - else
       %button.btn.btn_white
-        = link_to "ログイン", new_user_session_path, class: "btn_link"
+        = link_to "Login", new_user_session_path, class: "btn_link"
       %button.btn.btn_blue
-        = link_to "会員登録", "#", class: "btn_link registration_link"
+        = link_to "Sign up", "#", class: "btn_link registration_link"
 .search_show_btn
   %i.fas.fa-search.mobile
 .post_search_header

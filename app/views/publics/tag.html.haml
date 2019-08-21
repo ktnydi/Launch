@@ -1,11 +1,16 @@
 - @page_title = params[:category]
 %main.article_list
+  .article_list_header
+    .container.tag_container
+      %span.page_label= "#{params[:category]}に関するお気に入りの記事を発見しよう！"
+      %h2.page_title= params[:category]
   .article_list_box
-    .container
-      .tag_box
-        %h2.tag_title= "#{params[:category]}"
-        %p.description= "「#{params[:category]}」に関するお気に入りの記事を発見しよう！"
-      %h2.heading_2
-        %span.sharp #
-        新着の投稿
-      = render "share/card", publics: @publics
+    .container.tag_container
+      .container_inner
+        .left_box
+          %h3.side_bar_heading タグ・ランキング
+          = render "share/tag_ranking"
+        .right_box
+          %h3.contents_heading 新着記事
+          .inner
+            = render "share/card", publics: @publics

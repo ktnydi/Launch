@@ -1,11 +1,12 @@
 - @page_title = "閲覧履歴"
 %main.history
+  .history_header
+    .container
+      %span.page_label History
+      %h2.page_title 閲覧履歴
   .history_box
     = render "share/select"
     .container
-      %h2.heading_2
-        %span.sharp #
-        閲覧履歴
       - if @history_publics.length > 0
         = render "share/card", publics: @history_publics
       - else

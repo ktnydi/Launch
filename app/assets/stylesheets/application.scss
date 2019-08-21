@@ -75,8 +75,7 @@ header {
   height: 70px;
   width: 100%;
   padding: 0 16px;
-  border-bottom: 1px solid $border-color;
-  background-color: $white;
+  background-color: $header_background_color;
   position: fixed;
   top: 0;
   z-index: 100;
@@ -107,7 +106,7 @@ header {
     }
     .btn {
       margin-left: 10px;
-      padding: 0 15px;
+      min-width: 100px;
       text-align: center;
       line-height: 40px;
       font-size: 1.4rem;
@@ -118,14 +117,18 @@ header {
       &_link {
         display: block;
         text-decoration: none;
-        color: $font-color;
+        color: $white;
+        transition: .1s;
+        &:hover {
+          color: $primary_color;
+        }
       }
     }
     .btn_white {
       border: 1px solid rgba(0, 0, 0, .05);
-      background-color: #ECEFF1;
+      background-color: $white;
       &:hover {
-        background-color: #e4e8eb;
+        background-color: $hover_white;
       }
       .btn_link {
         color: $font-color;
@@ -133,9 +136,9 @@ header {
     }
     .btn_blue {
       color: $white;
-      background-color: $main-color;
+      background-color: $primary_color;
       &:hover {
-        background-color: #068b7f
+        background-color: $hover_primary_color;
       }
       .btn_link {
         color: $white;
@@ -157,9 +160,8 @@ header {
     display: none;
   }
   &:hover {
-    background-color: rgba(0, 0, 0, .03);
     .user_name_inner .fa-caret-down {
-      color: $font-color;
+      color: $primary_color;
     }
   }
   &[open] > .user_name:before {
@@ -181,22 +183,19 @@ header {
     list-style: none;
     cursor: pointer;
     &_inner {
+      height: 70px;
       font-size: 1.3rem;
       display: flex;
       align-items: center;
-      color: $font-color;
+      color: $white;
     }
-    img {
-      display: inline-block;
-      width: 20px;
-      height: 20px;
-      margin-right: 8px;
-      border-radius: 2px;
-      background-color: $white;
+    .fa-user {
+      font-size: 24px;
+      color: $white;
     }
     .fa-caret-down {
       margin-left: 8px;
-      color: $no_active_color;
+      color: $white;
     }
     &::-webkit-details-marker {
       display: none;
@@ -240,7 +239,7 @@ header {
       color: $font-color;
       transition: all .1s;
       &:hover {
-        background-color: rgba(0, 0, 0, .03);
+        background-color: $hover_white;
       }
     }
   }
@@ -267,7 +266,8 @@ header {
     text-decoration: none;
     font-size: 2.4rem;
     font-weight: bold;
-    color: $font-color;
+    font-family: serif;
+    color: $white;
     @media all and (max-width: 1024px) {
       font-size: 2rem;
     }
@@ -286,21 +286,11 @@ header {
       line-height: 70px;
       text-decoration: none;
       letter-spacing: 1px;
-      color: $no_active_color;
+      color: $white;
       transition: color .1s;
       position: relative;
       &:hover, &.now {
-        color: $font-color;
-      }
-      &:hover {
-      }
-      &.now:before {
-        content: "";
-        width: 100%;
-        height: 3px;
-        background-color: $main-color;
-        position: absolute;
-        bottom: 0;
+        color: $primary_color;
       }
     }
   }
@@ -335,17 +325,17 @@ header {
     font-size: 1.4rem;
     color: $font-color;
     &:hover {
-      background-color: rgba(0, 0, 0, .03);
+      background-color: $hover_white;
     }
     &.current {
       position: relative;
-      background-color: rgba(0, 0, 0, .03);
+      background-color: $hover_white;
       &:before {
         display: block;
         content: '';
         width: 3px;
         height: 50px;
-        background-color: $main-color;
+        background-color: $primary_color;
         position: absolute;
         top: 0;
         right: 0;
@@ -358,26 +348,21 @@ header {
 main {
   width: 100%;
   flex: 1;
-  background-color: #f4f5f7;
+  background-color: $main_background_color;
   &.top_page {
     height: 100vh;
-    background: $main-color;
+    background: $primary_color;
     color: $white;
     position: relative;
     overflow: hidden;
   }
   &.home_wrapper,
-  &.article_list,
-  &.request_list,
-  &.request_detail,
   &.follow,
   &.follower,
-  &.history,
-  &.bookmark,
   &.authenticate_edit_form {
     padding-top: 70px;
     .inner {
-      margin-top: 10px;
+      margin-top: 20px;
     }
   }
   &.post_wrapper {
@@ -387,18 +372,15 @@ main {
 
 .heading_2 {
   font-size: 1.6rem;
-  @media all and (max-width: 896px) {
-    padding: 0 16px;
-  }
-  .sharp {
+  letter-spacing: .3px;
+  .sharp, .icon {
     margin-right: 5px;
-    color: $main-color;
+    color: $primary_color;
   }
 }
 
 .mobile_select_box {
   display: none;
-  padding: 0 16px;
   margin-bottom: 24px;
   position: relative;
   @media all and (max-width: 896px) {
@@ -430,56 +412,71 @@ main {
 }
 
 .article_list_wrapper {
-  border-radius: 3px;
-  border: 1px solid rgba(0, 0, 0, .1);
-  background-color: $white;
+  border-radius: 2px;
+  box-shadow: $highest_box_shadow;
   @media all and (max-width: 896px) {
     border-radius: 0;
     border: none;
-    padding: 0 16px;
   }
   .article + .article {
-    border-top: 1px solid rgba(0, 0, 0, .1);
+    border-top: 1px solid $border-color;
   }
   .article {
+    background-color: $white;
     &:hover {
-      background-color: rgba(0, 0, 0, .02);
+      background-color: $hover_white;
     }
     .link {
       display: block;
-      padding: 10px;
       text-decoration: none;
       color: inherit;
       .article_title {
         font-weight: bold;
-        font-size: 1.4rem;
-        margin-bottom: 5px;
+        font-size: 1.6rem;
+      }
+      .article_content {
+        margin-top: 10px;
+        font-size: 1rem;
+        color: $sub-font-color;
+      }
+      .list_top {
+        padding: 12px 24px 0;
       }
       .list_bottom {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        margin-top: 12px;
+        padding: 12px 24px;
         font-size: 1.2rem;
         color: $sub-font-color;
         &_left {
           display: flex;
           align-items: center;
           flex-wrap: wrap;
-          .author_name {
-            margin-right: 12px;
+          .author_image {
+            width: 20px;
+            height: 20px;
+            border-radius: 2px;
           }
+          .author_name {
+            margin-left: 12px;
+          }
+        }
+        &_right {
+          display: flex;
+          align-items: center;
           .thumbs_up {
             display: flex;
             align-items: center;
             .fa-thumbs-up {
-              margin-right: 5px;
-              color: $main-color;
+              margin:  0 5px 0 10px;
+              color: $primary_color;
             }
           }
-        }
-        .created_at {
-          white-space: nowrap;
+          .created_at {
+            margin-left: 12px;
+            white-space: nowrap;
+          }
         }
       }
     }
@@ -487,24 +484,14 @@ main {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 12px 24px;
       @media all and (max-width: 896px) {
         padding: 12px 0;
       }
-      .author_image {
-        width: 40px;
-        height: 40px;
-        border-radius: 2px;
-        align-self: flex-start;
-      }
       .flex_item {
         flex: 1;
-        margin-left: 24px;
-        @media all and (max-width: 896px) {
-          margin-left: 16px;
-        }
       }
       .tags {
+        margin-top: 10px;
         font-size: 1rem;
         .tag_name {
           padding: 2px 8px;
@@ -565,7 +552,7 @@ main {
         left: 0;
         width: 100%;
         height: 3px;
-        border-bottom: 3px solid $main-color;
+        border-bottom: 3px solid $primary_color;
       }
     }
   }
@@ -621,18 +608,18 @@ main {
     line-height: 30px;
     text-align: center;
     border-radius: 2px;
-    box-shadow: 0 5px 17px 1px rgba(0, 0, 0, 0.1);
-    font-size: 1.2rem;
+    font-size: 1.4rem;
+    letter-spacing: .3px;
   }
   .follow {
-    border: 1px solid $main-color;
-    background-color: $main-color;
+    border: 1px solid $primary_color;
+    background-color: $primary_color;
     color: $white;
   }
   .unfollow {
-    border: 1px solid $main-color;
+    border: 1px solid $primary_color;
     background-color: $white;
-    color: $main-color;
+    color: $primary_color;
   }
 }
 
@@ -678,15 +665,11 @@ main {
 }
 
 .notice {
-  background-color: $sub-color;
+  background-color: $notice_color;
 }
 
 .alert {
-  background-color: #E75252;
-}
-
-.heart, .favorite, .unfavorite {
-  color: $main-color;
+  background-color: $alert_color;
 }
 
 footer {
@@ -696,7 +679,6 @@ footer {
   width: 100%;
   min-height: 50px;
   padding: 0 16px;
-  border-top: 1px solid $border-color;
   background-color: $white;
   @media all and (max-width: 896px) {
     text-align: center;
@@ -757,7 +739,7 @@ footer {
   }
   i {
     font-size: 2rem;
-    color: $font-color;
+    color: $white;
   }
 }
 
@@ -774,8 +756,11 @@ footer {
   align-items: center;
   justify-content: space-between;
   visibility: hidden;
+  transform: translateY(-100%);
+  transition: .15s;
   &.show {
     visibility: visible;
+    transform: translateY(0);
   }
   .mobile_search {
     height: 100%;
@@ -859,12 +844,15 @@ footer {
     width: 25px;
     height: 3px;
     border-radius: 3px;
-    background-color: $font-color;
+    background-color: $white;
     transition: all .3s;
   }
 }
 
 .hamburger.active {
+  .line, .line::before, .line::after {
+    background-color: $header_background_color;
+  }
   .line {
     transform: rotate(-45deg);
     &::before {
@@ -930,7 +918,7 @@ footer {
 
 .search {
   height: 40px;
-  width: 250px;
+  width: 100px;
   margin: 12px auto;
   border-radius: 2px;
   box-shadow: 0 5px 17px 1px rgba(0, 0, 0, 0.05);
@@ -938,34 +926,42 @@ footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: rgba(0, 0, 0, .08);
   position: relative;
-  label {
-    flex-grow: 1;
+  transition: .15s;
+  &.focus{
+    width: 200px;
+    background-color: #434343;
   }
-  input[type=text] {
-    height: 40px;
-    line-height: 40px;
+  &_label {
     width: 100%;
-    padding: 0 24px;
-    font-size: 1.4rem;
-    background-color: transparent;
-    color: $font-color;
-    &::placeholder {
-      color: rgba(0, 0, 0, .3);
+    .fa-search {
       font-size: 1.3rem;
-    }
-  }
-  button[type="submit"] {
-    height: 40px;
-    padding-right: 24px;
-    background-color: transparent;
-    i {
-      font-size: 1.3rem;
-      color: rgba(0, 0, 0, .3);
+      color: $white;
+      position: absolute;
+      top: 50%;
+      left: 10px;
+      transform: translate(0, -50%);
       @media all and (max-width: 896px) {
         font-size: 1.6rem;
       }
+    }
+    .search_field {
+      height: 40px;
+      width: 100%;
+      line-height: 40px;
+      padding: 0 10px 0 35px;
+      font-size: 1.4rem;
+      background-color: transparent;
+      color: $white;
+      &::placeholder {
+        color: $white;
+        font-size: 1.4rem;
+      }
+    }
+  }
+  &.focus {
+    .search_label .search_field::placeholder {
+      color: grey;
     }
   }
 }
@@ -1001,11 +997,26 @@ footer {
 }
 
 // 記事一覧
-.article_list, .history, .bookmark {
+.article_list, .history, .bookmark, .good {
+  margin-top: 70px;
+  &_header {
+    padding: 20px 16px;
+    background-color: $white;
+    box-shadow: $smaller_box_shadow;
+    .page_label {
+      font-size: 1.2rem;
+      color: $sub-font-color;
+    }
+    .page_title {
+      margin-top: 5px;
+      font-size: 2.4rem;
+      letter-spacing: .3px;
+    }
+  }
   &_box {
-    padding: 50px 0;
+    padding: 40px 0;
     @media all and (max-width: 896px) {
-      padding: 24px 0 50px;
+      padding: 24px 16px 50px;
     }
   }
 }
@@ -1052,6 +1063,10 @@ footer {
     text-align: center;
     text-decoration: none;
     color: $sub-font-color;
+    transition: .1s;
+    &:hover {
+      color: $primary_color;
+    }
   }
   .prev-page {
     position: absolute;

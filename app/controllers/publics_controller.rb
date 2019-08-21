@@ -37,6 +37,11 @@ class PublicsController < ApplicationController
     end
   end
 
+  def multiple_destroy
+    @publics = Public.where(article_token: params[:article_ids])
+    @publics.delete_all
+  end
+
   def tag
     @publics = Public.where("category LIKE ?", "%#{params[:category]}%").order("created_at DESC").page(params[:page]).per(20)
     if @publics.count < 1
