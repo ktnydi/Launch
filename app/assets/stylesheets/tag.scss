@@ -1,0 +1,66 @@
+@import "variables";
+
+.article_list_header, .article_list_box {
+  .tag_container {
+    max-width: 1024px;
+    .container_inner {
+      display: flex;
+      align-items: flex-start;
+      .right_box {
+        margin-left: 80px;
+        .contents_heading {
+          font-size: 16px;
+        }
+        .inner {
+          margin-top: 20px;
+        }
+      }
+      .left_box {
+        min-width: 280px;
+        .side_bar_heading {
+          font-size: 16px;
+        }
+        .tag_ranking {
+          margin-top: 20px;
+          border-radius: 2px;
+          box-shadow: $highest_box_shadow;
+          .tag_link {
+            padding: 12px 24px;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: $font-color;
+            background-color: $white;
+            &:hover {
+              background-color: $hover_white;
+            }
+            .rank {
+              min-width: 20px;
+              line-height: 20px;
+              text-align: center;
+              margin-right: 10px;
+              color: $sub-font-color;
+            }
+            .rank1, .rank2, .rank3 {
+              width: 30px;
+              line-height: 30px;
+              font-weight: bold;
+              &:before {
+                font-family: 'Font Awesome 5 Free';
+                font-weight: 'bold';
+                content: '\f5a2';
+                margin-right: 5px;
+              }
+            }
+            .rank1 { color: #FFD700; }
+            .rank2 { color: #C0C0C0; }
+            .rank3 { color: #C47222;}
+            .tag_name {
+              font-size: 1.4rem;
+            }
+          }
+        }
+      }
+    }
+  }
+}

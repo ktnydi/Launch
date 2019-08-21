@@ -50,19 +50,6 @@
           .article_not_found
             %h3.article_not_found_head 公開されている記事がありません。
             %p.article_not_found_message アクセスが多い記事はここに表示されます。
-      .box.interest_tag_article_box
-        %h2.interest_tag_article_heading.heading_2
-          よく使われるタグ
-        - if Public.tag_ranking.length > 0
-          .inner
-            .tag_ranking
-              - Public.tag_ranking(20).each do |tag_name, _|
-                = link_to tags_path(tag_name), class: "tag_link" do
-                  .tag_name= tag_name
-        - else
-          .article_not_found
-            %h3.article_not_found_head 公開されている記事がありません。
-            %p.article_not_found_message 多く使われているタグはここに表示されます。
       .box
         %h2.latest_article_heading.heading_2
           最近投稿された記事
