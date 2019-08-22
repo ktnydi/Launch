@@ -1,8 +1,10 @@
 class PublicsController < ApplicationController
   require 'securerandom'
   before_action :authenticate_user!, only: [:create, :destroy, :history, :good]
+  before_action :set_public, only: [:show, :destroy]
   before_action :confirm_params, only: [:show]
   before_action :create_access_analysis, only: [:show]
+
   def index
     @publics = Public.all.order(created_at: :desc).page(params[:page]).per(20)
     if params[:q]
@@ -11,7 +13,6 @@ class PublicsController < ApplicationController
   end
 
   def show
-    @public = Public.find_by(article_token: params[:article_token])
     @comment = Comment.new
   end
 
@@ -31,7 +32,6 @@ class PublicsController < ApplicationController
   end
 
   def destroy
-    @public = Public.find_by(article_token: params[:article_token])
     if @public.destroy
       redirect_to dashboard_article_path + "?mode=public"
     end
@@ -65,6 +65,10 @@ class PublicsController < ApplicationController
   end
 
   :private
+    def set_public
+      @public = Public.find_by(article_token: params[:article_token])
+    end
+
     def public_params
       params.require(:public).permit(:article_token, :title, :category, :content)
     end
