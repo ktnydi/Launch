@@ -1,10 +1,7 @@
 class DraftsController < ApplicationController
   require 'securerandom'
   before_action :authenticate_user!
-  before_action :set_draft, only: [:show, :edit, :update, :destroy]
-
-  def show
-  end
+  before_action :set_draft, only: [:edit, :update, :destroy]
 
   def new
     @draft = Draft.new
