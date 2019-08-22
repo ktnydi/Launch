@@ -402,8 +402,8 @@
 .comment_edit_form {
   padding: 0 0 24px;
   margin: 0 16px;
-  border-radius: 2px;
-  box-shadow: $highest_box_shadow;
+  border-top: 1px solid $border-color;
+  border-bottom: 1px solid $border-color;
   background-color: $white;
   @media all and (min-width: 1024px) {
     margin: 0;
@@ -419,20 +419,14 @@
       color: $no_active_color;
       cursor: pointer;
     }
+    .preview_show_btn {
+      border-left: 1px solid $border-color;
+    }
     .comment_edit_btn.current, .preview_show_btn.current {
       z-index: 1;
       font-weight: bold;
       color: $font-color;
     }
-    .comment_edit_btn.current {
-      box-shadow: 5px 0 5px -5px rgba(0, 0, 0, 0.25);
-    }
-    .preview_show_btn.current {
-      box-shadow: -5px 0 5px -5px rgba(0, 0, 0, 0.25);
-    }
-  }
-  .comment_form {
-    padding: 0 24px;
   }
 }
 
@@ -561,9 +555,6 @@
   font-size: 1.6rem;
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
-  @media all and (max-width: 896px) {
-    padding: 0 16px;
-  }
 }
 
 .comment_form .comment_edit_area, .comment_update_form textarea, .preview_area {
@@ -576,6 +567,7 @@
   border: 1px solid $border-color;
   font-family: 'Lato', sans-serif;
   resize: none;
+  background-color: #fafafa;
   .placeholder {
     color: $sub-font-color;
   }
