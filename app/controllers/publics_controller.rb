@@ -17,14 +17,13 @@ class PublicsController < ApplicationController
   end
 
   def create
-    @public = Public.new(public_params)
-    unless @public.article_token.present?
-      @public.article_token = SecureRandom.hex(10)
-    end
-    @public.user_token = current_user.uuid
+    @public = current_user.publics.new(public_params)
+    @public.article_token = SecureRandom.hex(10) unless @public.article_token.present?
     if @public.save
-      draft = Draft.find_by(article_token: @public.article_token)
-      draft&.destroy
+      if draft = Draft.find_by(article_token: @public.article_token)
+        draft.destroy
+      end
+      
       render json: { url: dashboard_article_path + '?mode=public' }
     else
       render json: @public.errors.full_messages, status: :unprocessable_entity
