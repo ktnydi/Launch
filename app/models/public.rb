@@ -19,6 +19,15 @@ class Public < ApplicationRecord
     likes.find_by(user_token: user_token)
   end
 
+  scope :history_articles, -> (current_user) do
+    joins(:access_analyses)
+      .select("publics.*, max(access_analyses.created_at) as last_access_time")
+      .where("access_analyses.user_token = ?", current_user.uuid)
+      .group("publics.id, access_analyses.article_token")
+      .order("last_access_time desc")
+      .limit(40)
+  end
+
   scope :get_trend_articles, -> (period = "") do
     joins(:access_analyses)
       .select("publics.*, count(access_analyses.article_token) as count")

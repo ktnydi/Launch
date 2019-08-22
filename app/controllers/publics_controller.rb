@@ -42,21 +42,12 @@ class PublicsController < ApplicationController
   end
 
   def tag
-    @publics = Public.where("category LIKE ?", "%#{params[:category]}%").order("created_at DESC").page(params[:page]).per(20)
-    if @publics.count < 1
-      redirect_to root_path
-    end
+    @publics = Public.where(category: params[:category]).order("created_at DESC").page(params[:page]).per(20)
+    redirect_to root_path unless @publics.length > 0
   end
 
   def history
-    @history_publics = Public.joins(:access_analyses)
-                             .select("publics.*, max(access_analyses.created_at) as last_access_time")
-                             .where("access_analyses.user_token = ?", current_user.uuid)
-                             .group("publics.id, access_analyses.article_token")
-                             .order("last_access_time desc")
-                             .limit(40)
-                             .page(params[:page])
-                             .per(20)
+    @history_publics = Public.history_articles(current_user).page(params[:page]).per(20)
   end
 
   def good
