@@ -9,9 +9,8 @@ class DraftsController < ApplicationController
   end
 
   def create
-    @draft = Draft.new(draft_params)
+    @draft = current_user.drafts.new(draft_params)
     @draft.article_token = SecureRandom.hex(10)
-    @draft.user_token = current_user.uuid
     if @draft.save
       render json: { url: dashboard_article_path + "?mode=draft" }
     else
