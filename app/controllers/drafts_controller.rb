@@ -1,9 +1,9 @@
 class DraftsController < ApplicationController
   require 'securerandom'
   before_action :authenticate_user!
+  before_action :set_draft, only: [:show, :edit, :update, :destroy]
 
   def show
-    @draft = Draft.find_by(article_token: params[:article_token])
   end
 
   def new
@@ -23,12 +23,10 @@ class DraftsController < ApplicationController
   end
 
   def edit
-    @draft = Draft.find_by(article_token: params[:article_token])
     render layout: "editor"
   end
 
   def update
-    @draft = Draft.find_by(article_token: params[:article_token])
     @draft.assign_attributes(draft_params)
     if @draft.save
       render json: { url: dashboard_article_path }
@@ -38,7 +36,6 @@ class DraftsController < ApplicationController
   end
 
   def destroy
-    @draft = Draft.find_by(article_token: params[:article_token])
     if @draft.destroy
       redirect_to dashboard_article_path + "?mode=draft"
     end
@@ -50,6 +47,10 @@ class DraftsController < ApplicationController
   end
 
   :private
+    def set_draft
+      @draft = Draft.find_by(article_token: params[:article_token])
+    end
+
     def draft_params
       params.require(:draft).permit(:title, :category, :content)
     end
