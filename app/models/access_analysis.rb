@@ -1,5 +1,5 @@
 class AccessAnalysis < ApplicationRecord
-  belongs_to :public, foreign_key: "article_token"
+  belongs_to :public, foreign_key: "article_token", counter_cache: true
 
   scope :access_within_date_range, -> (beginning_of_date) do
     where("created_at > ?", beginning_of_date)
