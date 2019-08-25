@@ -23,7 +23,7 @@ class PublicsController < ApplicationController
       if draft = Draft.find_by(article_token: @public.article_token)
         draft.destroy
       end
-      
+
       render json: { url: dashboard_article_path + '?mode=public' }
     else
       render json: @public.errors.full_messages, status: :unprocessable_entity

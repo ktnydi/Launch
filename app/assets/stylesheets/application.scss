@@ -1094,9 +1094,9 @@ footer {
 
 .article_not_found {
   padding: 100px 16px;
-  margin: 10px 0 0;
+  margin: 20px 0 0;
   text-align: center;
-  border: 1px solid $border-color;
+  box-shadow: $highest_box_shadow;
   border-radius: 2px;
   background-color: $white;
   @media all and (max-width: 896px) {
