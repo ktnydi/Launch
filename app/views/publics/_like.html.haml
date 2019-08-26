@@ -1,7 +1,4 @@
-/
-  ログイン中のユーザーが存在し、
-  閲覧している記事にいいね済みか？
-- if current_user && public.like_user(current_user.uuid)
+- if current_user && current_user.liked_article?(public)
   = link_to public_unlike_path(public.article_token), remote: true, method: :delete, class: "btn good gooding" do
     %i.fas.fa-check
     %p.count

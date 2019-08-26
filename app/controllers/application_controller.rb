@@ -9,8 +9,6 @@ class ApplicationController < ActionController::Base
       1.week.ago
     when "month"
       1.month.ago
-    when "all"
-      100.years.ago
     else
       1.day.ago
     end

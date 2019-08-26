@@ -62,6 +62,10 @@ class User < ApplicationRecord
     followings.find_by(uuid: user.uuid).present?
   end
 
+  def liked_article?(article)
+    liked_article.find_by(article_token: article.article_token)
+  end
+
   def create_uuid
     self.uuid = SecureRandom.hex(10) if self.uuid.empty?
   end
