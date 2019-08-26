@@ -15,10 +15,6 @@ class Public < ApplicationRecord
   validates :content, presence: true, length: { maximum: 10000 }
   validates :user_token, presence: true
 
-  def like_user(user_token)
-    likes.find_by(user_token: user_token)
-  end
-
   scope :history_articles, -> (current_user) do
     joins(:access_analyses)
       .select("publics.*, max(access_analyses.created_at) as last_access_time")
