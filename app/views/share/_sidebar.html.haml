@@ -26,11 +26,11 @@
         = link_to "アカウント設定", edit_user_registration_path, class: "edit_user_link"
 .box
   - if controller_name == "users"
-    = link_to "ダッシュボード", "#{dashboard_path}?period=all", class: "sidebar_link"
+    = link_to "ダッシュボード", dashboard_path, class: "sidebar_link"
     = link_to "高く評価した記事", goods_path, class: "sidebar_link"
     = link_to "ブックマーク", bookmarks_path, class: "sidebar_link"
     = link_to "閲覧履歴", history_path, class: "sidebar_link"
   - else
-    = link_to "アクセス解析", "#{dashboard_path}?period=all", class: "sidebar_link"
+    = link_to "アクセス解析", dashboard_path, class: "sidebar_link"
     = link_to "記事の管理", dashboard_article_path + "?mode=draft", class: "sidebar_link"
     = link_to "コメント一覧", dashboard_comment_path, class: "sidebar_link"
