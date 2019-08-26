@@ -31,16 +31,8 @@ class Public < ApplicationRecord
   scope :get_trend_articles, -> (period = "") do
     joins(:access_analyses)
       .select("publics.*, count(access_analyses.article_token) as count")
-      .where("access_analyses.created_at > ?", period)
+      .where("access_analyses.created_at > ?", 29.days.ago)
       .group("publics.id, access_analyses.article_token")
-      .order("count DESC")
-  end
-
-  scope :get_trend_article_sources, -> (period = "") do
-    get_trend_articles(period).first
-      .access_analyses
-      .select("count(access_source) as count, access_source as source")
-      .group(:access_source)
       .order("count DESC")
   end
 
