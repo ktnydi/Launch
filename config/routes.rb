@@ -7,8 +7,10 @@ Rails.application.routes.draw do
               omniauth_callbacks: 'omniauth_callbacks'
               }
   root 'users#index'
-  resources :drafts, param: :article_token, except: [:index]
+  resources :drafts, param: :article_token, except: [:index, :show]
+  post '/drafts/multiple' => 'drafts#multiple_destroy'
   resources :publics, param: :article_token, except: [:new, :edit, :update]
+  post '/publics/multiple' => 'publics#multiple_destroy'
   get '/terms' => 'terms#index'
   resources :publics, param: :article_token do
     post '/like' => 'likes#create'

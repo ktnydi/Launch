@@ -108,7 +108,7 @@
     }
     .restore_btn {
       cursor: pointer;
-      color: $main-color;
+      color: $primary_color;
       &:hover {
         text-decoration: underline;
       }
@@ -173,14 +173,13 @@
       margin-bottom: 0;
     }
   }
-  & >:first-child {
+  & > :first-child {
     margin-top: 0;
     padding: 0;
     border: none;
   }
   h1, h2 {
     margin: 50px 0 24px;
-    padding-top: 50px;
     font-size: 2.2rem;
     @media all and (max-width: 896px) {
       font-size: 2rem;
@@ -188,7 +187,6 @@
   }
   h1 {
     font-size: 2.6rem;
-    border-top: 1px solid $border-color;
   }
   h3 {
     margin: 24px 0;
@@ -208,10 +206,10 @@
   }
   a {
     text-decoration: none;
-    color: $main-color;
+    color: $primary_color;
   }
   ol, ul {
-    padding-left: 1em;
+    padding-left: 2em;
     li {
       margin: 0;
       line-height: 1.8em;
@@ -245,10 +243,12 @@
   pre {
     margin: 24px 0;
     code {
-      padding: 12px;
+      padding: 15px 25px;
       line-height: 1.7em;
+      border-radius: 10px;
       background-color: #282c34;
       color: #abb2bf;
+      -webkit-overflow-scrolling: touch;
     }
   }
   blockquote {
@@ -268,8 +268,7 @@
   }
 }
 
-.comment_content {
-  margin-top: 15px;
+.comment_content, .preview_area {
   * {
     font-size: 1.4rem;
   }
@@ -304,7 +303,7 @@
   padding: 24px;
   box-shadow: 0 2px 17px 1px rgba(0, 0, 0, 0.12);
   font-size: 1.3rem;
-  background-color: #E75252;
+  background-color: $alert_color;
   color: $white;
   position: fixed;
   right: 0;

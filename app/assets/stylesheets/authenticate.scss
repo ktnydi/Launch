@@ -25,7 +25,7 @@
       display: block;
       width: 100%;
       height: 5px;
-      background-color: $main-color;
+      background-color: $primary_color;
     }
   }
   h2 {
@@ -113,11 +113,11 @@
       &::after {
         height: 2px;
         transform: scale(1);
-        background-color: $main-color;
+        background-color: $primary_color;
       }
       label {
         transform: translateY(-20px) scale(.8);
-        color: $main-color;
+        color: $primary_color;
       }
     }
   }
@@ -148,11 +148,11 @@
     box-shadow: 0 5px 17px 1px rgba(0, 0, 0, 0.1);
     border-radius: 2px;
     font-size: 1.4rem;
-    background-color: $main-color;
+    background-color: $primary_color;
     color: $white;
     cursor: pointer;
     &:hover {
-      background-color: #068b7f
+      background-color: $hover_primary_color;
     }
   }
   .edit_submit {
@@ -173,7 +173,7 @@
     a {
       cursor: pointer;
       text-decoration: none;
-      color: $main-color;
+      color: $primary_color;
     }
   }
   .term {
@@ -251,7 +251,7 @@
     .avatar_setting {
       margin-left: 10px;
       .link_gravatar {
-        color: $main-color;
+        color: $primary_color;
       }
     }
   }
@@ -267,10 +267,10 @@
     text-decoration: none;
     box-shadow: 0 5px 17px 1px rgba(0, 0, 0, 0.1);
     font-size: 1.4rem;
-    background-color: #d14a4a;
+    background-color: $delete_color;
     color: $white;
     &:hover {
-      background-color: #c24242;
+      background-color: $hover_delete_color;
     }
   }
 }

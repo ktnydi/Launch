@@ -1,11 +1,12 @@
-- @page_title = "閲覧履歴"
-%main.history
-  .history_box
+- @page_title = "高評価した記事"
+%main.good
+  .good_header
+    .container
+      %span.page_label Good
+      %h2.page_title 高評価した記事
+  .good_box
     = render "share/select"
     .container
-      %h2.heading_2
-        %span.sharp #
-        高く評価した記事
       - if @good_articles.length > 0
         = render "share/card", publics: @good_articles
       - else

@@ -1,10 +1,11 @@
 - @page_title = "記事一覧"
 %main.article_list
+  .article_list_header
+    .container
+      %span.page_label Latest Article
+      %h2.page_title 最新記事
   .article_list_box
     .container
-      %h2.heading_2
-        %span.sharp #
-        記事一覧
       - if @publics.length > 0
         = render "share/card", publics: @publics
       - else

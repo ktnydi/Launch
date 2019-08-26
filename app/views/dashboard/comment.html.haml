@@ -1,6 +1,5 @@
 .inner
   .article_comment
-    %h2.article_comment_heading コメント一覧
     .article_comment_top
       .flex_item.article_comment_user_name ユーザー名
       .flex_item.article_comment_content 内容
@@ -11,7 +10,7 @@
         .article_comment_box
           = link_to public_path(comment.article_token), class: "article_comment_link" do
             .flex_item.article_comment_user_name= comment.user.name
-            .flex_item.article_comment_content!= (markdown comment.content).gsub(/<.*?>/, "").truncate(80)
+            .flex_item.article_comment_content= strip_tags markdown comment.content.truncate(80)
             .flex_item.article_comment_title= comment.public.title.truncate(30)
             .flex_item.article_comment_created_at= comment.created_at.strftime("%Y-%m-%d")
     - else

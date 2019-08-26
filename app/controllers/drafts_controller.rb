@@ -1,10 +1,7 @@
 class DraftsController < ApplicationController
   require 'securerandom'
   before_action :authenticate_user!
-
-  def show
-    @draft = Draft.find_by(article_token: params[:article_token])
-  end
+  before_action :set_draft, only: [:edit, :update, :destroy]
 
   def new
     @draft = Draft.new
@@ -12,23 +9,20 @@ class DraftsController < ApplicationController
   end
 
   def create
-    @draft = Draft.new(draft_params)
+    @draft = current_user.drafts.new(draft_params)
     @draft.article_token = SecureRandom.hex(10)
-    @draft.user_token = current_user.uuid
     if @draft.save
-      render json: { url: dashboard_article_path }
+      render json: { url: dashboard_article_path + "?mode=draft" }
     else
       render json: @draft.errors.full_messages, status: :unprocessable_entity
     end
   end
 
   def edit
-    @draft = Draft.find_by(article_token: params[:article_token])
     render layout: "editor"
   end
 
   def update
-    @draft = Draft.find_by(article_token: params[:article_token])
     @draft.assign_attributes(draft_params)
     if @draft.save
       render json: { url: dashboard_article_path }
@@ -38,13 +32,21 @@ class DraftsController < ApplicationController
   end
 
   def destroy
-    @draft = Draft.find_by(article_token: params[:article_token])
     if @draft.destroy
       redirect_to dashboard_article_path + "?mode=draft"
     end
   end
 
+  def multiple_destroy
+    @drafts = Draft.where(article_token: params[:article_ids])
+    @drafts.delete_all
+  end
+
   :private
+    def set_draft
+      @draft = Draft.find_by(article_token: params[:article_token])
+    end
+
     def draft_params
       params.require(:draft).permit(:title, :category, :content)
     end

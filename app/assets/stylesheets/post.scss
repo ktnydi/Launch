@@ -1,29 +1,25 @@
 @import "variables";
 
-.heading .sharp {
-  color: $main-color;
-  margin-right: 5px;
-}
-
 .bookmark_btn {
   margin-top: 10px;
   .btn {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 60px;
     height: 60px;
-    line-height: 60px;
-    text-align: center;
     border-radius: 50%;
     font-size: 2rem;
-    color: $white;
     cursor: pointer;
   }
   .unbookmark {
     background-color: #555;
+    color: $white;
   }
   .bookmark {
-    background-color: #aaa;
-    color: $white;
+    border: 1px solid #333;
+    background-color: $white;
+    color: #333;
   }
 }
 
@@ -57,21 +53,25 @@
         flex-direction: column;
         align-items: center;
         .btn {
+          margin-top: 0;
           border-radius: 50%;
           text-decoration: none;
           box-shadow: 0 2px 2px 1px rgba(0, 0, 0, 0.08);
         }
-        .good {
+        .good_btn {
+          margin-top: 0;
           width: 60px;
           height: 60px;
-          .heart {
+          .good {
             display: flex;
             align-items: center;
             justify-content: center;
-            height: 60px;
-            border: 1px solid $main-color;
+            width: 100%;
+            height: 100%;
+            border: 1px solid $primary_color;
             position: relative;
             background-color: $white;
+            color: $primary_color;
             .fa-thumbs-up {
               font-size: 2rem;
             }
@@ -82,8 +82,8 @@
               transform: translate(-50%, -150%);
               color: $sub-font-color;
             }
-            &.gooded {
-              background-color: $main-color;
+            &.gooding {
+              background-color: $primary_color;
               color: $white;
             }
           }
@@ -92,16 +92,16 @@
           display: flex;
           align-items: center;
           justify-content: center;
-          width: 50px;
-          height: 50px;
+          width: 40px;
+          height: 40px;
           margin-top: 10px;
           color: $white;
         }
         .twitter {
-          background-color: #00acee;
+          color: $twitter_color;
         }
         .facebook {
-          background-color: #3B5998;
+          color: $facebook_color;
         }
       }
     }
@@ -125,15 +125,11 @@
       display: none;
     }
     .inner {
-      .box {
-        &_heading {
-          font-size: 1.8rem;
-          padding: 24px 24px 0;
-        }
-      }
       .toc_box {
         .toc {
-          padding: 24px;
+          margin: 24px;
+          padding-left: 24px;
+          border-left: 1px solid $border-color;
           .heading1, .heading2, .heading3 {
             list-style: none;
             & > li > a {
@@ -209,28 +205,52 @@
   }
 }
 
-.box_content {
-  margin-bottom: 60px;
+.dots_wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 80px;
+  .dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background-color: #333;
+  }
+  .dot + .dot {
+    margin-left: 8px;
+  }
+}
+
+.article_bottom_box {
+  margin-top: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .author_name, .created_at {
+    font-size: 1.4rem;
+    color: $sub-font-color;
+    letter-spacing: .3px;
+  }
+  .created_at {
+    margin-top: 5px;
+  }
 }
 
 .article_tags {
-  margin: 24px 0;
+  margin-top: 20px;
   .tag_link {
     margin-right: 12px;
     display: inline-flex;
     align-items: center;
     text-decoration: none;
-    background-color: rgba(0, 0, 0, .05);
+    border: 1px solid $border-color;
     border-radius: 2px;
     color: $font-color;
-    &:hover {
-      background-color: rgba(0, 0, 0, .08);
-    }
   }
   .tag_name {
     line-height: 30px;
     padding: 0 10px;
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     cursor: pointer;
   }
 }
@@ -239,6 +259,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-top: 10px;
   font-size: 1.4rem;
   color: $sub-font-color;
   @media all and (max-width: 896px) {
@@ -251,10 +272,66 @@
   }
 }
 
+.user_action_bottom {
+  width: 100%;
+  margin-top: 20px;
+  .share_btn_box {
+    margin-top: 20px;
+    text-align: center;
+  }
+  .good, .bookmark {
+    margin: 0;
+  }
+  .good_btn_bottom {
+    .good {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      width: 150px;
+      height: 40px;
+      margin: 0 auto;
+      border: 1px solid $primary_color;
+      border-radius: 2px;
+      color: $primary_color;
+      .count {
+        margin-left: 10px;
+      }
+      &.gooding {
+        background-color: $primary_color;
+        color: $white;
+      }
+    }
+  }
+  .bookmark_btn {
+    margin: 0;
+  }
+  .bookmark_btn .bookmark, .bookmark_btn .unbookmark, .twitter, .facebook {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    margin: 0 5px;
+    font-size: 1.6rem;
+    border: none;
+    border-radius: 50%;
+    text-decoration: none;
+    box-shadow: 0 2px 2px 1px rgba(0, 0, 0, 0.08);
+  }
+  .twitter {
+    color: $twitter_color;
+  }
+  .facebook {
+    color: $facebook_color;
+  }
+}
+
 .article_box_bottom {
   width: 100%;
   max-width: 720px;
-  margin: 0 auto;
+  margin: 40px auto 0;
+  border-top: 1px solid $border-color;
 }
 
 // 記事関連のボタン
@@ -304,34 +381,6 @@
   }
 }
 
-.share_btn_wrapper {
-  display: flex;
-  align-items: center;
-  .share_for_sns {
-    display: flex;
-    align-items: center;
-    a {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 50px;
-      height: 30px;
-      padding: 5px 0;
-      margin-right: 8px;
-      border-radius: 2px;
-      text-decoration: none;
-    }
-    .twitter {
-      background-color: #00acee;
-      color: $white;
-    }
-    .facebook {
-      background-color: #3B5998;
-      color: $white;
-    }
-  }
-}
-
 // コメント
 .comment_list_wrapper {
   @media all and (max-width: 896px) {
@@ -350,6 +399,37 @@
   }
 }
 
+.comment_edit_form {
+  padding: 0 0 24px;
+  margin: 0 16px;
+  border-top: 1px solid $border-color;
+  border-bottom: 1px solid $border-color;
+  background-color: $white;
+  @media all and (min-width: 1024px) {
+    margin: 0;
+  }
+  .toggle_view_btn_box {
+    display: flex;
+    align-items: 'center';
+    .view_btn {
+      padding: 10px;
+      flex: 1;
+      text-align: center;
+      font-size: 1.2rem;
+      color: $no_active_color;
+      cursor: pointer;
+    }
+    .preview_show_btn {
+      border-left: 1px solid $border-color;
+    }
+    .comment_edit_btn.current, .preview_show_btn.current {
+      z-index: 1;
+      font-weight: bold;
+      color: $font-color;
+    }
+  }
+}
+
 .comment_form_wrapper, .comment_edit_child_modal {
   .comment_form_header {
     display: flex;
@@ -361,8 +441,8 @@
     }
   }
   .comment_form_bottom {
-    margin-top: 12px;
-    text-align: right;
+    margin-top: 20px;
+    text-align: center;
     @media all and (max-width: 896px) {
       text-align: center;
     }
@@ -373,8 +453,12 @@
       border-radius: 2px;
       cursor: pointer;
       box-shadow: 0 5px 17px 1px rgba(0, 0, 0, 0.1);
-      background-color: $main-color;
+      background-color: $primary_color;
       color: $white;
+      transition: .1s;
+      &:hover {
+        background-color: $hover_primary_color;
+      }
     }
   }
 }
@@ -391,20 +475,15 @@
   }
 }
 .comment {
-  padding: 24px;
-  margin-top: 24px;
-  border: 1px solid $border-color;
-  border-radius: 2px;
+  padding: 24px 0;
+  border-top: 1px solid $border-color;
   background-color: $white;
-  @media all and (max-width: 896px) {
-    padding: 16px;
+  &:first-child {
+    margin-top: 80px;
   }
   &:last-child {
-    margin-bottom: 0;
+    border-bottom: 1px solid $border-color;
   }
-}
-.comment + .comment {
-  margin-top: 24px;
 }
 .comment_user {
   display: flex;
@@ -416,8 +495,8 @@
     display: flex;
     align-items: center;
     img {
-      width: 25px;
-      height: 25px;
+      width: 30px;
+      height: 30px;
       margin-right: 12px;
       border-radius: 2px;
     }
@@ -431,17 +510,41 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    button {
-      font-size: 1rem;
+    .comment_update_btn, .comment_delete_btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width:30px;
+      height: 30px;
+      margin-left: 10px;
+      box-shadow:  0 1px 4px 0 rgba(0, 0, 0, 0.25);
+      border-radius: 50%;
+      font-size: 1.2rem;
       cursor: pointer;
-      background-color: transparent;
-      color: $sub-font-color;
-    }
-    a {
       text-decoration: none;
-      color: $sub-font-color;
+      background-color: $white;
+      transition: .1s;
+      &:hover {
+        background-color: #eee;
+        .icon {
+          color: $white;
+        }
+      }
+      .icon {
+        color: $sub-font-color;
+        transition: .1s;
+      }
+    }
+    .comment_update_btn:hover {
+      background-color: $edit_color;
+    }
+    .comment_delete_btn:hover {
+      background-color: $delete_color;
     }
   }
+}
+.comment_content {
+  padding-top: 24px;
 }
 
 // コメントフォーム
@@ -452,22 +555,28 @@
   font-size: 1.6rem;
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
-  @media all and (max-width: 896px) {
-    padding: 0 16px;
-  }
 }
 
-.comment_form textarea, .comment_update_form textarea {
+.comment_form .comment_edit_area, .comment_update_form textarea, .preview_area {
   display: block;
   width: 100%;
   height: 100%;
   padding: 12px;
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   line-height: 1.8em;
   border: 1px solid $border-color;
-  background-color: rgba(0, 0, 0, .02);
   font-family: 'Lato', sans-serif;
   resize: none;
+  background-color: #fafafa;
+  .placeholder {
+    color: $sub-font-color;
+  }
+}
+
+.comment_form {
+  .comment_edit_area.hide, .preview_area.hide {
+    display: none;
+  }
 }
 
 // コメント編集フォーム

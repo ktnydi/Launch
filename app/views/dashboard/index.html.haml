@@ -5,22 +5,22 @@
     .box
       %h3.access_count 24時間
       %p.value
-        = access_count("day")
+        = access_count_since 1.day.ago
         %span.pv PV
     .box
       %h3.access_count 1週間
       %p.value
-        = access_count("week")
+        = access_count_since 1.week.ago
         %span.pv PV
     .box
       %h3.access_count 1ヶ月間
       %p.value
-        = access_count("month")
+        = access_count_since 1.month.ago
         %span.pv PV
     .box
       %h3.access_count 全体
       %p.value
-        = access_count("")
+        = access_count_all_day
         %span.pv PV
 .inner.divide
   .access_analyses
@@ -30,11 +30,13 @@
       %canvas.chartjs#chartjs
   .access_source
     %h2.access_source_heading 上位のアクセス元
-    - if @access_analyses
-      - @access_analyses.each do |access_analysis|
+    - if most_access_article_sources
+      - most_access_article_sources.each do |source|
+        - p "="*100
+        - pp source
         .access_source_box
-          = link_to access_analysis.source, access_analysis.source, class: "access_source_path"
-          %span.percent= "(#{(access_analysis.count * 100.0 / @sum_access).round(1)}%)"
+          = link_to source.access_source, source.access_source, class: "access_source_path"
+          %span.percent= "(#{(source.pv * 100.0 / many_access_articles.first.pv).round(1)}%)"
     - else
       .access_not_found
         アクセスデータがありません
@@ -42,12 +44,12 @@
   .access_article
     %h2.access_article_heading
       アクセスが多い記事
-    - if @trend_articles.length > 0
-      - @trend_articles.each do |article|
-        = link_to public_path(article), class: "access_article_link" do
+    - if many_access_articles.length > 0
+      - many_access_articles.each do |article|
+        = link_to public_path(article.article_token), class: "access_article_link" do
           .flex_item
             %h3.title= article.title
-            %span.pv= "アクセス数：#{article.count}pv"
+            %span.pv= "アクセス数：#{article.pv}pv"
           %span.created_at= article.created_at.strftime("%Y-%m-%d")
     - else
       .access_not_found
@@ -76,10 +78,10 @@
             label: "アクセス数",
             data: access_counts,
             backgroundColor: [
-              'rgba(0, 150, 136, .3)'
+              'rgba(84, 191, 118, 0.3)'
             ],
             borderColor: [
-              'rgba(0, 150, 136, 1)'
+              'rgb(84, 191, 118)'
             ],
             borderWidth: 1,
             lineTension: 0,

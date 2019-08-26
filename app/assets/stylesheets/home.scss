@@ -2,20 +2,27 @@
 
 .home_wrapper {
   .home_contents {
+    max-width: 1200px;
     width: 100%;
     margin: 0 auto;
+    padding: 40px 0;
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
+    @media all and (max-width: 896px) {
+      flex-direction: column;
+    }
+    @media all and (max-width: 1024px) {
+      padding: 40px 16px;
+    }
     &_left {
-      width: 280px;
-      height: calc(100vh - 70px);
-      border-right: 1px solid $border-color;
+      width: 250px;
+      box-shadow: $highest_box_shadow;
       border-radius: 2px;
       background-color: $white;
       position: sticky;
       position: -webkit-sticky;
-      top: 70px;
+      top: 110px;
       left: 0;
       z-index: 90;
       @media all and (max-width: 896px) {
@@ -23,10 +30,9 @@
       }
     }
     &_center {
-      width: 100%;
-      max-width: 780px;
-      margin: 24px auto;
-      padding: 0 16px;
+      flex: 1;
+      margin: 0 auto;
+      padding: 0 0 0 25px;
       @media all and (max-width: 896px) {
         padding: 0;
       }
@@ -34,18 +40,22 @@
         margin-bottom: 60px;
       }
     }
+    &_right {
+      width: 250px;
+      margin-left: 25px;
+      @media all and (max-width: 896px) {
+        margin: 0;
+        width: 100%;
+      }
+    }
   }
 }
 
 .recommend_registration {
-  border-top: 3px solid $main-color;
-  box-shadow: 0 2px 2px 1px rgba(0, 0, 0, 0.08);
+  box-shadow: $highest_box_shadow;
   padding: 24px;
   text-align: center;
   background-color: $white;
-  @media all and (max-width: 896px) {
-    margin: 0 16px;
-  }
   &_heading {
     font-size: 2rem;
     letter-spacing: .5px;
@@ -57,8 +67,6 @@
     color: $sub-font-color;
   }
   .authenticate_user {
-    display: inline-flex;
-    flex-direction: column;
     &_registration, &_login {
       width: 150px;
       height: 40px;
@@ -72,29 +80,24 @@
       }
     }
     &_registration {
-      background-color: $main-color;
+      background-color: $primary_color;
       &:hover {
-        background-color: #068b7f;
+        background-color: $hover_primary_color;
       }
       &_link {
         display: block;
         color: $white;
       }
     }
-    &_login {
-      border: 1px solid rgba(0, 0, 0, .05);
-      background-color: #ECEFF1;
-      &:hover {
-        background-color: #e4e8eb;
-      }
-      &_link {
-        color: $font-color;
-      }
-    }
-    .or {
-      margin: 5px 0;
-      font-size: 1rem;
+    .login {
+      margin-top: 15px;
+      font-size: 1.2rem;
       color: $sub-font-color;
+      &_link {
+        margin-left: 10px;
+        text-decoration: none;
+        color: $primary_color;
+      }
     }
   }
 }
@@ -106,43 +109,21 @@
     justify-content: space-between;
     .select_period_btn_wrapper {
       display: flex;
+      .select_period {
+        font-size: 1.4rem;
+        color: $font-color;
+      }
       .period_btn {
-        display: block;
-        padding: 2px 8px;
+        margin-left: 15px;
         font-weight: normal;
-        font-size: 1.2rem;
+        font-size: 1.4rem;
         text-decoration: none;
         color: $no_active_color;
         &.show {
-          border-radius: 2px;
-          border: 1px solid $border-color;
-          color: $font-color;
-          background-color: rgba(0, 0, 0, .03);
+          font-weight: bold;
+          color: $primary_color;
         }
       }
-    }
-  }
-}
-
-.tag_ranking {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  @media all and (max-width: 896px) {
-    padding: 0 16px;
-  }
-  .tag_link {
-    line-height: 30px;
-    padding: 0 10px;
-    margin: 0 12px 10px 0;
-    text-decoration: none;
-    font-size: 1.4rem;
-    border-radius: 2px;
-    background-color: rgba(0, 0, 0, .05);
-    color: $font-color;
-    &:hover {
-      background-color: rgba(0, 0, 0, .08);
     }
   }
 }
@@ -156,11 +137,13 @@
   text-align: center;
   text-decoration: none;
   font-size: 1.4rem;
-  box-shadow: 0 5px 17px 1px rgba(0, 0, 0, 0.1);
-  background-color: #FFA726;
-  color: $white;
+  border: 1px solid $primary_color;
+  background-color: $main_background_color;
+  color: $primary_color;
+  transition: .1s;
   &:hover {
-    background-color: #ed9a20;
+    background-color: $primary_color;
+    color: $white;
   }
 }
 
@@ -231,18 +214,18 @@
     line-height: 45px;
     font-size: 1.4rem;
     border-radius: 2px;
-    background-color: $main-color;
+    background-color: $primary_color;
     color: $white;
     cursor: pointer;
     &:hover {
-      background-color: #068b7f;
+      background-color: $hover_primary_color;
     }
   }
   .term {
     margin: 12px 0;
     font-size: 1.4rem;
     a {
-      color: $main-color;
+      color: $primary_color;
       text-decoration: none;
     }
   }
@@ -273,10 +256,10 @@
       border-radius: 2px;
       text-decoration: none;
       color: $white;
-      background-color: rgba(0, 172, 238, 1);
+      background-color: $twitter_color;
       position: relative;
       &:hover {
-        background-color: rgba(0, 172, 238, 0.8);
+        background-color: $hover_twitter_color;
       }
       i {
         margin-left: 24px;
@@ -294,6 +277,6 @@
   .link a {
     text-decoration: none;
     font-size: 1.4rem;
-    color: $main-color;
+    color: $primary_color;
   }
 }

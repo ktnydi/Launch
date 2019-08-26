@@ -15,23 +15,20 @@ class Public < ApplicationRecord
   validates :content, presence: true, length: { maximum: 10000 }
   validates :user_token, presence: true
 
-  def like_user(user_token)
-    likes.find_by(user_token: user_token)
+  scope :history_articles, -> (current_user) do
+    joins(:access_analyses)
+      .select("publics.*, max(access_analyses.created_at) as last_access_time")
+      .where("access_analyses.user_token = ?", current_user.uuid)
+      .group("publics.id, access_analyses.article_token")
+      .order("last_access_time desc")
+      .limit(40)
   end
 
   scope :get_trend_articles, -> (period = "") do
     joins(:access_analyses)
       .select("publics.*, count(access_analyses.article_token) as count")
-      .where("access_analyses.created_at > ?", period)
+      .where("access_analyses.created_at > ?", 29.days.ago)
       .group("publics.id, access_analyses.article_token")
-      .order("count DESC")
-  end
-
-  scope :get_trend_article_sources, -> (period = "") do
-    get_trend_articles(period).first
-      .access_analyses
-      .select("count(access_source) as count, access_source as source")
-      .group(:access_source)
       .order("count DESC")
   end
 

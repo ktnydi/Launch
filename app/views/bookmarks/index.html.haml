@@ -1,11 +1,12 @@
 - @page_title = "ブックマーク"
 %main.bookmark
+  .bookmark_header
+    .container
+      %span.page_label Bookmark
+      %h2.page_title ブックマーク
   .bookmark_box
     = render "share/select"
     .container
-      %h2.heading_2
-        %span.sharp #
-        ブックマーク
       - if @bookmark_publics.length > 0
         = render "share/card", publics: @bookmark_publics
       - else

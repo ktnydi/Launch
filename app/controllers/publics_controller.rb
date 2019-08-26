@@ -1,8 +1,10 @@
 class PublicsController < ApplicationController
   require 'securerandom'
   before_action :authenticate_user!, only: [:create, :destroy, :history, :good]
+  before_action :set_public, only: [:show, :destroy]
   before_action :confirm_params, only: [:show]
   before_action :create_access_analysis, only: [:show]
+
   def index
     @publics = Public.all.order(created_at: :desc).page(params[:page]).per(20)
     if params[:q]
@@ -11,19 +13,17 @@ class PublicsController < ApplicationController
   end
 
   def show
-    @public = Public.find_by(article_token: params[:article_token])
     @comment = Comment.new
   end
 
   def create
-    @public = Public.new(public_params)
-    unless @public.article_token.present?
-      @public.article_token = SecureRandom.hex(10)
-    end
-    @public.user_token = current_user.uuid
+    @public = current_user.publics.new(public_params)
+    @public.article_token = SecureRandom.hex(10) unless @public.article_token.present?
     if @public.save
-      draft = Draft.find_by(article_token: @public.article_token)
-      draft&.destroy
+      if draft = Draft.find_by(article_token: @public.article_token)
+        draft.destroy
+      end
+
       render json: { url: dashboard_article_path + '?mode=public' }
     else
       render json: @public.errors.full_messages, status: :unprocessable_entity
@@ -31,28 +31,23 @@ class PublicsController < ApplicationController
   end
 
   def destroy
-    @public = Public.find_by(article_token: params[:article_token])
     if @public.destroy
       redirect_to dashboard_article_path + "?mode=public"
     end
   end
 
+  def multiple_destroy
+    @publics = Public.where(article_token: params[:article_ids])
+    @publics.delete_all
+  end
+
   def tag
-    @publics = Public.where("category LIKE ?", "%#{params[:category]}%").order("created_at DESC").page(params[:page]).per(20)
-    if @publics.count < 1
-      redirect_to root_path
-    end
+    @publics = Public.where(category: params[:category]).order("created_at DESC").page(params[:page]).per(20)
+    redirect_to root_path unless @publics.length > 0
   end
 
   def history
-    @history_publics = Public.joins(:access_analyses)
-                             .select("publics.*, max(access_analyses.created_at) as last_access_time")
-                             .where("access_analyses.user_token = ?", current_user.uuid)
-                             .group("publics.id, access_analyses.article_token")
-                             .order("last_access_time desc")
-                             .limit(40)
-                             .page(params[:page])
-                             .per(20)
+    @history_publics = Public.history_articles(current_user).page(params[:page]).per(20)
   end
 
   def good
@@ -60,6 +55,10 @@ class PublicsController < ApplicationController
   end
 
   :private
+    def set_public
+      @public = Public.find_by(article_token: params[:article_token])
+    end
+
     def public_params
       params.require(:public).permit(:article_token, :title, :category, :content)
     end
