@@ -11,17 +11,14 @@ class DashboardController < ApplicationController
                             .access_within_date_range(29.days.ago.beginning_of_day)
                             .map{ |date, count|
                               # DBがsqliteの時は、dateが文字列で渡される。(development)
-                              return [date.strftime("%Y-%m-%d"), count] unless date.class == String
-                              [date, count]
+                              next [date, count] if date.class == String
+                              [date.strftime("%Y-%m-%d"), count]
                             }.to_h
     last_month = {}
     29.downto(0).each do |i|
       day = i.day.ago.beginning_of_day
-      if access_count = count_by_created_at[day.strftime("%Y-%m-%d")]
-        last_month[day.strftime("%m/%d")] = access_count
-      else
-        last_month[day.strftime("%m/%d")] = 0
-      end
+      access_count = count_by_created_at[day.strftime("%Y-%m-%d")]
+      last_month[day.strftime("%m/%d")] = access_count || 0
     end
 
     gon.last_month = last_month
