@@ -32,8 +32,6 @@
     %h2.access_source_heading 上位のアクセス元
     - if most_access_article_sources
       - most_access_article_sources.each do |source|
-        - p "="*100
-        - pp source
         .access_source_box
           = link_to source.access_source, source.access_source, class: "access_source_path"
           %span.percent= "(#{(source.pv * 100.0 / many_access_articles.first.pv).round(1)}%)"
