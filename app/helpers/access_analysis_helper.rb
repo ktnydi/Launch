@@ -4,6 +4,7 @@ module AccessAnalysisHelper
     current_user.publics.pluck(:access_analyses_count).sum
   end
 
+  # Following's code should fix letter.
   def user_analyses_since(period)
     article_tokens = current_user.publics.pluck(:article_token)
     AccessAnalysis.where(article_token: article_tokens).where("created_at > ?", period)
