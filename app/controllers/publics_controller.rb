@@ -30,7 +30,7 @@ class PublicsController < ApplicationController
     end
   end
 
-  def multiple_destroy
+  def destroy
     @publics = Public.where(article_token: params[:article_ids])
     @publics.delete_all
   end

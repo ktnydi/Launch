@@ -1,10 +1,10 @@
 - if user_signed_in?
   - if Bookmark.find_by(user_token: current_user.uuid, article_token: @public.article_token)
-    = link_to public_unbookmarks_path(@public.article_token), method: :delete, remote: true, class: "btn unbookmark" do
+    = link_to unbookmark_public_path(@public.article_token), method: :delete, remote: true, class: "btn unbookmark" do
       %i.far.fa-bookmark
   - else
-    = link_to public_bookmarks_path(@public.article_token), method: :post, remote: true, class: "btn bookmark" do
+    = link_to bookmark_public_path(@public.article_token), method: :post, remote: true, class: "btn bookmark" do
       %i.far.fa-bookmark
 - else
-  = link_to public_bookmarks_path(@public.article_token), method: :post, remote: true, class: "btn bookmark" do
+  = link_to bookmark_public_path(@public.article_token), method: :post, remote: true, class: "btn bookmark" do
     %i.far.fa-bookmark

@@ -31,7 +31,7 @@ class DraftsController < ApplicationController
     end
   end
 
-  def multiple_destroy
+  def destroy
     @drafts = Draft.where(article_token: params[:article_ids])
     @drafts.delete_all
   end

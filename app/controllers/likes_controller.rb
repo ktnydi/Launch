@@ -3,7 +3,7 @@ class LikesController < ApplicationController
   before_action :post
 
   def create
-    @like = current_user && current_user.likes.new(article_token: params[:public_article_token])
+    @like = current_user && current_user.likes.new(article_token: params[:article_token])
     respond_to do |format|
       if @like.save
         format.js
@@ -13,7 +13,7 @@ class LikesController < ApplicationController
   end
 
   def destroy
-    @like = current_user.likes.find_by(article_token: params[:public_article_token])
+    @like = current_user.likes.find_by(article_token: params[:article_token])
     respond_to do |format|
       if @like.destroy
         format.js
@@ -24,6 +24,6 @@ class LikesController < ApplicationController
 
   private
     def post
-      @public = Public.find_by(article_token: params[:public_article_token])
+      @public = Public.find_by(article_token: params[:article_token])
     end
 end

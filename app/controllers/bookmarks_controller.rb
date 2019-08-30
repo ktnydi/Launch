@@ -7,7 +7,7 @@ class BookmarksController < ApplicationController
   end
 
   def create
-    bookmark = current_user.bookmarks.new(article_token: params[:public_article_token])
+    bookmark = current_user.bookmarks.new(article_token: params[:article_token])
     if bookmark.save
       respond_to do |format|
         format.js { render 'bookmark' }
@@ -17,7 +17,7 @@ class BookmarksController < ApplicationController
   end
 
   def destroy
-    bookmark = current_user.bookmarks.find_by(article_token: params[:public_article_token])
+    bookmark = current_user.bookmarks.find_by(article_token: params[:article_token])
     if bookmark.destroy
       respond_to do |format|
         format.js { render 'bookmark' }
@@ -28,6 +28,6 @@ class BookmarksController < ApplicationController
 
   private
     def get_public
-      @public = Public.find_by(article_token: params[:public_article_token])
+      @public = Public.find_by(article_token: params[:article_token])
     end
 end
