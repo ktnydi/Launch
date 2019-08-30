@@ -2,6 +2,6 @@
   %select.select_link
     %option.select_link_option{data: {url: root_path}} トレンド
     - if user_signed_in?
-      %option.select_link_option{data: {url: goods_path}} 高く評価した記事
+      %option.select_link_option{data: {url: likes_path}} 高く評価した記事
       %option.select_link_option{data: {url: bookmarks_path}} ブックマークした記事
       %option.select_link_option{data: {url: history_path}} 閲覧履歴

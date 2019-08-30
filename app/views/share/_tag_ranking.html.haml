@@ -1,7 +1,7 @@
 - if Public.tag_ranking.length > 0
   .tag_ranking
     - Public.tag_ranking(10).keys.each_with_index do |tag_name, idx|
-      = link_to tags_path(tag_name), class: "tag_link" do
+      = link_to tag_path(tag_name), class: "tag_link" do
         .rank{class: "rank#{idx + 1}"}= "#{idx + 1}."
         .tag_name= tag_name
 - else

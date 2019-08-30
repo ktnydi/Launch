@@ -37,9 +37,10 @@ Rails.application.routes.draw do
   end
   resources :likes, only: [:index]
   get '/bookmarks' => 'bookmarks#index', as: "bookmarks"
-  get '/tags/:category' => 'publics#tag', as: "tags"
-  get '/history' => 'publics#history', as: "history"
-  get '/goods' => 'publics#good', as: "goods"
+  scope module: 'article' do
+    resources :tags, param: :category, only: [:show]
+    get '/history' => 'history#index', as: 'history'
+  end
 
   # Around Comment
   post '/comment/:article_token' => 'comments#create'

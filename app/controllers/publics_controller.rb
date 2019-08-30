@@ -35,19 +35,6 @@ class PublicsController < ApplicationController
     @publics.delete_all
   end
 
-  def tag
-    @publics = Public.where("category LIKE ?", "%#{params[:category]}%").order("created_at DESC").page(params[:page]).per(20)
-    redirect_to root_path unless @publics.length > 0
-  end
-
-  def history
-    @history_publics = Public.history_articles(current_user).page(params[:page]).per(20)
-  end
-
-  def good
-    @good_articles = current_user.liked_article.page(params[:page]).per(20)
-  end
-
   :private
     def set_public
       @public = Public.find_by(article_token: params[:article_token])
