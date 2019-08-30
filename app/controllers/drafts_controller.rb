@@ -1,7 +1,7 @@
 class DraftsController < ApplicationController
   require 'securerandom'
   before_action :authenticate_user!
-  before_action :set_draft, only: [:edit, :update, :destroy]
+  before_action :set_draft, only: [:edit, :update]
 
   def new
     @draft = Draft.new
@@ -28,12 +28,6 @@ class DraftsController < ApplicationController
       render json: { url: dashboard_article_path }
     else
       render json: @draft.errors.full_messages, status: :unprocessable_entity
-    end
-  end
-
-  def destroy
-    if @draft.destroy
-      redirect_to dashboard_article_path + "?mode=draft"
     end
   end
 

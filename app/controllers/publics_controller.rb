@@ -1,7 +1,7 @@
 class PublicsController < ApplicationController
   require 'securerandom'
-  before_action :authenticate_user!, only: [:create, :destroy, :history, :good]
-  before_action :set_public, only: [:show, :destroy]
+  before_action :authenticate_user!, only: [:create, :history, :good]
+  before_action :set_public, only: [:show]
   before_action :confirm_params, only: [:show]
   before_action :create_access_analysis, only: [:show]
 
@@ -27,12 +27,6 @@ class PublicsController < ApplicationController
       render json: { url: dashboard_article_path + '?mode=public' }
     else
       render json: @public.errors.full_messages, status: :unprocessable_entity
-    end
-  end
-
-  def destroy
-    if @public.destroy
-      redirect_to dashboard_article_path + "?mode=public"
     end
   end
 
