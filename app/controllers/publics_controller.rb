@@ -23,7 +23,7 @@ class PublicsController < ApplicationController
       if draft = Draft.find_by(article_token: @public.article_token)
         draft.destroy
       end
-      
+
       render json: { url: dashboard_article_path + '?mode=public' }
     else
       render json: @public.errors.full_messages, status: :unprocessable_entity
@@ -42,7 +42,7 @@ class PublicsController < ApplicationController
   end
 
   def tag
-    @publics = Public.where(category: params[:category]).order("created_at DESC").page(params[:page]).per(20)
+    @publics = Public.where("category LIKE ?", "%#{params[:category]}%").order("created_at DESC").page(params[:page]).per(20)
     redirect_to root_path unless @publics.length > 0
   end
 
