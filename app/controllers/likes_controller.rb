@@ -1,6 +1,6 @@
 class LikesController < ApplicationController
   before_action :authenticate_user!
-  before_action :post
+  before_action :set_public, except: [:index]
 
   def index
     @likes = current_user.liked_article.page(params[:page]).per(20)
@@ -27,7 +27,7 @@ class LikesController < ApplicationController
   end
 
   private
-    def post
+    def set_public
       @public = Public.find_by(article_token: params[:article_token])
     end
 end
