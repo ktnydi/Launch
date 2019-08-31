@@ -1,6 +1,6 @@
 class FollowsController < ApplicationController
   before_action :authenticate_user!
-  before_action :user
+  before_action :set_user
 
   def create
     @follow = current_user.active_follows.create(
@@ -38,7 +38,7 @@ class FollowsController < ApplicationController
   end
 
   private
-    def user
+    def set_user
       @user = User.find_by(uuid: params[:user_id])
     end
 end
