@@ -10,7 +10,7 @@ class LikesController < ApplicationController
     @like = current_user && current_user.likes.new(article_token: params[:article_token])
     respond_to do |format|
       if @like.save
-        format.js
+        format.js { render 'like' }
         format.html
       end
     end
@@ -20,7 +20,7 @@ class LikesController < ApplicationController
     @like = current_user.likes.find_by(article_token: params[:article_token])
     respond_to do |format|
       if @like.destroy
-        format.js
+        format.js { render 'like' }
         format.html
       end
     end

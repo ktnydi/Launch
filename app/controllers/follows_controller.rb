@@ -8,7 +8,7 @@ class FollowsController < ApplicationController
               )
     respond_to do |format|
       if @follow
-        format.js
+        format.js { render 'follow'}
         format.html
       end
     end
@@ -20,7 +20,7 @@ class FollowsController < ApplicationController
               )
     respond_to do |format|
       if @follow.destroy
-        format.js
+        format.js { render 'follow' }
         format.html
       end
     end
