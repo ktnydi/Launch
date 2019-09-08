@@ -1,4 +1,5 @@
 class Public < ApplicationRecord
+  include Search
   self.primary_key = "article_token"
 
   has_many :likes, foreign_key: "article_token" ,dependent: :destroy
@@ -36,14 +37,6 @@ class Public < ApplicationRecord
     tag = article.category.split(",").first
     current_article_token = article.article_token
     self.where("category LIKE ?", "%#{tag}%").where.not(article_token: current_article_token).order(created_at: :desc)
-  end
-
-  scope :search, -> (query) do
-    rel = order(created_at: :desc)
-    if query.present?
-      rel = rel.where("title LIKE ? OR category LIKE ?", "%#{query}%", "%#{query}%")
-    end
-    rel
   end
 
   scope :tag_lists, -> (uniquness: false) do

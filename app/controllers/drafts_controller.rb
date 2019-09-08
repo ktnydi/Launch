@@ -1,7 +1,7 @@
 class DraftsController < ApplicationController
   require 'securerandom'
   before_action :authenticate_user!
-  before_action :set_draft, only: [:edit, :update, :destroy]
+  before_action :set_draft, only: [:edit, :update]
 
   def new
     @draft = Draft.new
@@ -32,12 +32,6 @@ class DraftsController < ApplicationController
   end
 
   def destroy
-    if @draft.destroy
-      redirect_to dashboard_article_path + "?mode=draft"
-    end
-  end
-
-  def multiple_destroy
     @drafts = Draft.where(article_token: params[:article_ids])
     @drafts.delete_all
   end
