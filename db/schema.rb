@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 2019_09_08_025110) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "access_analyses", force: :cascade do |t|
     t.string "article_token", null: false
     t.string "access_source", null: false
