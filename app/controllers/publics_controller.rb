@@ -1,7 +1,7 @@
 class PublicsController < ApplicationController
   require 'securerandom'
-  before_action :authenticate_user!, only: [:create, :destroy, :history, :good]
-  before_action :set_public, only: [:show, :destroy]
+  before_action :authenticate_user!, only: [:create, :history, :good]
+  before_action :set_public, only: [:show]
   before_action :confirm_params, only: [:show]
   before_action :create_access_analysis, only: [:show]
 
@@ -23,7 +23,7 @@ class PublicsController < ApplicationController
       if draft = Draft.find_by(article_token: @public.article_token)
         draft.destroy
       end
-      
+
       render json: { url: dashboard_article_path + '?mode=public' }
     else
       render json: @public.errors.full_messages, status: :unprocessable_entity
@@ -31,27 +31,8 @@ class PublicsController < ApplicationController
   end
 
   def destroy
-    if @public.destroy
-      redirect_to dashboard_article_path + "?mode=public"
-    end
-  end
-
-  def multiple_destroy
     @publics = Public.where(article_token: params[:article_ids])
     @publics.delete_all
-  end
-
-  def tag
-    @publics = Public.where(category: params[:category]).order("created_at DESC").page(params[:page]).per(20)
-    redirect_to root_path unless @publics.length > 0
-  end
-
-  def history
-    @history_publics = Public.history_articles(current_user).page(params[:page]).per(20)
-  end
-
-  def good
-    @good_articles = current_user.liked_article.page(params[:page]).per(20)
   end
 
   :private

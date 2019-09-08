@@ -26,7 +26,7 @@ class DashboardController < ApplicationController
 
   def article
     @articles = params[:mode] == "public" ? current_user.publics : current_user.drafts
-    @articles = @articles.search(params[:q]).page(params[:page]).per(1)
+    @articles = @articles.search(params[:q]).page(params[:page]).per(10)
 
     respond_to do |format|
       format.js

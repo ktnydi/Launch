@@ -7,8 +7,8 @@
   .good_box
     = render "share/select"
     .container
-      - if @good_articles.length > 0
-        = render "share/card", publics: @good_articles
+      - if @likes.length > 0
+        = render "share/card", publics: @likes
       - else
         .article_not_found
           %h3.article_not_found_head 高く評価した記事がありません。

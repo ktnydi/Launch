@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
   const delete_draft_articles = (article_ids) => {
     const authenticity_token = document.getElementsByName('authenticity_token')[0].value
-    fetch('/drafts/multiple', {
+    fetch('/drafts/destroy', {
       method: 'POST',
       credentials: 'same-origin',
       headers: {
@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
 
   const delete_public_articles = (article_ids) => {
     const authenticity_token = document.getElementsByName('authenticity_token')[0].value
-    fetch('/publics/multiple', {
+    fetch('/publics/destroy', {
       method: 'POST',
       credentials: 'same-origin',
       headers: {
