@@ -33,6 +33,7 @@
 # Ignore other unneeded file
 .DS_Store
 vendor/bundle
+postgres-data
 
 /public/packs
 /public/packs-test
