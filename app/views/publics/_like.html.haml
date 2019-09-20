@@ -1,10 +1,10 @@
 - if current_user && current_user.liked_article?(public)
-  = link_to public_unlike_path(public.article_token), remote: true, method: :delete, class: "btn good gooding" do
+  = link_to unlike_public_path(public.article_token), remote: true, method: :delete, class: "btn good gooding" do
     %i.fas.fa-check
     %p.count
       = public.likes.count
 - else
-  = link_to public_like_path(public.article_token), remote: true, method: :post, class: "btn good" do
+  = link_to like_public_path(public.article_token), remote: true, method: :post, class: "btn good" do
     %i.far.fa-thumbs-up
     %p.count
       = public.likes.count

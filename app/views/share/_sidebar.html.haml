@@ -27,7 +27,7 @@
 .box
   - if controller_name == "users"
     = link_to "ダッシュボード", dashboard_path, class: "sidebar_link"
-    = link_to "高く評価した記事", goods_path, class: "sidebar_link"
+    = link_to "高く評価した記事", likes_path, class: "sidebar_link"
     = link_to "ブックマーク", bookmarks_path, class: "sidebar_link"
     = link_to "閲覧履歴", history_path, class: "sidebar_link"
   - else
