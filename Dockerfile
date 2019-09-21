@@ -8,9 +8,9 @@ RUN apt-get install -y nodejs npm build-essential libpq-dev postgresql yarn
 
 RUN mkdir /app
 WORKDIR /app
-COPY Gemfile Gemfile
-COPY Gemfile.lock Gemfile.lock
-RUN bundle install --path vendor/bundle
+COPY Gemfile /app/Gemfile
+COPY Gemfile.lock /app/Gemfile.lock
+RUN bundle install
 COPY . /app
 
 # Add a script to be executed every time the container starts.
@@ -20,4 +20,4 @@ ENTRYPOINT ["entrypoint.sh"]
 EXPOSE 3000
 
 # Start the main process.
-CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0"]
+CMD ["rails", "server", "-b", "0.0.0.0"]
