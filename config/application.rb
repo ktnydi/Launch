@@ -24,7 +24,7 @@ module Launch
       g.skip_routes true
     end
 
-    config.hosts << "https://applaza.herokuapp.com"
+    config.hosts << "applaza.herokuapp.com"
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
