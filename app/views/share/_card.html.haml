@@ -19,7 +19,7 @@
                 %span.count= public.likes.count
               %span.created_at= public.created_at.strftime("%Y-%m-%d")
 
-- if controller_name != "users" && publics && publics.total_pages > 1
+- if controller_name != "home" && publics && publics.total_pages > 1
   .paginate
     = link_to_prev_page publics, "", class: "prev-page"
     - unless publics.out_of_range?
