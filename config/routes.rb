@@ -6,7 +6,7 @@ Rails.application.routes.draw do
               registrations: 'registrations',
               omniauth_callbacks: 'omniauth_callbacks'
               }
-  resources :users, only: [:index] do
+  resources :users, only: [:show] do
     resources :follows, only: [:create, :destroy]
   end
   get '/follows' => 'follows#follow', as: "follows_list"
