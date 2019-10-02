@@ -3,7 +3,7 @@
   %nav
     - if user_signed_in?
       .nav_link
-        = link_to "ホーム", users_path
+        = link_to "ホーム", root_path
         = link_to "記事一覧", publics_path
         = link_to "ダッシュボード", "#{dashboard_path}?period=all"
         = link_to "アカウント設定", edit_user_registration_path
