@@ -14,25 +14,22 @@
             .user-blog__user-status-label Follower
             %p.user-blog__user-status-count= current_user ? current_user.passive_follows.count : 0
     .user-blog__user-articles-section
-      %h2.user-blog__section-title 新着記事
-      .user-blog__user-articles
-        - @articles.each do |article|
-          .user-article
-            = link_to public_path(article), class: "user-article__article--link" do
-              .user-article--right
-                = image_tag gravatar_image(@user), size: 40, class: "user-blog__user-image--small"
-              .user-blog__user-article--left
-                .user-article__title= article.title
+      .user-blog__user-articles-section-inner
+        %h2.user-blog__section-title 投稿した記事
+        .user-blog__user-articles
+          - @articles.each do |article|
+            .user-article
+              .user-article__article-inner
                 .user-article__article-status
-                  %span.user-article__author= article.user.name
-                  %span.user-article__article-analytics
-                    %span.user-article__like-count
-                      %i.far.fa-thumbs-up
-                      = article.likes.count
-                    %span.user-article__created= article.created_at.strftime("%Y-%m-%d")
-      - if @articles && @articles.total_pages > 1
-        .user-blog__user-article-paginate
-          = link_to_prev_page @articles, "前のページ", class: "user-blog__prev-page"
-          - unless @articles.out_of_range?
-            .now_page= "#{@articles.current_page}/#{@articles.total_pages}"
-          = link_to_next_page @articles, "次のページ", class: "user-blog__next-page"
+                  %span.user-article__created= article.created_at.strftime("%Y-%m-%d")
+                  %span.user-article__like
+                    %i.far.fa-thumbs-up.user-article__like-icon
+                    %span.user-article__like-count= article.likes.count
+                .user-article__title= article.title
+                %p.user-article__content= strip_tags markdown article.content.truncate(180)
+                = link_to "続きを見る", public_path(article), class: "user-article__article-link"
+        .user-blog__user-articles-paginate
+          = link_to_prev_page @articles, "< 前のページ", class: "user-blog__prev-page" do
+            %span.user-blog__prev-page--disable < 前のページ
+          = link_to_next_page @articles, "次のページ >", class: "user-blog__next-page" do
+            %span.user-blog__next-page--disable 次のページ >

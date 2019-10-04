@@ -49,8 +49,40 @@
     color: $primary_color;
   }
   &__user-articles-section {
-    width: 600px;
-    margin: 0 auto;
+    flex: 1;
+    padding-left: 30px;
+  }
+  &__user-articles-section-inner {
+  }
+  &__user-articles-paginate {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+  }
+  &__prev-page, &__next-page {
+    text-decoration: none;
+    color: inherit;
+    width: 50%;
+    &:hover {
+      text-decoration: underline;
+    }
+    &--disable {
+      width: 50%;
+      color: $no_active_color;
+    }
+  }
+  &__prev-page {
+    text-align: left;
+    &--disable {
+      text-align: left;
+    }
+  }
+  &__next-page {
+    text-align: right;
+    &--disable {
+      text-align: right;
+    }
   }
   &__user-articles {
     margin-top: 10px;
