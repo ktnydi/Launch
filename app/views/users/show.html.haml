@@ -13,6 +13,13 @@
           = link_to followers_list_path, class: "user-blog__user-status-link" do
             .user-blog__user-status-label Follower
             %p.user-blog__user-status-count= @user.passive_follows.count
+      .user-blog__user-using-tags-box
+        .user-blog__box-inner
+          %h2.user-blog__box-title よく使うタグ
+          .user-blog__tags
+            .user-blog__tag # tagname1 (123)
+            .user-blog__tag # tagname2 (34)
+            .user-blog__tag # tagname3 (2)
     .user-blog__user-articles-section
       .user-blog__user-articles-section-inner
         %h2.user-blog__section-title 投稿した記事

@@ -48,6 +48,27 @@
     font-size: 2.4rem;
     color: $primary_color;
   }
+  &__user-using-tags-box {
+    margin-top: 20px;
+    box-shadow: $highest_box_shadow;
+    border-radius: 10px;
+    background-color: $white;
+  }
+  &__box-inner {
+    margin-top: 15px;
+  }
+  &__box-title {
+    padding: 15px 15px 0;
+    font-size: 1.2rem;
+    color: $sub-font-color;
+  }
+  &__tag + &__tag {
+    border-top: 1px solid $border-color;
+  }
+  &__tag {
+    padding: 15px;
+    font-size: 1.4rem;
+  }
   &__user-articles-section {
     flex: 1;
     padding-left: 30px;
