@@ -1,6 +1,7 @@
 class Public < ApplicationRecord
   include Search
   self.primary_key = "article_token"
+  serialize :category
 
   has_many :likes, foreign_key: "article_token" ,dependent: :destroy
   has_many :liked_users, through: :likes, source: :user
@@ -15,6 +16,8 @@ class Public < ApplicationRecord
   validates :category, presence: true, length: { maximum: 20 }
   validates :content, presence: true, length: { maximum: 10000 }
   validates :user_token, presence: true
+
+  before_save :category_to_hash
 
   scope :history_articles, -> (current_user) do
     joins(:access_analyses)
@@ -57,4 +60,9 @@ class Public < ApplicationRecord
     end
     tag_ranking.sort_by(&:last).reverse[0..(num - 1)].to_h
   end
+
+  private
+    def category_to_hash
+      self.category = self.category.split(",")
+    end
 end
