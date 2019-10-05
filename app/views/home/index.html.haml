@@ -34,9 +34,7 @@
                     .list_top
                       %p.article_title= article.title
                       %p.article_content= strip_tags markdown article.content.truncate(160)
-                      .tags
-                        - article.category.split(',').each do |tag|
-                          %span.tag_name= tag
+                      .tags=make_tag article.category
                     .list_bottom
                       .list_bottom_left
                         = image_tag gravatar_image(article.user), size: 20, class: 'author_image'
