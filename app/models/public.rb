@@ -50,7 +50,9 @@ class Public < ApplicationRecord
     tag_ranking = all_tags.uniq.map do |tag_name|
       [tag_name, all_tags.count(tag_name)]
     end
-    tag_ranking.sort_by(&:last).reverse[0..(num - 1)].to_h
+    tag_ranking.sort_by(&:last).reverse[0..(num - 1)].map do |tag|
+      {name: tag[0], count: tag[1]}
+    end
   end
 
   private
