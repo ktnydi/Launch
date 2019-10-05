@@ -46,13 +46,9 @@ class Public < ApplicationRecord
     self.all.pluck(:category).flatten
   end
 
-  scope :tag_count, -> (tag_name) do
-    all_tags.count(tag_name)
-  end
-
   scope :tag_ranking, -> (num = 1) do
     tag_ranking = all_tags.uniq.map do |tag_name|
-      [tag_name, tag_count(tag_name)]
+      [tag_name, all_tags.count(tag_name)]
     end
     tag_ranking.sort_by(&:last).reverse[0..(num - 1)].to_h
   end
