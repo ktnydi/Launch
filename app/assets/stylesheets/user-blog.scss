@@ -69,6 +69,13 @@
     padding: 15px;
     font-size: 1.4rem;
   }
+  &__tag-link {
+    text-decoration: none;
+    color: inherit;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
   &__user-articles-section {
     flex: 1;
     padding-left: 30px;
