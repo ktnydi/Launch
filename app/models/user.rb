@@ -2,6 +2,7 @@ class User < ApplicationRecord
   require "securerandom"
   self.primary_key = "uuid"
 
+  has_one :image, foreign_key: "user_token",dependent: :destroy
   has_many :drafts, foreign_key: "user_token", dependent: :destroy
   has_many :publics, foreign_key: "user_token", dependent: :destroy
   has_many :comments, foreign_key: "user_token", dependent: :destroy
