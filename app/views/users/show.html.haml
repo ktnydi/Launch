@@ -17,9 +17,9 @@
         .user-blog__box-inner
           %h2.user-blog__box-title よく使うタグ
           .user-blog__tags
-            .user-blog__tag # tagname1 (123)
-            .user-blog__tag # tagname2 (34)
-            .user-blog__tag # tagname3 (2)
+            - Public.tag_ranking(user_token: @user.uuid).each do |tag|
+              .user-blog__tag
+                = link_to "# #{tag[:name].truncate(10)} (#{tag[:count]})", tag_path(tag[:name]), class: "user-blog__tag-link"
     .user-blog__user-articles-section
       .user-blog__user-articles-section-inner
         %h2.user-blog__section-title 投稿した記事
