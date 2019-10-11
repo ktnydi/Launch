@@ -21,10 +21,7 @@
           .actions
             = f.submit "更新", class: "edit_submit"
         .gravatar
-          - if current_user.image.filename.present? && current_user.image.file.present?
-            = image_tag show_image_user_images_path(current_user), width: 50, height: 50, alt: "user image", class: "avatar"
-          - else
-            = image_tag gravatar_image(current_user), size: 35, class: "avatar"
+          = image_tag avatar(current_user), size: 35, class: "avatar"
           .avatar_setting
             = form_with url: user_images_path(current_user), method: :put, data: {remote: false} do |f|
               = f.file_field :file, accespt: "image/jpeg"
