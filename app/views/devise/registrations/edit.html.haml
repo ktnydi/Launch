@@ -20,11 +20,17 @@
               Currently waiting confirmation for: #{resource.unconfirmed_email}
           .actions
             = f.submit "更新", class: "edit_submit"
-          .gravatar
+        .gravatar
+          - if current_user.image.filename.present? && current_user.image.file.present?
+            = image_tag show_image_images_path, width: 50, height: 50, alt: "user image", class: "avatar"
+          - else
             = image_tag gravatar_image(current_user), size: 35, class: "avatar"
-            .avatar_setting
-              アバターを変更する。
-              = link_to "Gravatar", "https://ja.gravatar.com/", class: "link_gravatar", target: :_blank
+          .avatar_setting
+            = form_with url: images_path, method: :put, data: {remote: false} do |f|
+              = f.file_field :file, accespt: "image/jpeg"
+              = f.submit "画像更新"
+              = link_to "デフォルトに戻す", images_path, method: :delete
+
   .box.password_edit
     .inner
       .description_box
