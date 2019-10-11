@@ -22,14 +22,14 @@
             = f.submit "更新", class: "edit_submit"
         .gravatar
           - if current_user.image.filename.present? && current_user.image.file.present?
-            = image_tag show_image_images_path, width: 50, height: 50, alt: "user image", class: "avatar"
+            = image_tag show_image_user_images_path(current_user), width: 50, height: 50, alt: "user image", class: "avatar"
           - else
             = image_tag gravatar_image(current_user), size: 35, class: "avatar"
           .avatar_setting
-            = form_with url: images_path, method: :put, data: {remote: false} do |f|
+            = form_with url: user_images_path(current_user), method: :put, data: {remote: false} do |f|
               = f.file_field :file, accespt: "image/jpeg"
               = f.submit "画像更新"
-              = link_to "デフォルトに戻す", images_path, method: :delete
+              = link_to "デフォルトに戻す", user_images_path(current_user), method: :delete
 
   .box.password_edit
     .inner
