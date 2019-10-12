@@ -7,6 +7,11 @@ Rails.application.routes.draw do
               omniauth_callbacks: 'omniauth_callbacks'
               }
   resources :users, only: [:show] do
+    resource :images, only: [:update, :destroy] do
+      member do
+        get "show_image"
+      end
+    end
     resources :follows, only: [:create, :destroy]
   end
   get '/follows' => 'follows#follow', as: "follows_list"
