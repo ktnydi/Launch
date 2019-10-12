@@ -30,7 +30,7 @@ class User < ApplicationRecord
   validates :name, presence: true, length: { maximum: 10 }
   attr_accessor :current_password
   before_validation :create_uuid
-  after_save :create_image
+  after_create :create_image
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
