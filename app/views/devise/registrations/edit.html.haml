@@ -8,6 +8,14 @@
         %p.description
           ログインで使用するメールアドレスを変更します。
       .setting_box
+        .gravatar
+          = image_tag avatar(current_user), size: 35, class: "avatar"
+          .avatar_setting
+            = form_with url: user_images_path(current_user), method: :put, data: {remote: false}, class: "image-form" do |f|
+              = f.label :file, class: "image-field-label" do
+                画像を変更
+                = f.file_field :file, accespt: "image/jpeg", class: "image-field"
+              = link_to "デフォルトに戻す", user_images_path(current_user), method: :delete, class: "image-delete"
         = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, id: "left-form" }) do |f|
           .field
             = f.label :name
@@ -20,11 +28,7 @@
               Currently waiting confirmation for: #{resource.unconfirmed_email}
           .actions
             = f.submit "更新", class: "edit_submit"
-          .gravatar
-            = image_tag gravatar_image(current_user), size: 35, class: "avatar"
-            .avatar_setting
-              アバターを変更する。
-              = link_to "Gravatar", "https://ja.gravatar.com/", class: "link_gravatar", target: :_blank
+
   .box.password_edit
     .inner
       .description_box
@@ -59,6 +63,12 @@
 :javascript
   var submit = document.getElementById('submit');
   var input = document.querySelectorAll('.field input');
+  const imagefield = document.getElementsByClassName('image-field')[0]
+  const imageform = document.getElementsByClassName('image-form')[0]
+
+  imagefield.addEventListener('change', ()=>{
+    imageform.submit()
+  })
 
   const move_form_label = (target) => {
     if (target.nodeName === 'INPUT') {

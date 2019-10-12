@@ -26,10 +26,7 @@
                   - unless article_author?(@public.user)
                     %button.follow_btn{data: {id: @public.user.id}}= render "follows/follow", user: @public.user
             %h2.main_title= @public.title
-            .article_tags
-              - @public.category.split(',').each do |tag|
-                = link_to tag_path(tag), class: "tag_link" do
-                  .tag_name= tag
+            .article_tags= make_link_tag @public.category
             .post_detail_info
               .post_day
                 %span.day= "公開日：#{@public.created_at.strftime("%Y-%m-%d")}"
