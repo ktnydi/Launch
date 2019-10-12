@@ -10,7 +10,7 @@ class ImagesController < ApplicationController
     @image.filename = image[:filename]
     @image.file = image[:file]
     if @image.save
-      redirect_to root_path
+      redirect_to edit_user_registration_path, notice: "画像を更新しました。"
     else
       puts "save failed"
     end
@@ -20,7 +20,7 @@ class ImagesController < ApplicationController
     image = current_user.image
     image.assign_attributes(filename: "", file: "")
     image.save
-    redirect_to edit_user_registration_path
+    redirect_to edit_user_registration_path, notice: "デフォルト画像に戻しました。"
   end
 
   def show_image
