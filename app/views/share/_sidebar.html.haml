@@ -28,7 +28,7 @@
       .setting_user_account
         = link_to "アカウント設定", edit_user_registration_path, class: "edit_user_link"
 .box
-  - if controller_name == "users"
+  - if controller_name == "home"
     = link_to "ダッシュボード", dashboard_path, class: "sidebar_link"
     = link_to "高く評価した記事", likes_path, class: "sidebar_link"
     = link_to "ブックマーク", bookmarks_path, class: "sidebar_link"
