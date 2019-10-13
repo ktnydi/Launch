@@ -2,7 +2,7 @@
   .user_info
     .user_info_top
       - if user_signed_in?
-        = image_tag gravatar_image(current_user), size: 70, class: "user_image"
+        = image_tag avatar(current_user), size: 70, class: "user_image"
       - else
         %span.user_image
           %i.far.fa-user.guest_image
