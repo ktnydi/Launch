@@ -48,8 +48,20 @@
     font-size: 2.4rem;
     color: $primary_color;
   }
+  &__user-follow-btn {
+    margin-top: 15px;
+    .follow_btn {
+      .follow, .unfollow {
+        width: 100%;
+        padding: 5px 0;
+        border: none;
+        border-radius: 10px;
+        box-shadow: $highest_box_shadow;
+      }
+    }
+  }
   &__user-using-tags-box {
-    margin-top: 20px;
+    margin-top: 15px;
     box-shadow: $highest_box_shadow;
     border-radius: 10px;
     background-color: $white;
