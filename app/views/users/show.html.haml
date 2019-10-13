@@ -1,7 +1,7 @@
 %main.user-blog
   .user-blog__container
     .user-blog__user-info
-      = image_tag gravatar_image(@user), size: 70, class: "user-blog__user-image--big"
+      = image_tag avatar(@user), size: 70, class: "user-blog__user-image--big"
       .user-blog__user-name= @user.name
       .user-blog__user-id= "@#{@user.id}"
       .user-blog__user-status-box
