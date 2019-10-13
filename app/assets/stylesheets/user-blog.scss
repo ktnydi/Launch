@@ -1,0 +1,137 @@
+@import "variables";
+
+.user-blog {
+  &__container {
+    width: 100%;
+    max-width: 1024px;
+    margin: 0 auto;
+    padding: 100px 0;
+    display: flex;
+    align-items: flex-start;
+  }
+  &__user-info {
+    text-align: center;
+  }
+  &__user-image--big {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    box-shadow: $highest_box_shadow;
+  }
+  &__user-name {
+    margin-top: 10px;
+    font-size: 1.6rem;
+    font-weight: bold;
+  }
+  &__user-id {
+    margin-top: 5px;
+    font-size: 1.2rem;
+    color: $sub-font-color;
+  }
+  &__user-status-box {
+    display: inline-flex;
+    margin-top: 20px;
+    box-shadow: $highest_box_shadow;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  &__user-status-link {
+    display: inline-block;
+    width: 100px;
+    padding: 15px;
+    text-decoration: none;
+    background-color: $white;
+    color: $font-color;
+  }
+  &__user-status-label {
+    font-size: 1.4rem;
+  }
+  &__user-status-count {
+    font-size: 2.4rem;
+    color: $primary_color;
+  }
+  &__user-follow-btn {
+    margin-top: 15px;
+    .follow_btn {
+      .follow, .unfollow {
+        width: 100%;
+        padding: 5px 0;
+        border: none;
+        border-radius: 10px;
+        box-shadow: $highest_box_shadow;
+      }
+    }
+  }
+  &__user-using-tags-box {
+    margin-top: 15px;
+    box-shadow: $highest_box_shadow;
+    border-radius: 10px;
+    background-color: $white;
+  }
+  &__box-inner {
+    margin-top: 15px;
+  }
+  &__box-title {
+    padding: 15px 15px 0;
+    font-size: 1.2rem;
+    color: $sub-font-color;
+  }
+  &__tag + &__tag {
+    border-top: 1px solid $border-color;
+  }
+  &__tag {
+    padding: 15px;
+    font-size: 1.4rem;
+  }
+  &__tag-link {
+    text-decoration: none;
+    color: inherit;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  &__user-articles-section {
+    flex: 1;
+    padding-left: 30px;
+  }
+  &__user-articles-section-inner {
+  }
+  &__user-articles-paginate {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+  }
+  &__prev-page, &__next-page {
+    text-decoration: none;
+    color: inherit;
+    width: 50%;
+    &:hover {
+      text-decoration: underline;
+    }
+    &--disable {
+      width: 50%;
+      color: $no_active_color;
+    }
+  }
+  &__prev-page {
+    text-align: left;
+    &--disable {
+      text-align: left;
+    }
+  }
+  &__next-page {
+    text-align: right;
+    &--disable {
+      text-align: right;
+    }
+  }
+  &__user-articles {
+    margin-top: 10px;
+    box-shadow: $highest_box_shadow;
+  }
+  &__section-title {
+    font-weight: normal;
+    font-size: 1.6rem;
+  }
+}

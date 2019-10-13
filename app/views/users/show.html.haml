@@ -1,0 +1,45 @@
+%main.user-blog
+  .user-blog__container
+    .user-blog__user-info
+      = image_tag avatar(@user), size: 70, class: "user-blog__user-image--big"
+      .user-blog__user-name= @user.name
+      .user-blog__user-id= "@#{@user.id}"
+      .user-blog__user-status-box
+        .user-blog__user-status
+          = link_to follows_list_path, class: "user-blog__user-status-link" do
+            .user-blog__user-status-label Follow
+            %p.user-blog__user-status-count= @user.active_follows.count
+        .user-blog__user-status
+          = link_to followers_list_path, class: "user-blog__user-status-link" do
+            .user-blog__user-status-label Follower
+            %p.user-blog__user-status-count= @user.passive_follows.count
+      .user-blog__user-follow-btn
+        .follow_btn{data: {id: @user.id}}
+          = render 'follows/follow', user: @user
+      .user-blog__user-using-tags-box
+        .user-blog__box-inner
+          %h2.user-blog__box-title よく使うタグ
+          .user-blog__tags
+            - Public.tag_ranking(user_token: @user.uuid).each do |tag|
+              .user-blog__tag
+                = link_to "# #{tag[:name].truncate(10)} (#{tag[:count]})", tag_path(tag[:name]), class: "user-blog__tag-link"
+    .user-blog__user-articles-section
+      .user-blog__user-articles-section-inner
+        %h2.user-blog__section-title 投稿した記事
+        .user-blog__user-articles
+          - @articles.each do |article|
+            .user-article
+              .user-article__article-inner
+                .user-article__article-status
+                  %span.user-article__created= article.created_at.strftime("%Y-%m-%d")
+                  %span.user-article__like
+                    %i.far.fa-thumbs-up.user-article__like-icon
+                    %span.user-article__like-count= article.likes.count
+                .user-article__title= article.title
+                %p.user-article__content= strip_tags markdown article.content.truncate(180)
+                = link_to "続きを見る", public_path(article), class: "user-article__article-link"
+        .user-blog__user-articles-paginate
+          = link_to_prev_page @articles, "< 前のページ", class: "user-blog__prev-page" do
+            %span.user-blog__prev-page--disable < 前のページ
+          = link_to_next_page @articles, "次のページ >", class: "user-blog__next-page" do
+            %span.user-blog__next-page--disable 次のページ >

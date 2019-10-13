@@ -6,7 +6,7 @@ Rails.application.routes.draw do
               registrations: 'registrations',
               omniauth_callbacks: 'omniauth_callbacks'
               }
-  resources :users, only: [:index] do
+  resources :users, only: [:show] do
     resource :images, only: [:update, :destroy] do
       member do
         get "show_image"

@@ -42,15 +42,17 @@ class Public < ApplicationRecord
     self.where("category LIKE ?", "%#{tag}%").where.not(article_token: current_article_token).order(created_at: :desc)
   end
 
-  scope :all_tags, -> do
-    self.all.pluck(:category).flatten
+  scope :all_tags, -> (arg = {}) do
+    rel = arg.length > 0 ? self.where(arg) : self.all
+    rel.pluck(:category).flatten
   end
 
-  scope :tag_ranking, -> (num = 1) do
-    tag_ranking = all_tags.uniq.map do |tag_name|
+  scope :tag_ranking, -> (arg = {}) do
+    rel = arg.length > 0 ? all_tags.uniq : all_tags(arg).uniq
+    tag_ranking = rel.map do |tag_name|
       [tag_name, all_tags.count(tag_name)]
     end
-    tag_ranking.sort_by(&:last).reverse[0..(num - 1)].map do |tag|
+    tag_ranking.sort_by(&:last).reverse[0..10].map do |tag|
       {name: tag[0], count: tag[1]}
     end
   end

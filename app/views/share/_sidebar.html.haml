@@ -7,7 +7,10 @@
         %span.user_image
           %i.far.fa-user.guest_image
       %h2.name= current_user ? current_user.name : "ゲスト"
-      %p.uuid= current_user ? "@#{current_user.uuid}" : "@guestuser"
+      - if user_signed_in?
+        = link_to "@#{current_user.uuid}", user_path(current_user.uuid), class: "uuid"
+      - else
+        %p.uuid @guestuser
     .user_info_bottom
       .more_info
         = link_to "#{dashboard_article_path}?mode=public", class: "more_info_link" do
