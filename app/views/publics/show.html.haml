@@ -20,7 +20,7 @@
             .post_info_wrapper
               .post_info
                 .author
-                  = image_tag gravatar_image(@public.user), size: 50
+                  = image_tag avatar(@public.user), size: 50
                   %span.name= @public.user.name
                 - if user_signed_in?
                   - unless article_author?(@public.user)

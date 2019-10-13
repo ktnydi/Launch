@@ -37,7 +37,7 @@
                       .tags=make_tag article.category
                     .list_bottom
                       .list_bottom_left
-                        = image_tag gravatar_image(article.user), size: 20, class: 'author_image'
+                        = image_tag avatar(article.user), size: 20, class: 'author_image'
                         %span.author_name= "by #{article.user.name}"
                       .list_bottom_right
                         .thumbs_up

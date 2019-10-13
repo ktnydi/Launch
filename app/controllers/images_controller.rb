@@ -24,7 +24,8 @@ class ImagesController < ApplicationController
   end
 
   def show_image
-    @image = current_user.image
+    user = User.find_by(uuid: params[:user_id])
+    @image = user.image
     send_data @image.file, :type => 'image/jpeg'
   end
 
