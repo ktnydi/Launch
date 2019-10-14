@@ -238,22 +238,44 @@
     box-shadow: 0 5px 17px 1px rgba(0, 0, 0, 0.05);
   }
   .gravatar {
-    margin-top: 24px;
     font-size: 1.2rem;
     color: $sub-font-color;
     display: inline-flex;
     align-items: center;
     .avatar {
-      width: 20px;
-      height: 20px;
-      border-radius: 2px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: 1px solid $border-color;
+      background-color: $white;
+      background-position: center;
+      background-size: contain;
     }
     .avatar_setting {
       margin-left: 10px;
-      .link_gravatar {
+      .image-field-label {
+        position: static;
+        padding: 5px 10px;
+        box-shadow: $highest_box_shadow;
+        font-size: 1.2rem;
+        background-color: $white;
+        cursor: pointer;
+        &:hover {
+          background-color: $hover_white;
+        }
+        .image-field {
+          display: none;
+        }
+      }
+      .image-delete {
+        display: inline-block;
+        margin-left: 10px;
         color: $primary_color;
       }
     }
+  }
+  .edit_user {
+    margin-top: 24px;
   }
 }
 

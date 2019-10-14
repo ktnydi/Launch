@@ -2,6 +2,7 @@ class User < ApplicationRecord
   require "securerandom"
   self.primary_key = "uuid"
 
+  has_one :image, foreign_key: "user_token",dependent: :destroy
   has_many :drafts, foreign_key: "user_token", dependent: :destroy
   has_many :publics, foreign_key: "user_token", dependent: :destroy
   has_many :comments, foreign_key: "user_token", dependent: :destroy
@@ -29,6 +30,7 @@ class User < ApplicationRecord
   validates :name, presence: true, length: { maximum: 10 }
   attr_accessor :current_password
   before_validation :create_uuid
+  after_create :create_image
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -68,5 +70,10 @@ class User < ApplicationRecord
 
   def create_uuid
     self.uuid = SecureRandom.hex(10) if self.uuid.empty?
+  end
+
+  def create_image
+    image = self.build_image(filename: "", file: "")
+    image.save
   end
 end

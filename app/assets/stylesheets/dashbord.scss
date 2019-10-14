@@ -550,10 +550,10 @@
   &_top {
     .user_image {
       display: inline-block;
-      width: 70px;
-      height: 70px;
-      border-radius: 2px;
-      box-shadow: 0 5px 17px 1px rgba(0, 0, 0, 0.05);
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      box-shadow: $highest_box_shadow;
       .guest_image {
         display: block;
         line-height: 70px;
@@ -570,6 +570,10 @@
       margin-top: 5px;
       font-size: 1.2rem;
       color: $sub-font-color;
+      text-decoration: none;
+      &:hover {
+        text-decoration: underline;
+      }
     }
   }
   &_bottom {

@@ -1,6 +1,7 @@
 class Public < ApplicationRecord
   include Search
   self.primary_key = "article_token"
+  serialize :category
 
   has_many :likes, foreign_key: "article_token" ,dependent: :destroy
   has_many :liked_users, through: :likes, source: :user
@@ -15,6 +16,8 @@ class Public < ApplicationRecord
   validates :category, presence: true, length: { maximum: 20 }
   validates :content, presence: true, length: { maximum: 10000 }
   validates :user_token, presence: true
+
+  before_save :category_to_hash
 
   scope :history_articles, -> (current_user) do
     joins(:access_analyses)
@@ -39,22 +42,23 @@ class Public < ApplicationRecord
     self.where("category LIKE ?", "%#{tag}%").where.not(article_token: current_article_token).order(created_at: :desc)
   end
 
-  scope :tag_lists, -> (uniquness: false) do
-    rel = self.all.pluck(:category).map{ |tags| tags.split(",") }.flatten
-    if uniquness
-      rel = rel.uniq
-    end
-    rel
+  scope :all_tags, -> (arg = {}) do
+    rel = arg.length > 0 ? self.where(arg) : self.all
+    rel.pluck(:category).flatten
   end
 
-  scope :tag_count, -> (tag_name) do
-    tag_lists.count(tag_name)
+  scope :tag_ranking, -> (arg = {}) do
+    rel = arg.length > 0 ? all_tags.uniq : all_tags(arg).uniq
+    tag_ranking = rel.map do |tag_name|
+      [tag_name, all_tags.count(tag_name)]
+    end
+    tag_ranking.sort_by(&:last).reverse[0..10].map do |tag|
+      {name: tag[0], count: tag[1]}
+    end
   end
 
-  scope :tag_ranking, -> (num = 1) do
-    tag_ranking = tag_lists(uniquness: true).map do |tag_name|
-      [tag_name, tag_count(tag_name)]
+  private
+    def category_to_hash
+      self.category = self.category.split(",")
     end
-    tag_ranking.sort_by(&:last).reverse[0..(num - 1)].to_h
-  end
 end

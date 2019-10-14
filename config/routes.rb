@@ -1,12 +1,17 @@
 Rails.application.routes.draw do
-  root 'users#index'
+  root 'home#index'
 
   # Around User
   devise_for :users, controllers: {
               registrations: 'registrations',
               omniauth_callbacks: 'omniauth_callbacks'
               }
-  resources :users, only: [:index] do
+  resources :users, only: [:show] do
+    resource :images, only: [:update, :destroy] do
+      member do
+        get "show_image"
+      end
+    end
     resources :follows, only: [:create, :destroy]
   end
   get '/follows' => 'follows#follow', as: "follows_list"

@@ -20,8 +20,9 @@ module ApplicationHelper
    @devise_mapping ||= Devise.mappings[:user]
   end
 
-  def gravatar_image(user)
-    user.gravatar_url(default: "retro")
+  def avatar(user)
+    has_image_data = user.image.filename.present? && user.image.file.present?
+    has_image_data ? show_image_user_images_path(user) : user.gravatar_url(default: "retro")
   end
 
   def article_author?(author)
