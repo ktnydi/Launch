@@ -456,7 +456,8 @@ main {
           .author_image {
             width: 20px;
             height: 20px;
-            border-radius: 2px;
+            border-radius: 50%;
+            border: 1px solid $border-color;
           }
           .author_name {
             margin-left: 12px;
@@ -568,7 +569,7 @@ main {
     margin: 24px 16px 0;
   }
   .user_list {
-    padding: 24px;
+    padding: 15px 24px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -580,9 +581,10 @@ main {
       align-items: center;
       img {
         margin-right: 12px;
-        width: 30px;
-        height: 30px;
-        border-radius: 2px;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        box-shadow: $highest_box_shadow;
       }
       .name {
         font-size: 1.4rem;
