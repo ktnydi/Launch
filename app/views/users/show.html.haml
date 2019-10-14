@@ -13,9 +13,10 @@
           = link_to followers_list_path, class: "user-blog__user-status-link" do
             .user-blog__user-status-label Follower
             %p.user-blog__user-status-count= @user.passive_follows.count
-      .user-blog__user-follow-btn
-        .follow_btn{data: {id: @user.id}}
-          = render 'follows/follow', user: @user
+      - unless @user.id == current_user.id
+        .user-blog__user-follow-btn
+          .follow_btn{data: {id: @user.id}}
+            = render 'follows/follow', user: @user
       .user-blog__user-using-tags-box
         .user-blog__box-inner
           %h2.user-blog__box-title よく使うタグ
