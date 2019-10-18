@@ -13,7 +13,7 @@
           = link_to followers_list_path, class: "user-blog__user-status-link" do
             .user-blog__user-status-label Follower
             %p.user-blog__user-status-count= @user.passive_follows.count
-      - unless @user.id == current_user.id
+      - if user_signed_in? && @user.id != current_user.id
         .user-blog__user-follow-btn
           .follow_btn{data: {id: @user.id}}
             = render 'follows/follow', user: @user
