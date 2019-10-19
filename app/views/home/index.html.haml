@@ -8,7 +8,6 @@
             %span#period トレンド
           %span
             .select_period_btn_wrapper
-              %span.select_period Select:
               = link_to "Today", root_path, class: "period_btn", data: {date: '今日'}
               = link_to "Week", "?period=week", class: "period_btn", data: {date: '今週'}
               = link_to "Month", "?period=month", class: "period_btn", data: {date: '今月'}

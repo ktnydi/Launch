@@ -23,6 +23,8 @@
 @import "terms";
 @import "user-article";
 @import "user-blog";
+@import "user-info";
+@import "user-regist";
 
 
 * {
@@ -384,6 +386,7 @@ main {
 
 .heading_2 {
   font-size: 1.6rem;
+  font-weight: normal;
   letter-spacing: .3px;
   .sharp, .icon {
     margin-right: 5px;
