@@ -251,6 +251,12 @@ header {
   }
 }
 
+.toggle-menu {
+  &__box + &__box {
+    border-top: 1px solid $border-color;
+  }
+}
+
 .header-left {
   display: none;
   align-items: center;
@@ -921,6 +927,12 @@ footer {
   }
   nav {
     margin-top: 94px;
+  }
+}
+
+.nav-link {
+  &__block + &__block {
+    border-top: 1px solid $border-color;
   }
 }
 

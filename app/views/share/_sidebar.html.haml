@@ -1,16 +1,9 @@
 .box
   .user_info
     .user_info_top
-      - if user_signed_in?
-        = image_tag avatar(current_user), size: 70, class: "user_image"
-      - else
-        %span.user_image
-          %i.far.fa-user.guest_image
-      %h2.name= current_user ? current_user.name : "ゲスト"
-      - if user_signed_in?
-        = link_to "@#{current_user.uuid}", user_path(current_user.uuid), class: "uuid"
-      - else
-        %p.uuid @guestuser
+      = image_tag avatar(current_user), size: 70, class: "user_image"
+      %h2.name= current_user.name
+      = link_to "@#{current_user.uuid}", user_path(current_user.uuid), class: "uuid"
     .user_info_bottom
       .more_info
         = link_to "#{dashboard_article_path}?mode=public", class: "more_info_link" do
@@ -28,12 +21,6 @@
       .setting_user_account
         = link_to "アカウント設定", edit_user_registration_path, class: "edit_user_link"
 .box
-  - if controller_name == "home"
-    = link_to "ダッシュボード", dashboard_path, class: "sidebar_link"
-    = link_to "高く評価した記事", likes_path, class: "sidebar_link"
-    = link_to "ブックマーク", bookmarks_path, class: "sidebar_link"
-    = link_to "閲覧履歴", history_path, class: "sidebar_link"
-  - else
-    = link_to "アクセス解析", dashboard_path, class: "sidebar_link"
-    = link_to "記事の管理", dashboard_article_path + "?mode=draft", class: "sidebar_link"
-    = link_to "コメント一覧", dashboard_comment_path, class: "sidebar_link"
+  = link_to "アクセス解析", dashboard_path, class: "sidebar_link"
+  = link_to "記事の管理", dashboard_article_path + "?mode=draft", class: "sidebar_link"
+  = link_to "コメント一覧", dashboard_comment_path, class: "sidebar_link"

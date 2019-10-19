@@ -3,11 +3,18 @@
   %nav
     - if user_signed_in?
       .nav_link
-        = link_to "ホーム", root_path
-        = link_to "記事一覧", publics_path
-        = link_to "ダッシュボード", "#{dashboard_path}?period=all"
-        = link_to "アカウント設定", edit_user_registration_path
-        = link_to "ログアウト", destroy_user_session_path, method: :delete
+        .nav-link__block
+          = link_to "ホーム", root_path
+          = link_to "記事一覧", publics_path
+        .nav-link__block
+          = link_to "高く評価した記事", likes_path
+          = link_to "ブックマーク", bookmarks_path
+          = link_to "閲覧履歴", history_path
+        .nav-link__block
+          = link_to "ダッシュボード", "#{dashboard_path}?period=all"
+          = link_to "アカウント設定", edit_user_registration_path
+        .nav-link__block
+          = link_to "ログアウト", destroy_user_session_path, method: :delete
     - else
       .nav_link
         = link_to "ホーム", root_path, class: "home"

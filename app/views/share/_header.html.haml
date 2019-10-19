@@ -23,9 +23,19 @@
             %i.far.fa-user
             %i.fas.fa-caret-down
         .toggle-list
-          = link_to "ダッシュボード", dashboard_path
-          = link_to "アカウント設定", edit_user_registration_path
-          = link_to "ログアウト", destroy_user_session_path, method: :delete, data: { confirm: "ログアウトします。" }
+          .toggle-menu__box
+            = link_to "#{current_user.name}", user_path(current_user)
+          .toggle-menu__box
+            = link_to "ブログを見る", user_path(current_user)
+          .toggle-menu__box
+            = link_to "高く評価した記事", likes_path
+            = link_to "ブックマーク", bookmarks_path
+            = link_to "閲覧履歴", history_path
+          .toggle-menu__box
+            = link_to "ダッシュボード", dashboard_path
+            = link_to "アカウント設定", edit_user_registration_path
+          .toggle-menu__box
+            = link_to "ログアウト", destroy_user_session_path, method: :delete, data: { confirm: "ログアウトします。" }
     - else
       %button.btn.btn_white
         = link_to "ログイン", new_user_session_path, class: "btn_link"
