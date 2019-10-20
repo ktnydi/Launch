@@ -1,46 +1,47 @@
-%header#header
-  .header-mobile
-    .logo= link_to "Launch", root_path
-  .header-left
-    .logo
-      = link_to "Launch", root_path
-    %ul.header_nav
-      %li.header_nav_li
-        = link_to "ホーム", root_path, class: "home, link"
-      %li.header_nav_li
-        = link_to "最新記事", publics_path, class: "article, link"
-    %form.search.header_search#search_focus{action: "#{publics_path}", method: "get"}
-      = label_tag nil, class: 'search_label' do
-        %i.fas.fa-search
-        = text_field_tag "q", params[:q], required: true, autocomplete: "off", id: "field", placeholder: "検索", class: 'search_field'
-  .header-right
-    - if user_signed_in?
-      %button.btn.btn_blue.link_editor
-        = link_to "記事を書く", new_draft_path, class: "btn_link"
-      %details.header_right_menu
-        %summary.user_name
-          .user_name_inner
-            %i.far.fa-user
-            %i.fas.fa-caret-down
-        .toggle-list
-          .toggle-menu__box
-            = link_to "#{current_user.name}", user_path(current_user)
-          .toggle-menu__box
-            = link_to "ブログを見る", user_path(current_user)
-          .toggle-menu__box
-            = link_to "高く評価した記事", likes_path
-            = link_to "ブックマーク", bookmarks_path
-            = link_to "閲覧履歴", history_path
-          .toggle-menu__box
-            = link_to "ダッシュボード", dashboard_path
-            = link_to "アカウント設定", edit_user_registration_path
-          .toggle-menu__box
-            = link_to "ログアウト", destroy_user_session_path, method: :delete, data: { confirm: "ログアウトします。" }
-    - else
-      %button.btn.btn_white
-        = link_to "ログイン", new_user_session_path, class: "btn_link"
-      %button.btn.btn_blue
-        = link_to "会員登録", new_user_registration_path, class: "btn_link"
+%header.header#header
+  .header__container
+    .header-mobile
+      .logo= link_to "Launch", root_path
+    .header-left
+      .logo
+        = link_to "Launch", root_path
+      %ul.header_nav
+        %li.header_nav_li
+          = link_to "ホーム", root_path, class: "home, link"
+        %li.header_nav_li
+          = link_to "最新記事", publics_path, class: "article, link"
+      %form.search.header_search#search_focus{action: "#{publics_path}", method: "get"}
+        = label_tag nil, class: 'search_label' do
+          %i.fas.fa-search
+          = text_field_tag "q", params[:q], required: true, autocomplete: "off", id: "field", placeholder: "タイトルかタグで検索", class: 'search_field'
+    .header-right
+      - if user_signed_in?
+        %button.btn.btn_blue.link_editor
+          = link_to "記事を書く", new_draft_path, class: "btn_link"
+        %details.header_right_menu
+          %summary.user_name
+            .user_name_inner
+              = image_tag avatar(current_user), size: 40, class: "user-image"
+              %span.user-name= current_user.name
+          .toggle-list
+            .toggle-menu__box
+              = link_to "#{current_user.name}", user_path(current_user)
+            .toggle-menu__box
+              = link_to "ブログを見る", user_path(current_user)
+            .toggle-menu__box
+              = link_to "高く評価した記事", likes_path
+              = link_to "ブックマーク", bookmarks_path
+              = link_to "閲覧履歴", history_path
+            .toggle-menu__box
+              = link_to "ダッシュボード", dashboard_path
+              = link_to "アカウント設定", edit_user_registration_path
+            .toggle-menu__box
+              = link_to "ログアウト", destroy_user_session_path, method: :delete, data: { confirm: "ログアウトします。" }
+      - else
+        %button.btn.btn_white
+          = link_to "ログイン", new_user_session_path, class: "btn_link"
+        %button.btn.btn_blue
+          = link_to "会員登録", new_user_registration_path, class: "btn_link"
 .search_show_btn
   %i.fas.fa-search.mobile
 .post_search_header
