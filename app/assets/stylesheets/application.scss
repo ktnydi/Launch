@@ -170,6 +170,9 @@ header {
     display: flex;
     justify-content: space-between;
     align-content: center;
+    @media all and (max-width: 896px) {
+      justify-content: center;
+    }
   }
 }
 
@@ -753,7 +756,7 @@ footer {
   }
   i {
     font-size: 2rem;
-    color: $white;
+    color: $font-color;
   }
 }
 
@@ -858,7 +861,7 @@ footer {
     width: 25px;
     height: 3px;
     border-radius: 3px;
-    background-color: $white;
+    background-color: $font-color;
     transition: all .3s;
   }
 }
