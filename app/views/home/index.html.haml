@@ -37,11 +37,11 @@
               .user-info__user-id= "@#{current_user.id}"
             .user-info__user-status-box
               .user-info__user-status
-                = link_to follows_list_path, class: "user-info__user-status-link" do
+                = link_to follows_list_path(current_user), class: "user-info__user-status-link" do
                   .user-info__user-status-label Follow
                   %p.user-info__user-status-count= current_user.active_follows.count
               .user-info__user-status
-                = link_to followers_list_path, class: "user-info__user-status-link" do
+                = link_to followers_list_path(current_user), class: "user-info__user-status-link" do
                   .user-info__user-status-label Follower
                   %p.user-info__user-status-count= current_user.passive_follows.count
         - else

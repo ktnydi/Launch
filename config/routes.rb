@@ -14,8 +14,8 @@ Rails.application.routes.draw do
     end
     resources :follows, only: [:create, :destroy]
   end
-  get '/follows' => 'follows#follow', as: "follows_list"
-  get '/followers' => 'follows#follower', as: "followers_list"
+  get '/follows/:user_id' => 'follows#follow', as: "follows_list"
+  get '/followers/:user_id' => 'follows#follower', as: "followers_list"
 
   # Around Dashboard
   get '/dashboard' => 'dashboard#index', as: 'dashboard'
