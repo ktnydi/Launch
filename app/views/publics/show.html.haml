@@ -40,10 +40,7 @@
           .article_bottom_box
             .author_name= "Created by #{@public.user.name}"
             .created_at= @public.created_at.strftime("%Y-%m-%d")
-            .article_tags
-              - @public.category.split(',').each do |tag|
-                = link_to tag_path(tag), class: "tag_link" do
-                  .tag_name= tag
+            .article_tags= make_link_tag @public.category
             .user_action_bottom
               .good_btn.good_btn_bottom
                 = render "like", public: @public
