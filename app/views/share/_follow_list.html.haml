@@ -12,7 +12,7 @@
             = image_tag avatar(user), size: 50
             %h2.name
               = link_to user.name, user_path(user), class: "user-blog-link"
-          - if current_user.uuid
+          - if user_signed_in? && current_user.uuid
             .follow_btn{data: {id: user.id}}
               = render "follows/follow", user: user
     - unless users.total_pages == 1
