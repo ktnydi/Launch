@@ -10,11 +10,11 @@
           .info_name Article
           %p.count= current_user ? current_user.publics.count : 0
       .more_info
-        = link_to follows_list_path, class: "more_info_link" do
+        = link_to follows_list_path(current_user), class: "more_info_link" do
           .info_name Follow
           %p.count= current_user ? current_user.active_follows.count : 0
       .more_info
-        = link_to followers_list_path, class: "more_info_link" do
+        = link_to followers_list_path(current_user), class: "more_info_link" do
           .info_name Follower
           %p.count= current_user ? current_user.passive_follows.count : 0
     - if controller_name == "dashboard"
