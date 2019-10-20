@@ -6,11 +6,11 @@
       .user-blog__user-id= "@#{@user.id}"
       .user-blog__user-status-box
         .user-blog__user-status
-          = link_to follows_list_path, class: "user-blog__user-status-link" do
+          = link_to follows_list_path(@user), class: "user-blog__user-status-link" do
             .user-blog__user-status-label Follow
             %p.user-blog__user-status-count= @user.active_follows.count
         .user-blog__user-status
-          = link_to followers_list_path, class: "user-blog__user-status-link" do
+          = link_to followers_list_path(@user), class: "user-blog__user-status-link" do
             .user-blog__user-status-label Follower
             %p.user-blog__user-status-count= @user.passive_follows.count
       - if user_signed_in? && @user.id != current_user.id

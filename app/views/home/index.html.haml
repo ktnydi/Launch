@@ -1,19 +1,6 @@
 %main.home_wrapper
   .home_contents
-    .home_contents_left
-      = render "share/sidebar"
     .home_contents_center
-      - unless user_signed_in?
-        .box
-          .recommend_registration
-            %h2.recommend_registration_heading アウトプットを始めよう！
-            %p.recommend_registration_message Launchは学び続けるITエンジニアのための技術ブログです
-            .authenticate_user
-              %button.authenticate_user_registration
-                = link_to "会員登録する", "#", class: "authenticate_user_registration_link registration_link"
-              %p.login
-                すでにアカウントをお持ちですか？
-                = link_to "ログイン", new_user_session_path, class: "login_link"
       = render "share/select"
       .box
         %h2.trend_article_heading.heading_2
@@ -21,29 +8,11 @@
             %span#period トレンド
           %span
             .select_period_btn_wrapper
-              %span.select_period Select:
               = link_to "Today", root_path, class: "period_btn", data: {date: '今日'}
               = link_to "Week", "?period=week", class: "period_btn", data: {date: '今週'}
               = link_to "Month", "?period=month", class: "period_btn", data: {date: '今月'}
         - if @trend_articles.length > 0
-          .inner.article_list_wrapper
-            - @trend_articles.each do |article|
-              .article
-                = link_to public_path(article.article_token), class: "link large_link" do
-                  .flex_item
-                    .list_top
-                      %p.article_title= article.title
-                      %p.article_content= strip_tags markdown article.content.truncate(160)
-                      .tags=make_tag article.category
-                    .list_bottom
-                      .list_bottom_left
-                        = image_tag avatar(article.user), size: 20, class: 'author_image'
-                        %span.author_name= "by #{article.user.name}"
-                      .list_bottom_right
-                        .thumbs_up
-                          %i.far.fa-thumbs-up
-                          %span.count= article.likes.count
-                        %span.created_at= article.created_at.strftime("%Y-%m-%d")
+          = render "share/card", publics: @trend_articles
         - else
           .article_not_found
             %h3.article_not_found_head 公開されている記事がありません。
@@ -59,8 +28,35 @@
             %h3.article_not_found_head 公開されている記事がありません。
             %p.article_not_found_message 最近投稿された記事はここに表示されます。
     .home_contents_right
-      %h2.heading_2 タグ・ランキング
-      = render "share/tag_ranking"
+      .home_contents_right__box
+        - if user_signed_in?
+          .user-info
+            .user-info__user-account
+              = image_tag avatar(current_user), size: 90, class: "user-info__user-image"
+              .user-info__user-name= current_user.name
+              .user-info__user-id= "@#{current_user.id}"
+            .user-info__user-status-box
+              .user-info__user-status
+                = link_to follows_list_path(current_user), class: "user-info__user-status-link" do
+                  .user-info__user-status-label Follow
+                  %p.user-info__user-status-count= current_user.active_follows.count
+              .user-info__user-status
+                = link_to followers_list_path(current_user), class: "user-info__user-status-link" do
+                  .user-info__user-status-label Follower
+                  %p.user-info__user-status-count= current_user.passive_follows.count
+        - else
+          .user-regist
+            %h2.user-regist__title Hello, World!
+            %p.user-regist__message Launchはプログラマーのアプトプットを助ける技術ブログです。
+            .user-regist__link-wrapper
+              = link_to "会員登録する", new_user_registration_path, class: "user-regist__new-link"
+              %p.user-regist__session
+                すでにアカウントをお持ちですか?
+                %br
+                = link_to "ログイン", new_user_session_path, class: "user-regist__session-link"
+      .home_contents_right__box
+        %h2.heading_2 タグ・ランキング
+        = render "share/tag_ranking"
 :javascript
   const period_btns = document.getElementsByClassName('period_btn')
   const period = document.getElementById('period')

@@ -1,0 +1,43 @@
+.user-info {
+  width: 100%;
+  text-align: center;
+  &__user-account {
+    padding: 15px;
+  }
+  &__user-image {
+    border-radius: 50%;
+    box-shadow: $highest_box_shadow;
+    vertical-align: bottom;
+    background-color: $white;
+  }
+  &__user-name, &__user-id {
+    margin-top: 5px;
+  }
+  &__user-id {
+    font-size: 1.2rem;
+    color: $sub-font-color;
+  }
+  &__user-status-box {
+    display: flex;
+    box-shadow: $highest_box_shadow;
+    border-radius: 2px;
+    background-color: $white;
+  }
+  &__user-status {
+    flex: 1;
+  }
+  &__user-status-link {
+    display: block;
+    padding: 15px;
+    text-decoration: none;
+    color: inherit;
+  }
+  &__user-status-label {
+    font-size: 1.2rem;
+    color: $sub-font-color;
+  }
+  &__user-status-count {
+    font-size: 2rem;
+    color: $primary_color;
+  }
+}
