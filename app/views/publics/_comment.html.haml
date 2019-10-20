@@ -3,16 +3,23 @@
     %h3.heading
       = "#{comments.count}件のコメント"
   .comment_edit_form
-    .toggle_view_btn_box
-      .view_btn.comment_edit_btn.current 編集
-      .view_btn.preview_show_btn プレビュー
-    = form_for @comment, url: "/comment/#{params[:article_token]}", html: { id: "comment_form", class: "comment_form" } do |f|
-      = f.text_area :content, id: "comment_area", placeholder: "Markdownで入力", class: 'comment_edit_area'
-      .preview_area.hide
-        %span.placeholder プレビューがここに表示されます。
-    .comment_form_bottom
-      %button.comment_submit#comment_submit{type: "submit", form: "comment_form"}
-        コメントする
+    - if user_signed_in?
+      .toggle_view_btn_box
+        .view_btn.comment_edit_btn.current 編集
+        .view_btn.preview_show_btn プレビュー
+      = form_for @comment, url: "/comment/#{params[:article_token]}", html: { id: "comment_form", class: "comment_form" } do |f|
+        = f.text_area :content, id: "comment_area", placeholder: "Markdownで入力", class: 'comment_edit_area'
+        .preview_area.hide
+          %span.placeholder プレビューがここに表示されます。
+      .comment_form_bottom
+        %button.comment_submit#comment_submit{type: "submit", form: "comment_form"}
+          コメントする
+    - else
+      %p.comment-user-regist
+        = link_to "アカウント作成", new_user_registration_path, class: "comment-user-regist__link"
+        or
+        = link_to "ログイン", new_user_session_path, class: "comment-user-regist__link"
+        してコメントを送ろう。
 -if comments.present?
   .comments.comment_list_wrapper
     - comments.each do |comment|

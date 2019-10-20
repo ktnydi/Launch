@@ -438,6 +438,15 @@
   }
 }
 
+.comment-user-regist {
+  padding: 60px 0 46px;
+  text-align: center;
+  &__link {
+    text-decoration: none;
+    color: $primary_color;
+  }
+}
+
 .comment_form_wrapper, .comment_edit_child_modal {
   .comment_form_header {
     display: flex;

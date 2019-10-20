@@ -8,9 +8,15 @@
     padding: 100px 0;
     display: flex;
     align-items: flex-start;
+    @media all and (max-width: 896px) {
+      flex-direction: column;
+    }
   }
   &__user-info {
     text-align: center;
+    @media all and (max-width: 896px) {
+      width: 100%;
+    }
   }
   &__user-image--big {
     width: 100px;
@@ -67,6 +73,9 @@
     box-shadow: $highest_box_shadow;
     border-radius: 10px;
     background-color: $white;
+    @media all and (max-width: 896px) {
+      display: none;
+    }
   }
   &__box-inner {
     margin-top: 15px;
@@ -93,6 +102,10 @@
   &__user-articles-section {
     flex: 1;
     padding-left: 30px;
+    @media all and (max-width: 896px) {
+      padding-left: 0;
+      margin-top: 60px;
+    }
   }
   &__user-articles-section-inner {
   }
