@@ -1,0 +1,74 @@
+%header.header#header
+  .header-mobile
+    .logo= link_to "Launch", root_path
+  .header-left
+    .logo
+      = link_to "Launch", root_path
+    %ul.header_nav
+      %li.header_nav_li
+        = link_to "ホームに戻る", root_path, class: "home, link"
+  .header-right
+    - if user_signed_in?
+      %button.btn.btn_blue.link_editor
+        = link_to "記事を書く", new_draft_path, class: "btn_link"
+      %details.header_right_menu
+        %summary.user_name
+          .user_name_inner
+            = image_tag avatar(current_user), size: 40, class: "user-image"
+            %span.user-name= current_user.name
+        .toggle-list
+          .toggle-menu__box
+            = link_to "#{current_user.name}", user_path(current_user)
+          .toggle-menu__box
+            = link_to "ブログを見る", user_path(current_user)
+          .toggle-menu__box
+            = link_to "高く評価した記事", likes_path
+            = link_to "ブックマーク", bookmarks_path
+            = link_to "閲覧履歴", history_path
+          .toggle-menu__box
+            = link_to "ダッシュボード", dashboard_path
+            = link_to "アカウント設定", edit_user_registration_path
+          .toggle-menu__box
+            = link_to "ログアウト", destroy_user_session_path, method: :delete, data: { confirm: "ログアウトします。" }
+    - else
+      %button.btn.btn_white
+        = link_to "ログイン", new_user_session_path, class: "btn_link"
+      %button.btn.btn_blue
+        = link_to "会員登録", new_user_registration_path, class: "btn_link"
+.search_show_btn
+  %i.fas.fa-search.mobile
+.post_search_header
+  = form_tag publics_path, name: "search_header", method: :get, class: 'mobile_search' do
+    = label_tag do
+      = text_field_tag "q", params[:q], required: true, autocomplete: "off", id: "field", placeholder: "記事タイトルかタグで検索"
+  .search_close
+    %span.line
+.hamburger#hamburger
+  %i.line
+- if flash[:notice]
+  %p.notification.notice
+    = notice
+- elsif flash[:alert]
+  %p.notification.alert
+    = alert
+
+:javascript
+
+  const post_search = document.getElementsByClassName('post_search_header')[0]
+  const search_show = document.getElementsByClassName('search_show_btn')[0]
+  const search_close = document.getElementsByClassName('search_close')[0]
+  search_close.addEventListener('click', ()=>{
+    post_search.classList.remove('show')
+  })
+  search_show.addEventListener('click', ()=>{
+    post_search.classList.add('show')
+    document.search_header.q.focus()
+  })
+
+  const links = document.querySelectorAll('.header_nav_li .link')
+  for (let i = 0; i < links.length; i++) {
+    const link = links.item(i)
+    if (link.getAttribute('href') === window.location.pathname) {
+      link.classList.add('now')
+    }
+  }
