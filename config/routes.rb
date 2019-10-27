@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   get '/dashboard/comments' => 'dashboard#comment', as: 'dashboard_comment'
 
   # Around Article
+  resources :entries, param: :token
   resources :drafts, param: :article_token, except: [:index, :show, :destroy] do
     collection do
       post '/destroy' => 'drafts#destroy'
