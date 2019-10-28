@@ -1,0 +1,67 @@
+- @page_title = "記事作成"
+.entry-header
+  = link_to "ダッシュボードに移動", dashboard_path, class: "entry-header__home-link"
+  .entry-header__user
+    = image_tag avatar(current_user), size: 40, class: "entry-header__user-image"
+    %span.entry-header__user-name= current_user.name
+= form_with model: @entry, id: "entry-form" do |f|
+  = f.hidden_field :status, value: 1, id: "status-field"
+  .entry-form__field
+    = f.text_field :title, placeholder: "記事タイトル", class: "entry-form__title"
+    .entry-form__status= @entry.status == 0 ? "未公開" : "公開中"
+  .entry-form__field
+    = f.text_field :tag, placeholder: "タグを追加（最大10個まで）", class: "entry-form__tag", id: "tag"
+  .entry-form__area
+    .entry-form__area-box
+      = f.text_area :content, placeholder: "Markdownで内容を書く...", class: "entry-form__content", id: "f-markdown"
+      .entry-form__bottom
+        .entry-form__word-count
+          %span#word-count 0
+          文字
+        .entry-form__submit
+          %button.entry-form__status-select-btn{form: "entry-form", data: {status: 0}}
+            %span.entry-form__status-select-draft 下書き保存
+          %button.entry-form__status-select-btn{form: "entry-form", data: {status: 1}}
+            %span.entry-form__status-select-public 記事を公開
+    .entry-form__area-box
+      .entry-form__preview-area
+        %span.entry-form__preview-label プレビュー画面
+        .entry-form__preview-content#f-html
+
+:javascript
+  (function() {
+    $('#tag').selectize({
+      delimiter: ',',
+      persist: false,
+      maxItems: 5,
+      create: function(input) {
+        return {
+          value: input,
+          text: input,
+        }
+      }
+    })
+  })
+
+  (function() {
+    const status_select_btns = document.getElementsByClassName('entry-form__status-select-btn')
+    const status_field = document.getElementById('status-field')
+
+    for(let i = 0, len = status_select_btns.length; i < len; i++) {
+      const status_select_btn = status_select_btns.item(i)
+      status_select_btn.addEventListener('click', ()=>{
+        status_field.value = status_select_btn.dataset.status
+      })
+    }
+  }());
+
+  (function() {
+    const f_markdown = document.getElementById('f-markdown')
+    const f_html = document.getElementById('f-html')
+    const word_count = document.getElementById('word-count')
+    
+    f_markdown.addEventListener('input', ()=>{
+      f_html.innerHTML = marked(f_markdown.value)
+      word_count.textContent = f_markdown.value.length
+    })
+  }());
