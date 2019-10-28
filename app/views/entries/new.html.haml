@@ -4,7 +4,7 @@
   .entry-header__user
     = image_tag avatar(current_user), size: 40, class: "entry-header__user-image"
     %span.entry-header__user-name= current_user.name
-= form_with model: @entry, id: "entry-form" do |f|
+= form_with model: @entry, data: { remote: false }, id: "entry-form" do |f|
   = f.hidden_field :status, value: 1, id: "status-field"
   .entry-form__field
     = f.text_field :title, placeholder: "記事タイトル", class: "entry-form__title"
