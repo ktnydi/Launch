@@ -1,5 +1,5 @@
 class Entry < ApplicationRecord
-  self.primary_key = "entry_token"
+  self.primary_key = "token"
 
   belongs_to :user, foreign_key: "user_token"
 
@@ -7,5 +7,5 @@ class Entry < ApplicationRecord
   validates :tags, length: { maximum: 50 }
   validates :content, length: { maximum: 10000 }
 
-  has_secure_token :entry_token
+  has_secure_token :token
 end
