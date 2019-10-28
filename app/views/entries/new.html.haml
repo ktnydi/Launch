@@ -10,7 +10,7 @@
     = f.text_field :title, placeholder: "記事タイトル", class: "entry-form__title"
     .entry-form__status= @entry.status == 0 ? "未公開" : "公開中"
   .entry-form__field
-    = f.text_field :tag, placeholder: "タグを追加（最大10個まで）", class: "entry-form__tag", id: "tag"
+    = f.text_field :tags, placeholder: "タグを追加（最大10個まで）", class: "entry-form__tag", id: "tag"
   .entry-form__area
     .entry-form__area-box
       = f.text_area :content, placeholder: "Markdownで内容を書く...", class: "entry-form__content", id: "f-markdown"

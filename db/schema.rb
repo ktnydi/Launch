@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_25_131618) do
+ActiveRecord::Schema.define(version: 2019_10_28_065506) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,7 +52,7 @@ ActiveRecord::Schema.define(version: 2019_10_25_131618) do
     t.string "token"
     t.integer "status", default: 0, null: false
     t.string "title", default: "", null: false
-    t.string "tag", default: ""
+    t.text "tags", default: ""
     t.text "content", default: ""
     t.string "user_token"
     t.datetime "created_at", precision: 6, null: false
