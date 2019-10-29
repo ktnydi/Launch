@@ -67,10 +67,15 @@
     const f_markdown = document.getElementById('f-markdown')
     const f_html = document.getElementById('f-html')
     const word_count = document.getElementById('word-count')
-    
-    f_markdown.addEventListener('input', ()=>{
+
+    const doPreview = () => {
       f_html.innerHTML = marked(f_markdown.value)
       word_count.textContent = f_markdown.value.length
+    }
+
+    doPreview()
+    f_markdown.addEventListener('input', ()=>{
+      doPreview()
     })
   }());
 
