@@ -1,5 +1,6 @@
 class Entry < ApplicationRecord
   self.primary_key = "token"
+  serialize :tags
 
   belongs_to :user, foreign_key: "user_token"
 
@@ -8,4 +9,11 @@ class Entry < ApplicationRecord
   validates :content, length: { maximum: 10000 }
 
   has_secure_token :token
+
+  before_save :tags_to_array
+
+  :private
+    def tags_to_array
+      self.tags = self.tags.split(",")
+    end
 end
