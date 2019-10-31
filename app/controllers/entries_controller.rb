@@ -1,6 +1,6 @@
 class EntriesController < ApplicationController
   def index
-    
+    @entries = Entry.publics.search(params[:query]).new_order
   end
 
   def show
