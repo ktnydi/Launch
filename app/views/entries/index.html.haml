@@ -1,0 +1,28 @@
+.entry-list
+  .entry-list__header
+    .entry-list__container
+      %span.entry-list__header-minlabel Latest Article
+      %h2.entry-list__header-label 最新記事
+  .entry-list__content
+    .entry-list__container
+      .entry
+        .entry__cards
+          - @entries.each do |entry|
+            = link_to "#", class: "entry__link" do
+              %div
+                = image_tag avatar(entry.user), size: 45, class: "entry__user-image"
+              .entry__card-right
+                .entry__title= entry.title
+                .entry__info
+                  .entry__author= "by #{entry.user.name}"
+                  .entry__status
+                    %span.entry__like
+                      %i.far.fa-heart.entry__like-icon
+                      %span.entry__like-count 98
+                    %span.entry__created-at= entry.created_at.strftime("%Y-%m-%d")
+        - if @entries
+          .entry__paginate
+            = link_to_prev_page @entries, "< 前のページ", class: "entry__paginate-prev" do
+              %span.entry__paginate-prev-disable < 前のページ
+            = link_to_next_page @entries, "次のページ >", class: "entry__paginate-next" do
+              %span.entry__paginate-next-disable 次のページ >
