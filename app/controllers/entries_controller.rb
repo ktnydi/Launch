@@ -1,6 +1,6 @@
 class EntriesController < ApplicationController
   def index
-    @entries = Entry.publics.search(params[:query]).new_order
+    @entries = Entry.publics.search(params[:query]).new_order.page(params[:page]).per(30)
   end
 
   def show
