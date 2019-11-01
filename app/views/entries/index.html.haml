@@ -8,7 +8,7 @@
       .entry
         .entry__cards
           - @entries.each do |entry|
-            = link_to "#", class: "entry__link" do
+            = link_to entry_path(entry), class: "entry__link" do
               %div
                 = image_tag avatar(entry.user), size: 45, class: "entry__user-image"
               .entry__card-right
