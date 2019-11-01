@@ -1,0 +1,66 @@
+@import "variables";
+
+.entry {
+  &__cards {
+    box-shadow: 0 1px 10px 0 rgba(0, 0, 0, .08);
+    background-color: $white;
+  }
+  &__link + &__link {
+    border-top: 1px solid #ddd;
+  }
+  &__link {
+    display: flex;
+    padding: 15px;
+    text-decoration: none;
+    color: $font-color;
+    &:hover {
+      background-color: rgba(0, 0, 0, .02);
+    }
+  }
+  &__user-image {
+    display: inline-block;
+    border-radius: 50%;
+    box-shadow: 0 1px 8px 0 rgba(0, 0, 0, .1);
+  }
+  &__card-right {
+    flex: 1;
+    margin-left: 15px;
+  }
+  &__title {
+    letter-spacing: 0.1px;
+  }
+  &__info {
+    display: flex;
+    margin-top: 20px;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 1.2rem;
+    color: #888;
+  }
+  &__like-icon {
+    color: $primary-color;
+  }
+  &__like-count {
+    margin-left: 5px;
+  }
+  &__created-at {
+    margin-left: 15px;
+  }
+  &__paginate {
+    display: flex;
+    width: 100%;
+    margin-top: 30px;
+    align-items: center;
+    justify-content: space-between;
+  }
+  &__paginate-prev, &__paginate-next {
+    text-decoration: none;
+    color: #333;
+    &:hover {
+      text-decoration: underline;
+    }
+    &-disable {
+      color: #aaa;
+    }
+  }
+}
