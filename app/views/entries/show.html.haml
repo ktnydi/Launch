@@ -1,0 +1,206 @@
+.entry-page
+  .entry-page__container
+    .entry-page__inner
+      .entry-page__action
+        .entry-page__btn-big
+          .entry-page__like
+            .entry-page__like-count
+              %span 161
+            %i.far.fa-heart.entry-page__like-icon
+        .entry-page__btn-big
+          .entry-page__bookmark
+            %i.far.fa-bookmark
+        .entry-page__share-btn
+          .entry-page__btn-small
+            = link_to "http://twitter.com/share?url=#{request.url}&text=#{@entry.title}%0a%0a&hashtags=launch", target: :_blank, class: "entry-page__twitter-circle" do
+              %i.fab.fa-twitter
+          .entry-page__btn-small
+            = link_to "https://www.facebook.com/sharer/sharer.php?u=#{request.url}", target: :_blank, class: "entry-page__facebook-circle" do
+              %i.fab.fa-facebook
+      .entry-page__main
+        .entry-page__head
+          = image_tag avatar(@entry.user), size: 50, class: "entry-page__author-image"
+          = link_to @entry.user.name, user_path(@entry.user), class: "entry-page__author-name"
+        .entry-page__entry-head
+          %h2.entry-page__title= @entry.title
+          .entry-page__tags
+            - @entry.tags.each do |tag|
+              %span.entry-page__tag
+                = link_to tag, "#", class: "entry-page__tag-link"
+          .entry-page__edit-date
+            %span.entry-page__created= "投稿日：#{@entry.created_at.strftime("%Y-%m-%d")}"
+            %span.entry-page__updated= "更新日：#{@entry.updated_at.strftime("%Y-%m-%d")}"
+        .entry-page__entry-main
+          .entry-page__content#content{data: {content: @entry.content}}
+          .entry-page__share
+            %h3.entry-page__share-head いいなと思った記事はSNSでみんなにシェアしよう
+            .entry-page__sns
+              .entry-page__twitter
+                = link_to "http://twitter.com/share?url=#{request.url}&text=#{@entry.title}%0a%0a&hashtags=launch", target: :_blank, class: "entry-page__share-link" do
+                  %i.fab.fa-twitter
+              .entry-page__facebook
+                = link_to "https://www.facebook.com/sharer/sharer.php?u=#{request.url}", target: :_blank, class: "entry-page__share-link" do
+                  %i.fab.fa-facebook-f
+        .entry-page__entry-bottom
+          %h2.entry-page__comment-head この記事のコメント
+          - if user_signed_in?
+            %form.entry-page__comment-form
+              = image_tag avatar(current_user), size: 40, class: "entry-page__current-user"
+              .entry-page__comment-editor
+                %textarea.entry-page__comment-md{placeholder: "Markdownで内容を入力"}
+                .entry-page__form-btn
+                  %span.entry-page__comment-reset
+                    %i.fas.fa-undo.entry-page__icon-undo
+                    %span.entry-page__btn-text リセット
+                  %span.entry-page__comment-submit コメントする
+          - else
+            .entry-page__no-auth
+              %p.entry-page__no-auth-message
+                = link_to "新規作成", new_user_registration_path, class: "entry-page__auth-link"
+                または
+                = link_to "ログイン", new_user_session_path, class: "entry-page__auth-link"
+                してコメントを送ろう
+          .entry-page__comment-list
+            - 3.times do |n|
+              .entry-page__comment
+                .entry-page__comment-left
+                  = image_tag avatar(@entry.user), size: 40, class: "entry-page__comment-user-img"
+                .entry-page__comment-right
+                  .entry-page__comment-top
+                    %span.entry-page__comment-user-name= "Taro#{n}"
+                    .entry-page__comment-created 2019-11-02
+                  .entry-page__comment-content
+                    コメントテキストコメントテキストコメントテキストコメントテキストコメントテキストコメントテキストコメントテキストコメントテキストコメントテキストコメントテキストコメントテキストコメントテキスト
+          
+      .entry-page__sidebar
+        .entry-page__entry-toc
+          .entry-page__toc-head 目次
+          %div.entry-page__toc#toc
+  .entry-page__mobile-like
+    .entry-page__like-count
+      %span 161
+    %i.far.fa-heart.entry-page__like-icon
+:javascript
+  (function() {
+    var renderer = new marked.Renderer();
+
+    renderer.code = function (code, lang) {
+      return `<div class="code-box"><` + `div class="code-lang">${lang}</div><pre` + `><code class="${lang}">` + hljs.highlightAuto(code, [lang]).value + '</code></pre></div>';
+    };
+
+    marked.setOptions({
+      breaks: true,
+      renderer: renderer
+    });
+
+    hljs.initHighlightingOnLoad();
+  }());
+
+:javascript
+  (function() {
+    const content = document.getElementById('content')
+    content.innerHTML = marked(content.dataset.content)
+  }());
+
+:javascript
+  (function() {
+    const contentsList = document.getElementById('toc') // 目次を追加する先(table of contents)
+    const div = document.createElement('div') // 作成する目次のコンテナ要素
+    // .entry-content配下のh2、h3要素を全て取得する
+    const matches = document.querySelectorAll('.entry-page__content h1, .entry-page__content h2, .entry-page__content h3')
+    const createBlafhH1 = (parent_element) => {
+      var blafh_ul1 = document.createElement('ul')
+      var blafh_li1 = document.createElement('li')
+      blafh_ul1.className = 'entry-page__toc-h1'
+      blafh_ul1.appendChild(blafh_li1)
+      parent_element.appendChild(blafh_ul1)
+    }
+    const createBlafhH2 = (parent_element) => {
+      var blafh_ul2 = document.createElement('ul')
+      var blafh_li2 = document.createElement('li')
+      blafh_ul2.className = 'entry-page__toc-h2'
+      blafh_ul2.appendChild(blafh_li2)
+      parent_element.appendChild(blafh_ul2)
+    }
+     // 取得した見出しタグ要素の数だけ以下の操作を繰り返す
+    // 最後に画面にレンダリング
+    matches.forEach(function (value, i) {
+      const id = value.id
+      if(id === '') {
+        id = value.textContent
+        value.id = id
+      }
+
+      if(value.tagName === 'H1') {
+        var ul = document.createElement('ul')
+        var li = document.createElement('li')
+        var a = document.createElement('a')
+        // 追加する<ul><li><a>タイトル</a></li></ul>を準備する
+        ul.className = 'entry-page__toc-h1'
+        a.textContent = value.textContent
+        a.href = '#' + value.id
+        a.className = 'entry-page__toc-link'
+        li.appendChild(a)
+        ul.appendChild(li)
+        // コンテナ要素である<div>の中に要素を追加する
+        div.appendChild(ul)
+      }
+
+      if(value.tagName === 'H2') {
+        var ul = document.createElement('ul')
+        var li = document.createElement('li')
+        var a = document.createElement('a')
+
+        // 直前にh1タグがない場合、空のリストを作成
+        if (div.lastElementChild !== 'UL') {
+          createBlafhH1(div)
+        }
+
+        // コンテナ要素である<div>の中から最後の<li>を取得する。
+        var lastUl1 = div.lastElementChild
+        var lastLi1 = lastUl1.lastElementChild
+        // 追加する<ul><li><a>タイトル</a></li></ul>を準備する
+        ul.className = 'entry-page__toc-h2'
+        a.textContent = value.textContent
+        a.href = '#' + value.id
+        a.className = 'entry-page__toc-link'
+        li.appendChild(a)
+        ul.appendChild(li)
+        // 最後の<li>の中に要素を追加する
+        lastLi1.appendChild(ul)
+      }
+
+      if(value.tagName === 'H3') {
+        var ul = document.createElement('ul')
+        var li = document.createElement('li')
+        var a = document.createElement('a')
+
+        // 直前にh1タグがない場合、空のリストを作成
+        if (div.lastElementChild !== 'UL') {
+          createBlafhH1(div)
+        }
+
+        // コンテナ要素である<div>の中から最後の<li>を取得する。
+        var lastUl1 = div.lastElementChild
+        var lastLi1 = lastUl1.lastElementChild
+
+        // 直前にh2タグがない場合、空のリストを作成
+        if (lastLi1.lastElementChild !== 'UL') {
+          createBlafhH2(lastLi1)
+        }
+        
+        var lastUl2 = lastLi1.lastElementChild
+        var lastLi2 = lastUl2.lastElementChild
+        // 追加する<ul><li><a>タイトル</a></li></ul>を準備する
+        ul.className = 'entry-page__toc-h3'
+        a.textContent = value.textContent
+        a.href = '#' + value.id
+        a.className = 'entry-page__toc-link'
+        li.appendChild(a)
+        ul.appendChild(li)
+        // 最後の<li>の中に要素を追加する
+        lastLi2.appendChild(ul)
+      }
+    })
+    contentsList.appendChild(div)
+  }());
