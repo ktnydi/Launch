@@ -1,0 +1,99 @@
+@import "variables";
+
+%__entry-content {
+  & > * {
+    line-height: 1.8em;
+  }
+  & > :first-child {
+    margin-top: 0 !important;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    margin: 15px 0 30px;
+  }
+  h1, h2 {
+    padding: 0 0 5px;
+    font-size: 2.4rem;
+    border-bottom: 1px solid #ccc;
+  }
+  h3, h4 {
+    font-size: 2rem;
+  }
+  h5, h6 {
+    font-size: 1.6rem;
+  }
+  p {
+    margin: 0 0 30px;
+  }
+  a {
+    text-decoration: none;
+    color: $primary-color;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  img {
+    max-width: 100%;
+  }
+  .code-box {
+    width: 100%;
+    position: relative;
+    overflow-x: scroll;
+    .code-lang {
+      padding: 5px 15px;
+      position: absolute;
+      top: 0;
+      right: 0;
+      color: #555;
+    }
+  }
+  code {
+    margin: 0 5px;
+    padding: 2px 5px;
+    font-family: monaco;
+    border: 1px solid #ddd;
+    border-radius: 2px;
+  }
+  pre {
+    width: 100%;
+    margin: 0 0 30px;
+    code {
+      width: 100%;
+      max-width: 100%;
+      margin: 0;
+      padding: 15px 30px;
+      border: none;
+      overflow-x: scroll;
+    }
+  }
+  blockquote {
+    margin: 30px 0;
+    padding: 15px 30px;
+    border-radius: 2px;
+    background-color: #eee;
+    color: #555;
+    p {
+      margin: 0;
+    }
+  }
+  hr {
+    margin: 30px 0;
+    border: 0;
+    width: 100%;
+    height: 1px;
+    background-color: #ccc;
+  }
+  table {
+    display: block;
+    margin: 30px 0;
+    max-width: 100%;
+    overflow-x: scroll;
+    border-collapse: collapse;
+    tbody > tr:nth-child(odd) {
+      background-color: #eee;
+    }
+    th, td {
+      padding: 5px 10px;
+      border: 1px solid #ccc;
+    }
+  }
+}
