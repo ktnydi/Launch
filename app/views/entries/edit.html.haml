@@ -1,0 +1,10 @@
+- @page_title = "記事編集"
+- if @messages.present?
+  .entry-message
+    .entry-message__wrapper
+      %i.fas.fa-times.entry-message__close-btn#close
+      .entry-message__title 記事を保存できませんでした
+      %ul.entry-message__list-wrapper
+        - @messages.each do |message|
+          %li.entry-message__list= message
+= render "entries/share/form"
