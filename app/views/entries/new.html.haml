@@ -64,6 +64,21 @@
   }());
 
   (function() {
+    var renderer = new marked.Renderer();
+
+    renderer.code = function (code, lang) {
+      return `<div class="code-box"><` + `div class="code-lang">${lang}</div><pre` + `><code class="${lang}">` + hljs.highlightAuto(code, [lang]).value + '</code></pre></div>';
+    };
+
+    marked.setOptions({
+      breaks: true,
+      renderer: renderer
+    });
+
+    hljs.initHighlightingOnLoad();
+  }());
+
+  (function() {
     const f_markdown = document.getElementById('f-markdown')
     const f_html = document.getElementById('f-html')
     const word_count = document.getElementById('word-count')
@@ -73,9 +88,17 @@
       word_count.textContent = f_markdown.value.length
     }
 
+    const doAutoLanguage = () => {
+      const codes = document.querySelectorAll('pre code')
+      codes.forEach((block) => {
+        hljs.highlightBlock(block);
+      })
+    }
+
     doPreview()
     f_markdown.addEventListener('input', ()=>{
       doPreview()
+      doAutoLanguage()
     })
   }());
 
