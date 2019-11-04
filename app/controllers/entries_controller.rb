@@ -29,7 +29,13 @@ class EntriesController < ApplicationController
   end
 
   def update
-    
+    @entry = Entry.find_by(token: params[:token])
+    if @entry.update_attributes(entry_params)
+      redirect_to dashboard_path, notice: "記事を更新しました。"
+    else
+      @messages = @entry.errors.full_messages
+      render 'edit', layout: "editor"
+    end
   end
 
   def destroy
