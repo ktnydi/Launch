@@ -23,7 +23,9 @@ class EntriesController < ApplicationController
   end
 
   def edit
-    
+    @entry = Entry.find_by(token: params[:token])
+    @entry.tags = @entry.tags.join(",")
+    render layout: "editor"
   end
 
   def update
