@@ -1,0 +1,23 @@
+= form_with model: @entry, data: { remote: false }, id: "entry-form" do |f|
+  = f.hidden_field :status, value: 1, id: "status-field"
+  .entry-form__field
+    = f.text_field :title, placeholder: "記事タイトル", class: "entry-form__title"
+    .entry-form__status= @entry.status == 0 ? "未公開" : "公開中"
+  .entry-form__field
+    = f.text_field :tags, placeholder: "タグを追加（最大10個まで）", class: "entry-form__tag", id: "tag"
+  .entry-form__area
+    .entry-form__area-box
+      = f.text_area :content, placeholder: "Markdownで内容を書く...", class: "entry-form__content", id: "f-markdown"
+      .entry-form__bottom
+        .entry-form__word-count
+          %span#word-count 0
+          文字
+        .entry-form__submit
+          %button.entry-form__status-select-btn{form: "entry-form", data: {status: 0}}
+            %span.entry-form__status-select-draft 下書き保存
+          %button.entry-form__status-select-btn{form: "entry-form", data: {status: 1}}
+            %span.entry-form__status-select-public 記事を公開
+    .entry-form__area-box
+      .entry-form__preview-area
+        %span.entry-form__preview-label プレビュー画面
+        .entry-form__preview-content#f-html
