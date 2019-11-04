@@ -21,3 +21,79 @@
     = javascript_include_tag '/editor/highlight/highlight.pack.js'
   %body
     = yield
+
+    :javascript
+      (function() {
+        $('#tag').selectize({
+          delimiter: ',',
+          persist: false,
+          maxItems: 5,
+          create: function(input) {
+            return {
+              value: input,
+              text: input,
+            }
+          }
+        })
+      }());
+
+    :javascript
+      (function() {
+        var renderer = new marked.Renderer();
+
+        renderer.code = function (code, lang) {
+          return `<div class="code-box"><` + `div class="code-lang">${lang}</div><pre` + `><code class="${lang}">` + hljs.highlightAuto(code, [lang]).value + '</code></pre></div>';
+        };
+
+        marked.setOptions({
+          breaks: true,
+          renderer: renderer
+        });
+
+        hljs.initHighlightingOnLoad();
+      }());
+
+    :javascript
+      (function() {
+        const status_select_btns = document.getElementsByClassName('entry-form__status-select-btn')
+        const status_field = document.getElementById('status-field')
+
+        for(let i = 0, len = status_select_btns.length; i < len; i++) {
+          const status_select_btn = status_select_btns.item(i)
+          status_select_btn.addEventListener('click', ()=>{
+            status_field.value = status_select_btn.dataset.status
+          })
+        }
+      }());
+
+      (function() {
+        const f_markdown = document.getElementById('f-markdown')
+        const f_html = document.getElementById('f-html')
+        const word_count = document.getElementById('word-count')
+
+        const doPreview = () => {
+          f_html.innerHTML = marked(f_markdown.value)
+          word_count.textContent = f_markdown.value.length
+        }
+
+        const doAutoLanguage = () => {
+          const codes = document.querySelectorAll('pre code')
+          codes.forEach((block) => {
+            hljs.highlightBlock(block);
+          })
+        }
+
+        doPreview()
+        f_markdown.addEventListener('input', ()=>{
+          doPreview()
+          doAutoLanguage()
+        })
+      }());
+
+      (function() {
+        const message = document.getElementsByClassName('entry-message')[0]
+        const close = document.getElementById('close')
+        close.addEventListener('click', ()=>{
+          message.classList.add('fadeout')
+        })
+      }());
