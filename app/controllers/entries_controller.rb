@@ -4,7 +4,7 @@ class EntriesController < ApplicationController
   end
 
   def show
-    
+    @entry = Entry.find_by(token: params[:token])
   end
 
   def new
