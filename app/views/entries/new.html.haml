@@ -7,9 +7,4 @@
       %ul.entry-message__list-wrapper
         - @messages.each do |message|
           %li.entry-message__list= message
-.entry-header
-  = link_to "ダッシュボードに移動", dashboard_path, class: "entry-header__home-link"
-  .entry-header__user
-    = image_tag avatar(current_user), size: 40, class: "entry-header__user-image"
-    %span.entry-header__user-name= current_user.name
 = render "entries/share/form"
