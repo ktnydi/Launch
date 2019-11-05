@@ -39,7 +39,10 @@ class EntriesController < ApplicationController
   end
 
   def destroy
-    
+    @entry = Entry.find_by(token: params[:token])
+    if @entry.destroy
+      redirect_to dashboard_path, notice: "記事を削除しました。"
+    end
   end
 
   :private
