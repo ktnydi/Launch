@@ -147,6 +147,11 @@
     display: flex;
     padding: 30px 0 0;
     align-items: center;
+    justify-content: space-between;
+  }
+  &__author {
+    display: flex;
+    align-items: center;
   }
   &__author-image {
     display: inline-block;
@@ -157,6 +162,23 @@
     margin-left: 10px;
     text-decoration: none;
     color: $font-color;
+  }
+  &__edit-link {
+    padding: 10px 15px;
+    border-radius: 2px;
+    text-decoration: none;
+    font-size: 1.4rem;
+    color: #555;
+    transition: .15s;
+    &::before {
+      margin-right: 3px;
+      font-family: 'Font Awesome 5 Free';
+      font-weight: 600;
+      content: '\f044';
+    }
+    &:hover {
+      opacity: .6;
+    }
   }
   &__entry-head {
     padding: 30px 0;
