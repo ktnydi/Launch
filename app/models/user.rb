@@ -61,6 +61,10 @@ class User < ApplicationRecord
     "#{auth.uid}-#{auth.provider}@example.com"
   end
 
+  def author?(entry)
+    self.entries.find_by(token: entry.token)
+  end
+
   def is_following?(user)
     followings.find_by(uuid: user.uuid).present?
   end

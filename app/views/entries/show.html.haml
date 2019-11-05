@@ -19,8 +19,11 @@
               %i.fab.fa-facebook
       .entry-page__main
         .entry-page__head
-          = image_tag avatar(@entry.user), size: 50, class: "entry-page__author-image"
-          = link_to @entry.user.name, user_path(@entry.user), class: "entry-page__author-name"
+          .entry-page__author
+            = image_tag avatar(@entry.user), size: 50, class: "entry-page__author-image"
+            = link_to @entry.user.name, user_path(@entry.user), class: "entry-page__author-name"
+          - if current_user.author?(@entry)
+            = link_to "この記事を編集する", edit_entry_path(@entry), class: "entry-page__edit-link"
         .entry-page__entry-head
           %h2.entry-page__title= @entry.title
           .entry-page__tags
