@@ -1,4 +1,6 @@
 class EntriesController < ApplicationController
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+  
   def index
     @entries = Entry.publics.search(params[:query]).new_order.page(params[:page]).per(30)
   end
