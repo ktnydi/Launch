@@ -23,7 +23,12 @@
             = image_tag avatar(@entry.user), size: 50, class: "entry-page__author-image"
             = link_to @entry.user.name, user_path(@entry.user), class: "entry-page__author-name"
           - if current_user.author?(@entry)
-            = link_to "この記事を編集する", edit_entry_path(@entry), class: "entry-page__edit-link"
+            .entry-page__edit
+              .entry-page__dropdown#dropdown
+                この記事を編集する
+              .entry-page__dropdown-list#dropdown-list
+                = link_to "内容を修正", edit_entry_path(@entry), class: "entry-page__edit-link"
+                = link_to "記事を削除", entry_path(@entry), class: "entry-page__destroy-link", data: {confirm: "記事を削除します。\n\n削除した記事は二度と元に戻すことはできません。\n本当によろしいですか？"}, method: :delete
         .entry-page__entry-head
           %h2.entry-page__title= @entry.title
           .entry-page__tags
@@ -103,6 +108,20 @@
   (function() {
     const content = document.getElementById('content')
     content.innerHTML = marked(content.dataset.content)
+  }());
+
+:javascript
+  (function() {
+    const dropdown = document.getElementById('dropdown')
+    const dropdown_list = document.getElementById('dropdown-list')
+    document.body.addEventListener('click', (e)=>{
+      const target = e.target
+      if (target === dropdown && !dropdown_list.hasAttribute('open')) {
+        dropdown_list.setAttribute('open', '')
+      } else {
+        dropdown_list.removeAttribute('open')
+      }
+    })
   }());
 
 :javascript
