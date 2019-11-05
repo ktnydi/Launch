@@ -163,13 +163,60 @@
     text-decoration: none;
     color: $font-color;
   }
-  &__edit-link {
-    padding: 10px 15px;
+  &__edit {
+    position: relative;
+  }
+  &__dropdown {
+    padding: 10px 0;
+    font-size: 1.4rem;
+    color: #323232;
+    cursor: pointer;
+    transition: .15s;
+    &::after {
+      margin-left: 3px;
+      font-family: 'Font Awesome 5 Free';
+      font-weight: 600;
+      content: '\f107';
+    }
+    &:hover {
+      opacity: .6;
+    }
+  }
+  &__dropdown-list {
+    display: none;
+    width: 130px;
+    position: absolute;
+    bottom: -110px;
+    right: 0;
+    z-index: 10;
+    box-shadow: 0 1px 10px 0 rgba(0, 0, 0, .08);
+    border-radius: 2px;
+    background-color: $white;
+    &[open] {
+      display: block;
+      animation: dropdown-fade .15s ease 0s forwards;
+    }
+  }
+  @keyframes dropdown-fade {
+    0% {
+      transform: scale(0.9);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  %__edit-btn {
+    display: block;
+    padding: 8px 16px;
+    line-height: 36px;
     border-radius: 2px;
     text-decoration: none;
-    font-size: 1.4rem;
-    color: #555;
+    font-size: 1.2rem;
     transition: .15s;
+  }
+  &__edit-link {
+    @extend %__edit-btn;
+    color: #323232;
     &::before {
       margin-right: 3px;
       font-family: 'Font Awesome 5 Free';
@@ -177,7 +224,20 @@
       content: '\f044';
     }
     &:hover {
-      opacity: .6;
+      text-decoration: underline;
+    }
+  }
+  &__destroy-link {
+    @extend %__edit-btn;
+    color: #D53E44;
+    &::before {
+      margin-right: 6px;
+      font-family: 'Font Awesome 5 Free';
+      font-weight: 400;
+      content: '\f2ed';
+    }
+    &:hover {
+      text-decoration: underline;
     }
   }
   &__entry-head {
