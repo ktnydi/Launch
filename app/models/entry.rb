@@ -2,6 +2,7 @@ class Entry < ApplicationRecord
   self.primary_key = "token"
   serialize :tags
 
+  has_many :bookmarks, foreign_key: "entry_token", dependent: :destroy
   belongs_to :user, foreign_key: "user_token"
 
   validates :title, presence: true, length: { maximum: 50 }
