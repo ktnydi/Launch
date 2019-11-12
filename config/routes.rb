@@ -27,6 +27,9 @@ Rails.application.routes.draw do
     member do
       post '/bookmarks' => 'bookmarks#create'
       delete '/bookmarks' => 'bookmarks#destroy'
+
+      post '/likes' => 'likes#create'
+      delete '/likes' => 'likes#destroy'
     end
   end
   resources :drafts, param: :article_token, except: [:index, :show, :destroy] do
@@ -37,11 +40,6 @@ Rails.application.routes.draw do
   resources :publics, param: :article_token, except: [:destroy] do
     collection do
       post '/destroy' => 'publics#destroy'
-    end
-
-    member do
-      post '/like' => 'likes#create'
-      delete '/unlike' => 'likes#destroy'
     end
   end
   resources :likes, only: [:index]
