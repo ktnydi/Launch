@@ -8,8 +8,10 @@
               %span 161
             %i.far.fa-heart.entry-page__like-icon
         .entry-page__btn-big
-          .entry-page__bookmark
-            %i.far.fa-bookmark
+          - if current_user.bookmarked?(@entry)
+            .entry-page__bookmark#bookmark{data: {entrytoken: @entry.token}, bookmarked: ""}
+          - else
+            .entry-page__bookmark#bookmark{data: {entrytoken: @entry.token}}
         .entry-page__share-btn
           .entry-page__btn-small
             = link_to "http://twitter.com/share?url=#{request.url}&text=#{@entry.title}%0a%0a&hashtags=launch", target: :_blank, class: "entry-page__twitter-circle" do
