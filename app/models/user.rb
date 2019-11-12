@@ -10,7 +10,7 @@ class User < ApplicationRecord
   has_many :likes, foreign_key: "user_token", dependent: :destroy
   has_many :liked_article, through: :likes, source: :public
   has_many :bookmarks, foreign_key: "user_token", dependent: :destroy
-  has_many :bookmark_articles, through: :bookmarks, source: :public
+  has_many :bookmarked_entries, through: :bookmarks, source: :entry
   # フォローしたユーザー
   has_many :active_follows,
             class_name: "Follow",
