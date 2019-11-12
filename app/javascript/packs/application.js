@@ -15,4 +15,24 @@
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
 
-console.log('Hello World from Webpacker')
+import Bookmark from '../bookmark'
+
+document.addEventListener('DOMContentLoaded', ()=>{
+  const parent_bookmark = document.getElementById('bookmark')
+  const state = {
+    parent: parent_bookmark,
+    has_bookmarked: parent_bookmark.hasAttribute('bookmarked')
+  }
+  const bookmark = new Bookmark(state)
+  bookmark._state.parent.innerHTML = bookmark.render()
+
+  bookmark._state.parent.addEventListener('click', ()=>{
+    if (bookmark._state.has_bookmarked) {
+      // bookmark削除のリクエスト
+      bookmark.destroy(bookmark._state.parent.dataset.entrytoken)
+    } else {
+      // bookmark作成のリクエスト
+      bookmark.create(bookmark._state.parent.dataset.entrytoken)
+    }
+  })
+})
