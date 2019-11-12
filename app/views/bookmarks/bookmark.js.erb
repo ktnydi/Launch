@@ -1,4 +1,0 @@
-var bookmark_btns = document.getElementsByClassName('bookmark_btn')
-for (let i = 0; i < bookmark_btns.length; i++) {
-  bookmark_btns.item(i).innerHTML = '<%= j(render "bookmarks/bookmark", public: @public) %>'
-}
