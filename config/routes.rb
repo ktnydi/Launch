@@ -23,7 +23,12 @@ Rails.application.routes.draw do
   get '/dashboard/comments' => 'dashboard#comment', as: 'dashboard_comment'
 
   # Around Article
-  resources :entries, param: :token
+  resources :entries, param: :token do
+    member do
+      post '/bookmarks' => 'bookmarks#create'
+      delete '/bookmarks' => 'bookmarks#destroy'
+    end
+  end
   resources :drafts, param: :article_token, except: [:index, :show, :destroy] do
     collection do
       post '/destroy' => 'drafts#destroy'
@@ -37,8 +42,6 @@ Rails.application.routes.draw do
     member do
       post '/like' => 'likes#create'
       delete '/unlike' => 'likes#destroy'
-      post '/bookmark' => 'bookmarks#create'
-      delete '/unbookmark' => 'bookmarks#destroy'
     end
   end
   resources :likes, only: [:index]
