@@ -65,6 +65,10 @@ class User < ApplicationRecord
     self.entries.find_by(token: entry.token)
   end
 
+  def bookmarked?(entry)
+    !!bookmarks.find_by(entry_token: entry.token)
+  end
+
   def is_following?(user)
     followings.find_by(uuid: user.uuid).present?
   end
