@@ -65,6 +65,19 @@ class User < ApplicationRecord
     self.entries.find_by(token: entry.token)
   end
 
+  def liked?(entry)
+    !!likes.find_by(entry_token: entry.token)
+  end
+
+  def add_like_count(entry)
+    unless self.liked?(entry)
+      return 0
+    end
+
+    like = self.likes.find_by(entry_token: entry.token)
+    like.count
+  end
+
   def bookmarked?(entry)
     !!bookmarks.find_by(entry_token: entry.token)
   end
