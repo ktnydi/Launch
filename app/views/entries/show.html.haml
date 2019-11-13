@@ -3,10 +3,13 @@
     .entry-page__inner
       .entry-page__action
         .entry-page__btn-big
-          .entry-page__like
+          .entry-page__like#like{data: {state: "#{{entry_token: @entry.token, sum_like_count: @entry.likes.sum(:count), add_like_count: current_user.add_like_count(@entry)}.to_json}"}}
             .entry-page__like-count
-              %span 161
-            %i.far.fa-heart.entry-page__like-icon
+              %span= @entry.likes.sum(:count)
+            .entry-page__liked
+              .entry-page__add-like-label
+                %span.entry-page__add-like-count +10
+              %i.far.fa-heart
         .entry-page__btn-big
           - if current_user.bookmarked?(@entry)
             .entry-page__bookmark#bookmark{data: {entrytoken: @entry.token}, bookmarked: ""}
