@@ -6,9 +6,18 @@ class LikesController < ApplicationController
   end
 
   def create
-    like = current_user.likes.new(entry_token: params[:entry_token])
+    like = current_user.likes.new(entry_token: params[:entry_token], count: params[:count])
     if like.save
       render json: like, status: :created
+    else
+      render json: like.errors, status: :unprocessable_entity
+    end
+  end
+
+  def update
+    like = current_user.likes.find_by(entry_token: params[:entry_token])
+    if like.update_attributes(count: params[:count])
+      render json: like, status: :ok
     else
       render json: like.errors, status: :unprocessable_entity
     end
