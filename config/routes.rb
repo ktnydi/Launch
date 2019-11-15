@@ -29,6 +29,7 @@ Rails.application.routes.draw do
       delete '/bookmarks' => 'bookmarks#destroy'
 
       post '/likes' => 'likes#create'
+      put '/likes' => 'likes#update'
       delete '/likes' => 'likes#destroy'
     end
   end
