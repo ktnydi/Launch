@@ -70,6 +70,10 @@
     position: absolute;
     top: -35px;
     left: 0;
+    display: none;
+    &[add] {
+      display: block;
+    }
   }
   &__add-like-count {
     padding: 5px;

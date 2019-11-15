@@ -16,15 +16,35 @@
 // const imagePath = (name) => images(name, true)
 
 import Bookmark from '../bookmark'
+import Like from '../like'
 
 document.addEventListener('DOMContentLoaded', ()=>{
+  const parent_like = document.getElementById('like')
+  const like_state = {
+    parent_elem: parent_like,
+    entry_token: parent_like.dataset.entrytoken,
+    sum_like_count: Number(parent_like.dataset.sumlikecount),
+    add_like_count: Number(parent_like.dataset.addlikecount)
+  }
+  const like = new Like(like_state)
+
   const parent_bookmark = document.getElementById('bookmark')
   const state = {
     parent: parent_bookmark,
     has_bookmarked: parent_bookmark.hasAttribute('bookmarked')
   }
   const bookmark = new Bookmark(state)
+
+  parent_like.innerHTML = like.render()
   bookmark._state.parent.innerHTML = bookmark.render()
+
+  parent_like.addEventListener('click', ()=>{
+    if (like._state.add_like_count > 0) {
+      like.update(like._state.entry_token)
+    } else {
+      like.create(like._state.entry_token)
+    }
+  })
 
   bookmark._state.parent.addEventListener('click', ()=>{
     if (bookmark._state.has_bookmarked) {
