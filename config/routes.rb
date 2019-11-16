@@ -31,6 +31,8 @@ Rails.application.routes.draw do
       post '/likes' => 'likes#create'
       put '/likes' => 'likes#update'
       delete '/likes' => 'likes#destroy'
+
+      resources :comments, only: [:create, :destroy]
     end
   end
   resources :drafts, param: :article_token, except: [:index, :show, :destroy] do
@@ -49,11 +51,6 @@ Rails.application.routes.draw do
     resources :tags, param: :category, only: [:show]
     get '/history' => 'history#index', as: 'history'
   end
-
-  # Around Comment
-  post '/comment/:article_token' => 'comments#create'
-  patch '/comment/:id' => 'comments#update'
-  delete '/comment/:id/' => 'comments#destroy'
 
   # Terms
   get '/terms' => 'terms#index'
