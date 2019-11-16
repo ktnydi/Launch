@@ -51,15 +51,15 @@
         .entry-page__entry-bottom
           %h2.entry-page__comment-head この記事のコメント
           - if user_signed_in?
-            %form.entry-page__comment-form
+            = form_with scope: :comment, url: comments_path(@entry), html: {name: "comment_form"}, data: {remote: false}, class: "entry-page__comment-form" do |f|
               = image_tag avatar(current_user), size: 40, class: "entry-page__current-user"
               .entry-page__comment-editor
-                %textarea.entry-page__comment-md{placeholder: "Markdownで内容を入力"}
+                = f.text_area :content, placeholder: "Markdownでコメントを入力", class: "entry-page__comment-md"
                 .entry-page__form-btn
-                  %span.entry-page__comment-reset
+                  %span.entry-page__comment-reset#comment-reset
                     %i.fas.fa-undo.entry-page__icon-undo
                     %span.entry-page__btn-text リセット
-                  %span.entry-page__comment-submit コメントする
+                  = f.button "コメントする", class: "entry-page__comment-submit"
           - else
             .entry-page__no-auth
               %p.entry-page__no-auth-message
@@ -68,17 +68,19 @@
                 = link_to "ログイン", new_user_session_path, class: "entry-page__auth-link"
                 してコメントを送ろう
           .entry-page__comment-list
-            - 3.times do |n|
+            - @entry.comments.each do |comment|
               .entry-page__comment
                 .entry-page__comment-left
-                  = image_tag avatar(@entry.user), size: 40, class: "entry-page__comment-user-img"
+                  = image_tag avatar(comment.user), size: 40, class: "entry-page__comment-user-img"
                 .entry-page__comment-right
                   .entry-page__comment-top
-                    %span.entry-page__comment-user-name= "Taro#{n}"
-                    .entry-page__comment-created 2019-11-02
-                  .entry-page__comment-content
-                    コメントテキストコメントテキストコメントテキストコメントテキストコメントテキストコメントテキストコメントテキストコメントテキストコメントテキストコメントテキストコメントテキストコメントテキスト
-          
+                    %span
+                      %span.entry-page__comment-user-name= comment.user.name
+                      ・
+                      %span.entry-page__comment-created= comment.created_at.strftime("%Y-%m-%d")
+                    - if comment.user == current_user
+                      = link_to "削除する", comment_path(@entry, comment), method: :delete, data: {confirm: "コメントを削除してもよろしいですか？"}, class: "entry-page__comment-delete"
+                  .entry-page__comment-content= comment.content
       .entry-page__sidebar
         .entry-page__entry-toc
           .entry-page__toc-head 目次
@@ -225,3 +227,15 @@
     })
     contentsList.appendChild(div)
   }());
+
+:javascript
+  const comment_reset = document.getElementById('comment-reset')
+  const comment_form = document.forms.comment_form
+  const comment_contents = document.querySelectorAll('.entry-page__comment-content')
+  comment_reset.addEventListener('click', ()=>{
+    comment_form.comment_content.value = ''
+  })
+
+  comment_contents.forEach(function(content, idx){
+    content.innerHTML = marked(content.textContent)
+  })

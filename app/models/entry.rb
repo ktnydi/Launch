@@ -4,6 +4,7 @@ class Entry < ApplicationRecord
 
   has_many :bookmarks, foreign_key: "entry_token", dependent: :destroy
   has_many :likes, foreign_key: "entry_token", dependent: :destroy
+  has_many :comments, foreign_key: "entry_token", dependent: :destroy
   belongs_to :user, foreign_key: "user_token"
 
   validates :title, presence: true, length: { maximum: 50 }

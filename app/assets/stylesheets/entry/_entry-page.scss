@@ -439,8 +439,17 @@
     margin-left: 15px;
     font-size: 1.4rem;
   }
+  &__comment-delete {
+    text-decoration: none;
+    color: $sub-font-color;
+    transition: .15s;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
   &__comment-content {
     margin-top: 5px;
+    @extend %__entry-content;
   }
   &__no-auth {
     padding: 50px 0;
