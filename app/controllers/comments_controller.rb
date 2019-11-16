@@ -3,27 +3,19 @@ class CommentsController < ApplicationController
 
   def create
     @comment = current_user.comments.new(comment_params)
-    @comment.article_token = params[:article_token]
+    @comment.entry_token = params[:token]
     if @comment.save
-      redirect_to public_path(params[:article_token]), notice: "コメントを投稿しました。"
+      redirect_to entry_path(params[:token])
     else
       flash[:alert] = "コメントするにはログインが必要です。"
     end
   end
 
-  def update
-    @comment = Comment.find_by(id: params[:id])
-    @comment.content = params[:comment][:content]
-    if @comment.save
-      redirect_to public_path(@comment.article_token), notice: "コメントを更新しました。"
-    end
-  end
-
   def destroy
-    @comment = Comment.find_by(id: params[:id])
-    @public = @comment.public
+    @entry = Entry.find_by(token: params[:token])
+    @comment = current_user.comments.find_by(id: params[:id], entry_token: params[:token])
     if @comment.destroy
-      redirect_to public_path(@public)
+      redirect_to entry_path(@entry)
     end
   end
 
