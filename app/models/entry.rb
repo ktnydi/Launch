@@ -41,7 +41,7 @@ class Entry < ApplicationRecord
 
   before_save :tags_to_array
 
-  :private
+  private
     def tags_to_array
       self.tags = self.tags.split(",")
     end

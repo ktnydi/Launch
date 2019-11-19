@@ -5,7 +5,7 @@ class HomeController < ApplicationController
     @tags = Entry.tag_ranking.take(10)
   end
 
-  :private
+  private
     def from_date
       period = params[:period]
       case period
