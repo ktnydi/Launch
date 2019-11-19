@@ -475,10 +475,10 @@ main {
         &_right {
           display: flex;
           align-items: center;
-          .thumbs_up {
+          .heart {
             display: flex;
             align-items: center;
-            .fa-thumbs-up {
+            .fa-heart {
               margin:  0 5px 0 10px;
               color: $primary_color;
             }
