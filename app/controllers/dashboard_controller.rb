@@ -24,7 +24,7 @@ class DashboardController < ApplicationController
   end
 
   def comment
-    article_tokens = current_user.publics.pluck(:article_token)
-    @comments = Comment.where(article_token: article_tokens).order("created_at DESC").page(params[:page]).per(10)
+    entry_tokens = current_user.entries.pluck(:token)
+    @comments = Comment.where(entry_token: entry_tokens).order("created_at DESC").page(params[:page]).per(10)
   end
 end

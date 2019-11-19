@@ -8,10 +8,10 @@
     - if @comments.length > 0
       - @comments.each do |comment|
         .article_comment_box
-          = link_to public_path(comment.article_token), class: "article_comment_link" do
+          = link_to entry_path(comment.entry_token), class: "article_comment_link" do
             .flex_item.article_comment_user_name= comment.user.name
             .flex_item.article_comment_content= strip_tags markdown comment.content.truncate(80)
-            .flex_item.article_comment_title= comment.public.title.truncate(30)
+            .flex_item.article_comment_title= comment.entry.title.truncate(30)
             .flex_item.article_comment_created_at= comment.created_at.strftime("%Y-%m-%d")
     - else
       .comment_not_found
