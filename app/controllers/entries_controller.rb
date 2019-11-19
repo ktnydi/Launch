@@ -1,6 +1,7 @@
 class EntriesController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
   before_action :set_entry, only: [:show, :edit, :update, :destroy]
+  before_action :create_access_analysis, only: [:show]
 
   def index
     @entries = Entry.publics.search(params[:query]).new_order.page(params[:page]).per(30)
@@ -51,5 +52,9 @@ class EntriesController < ApplicationController
 
     def entry_params
       params.require(:entry).permit(:status, :title, :tags, :content)
+    end
+
+    def create_access_analysis
+      AccessAnalysis.create(entry_token: params[:token], access_source: request.referer, user_token: current_user.uuid)
     end
 end
