@@ -90,6 +90,25 @@ class User < ApplicationRecord
     liked_article.find_by(article_token: article.article_token)
   end
 
+  def all_pv_count
+    self.entries.sum(:pv)
+  end
+
+  def day_pv_count
+    entries = self.entries
+    AccessAnalysis.where(entry_token: entries.pluck(:token)).where("created_at > ?", Time.current.beginning_of_day).count
+  end
+
+  def week_pv_count
+    entries = self.entries
+    AccessAnalysis.where(entry_token: entries.pluck(:token)).where("created_at > ?", Time.current.beginning_of_week).count
+  end
+
+  def month_pv_count
+    entries = self.entries
+    AccessAnalysis.where(entry_token: entries.pluck(:token)).where("created_at > ?", Time.current.beginning_of_month).count
+  end
+
   def create_uuid
     self.uuid = SecureRandom.hex(10) if self.uuid.empty?
   end
