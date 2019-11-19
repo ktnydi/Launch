@@ -1,12 +1,22 @@
 class HomeController < ApplicationController
-  before_action :get_trend_articles, only: [:index]
-
   def index
-    @publics = Public.all.order(created_at: :desc).limit(5)
+    @trends = Entry.trend(from_date: from_date).take(15)
+    @entries = Entry.all.new_order.limit(15)
+    @tags = Entry.tag_ranking.take(10)
   end
 
   private
-    def get_trend_articles
-      @trend_articles = Public.get_trend_articles(date(params[:period])).limit(10)
+    def from_date
+      period = params[:period]
+      case period
+      when "day"
+        1.day.ago
+      when "week"
+        7.day.ago
+      when "month"
+        30.day.ago
+      else
+        1.day.ago
+      end
     end
 end

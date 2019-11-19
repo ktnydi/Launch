@@ -20,9 +20,29 @@ class Entry < ApplicationRecord
     self.where("title LIKE ? OR tags LIKE ?", "%#{query}%", "%#{query}%")
   end
 
+  def self.trend(from_date: 1.day.ago)
+    publics = self.publics
+    trend_entry_tokens = AccessAnalysis
+      .where("created_at > ?", from_date)
+      .select("entry_token, count(entry_token) as pv")
+      .group(:entry_token)
+      .order("pv desc")
+      .map(&:entry_token)
+    unless trend_entry_tokens.length > 0
+      return
+    end
+    trend_entries = publics.where(token: trend_entry_tokens).sort_by{ |o| trend_entry_tokens.index(o.id)}
+    trend_entries
+  end
+
+  def self.tag_ranking
+    tags = self.publics.pluck(:tags).flatten
+    tags.group_by(&:to_s).sort_by{|_,v|-v.size}.map(&:first)
+  end
+
   before_save :tags_to_array
 
-  :private
+  private
     def tags_to_array
       self.tags = self.tags.split(",")
     end
