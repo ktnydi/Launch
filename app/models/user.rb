@@ -140,6 +140,16 @@ class User < ApplicationRecord
     popular_entries
   end
 
+  def access_sources(from_date: 1.day.ago)
+    entries = self.entries
+    access_sources = AccessAnalysis
+      .where("created_at > ?", from_date)
+      .where(entry_token: entries.pluck(:token))
+      .select("access_source, count(access_source) as count")
+      .group(:access_source)
+      .order("count desc")
+  end
+
   def create_uuid
     self.uuid = SecureRandom.hex(10) if self.uuid.empty?
   end
