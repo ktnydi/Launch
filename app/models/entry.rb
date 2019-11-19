@@ -34,6 +34,11 @@ class Entry < ApplicationRecord
     trend_entries
   end
 
+  def self.tag_ranking
+    tags = self.publics.pluck(:tags).flatten
+    tags.group_by(&:to_s).sort_by{|_,v|-v.size}.map(&:first)
+  end
+
   before_save :tags_to_array
 
   :private
