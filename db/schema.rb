@@ -10,13 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_16_001958) do
+ActiveRecord::Schema.define(version: 2019_11_17_080845) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "access_analyses", force: :cascade do |t|
-    t.string "article_token", null: false
+    t.string "entry_token", null: false
     t.string "access_source", null: false
     t.string "user_token", default: "", null: false
     t.datetime "created_at", null: false
@@ -57,6 +57,7 @@ ActiveRecord::Schema.define(version: 2019_11_16_001958) do
     t.string "user_token"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "pv", default: 0, null: false
     t.index ["token"], name: "index_entries_on_token", unique: true
   end
 
