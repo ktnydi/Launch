@@ -109,6 +109,23 @@ class User < ApplicationRecord
     AccessAnalysis.where(entry_token: entries.pluck(:token)).where("created_at > ?", Time.current.beginning_of_month).count
   end
 
+  def chart_data
+    entries = self.entries
+    pv_per_day = AccessAnalysis.where(entry_token: entries.pluck(:token)).where("created_at > ?", 30.day.ago.beginning_of_day)
+      .select("date(created_at)")
+      .group("date(created_at)")
+      .count("date(created_at)")
+      .map{|date, pv| [date.strftime("%m/%d"), pv]}
+      .to_h
+    chart_data = {}
+    30.downto(0).each do |i|
+      day = i.day.ago.beginning_of_day.strftime("%m/%d")
+      pv = pv_per_day[day]
+      chart_data[day] = pv || 0
+    end
+    chart_data
+  end
+
   def create_uuid
     self.uuid = SecureRandom.hex(10) if self.uuid.empty?
   end
