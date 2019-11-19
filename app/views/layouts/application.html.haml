@@ -28,6 +28,15 @@
     = javascript_pack_tag 'application'
     = javascript_include_tag '/editor/marked/marked.min.js'
     = javascript_include_tag '/editor/highlight/highlight.pack.js'
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+  %script{async: '', src: 'https://www.googletagmanager.com/gtag/js?id=UA-142572155-1'}
+  :javascript
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-142572155-1');
+
   %body
     = render 'share/header'
     = render 'share/modal_authenticate'
