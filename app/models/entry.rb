@@ -1,4 +1,5 @@
 class Entry < ApplicationRecord
+  include Search
   self.primary_key = "token"
   serialize :tags
 
