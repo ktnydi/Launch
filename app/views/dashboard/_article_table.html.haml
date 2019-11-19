@@ -13,27 +13,27 @@
     %th.table_heading_good 高評価
     %th.table_heading_comment コメント
     %th.table_heading_edit
-  - articles.each_with_index do |article, idx|
-    %tr.table_container{data: {url: params[:mode] == "public" ? public_path(article) : edit_draft_path(article) }}
+  - entries.each_with_index do |entry, idx|
+    %tr.table_container{data: {url: edit_entry_path(entry) }}
       %td.table_heading_check
         .check_box_inner
-          %input.check.delete_check_box{id: "delete_checked_#{idx}",type: "checkbox", data: {articleid: article.id}}
+          %input.check.delete_check_box{id: "delete_checked_#{idx}",type: "checkbox", data: {articleid: entry.id}}
           %label.check_box_label{for: "delete_checked_#{idx}"}
-      %td.table_container_title= article.title.truncate(50)
-      %td.table_container_updated_at= article.updated_at.strftime("%Y-%m-%d")
-      %td.table_container_pv= article.respond_to?(:access_analyses) ? article.access_analyses.count : 0
-      %td.table_container_good= article.respond_to?(:likes) ? article.likes.count : 0
-      %td.table_container_comment= article.respond_to?(:comments) ? article.comments.count : 0
+      %td.table_container_title= entry.title.truncate(50)
+      %td.table_container_updated_at= entry.updated_at.strftime("%Y-%m-%d")
+      %td.table_container_pv= entry.respond_to?(:access_analyses) ? entry.access_analyses.count : 0
+      %td.table_container_good= entry.respond_to?(:likes) ? entry.likes.sum(:count) : 0
+      %td.table_container_comment= entry.respond_to?(:comments) ? entry.comments.count : 0
       %td.table_container_edit
         - if params[:mode] == "public"
-          = link_to public_path(article), class: "table_container_edit_link edit" do
+          = link_to entry_path(entry), class: "table_container_edit_link edit" do
             %i.fas.fa-arrow-right
         - else
-          = link_to edit_draft_path(article), class: "table_container_edit_link edit" do
+          = link_to edit_entry_path(entry), class: "table_container_edit_link edit" do
             %i.fas.fa-arrow-right
-- if @articles && @articles.total_pages > 1
+- if @entries && @entries.total_pages > 1
   .paginate.table_paginate
-    = link_to_prev_page @articles, "", class: "prev-page"
-    - unless @articles.out_of_range?
-      .now_page= "#{@articles.current_page}/#{@articles.total_pages}"
-    = link_to_next_page @articles, "", class: "next-page"
+    = link_to_prev_page @entries, "", class: "prev-page"
+    - unless @entries.out_of_range?
+      .now_page= "#{@entries.current_page}/#{@entries.total_pages}"
+    = link_to_next_page @entries, "", class: "next-page"

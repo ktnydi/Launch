@@ -90,6 +90,66 @@ class User < ApplicationRecord
     liked_article.find_by(article_token: article.article_token)
   end
 
+  def all_pv_count
+    self.entries.sum(:pv)
+  end
+
+  def day_pv_count
+    entries = self.entries
+    AccessAnalysis.where(entry_token: entries.pluck(:token)).where("created_at > ?", Time.current.beginning_of_day).count
+  end
+
+  def week_pv_count
+    entries = self.entries
+    AccessAnalysis.where(entry_token: entries.pluck(:token)).where("created_at > ?", Time.current.beginning_of_week).count
+  end
+
+  def month_pv_count
+    entries = self.entries
+    AccessAnalysis.where(entry_token: entries.pluck(:token)).where("created_at > ?", Time.current.beginning_of_month).count
+  end
+
+  def chart_data
+    entries = self.entries
+    pv_per_day = AccessAnalysis.where(entry_token: entries.pluck(:token)).where("created_at > ?", 30.day.ago.beginning_of_day)
+      .select("date(created_at)")
+      .group("date(created_at)")
+      .count("date(created_at)")
+      .map{|date, pv| [date.strftime("%m/%d"), pv]}
+      .to_h
+    chart_data = {}
+    30.downto(0).each do |i|
+      day = i.day.ago.beginning_of_day.strftime("%m/%d")
+      pv = pv_per_day[day]
+      chart_data[day] = pv || 0
+    end
+    chart_data
+  end
+
+  def popular_entries(from_date: 1.day.ago)
+    entries = self.entries
+    popular_entry_tokens = AccessAnalysis
+      .where("created_at > ?", from_date)
+      .where(entry_token: entries.pluck(:token))
+      .select("entry_token, count(entry_token) as pv")
+      .group(:entry_token)
+      .order("pv desc")
+      .map(&:entry_token)
+    return unless popular_entry_tokens.length > 0
+    popular_entries = entries.where(token: popular_entry_tokens).sort_by{ |o| popular_entry_tokens.index(o.id)}
+    popular_entries
+  end
+
+  def access_sources(from_date: 1.day.ago)
+    entries = self.entries
+    access_sources = AccessAnalysis
+      .where("created_at > ?", from_date)
+      .where(entry_token: entries.pluck(:token))
+      .select("access_source, count(access_source) as count")
+      .group(:access_source)
+      .order("count desc")
+  end
+
   def create_uuid
     self.uuid = SecureRandom.hex(10) if self.uuid.empty?
   end

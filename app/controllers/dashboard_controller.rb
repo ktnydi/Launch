@@ -4,24 +4,9 @@ class DashboardController < ApplicationController
   layout "application_dashboard"
 
   def index
-    # acategory : analytics
-    article_tokens = current_user.publics.pluck(:article_token)
-    # { "YYYY-mm-dd" => access_count }
-    count_by_created_at = AccessAnalysis.where(article_token: article_tokens)
-                            .access_within_date_range(29.days.ago.beginning_of_day)
-                            .map{ |date, count|
-                              # DBがsqliteの時は、dateが文字列で渡される。(development)
-                              next [date, count] if date.class == String
-                              [date.strftime("%Y-%m-%d"), count]
-                            }.to_h
-    last_month = {}
-    29.downto(0).each do |i|
-      day = i.day.ago.beginning_of_day
-      access_count = count_by_created_at[day.strftime("%Y-%m-%d")]
-      last_month[day.strftime("%m/%d")] = access_count || 0
-    end
-
-    gon.last_month = last_month
+    gon.chart_data = current_user.chart_data
+    @popular_entries = current_user.popular_entries(from_date: Time.current.beginning_of_week)
+    @access_sources = current_user.access_sources(from_date: Time.current.beginning_of_week)
   end
 
   def article
