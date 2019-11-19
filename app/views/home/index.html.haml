@@ -11,22 +11,52 @@
               = link_to "Today", root_path, class: "period_btn", data: {date: '今日'}
               = link_to "Week", "?period=week", class: "period_btn", data: {date: '今週'}
               = link_to "Month", "?period=month", class: "period_btn", data: {date: '今月'}
-        - if @trend_articles.length > 0
-          = render "share/card", publics: @trend_articles
-        - else
-          .article_not_found
-            %h3.article_not_found_head 公開されている記事がありません。
-            %p.article_not_found_message アクセスが多い記事はここに表示されます。
+        - if @trends.length > 0
+          .inner.article_list_wrapper
+            - @trends.each do |trend|
+              .article
+                = link_to entry_path(trend), class: "link large_link" do
+                  .flex_item
+                    .list_left
+                      = image_tag avatar(trend.user), size: 50, class: 'author_image'
+                    .list_right
+                      .list_top
+                        %p.article_title= trend.title
+                        - trend.tags.each do |tag|
+                          %span.tags= tag
+                      .list_bottom
+                        .list_bottom_left
+                          %span.author_name= "by #{trend.user.name}"
+                        .list_bottom_right
+                          .heart
+                            %i.far.fa-heart
+                            %span.count= trend.likes.sum(:count)
+                          %span.created_at= trend.created_at.strftime("%Y-%m-%d")
       .box
         %h2.latest_article_heading.heading_2
           最近投稿された記事
-        - if @publics.length > 0
-          = render "share/card", publics: @publics
-          = link_to "もっとみる", publics_path, class: "more_latest_article_link"
-        - else
-          .article_not_found
-            %h3.article_not_found_head 公開されている記事がありません。
-            %p.article_not_found_message 最近投稿された記事はここに表示されます。
+        - if @entries.length > 0
+          .inner.article_list_wrapper
+            - @entries.each do |entry|
+              .article
+                = link_to entry_path(entry), class: "link large_link" do
+                  .flex_item
+                    .list_left
+                      = image_tag avatar(entry.user), size: 50, class: 'author_image'
+                    .list_right
+                      .list_top
+                        %p.article_title= entry.title
+                        - entry.tags.each do |tag|
+                          %span.tags= tag
+                      .list_bottom
+                        .list_bottom_left
+                          %span.author_name= "by #{entry.user.name}"
+                        .list_bottom_right
+                          .heart
+                            %i.far.fa-heart
+                            %span.count= entry.likes.sum(:count)
+                          %span.created_at= entry.created_at.strftime("%Y-%m-%d")
+          = link_to "もっとみる", entries_path, class: "more_latest_article_link"
     .home_contents_right
       .home_contents_right__box
         - if user_signed_in?

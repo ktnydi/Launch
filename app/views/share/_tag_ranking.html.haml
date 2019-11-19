@@ -1,9 +1,9 @@
-- if Public.tag_ranking.length > 0
+- if @tags.length > 0
   .tag_ranking
-    - Public.tag_ranking.each_with_index do |tag, idx|
-      = link_to tag_path(tag[:name]), class: "tag_link" do
+    - @tags.each_with_index do |tag, idx|
+      = link_to tag_path(tag), class: "tag_link" do
         .rank{class: "rank#{idx + 1}"}= "#{idx + 1}."
-        .tag_name= tag[:name]
+        .tag_name= tag
 - else
   .article_not_found
     %h3.article_not_found_head 公開されている記事がありません。
