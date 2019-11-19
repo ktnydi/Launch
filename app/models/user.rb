@@ -126,6 +126,20 @@ class User < ApplicationRecord
     chart_data
   end
 
+  def popular_entries(from_date: 1.day.ago)
+    entries = self.entries
+    popular_entry_tokens = AccessAnalysis
+      .where("created_at > ?", from_date)
+      .where(entry_token: entries.pluck(:token))
+      .select("entry_token, count(entry_token) as pv")
+      .group(:entry_token)
+      .order("pv desc")
+      .map(&:entry_token)
+    return unless popular_entry_tokens.length > 0
+    popular_entries = entries.where(token: popular_entry_tokens).sort_by{ |o| popular_entry_tokens.index(o.id)}
+    popular_entries
+  end
+
   def create_uuid
     self.uuid = SecureRandom.hex(10) if self.uuid.empty?
   end
