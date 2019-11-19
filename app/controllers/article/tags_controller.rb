@@ -1,6 +1,7 @@
 class Article::TagsController < ApplicationController
   def show
-    @publics = Public.where("category LIKE ?", "%#{params[:category]}%").order("created_at DESC").page(params[:page]).per(20)
-    redirect_to root_path unless @publics.length > 0
+    @entries = Entry.publics.where("tags LIKE ?", "%#{params[:category]}%").order("created_at DESC").page(params[:page]).per(20)
+    @tags = Entry.tag_ranking.take(10)
+    redirect_to root_path unless @entries.length > 0
   end
 end
