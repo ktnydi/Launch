@@ -5,7 +5,7 @@ module Search
     scope :search, -> (query) do
       rel = order(created_at: :desc)
       if query.present?
-        rel = rel.where("title LIKE ? OR category LIKE ?", "%#{query}%", "%#{query}%")
+        rel = rel.where("title LIKE ? OR tags LIKE ?", "%#{query}%", "%#{query}%")
       end
       rel
     end
