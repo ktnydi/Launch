@@ -14,6 +14,7 @@ class Entry < ApplicationRecord
   has_secure_token :token
 
   scope :publics, -> { self.where(status: 1) }
+  scope :drafts, -> { self.where(status: 0) }
   scope :new_order, -> { self.order(created_at: :desc) }
   scope :search, -> (query) do
     self.where("title LIKE ? OR tags LIKE ?", "%#{query}%", "%#{query}%")
