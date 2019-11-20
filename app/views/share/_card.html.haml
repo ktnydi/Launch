@@ -2,7 +2,7 @@
   .entry-list__container
     .entry
       .entry__cards
-        - @entries.each do |entry|
+        - entries.each do |entry|
           = link_to entry_path(entry), class: "entry__link" do
             %div
               = image_tag avatar(entry.user), size: 45, class: "entry__user-image"
@@ -15,9 +15,9 @@
                     %i.far.fa-heart.entry__like-icon
                     %span.entry__like-count 98
                   %span.entry__created-at= entry.created_at.strftime("%Y-%m-%d")
-      - if @entries
+      - if entries
         .entry__paginate
-          = link_to_prev_page @entries, "< 前のページ", class: "entry__paginate-prev" do
+          = link_to_prev_page entries, "< 前のページ", class: "entry__paginate-prev" do
             %span.entry__paginate-prev-disable < 前のページ
-          = link_to_next_page @entries, "次のページ >", class: "entry__paginate-next" do
+          = link_to_next_page entries, "次のページ >", class: "entry__paginate-next" do
             %span.entry__paginate-next-disable 次のページ >
