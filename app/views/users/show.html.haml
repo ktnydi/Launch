@@ -21,26 +21,26 @@
         .user-blog__box-inner
           %h2.user-blog__box-title よく使うタグ
           .user-blog__tags
-            - Public.tag_ranking(user_token: @user.uuid).each do |tag|
+            - @tags.each do |tag|
               .user-blog__tag
-                = link_to "# #{tag[:name].truncate(10)} (#{tag[:count]})", tag_path(tag[:name]), class: "user-blog__tag-link"
+                = link_to "# #{tag.truncate(10)}", tag_path(tag), class: "user-blog__tag-link"
     .user-blog__user-articles-section
       .user-blog__user-articles-section-inner
         %h2.user-blog__section-title 投稿した記事
         .user-blog__user-articles
-          - @articles.each do |article|
+          - @entries.each do |entry|
             .user-article
               .user-article__article-inner
                 .user-article__article-status
-                  %span.user-article__created= article.created_at.strftime("%Y-%m-%d")
+                  %span.user-article__created= entry.created_at.strftime("%Y-%m-%d")
                   %span.user-article__like
                     %i.far.fa-thumbs-up.user-article__like-icon
-                    %span.user-article__like-count= article.likes.count
-                .user-article__title= article.title
-                %p.user-article__content= strip_tags markdown article.content.truncate(180)
-                = link_to "続きを見る", public_path(article), class: "user-article__article-link"
+                    %span.user-article__like-count= entry.likes.count
+                .user-article__title= entry.title
+                %p.user-article__content= strip_tags markdown entry.content.truncate(180)
+                = link_to "続きを見る", entry_path(entry), class: "user-article__article-link"
         .user-blog__user-articles-paginate
-          = link_to_prev_page @articles, "< 前のページ", class: "user-blog__prev-page" do
+          = link_to_prev_page @entries, "< 前のページ", class: "user-blog__prev-page" do
             %span.user-blog__prev-page--disable < 前のページ
-          = link_to_next_page @articles, "次のページ >", class: "user-blog__next-page" do
+          = link_to_next_page @entries, "次のページ >", class: "user-blog__next-page" do
             %span.user-blog__next-page--disable 次のページ >
