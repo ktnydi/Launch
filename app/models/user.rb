@@ -11,6 +11,8 @@ class User < ApplicationRecord
   has_many :liked_entries, through: :likes, source: :entry
   has_many :bookmarks, foreign_key: "user_token", dependent: :destroy
   has_many :bookmarked_entries, through: :bookmarks, source: :entry
+  has_many :access_analyses, foreign_key: "user_token", dependent: :destroy
+  has_many :history_entries, through: :access_analyses, source: :entry
   # フォローしたユーザー
   has_many :active_follows,
             class_name: "Follow",
