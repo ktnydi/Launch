@@ -7,8 +7,8 @@
   .history_box
     = render "share/select"
     .container
-      - if @history_publics.length > 0
-        = render "share/card", publics: @history_publics
+      - if @entries.length > 0
+        = render "share/card", entries: @entries
       - else
         .article_not_found
           %h3.article_not_found_head 閲覧した記事がありません。
