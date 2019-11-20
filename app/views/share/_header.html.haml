@@ -9,15 +9,15 @@
         %li.header_nav_li
           = link_to "ホーム", root_path, class: "home, link"
         %li.header_nav_li
-          = link_to "最新記事", publics_path, class: "article, link"
-      %form.search.header_search#search_focus{action: "#{publics_path}", method: "get"}
+          = link_to "最新記事", entries_path, class: "article, link"
+      %form.search.header_search#search_focus{action: "#{entries_path}", method: "get"}
         = label_tag nil, class: 'search_label' do
           %i.fas.fa-search
           = text_field_tag "q", params[:q], required: true, autocomplete: "off", id: "field", placeholder: "タイトルかタグで検索", class: 'search_field'
     .header-right
       - if user_signed_in?
         %button.btn.btn_blue.link_editor
-          = link_to "記事を書く", new_draft_path, class: "btn_link"
+          = link_to "記事を書く", new_entry_path, class: "btn_link"
         %details.header_right_menu
           %summary.user_name
             .user_name_inner
