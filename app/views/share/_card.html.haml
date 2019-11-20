@@ -1,26 +1,23 @@
-.inner.article_list_wrapper
-  - publics.each do |public|
-    .article
-      = link_to public_path(public.article_token), class: "link large_link" do
-        .flex_item
-          .list_left
-            = image_tag avatar(public.user), size: 50, class: 'author_image'
-          .list_right
-            .list_top
-              %p.article_title= public.title
-              .tags= make_tag public.category
-            .list_bottom
-              .list_bottom_left
-                %span.author_name= "by #{public.user.name}"
-              .list_bottom_right
-                .thumbs_up
-                  %i.far.fa-thumbs-up
-                  %span.count= public.likes.count
-                %span.created_at= public.created_at.strftime("%Y-%m-%d")
-
-- if controller_name != "home" && publics && publics.total_pages > 1
-  .paginate
-    = link_to_prev_page publics, "", class: "prev-page"
-    - unless publics.out_of_range?
-      .now_page= "#{publics.current_page}/#{publics.total_pages}"
-    = link_to_next_page publics, "", class: "next-page"
+.entry-list__content
+  .entry-list__container
+    .entry
+      .entry__cards
+        - @entries.each do |entry|
+          = link_to entry_path(entry), class: "entry__link" do
+            %div
+              = image_tag avatar(entry.user), size: 45, class: "entry__user-image"
+            .entry__card-right
+              .entry__title= entry.title
+              .entry__info
+                .entry__author= "by #{entry.user.name}"
+                .entry__status
+                  %span.entry__like
+                    %i.far.fa-heart.entry__like-icon
+                    %span.entry__like-count 98
+                  %span.entry__created-at= entry.created_at.strftime("%Y-%m-%d")
+      - if @entries
+        .entry__paginate
+          = link_to_prev_page @entries, "< 前のページ", class: "entry__paginate-prev" do
+            %span.entry__paginate-prev-disable < 前のページ
+          = link_to_next_page @entries, "次のページ >", class: "entry__paginate-next" do
+            %span.entry__paginate-next-disable 次のページ >

@@ -7,8 +7,8 @@
   .bookmark_box
     = render "share/select"
     .container
-      - if @bookmark_publics.length > 0
-        = render "share/card", publics: @bookmark_publics
+      - if @entries.length > 0
+        = render "share/card", entries: @entries
       - else
         .article_not_found
           %h3.article_not_found_head ブックマークした記事がありません。
