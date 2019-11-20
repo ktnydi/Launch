@@ -4,7 +4,7 @@ class EntriesController < ApplicationController
   before_action :create_access_analysis, only: [:show]
 
   def index
-    @entries = Entry.publics.search(params[:query]).new_order.page(params[:page]).per(30)
+    @entries = Entry.publics.search(params[:q]).new_order.page(params[:page]).per(30)
   end
 
   def show
