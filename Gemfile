@@ -52,7 +52,7 @@ gem 'gravtastic'
 
 gem 'haml-rails'
 
-gem 'gon', '~> 6.2', '>= 6.2.1'
+gem 'gon', '~> 6.4'
 
 gem 'pg'
 
